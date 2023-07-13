@@ -64,7 +64,7 @@ jobs:
             org.opencontainers.image.vendor=Enofex
             org.opencontainers.image.version=${{ env.VERSION }}
             org.opencontainers.image.url=https://enofex.com            
-            org.opencontainers.image.source=https://github.com/enofex/naikan-projects
+            org.opencontainers.image.source=https://github.com/enofex/naikan
             org.opencontainers.image.licenses=MIT license
 
       - name: Set next version POMs

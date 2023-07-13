@@ -3,7 +3,7 @@
 <img src="assets/images/index-header.png" alt="Naikan logo" width="1024"/>
 
 [Get Started](./getting-started/){ .md-button .md-button--primary }
-[View on GitHub :simple-github:](https://github.com/enofex/naikan-projects){ .md-button }
+[View on GitHub :simple-github:](https://github.com/enofex/naikan){ .md-button }
 
 *Naikan* is a powerful inventory management tool that allows organizations to keep track of critical
 information related to their software projects. It enables users to manage their projects' essential
@@ -70,4 +70,4 @@ sponsorship plays an important role in making *Naikan* even better.
 
 ## License
 
-See [LICENSE](https://github.com/enofex/naikan-projects/blob/main/LICENSE).
+See [LICENSE](https://github.com/enofex/naikan/blob/main/LICENSE).

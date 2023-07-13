@@ -6,8 +6,8 @@ site_description: >-
   Naikan is a software inventory management tool driven by our CI/CD pipeline.
 
 # Repository
-repo_name: naikan-projects
-repo_url: https://github.com/enofex/naikan-projects
+repo_name: naikan
+repo_url: https://github.com/enofex/naikan
 
 # Copyright
 copyright: Copyright &copy; 2023 Martin Hock / Enofex
@@ -51,7 +51,7 @@ plugins:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/enofex/naikan-projects
+      link: https://github.com/enofex/naikan
     - icon: fontawesome/brands/docker
       link: https://hub.docker.com/u/enofex
     - icon: fontawesome/brands/twitter

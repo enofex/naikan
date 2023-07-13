@@ -26,7 +26,7 @@
   "project": {
     "name": "Naikan I",
     "url": "https://naikan.io",
-    "repository": "https://github.com/enofex/naikan-projects",
+    "repository": "https://github.com/enofex/naikan",
     "packaging": "jar",
     "groupId": "com.enofex",
     "artifactId": "naikan-core",

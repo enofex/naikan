@@ -6,7 +6,7 @@ to help make the project even better. Here are some ways you can get involved:
 * Star the Project:
 
     - Show your support by starring the project
-      on [GitHub](https://github.com/enofex/naikan-projects).
+      on [GitHub](https://github.com/enofex/naikan).
     - This helps increase visibility and encourages others to discover and contribute to the
       project.
 
@@ -20,7 +20,7 @@ to help make the project even better. Here are some ways you can get involved:
 * Follow Contribution Guidelines:
 
     - Ensure that you follow our
-      contribution [guidelines](https://github.com/enofex/naikan-projects/blob/main/CONTRIBUTING.md)
+      contribution [guidelines](https://github.com/enofex/naikan/blob/main/CONTRIBUTING.md)
       when submitting your contributions.
     - These guidelines cover aspects such as code formatting, documentation standards, and other
       important considerations.
