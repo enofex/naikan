@@ -1,0 +1,74 @@
+<div class="card card-border-none">
+  <h5>
+    <p-inputSwitch
+        [(ngModel)]="favorites"
+        tooltipPosition="top"
+        pTooltip="Toggle favorites"
+        (onChange)="toggleFavorites($event)">
+    </p-inputSwitch>
+
+    <span class="ml-4">{{page?.totalElements}} Projects </span>
+    <span class="text-500 text-sm">showing {{favorites ? 'favorites' : 'all'}}</span>
+  </h5>
+
+  <p-table
+      #projectsTable
+      dataKey="id"
+      [value]="page?.content"
+      [paginator]="true"
+      [lazy]="true"
+      (onLazyLoad)="loadProjects($event)"
+      [alwaysShowPaginator]="false"
+      [rowsPerPageOptions]="[10, 25, 50, 100]"
+      [sortField]="sortField"
+      [sortOrder]="sortOrder"
+      [defaultSortOrder]="1"
+      [rows]="25"
+      [totalRecords]="page?.totalElements">
+
+    <ng-template pTemplate="header">
+
+      <naikan-project-filter
+          [table]="projectsTable"
+          #naikanProjectFilter>
+      </naikan-project-filter>
+
+      <div class="flex justify-content-between flex-wrap mb-4 mt-4">
+        <div class="flex align-items-center justify-content-center">
+          <naikan-search #search [table]="projectsTable"></naikan-search>
+        </div>
+        <div class="flex align-items-center justify-content-center">
+          <button pButton
+                  label="Clear"
+                  class="p-button-outlined mr-3"
+                  icon="pi pi-filter-slash"
+                  (click)="projectsTable.reset(); search.clear()">
+          </button>
+
+          <button pButton
+                  type="button"
+                  class="mr-3" (click)="naikanProjectFilter.show()"
+                  icon="pi pi-filter">
+          </button>
+
+          <p-dropdown [options]="sortOptions"
+                      placeholder="Sort by name"
+                      (onChange)="onSortChange($event)"
+                      styleClass="md:w-15rem mb-2 md:mb-0">
+          </p-dropdown>
+
+          <i class="pi pi-sort-alt ml-3 text-primary"
+             [ngClass]="sortOrder === -1 ? 'pi-sort-amount-down-alt': 'pi-sort-amount-up-alt'"
+             style="font-size: 1.4rem;"
+             (click)="toggleSortOrder()">
+          </i>
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template let-bom pTemplate="body">
+      <naikan-project-overview [bom]="bom"></naikan-project-overview>
+    </ng-template>
+  </p-table>
+
+</div>

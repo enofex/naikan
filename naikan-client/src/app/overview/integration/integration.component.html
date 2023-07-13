@@ -1,0 +1,99 @@
+<naikan-breadcrumb
+    [items]="[{label: 'Overviews', routerLink: '/overview'}, {label: 'Integrations', routerLink: '/overview/integrations'}]">
+</naikan-breadcrumb>
+
+<div class="card card-border-none">
+  <h5> {{page?.totalElements}} Integrations</h5>
+
+  <p-table
+      #tableOverviewGroups
+      dataKey="uuid"
+      styleClass="p-datatable-striped"
+      [rowHover]="true"
+      [value]="page?.content"
+      [lazy]="true"
+      (onLazyLoad)="loadOverviews($event)"
+      [paginator]="true"
+      [alwaysShowPaginator]="false"
+      [rows]="25"
+      [defaultSortOrder]="1"
+      [sortOrder]="1"
+      sortField="group.name"
+      sortMode="multiple"
+      [expandedRowKeys]="expandedRows"
+      [rowsPerPageOptions]="[10, 25, 50, 100, 200]"
+      [totalRecords]="page?.totalElements">
+
+    <ng-template pTemplate="caption">
+      <div class="flex justify-content-between flex-wrap mb-2 mt-4">
+        <div class="flex align-items-center justify-content-center">
+          <naikan-search #search [table]="tableOverviewGroups"></naikan-search>
+        </div>
+        <div class="flex align-items-center justify-content-center">
+          <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
+                  (click)="tableOverviewGroups.reset(); search.clear()"></button>
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th class="w-3rem">
+          <p-button *ngIf="page?.totalElements > 0"
+                    styleClass="p-button-primary"
+                    icon="{{expandedRows && Object.keys(expandedRows).length ? 'pi pi-angle-down' : 'pi pi-angle-right'}}"
+                    (click)="expand()"
+                    tooltipPosition="top"
+                    pTooltip="Toggle rows">
+          </p-button>
+        </th>
+        <th pSortableColumn="group.name">Name
+          <p-columnFilter field="group.name" display="menu"
+                          placeholder="Name">
+          </p-columnFilter>
+          <p-sortIcon field="group.name"></p-sortIcon>
+        </th>
+        <th pSortableColumn="group.url">URL
+          <p-columnFilter field="group.url" display="menu"
+                          placeholder="URL">
+          </p-columnFilter>
+          <p-sortIcon field="group.url"></p-sortIcon>
+        </th>
+        <th pSortableColumn="count" class="w-10rem">Projects
+          <p-sortIcon field="count"></p-sortIcon>
+        </th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-overviewGroup let-expanded="expanded">
+      <tr>
+        <td>
+          <button type="button" pButton [pRowToggler]="overviewGroup"
+                  class="p-button-text p-button-rounded p-button-plain"
+                  [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+        </td>
+        <td>
+          <span tooltipPosition="top" pTooltip="{{ overviewGroup.group.description }}">
+            {{ overviewGroup.group.name }}
+          </span>
+        </td>
+        <td>
+          <naikan-url [url]="overviewGroup.group.url"></naikan-url>
+        </td>
+        <td class="text-center w-4rem">
+          <p-tag severity="primary" value="{{ overviewGroup.count }}" [rounded]="true"></p-tag>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="rowexpansion" let-group>
+      <tr>
+        <td></td>
+        <td colspan="3">
+          <naikan-overview-project-table [overviewBoms]="group.boms">
+          </naikan-overview-project-table>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

@@ -1,0 +1,34 @@
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: naikan
+      replicaSet: rs0
+  ldap:
+    urls: ldap://localhost:389
+    base: ou=users,dc=naikan,dc=io
+    username: admin
+    password: admin
+    anonymousReadOnly: true
+  docker:
+    compose:
+      file: "./development/docker/compose.yml"
+      enabled: true
+
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          mongodb:
+            core:
+              MongoTemplate: DEBUG
+
+naikan:
+  security:
+    cors:
+      allowedOriginPatterns: http://localhost:4200
+    ldap:
+      userDnPatterns: uid={0}
+      userSearchFilter:

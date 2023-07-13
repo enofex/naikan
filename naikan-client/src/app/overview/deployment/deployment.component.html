@@ -1,0 +1,126 @@
+<naikan-breadcrumb
+    [items]="[{label: 'Overviews', routerLink: '/overview'}, {label: 'Deployments', routerLink: '/overview/deployments'}]">
+</naikan-breadcrumb>
+
+<div class="card card-border-none">
+  <h5> {{page?.totalElements}} Deployments</h5>
+
+  <p-chart type="bar" height="200px" [data]="chartData" [options]="chartOptions"
+           *ngIf="chartData?.datasets"></p-chart>
+
+  <p-table
+      #tableOverviewGroups
+      dataKey="bom.id"
+      styleClass="p-datatable-striped"
+      [rowHover]="true"
+      [value]="page?.content"
+      [lazy]="true"
+      (onLazyLoad)="loadOverviews($event)"
+      [paginator]="true"
+      [alwaysShowPaginator]="false"
+      [rows]="25"
+      [defaultSortOrder]="-1"
+      [sortOrder]="-1"
+      sortField="deployment.timestamp"
+      sortMode="multiple"
+      [rowsPerPageOptions]="[10, 25, 50, 100, 200]"
+      [totalRecords]="page?.totalElements">
+
+    <ng-template pTemplate="caption">
+      <div class="flex justify-content-between flex-wrap mb-2 mt-4">
+        <div class="flex align-items-center justify-content-center">
+          <naikan-search #search [table]="tableOverviewGroups"></naikan-search>
+        </div>
+        <div class="flex align-items-center justify-content-center">
+          <button pButton label="Clear" class="p-button-outlined"
+                  icon="pi pi-filter-slash"
+                  (click)="tableOverviewGroups.reset(); search.clear()">
+          </button>
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="bom.project.name">
+          <div class="flex align-items-center">
+            <span class="mr-2">Name</span>
+            <p-columnFilter field="bom.project.name" display="menu"
+                            placeholder="Name">
+            </p-columnFilter>
+            <p-sortIcon field="bom.project.name"></p-sortIcon>
+          </div>
+        </th>
+        <th pSortableColumn="bom.timestamp">
+          <div class="flex align-items-center">
+            <span class="mr-2">Last updated</span>
+            <p-columnFilter type="date" field="bom.timestamp" display="menu"
+                            placeholder="Last updated">
+            </p-columnFilter>
+            <p-sortIcon field="bom.timestamp"></p-sortIcon>
+          </div>
+        </th>
+        <th pSortableColumn="deployment.environment">
+          <div class="flex align-items-center">
+            <span class="mr-2">Environment</span>
+            <p-columnFilter field="deployment.environment" display="menu"
+                            placeholder="Environment">
+            </p-columnFilter>
+            <p-sortIcon field="deployment.environment"></p-sortIcon>
+          </div>
+        </th>
+        <th pSortableColumn="deployment.location">
+          <div class="flex align-items-center">
+            <span class="mr-2">Location</span>
+            <p-columnFilter field="deployment.location" display="menu"
+                            placeholder="Location">
+            </p-columnFilter>
+            <p-sortIcon field="deployment.location"></p-sortIcon>
+          </div>
+        </th>
+        <th pSortableColumn="deployment.timestamp">
+          <div class="flex align-items-center">
+            <span class="mr-2">Timestamp</span>
+            <p-columnFilter type="date" field="deployment.timestamp" display="menu"
+                            placeholder="Timestamp">
+            </p-columnFilter>
+            <p-sortIcon field="deployment.timestamp"></p-sortIcon>
+          </div>
+        </th>
+        <th class="w-12rem" pSortableColumn="deployment.version">
+          <div class="flex align-items-center">
+            <span class="mr-2">Version</span>
+            <p-columnFilter field="deployment.version" display="menu"
+                            placeholder="Version">
+            </p-columnFilter>
+            <p-sortIcon field="deployment.version"></p-sortIcon>
+          </div>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-overviewGroup>
+      <tr>
+        <td>
+          <span tooltipPosition="top"
+                pTooltip="{{ overviewGroup.bom.project?.description }}">
+              <a routerLink="/projects/{{overviewGroup.bom.id}}">
+                {{ overviewGroup.bom.project?.name }}
+              </a>
+            <naikan-project-url-icon [url]="overviewGroup.bom.project?.url">
+            </naikan-project-url-icon>
+          </span>
+        </td>
+        <td>{{ overviewGroup.bom.timestamp | naikanDateTime }}</td>
+        <td>{{ overviewGroup.deployment.environment }}</td>
+        <td>
+          <naikan-url [url]="overviewGroup.deployment.location"></naikan-url>
+        </td>
+        <td>{{ overviewGroup.deployment.timestamp | naikanDateTime }}</td>
+        <td>
+          <p-tag severity="success"
+                 value="{{ overviewGroup.deployment.version }}"></p-tag>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

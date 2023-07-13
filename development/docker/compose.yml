@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+
+  openldap:
+    image: osixia/openldap
+    container_name: openldap
+    environment:
+      - LDAP_ORGANISATION="Naikan"
+      - LDAP_DOMAIN=naikan.io
+      - LDAP_ADMIN_PASSWORD=admin
+    ports:
+      - "389:389"
+    volumes:
+      - ./users.ldif:/container/service/slapd/assets/config/bootstrap/ldif/custom/users.ldif
+    command: --copy-service
+
+  mongodb:
+    image: mongo:5
+    container_name: mongodb
+    hostname: mongodb
+    environment:
+      - MONGO_INITDB_DATABASE=naikan
+      - MONGO_REPLICA_SET_NAME=rs0
+    volumes:
+      - ./boms.json:/docker-entrypoint-initdb.d/boms.json
+      - ./tokens.json:/docker-entrypoint-initdb.d/tokens.json
+    ports:
+      - "27017:27017"
+    healthcheck:
+      test: test $$(echo "rs.initiate().ok || rs.status().ok" | mongo --port 27017 --quiet) -eq 1
+      interval: 10s
+      start_period: 30s
+    command: >
+      bash -c "
+        exec mongod --bind_ip_all --replSet rs0 |
+        mongoimport --db naikan --collection projects --drop --file /docker-entrypoint-initdb.d/boms.json --jsonArray |        
+        mongoimport --db naikan --collection tokens --drop --file /docker-entrypoint-initdb.d/tokens.json --jsonArray
+      "

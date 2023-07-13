@@ -1,0 +1,54 @@
+version: '3.8'
+
+volumes:
+  naikan:
+
+services:
+  naikan:
+    image: enofex/naikan
+    #environment:
+    # The Naikan container can be configured using any of the available configuration properties:
+    #
+    # MongoDB Properties
+    # - NAIKAN_MONGODB_HOST=localhost
+    # - NAIKAN_MONGODB_PORT=27017
+    # - NAIKAN_MONGODB_DATABASE=naikan
+    # - NAIKAN_MONGODB_REPLICA_SET=
+    # - NAIKAN_MONGODB_USERNAME=
+    # - NAIKAN_MONGODB_PASSWORD=
+    # - NAIKAN_MONGODB_TRANSACTION_ENABLED=true
+    #
+    # LDAP Properties
+    # - NAIKAN_LDAP_ENABLED=true
+    # - NAIKAN_LDAP_SERVER_URL=ldap://localhost:389
+    # - NAIKAN_LDAP_BASEDN=dc=example,dc=com
+    # - NAIKAN_LDAP_BIND_USERNAME=
+    # - NAIKAN_LDAP_BIND_PASSWORD=
+    # - NAIKAN_LDAP_ANONYMOUS_READ_ONLY=true
+    # - NAIKAN_LDAP_USER_DN_PATTERNS=
+    # - NAIKAN_LDAP_USERS_SEARCH_BASE=
+    # - NAIKAN_LDAP_USERS_SEARCH_FILTER=
+    #
+    # Optional Cross-Origin Resource Sharing (CORS) Headers
+    # - NAIKAN_CORS_ENABLED=true
+    # - NAIKAN_CORS_ALLOW_ORIGIN=*
+    # - NAIKAN_CORS_ALLOW_METHODS=GET, PUT, POST, PATCH, DELETE, OPTIONS
+    # - NAIKAN_CORS_ALLOW_HEADERS=*
+    # - NAIKAN_CORS_ALLOW_CREDENTIALS=true
+    # - NAIKAN_CORS_MAX_AGE=1800
+    #
+    # Optional environmental variables to provide more JVM arguments to the JVM, i.e. "-XX:ActiveProcessorCount=4"
+    # - EXTRA_JAVA_OPTIONS=
+    deploy:
+      resources:
+        limits:
+          memory: 12288m
+        reservations:
+          memory: 8192m
+      restart_policy:
+        condition: on-failure
+    ports:
+      - '8080:8080'
+    volumes:
+      - 'naikan:/data'
+    restart: unless-stopped

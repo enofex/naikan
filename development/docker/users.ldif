@@ -1,0 +1,47 @@
+version: 1
+
+dn: ou=groups,dc=naikan,dc=io
+objectclass: organizationalUnit
+objectclass: top
+ou: groups
+
+dn: cn=employees,ou=groups,dc=naikan,dc=io
+cn: employees
+gidnumber: 500
+memberuid: 1000
+memberuid: 1001
+objectclass: posixGroup
+objectclass: top
+
+dn: ou=users,dc=naikan,dc=io
+objectclass: organizationalUnit
+objectclass: top
+ou: users
+
+# Admin, username: admin, password: 123
+dn: uid=admin,ou=users,dc=naikan,dc=io
+cn: Admin
+gidnumber: 500
+givenname: Admin
+homedirectory: /home/users/admin
+objectclass: inetOrgPerson
+objectclass: posixAccount
+objectclass: top
+sn: Admin
+uid: admin
+uidnumber: 1000
+userpassword: {MD5}ICy5YqxZB1uWSwcVLSNLcA==
+
+# John Rambo, username: jnramb, password: 123
+dn: uid=jnramb,ou=users,dc=naikan,dc=io
+cn: John Rambo
+gidnumber: 500
+givenname: John
+homedirectory: /home/users/jnramb
+objectclass: inetOrgPerson
+objectclass: posixAccount
+objectclass: top
+sn: Rambo
+uid: jnbamb
+uidnumber: 1001
+userpassword: {MD5}ICy5YqxZB1uWSwcVLSNLcA==

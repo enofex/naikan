@@ -1,0 +1,73 @@
+<naikan-breadcrumb
+    [items]="[{label: 'Administration', routerLink: '/administration'}, {label: 'Profile', routerLink: '/administration/profile'}]">
+</naikan-breadcrumb>
+
+<div class="grid" *ngIf="user">
+  <div class="col-12 mt-4 surface-50">
+    <div class="flex flex-column xl:flex-row align-items-start">
+      <div
+          class="flex flex-column sm:flex-row justify-content-between align-items-start flex-1">
+
+        <div class="flex flex-column align-items-start">
+          <div class="text-xl font-bold text-900">
+            <h5>Profile</h5>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="field grid">
+      <label class="col-12 mb-2 md:col-2 md:mb-0">Name</label>
+      <div class="col-12 md:col-10">
+        {{ user.username}}
+      </div>
+    </div>
+
+    <div class="field grid" *ngIf="user.authorities && user.authorities.length > 0">
+      <label class="col-12 mb-2 md:col-2 md:mb-0">Authorities</label>
+      <div class="col-12 md:col-10">
+        <ng-container *ngFor="let authority of user.authorities;">
+          <p-tag severity="info" value="{{authority}}" class="mr-1"></p-tag>
+        </ng-container>
+      </div>
+    </div>
+    <div class="field grid" *ngIf="user.details?.title">
+      <label class="col-12 mb-2 md:col-2 md:mb-0">Title</label>
+      <div class="col-12 md:col-10">
+        {{ user.details?.title}}
+      </div>
+    </div>
+    <div class="field grid" *ngIf="user.details?.givenName">
+      <label class="col-12 mb-2 md:col-2 md:mb-0">Given name</label>
+      <div class="col-12 md:col-10">
+        {{ user.details?.givenName}}
+      </div>
+    </div>
+    <div class="field grid" *ngIf="user.details?.displayName">
+      <label class="col-12 mb-2 md:col-2 md:mb-0">Display name</label>
+      <div class="col-12 md:col-10">
+        {{ user.details?.displayName}}
+      </div>
+    </div>
+    <div class="field grid" *ngIf="user.details?.mail">
+      <label class="col-12 mb-2 md:col-2 md:mb-0">Mail</label>
+      <div class="col-12 md:col-10">
+        {{ user.details?.mail}}
+      </div>
+    </div>
+    <div class="field grid" *ngIf="user.details?.telephoneNumber">
+      <label class="col-12 mb-2 md:col-2 md:mb-0">Telephone number</label>
+      <div class="col-12 md:col-10">
+        {{ user.details?.telephoneNumber}}
+      </div>
+    </div>
+    <div class="field grid" *ngIf="user.details?.mobile">
+      <label class="col-12 mb-2 md:col-2 md:mb-0">Mobile</label>
+      <div class="col-12 md:col-10">
+        {{ user.details?.mobile}}
+      </div>
+    </div>
+
+  </div>
+</div>

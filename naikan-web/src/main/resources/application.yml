@@ -1,0 +1,61 @@
+spring:
+  main:
+    banner-mode: off
+  docker:
+    compose:
+      enabled: false
+  mvc:
+    problemdetails:
+      enabled: true
+  web:
+    locale: en
+    locale-resolver: fixed
+  data:
+    mongodb:
+      host:  ${NAIKAN_MONGODB_HOST:localhost}
+      port:  ${NAIKAN_MONGODB_PORT:27017}
+      database:  ${NAIKAN_MONGODB_DATABASE:naikan}
+      replicaSet:  ${NAIKAN_MONGODB_REPLICA_SET}
+      username:  ${NAIKAN_MONGODB_USERNAME}
+      password: ${NAIKAN_MONGODB_PASSWORD}
+  ldap:
+    urls: ${NAIKAN_LDAP_SERVER_URL:ldap://localhost:389}
+    base: ${NAIKAN_LDAP_BASEDN:dc=example,dc=com}
+    username: ${NAIKAN_LDAP_BIND_USERNAME}
+    password: ${NAIKAN_LDAP_BIND_PASSWORD}
+    anonymousReadOnly: ${NAIKAN_LDAP_ANONYMOUS_READ_ONLY:true}
+
+server:
+  servlet:
+    application-display-name: naikan
+    session:
+      timeout: 7200s
+      cookie:
+        secure: true
+  compression:
+    enabled: true
+    mime-types:
+      - application/json
+
+logging:
+  file:
+    name: naikan.log
+
+naikan:
+  mongodb:
+    transaction:
+      enable: ${NAIKAN_MONGODB_TRANSACTION_ENABLED:true}
+  security:
+    cors:
+      enabled: ${NAIKAN_CORS_ENABLED:true}
+      allowedOriginPatterns: ${NAIKAN_CORS_ALLOW_ORIGIN:*}
+      allowed-headers: ${NAIKAN_CORS_ALLOW_HEADERS:*}
+      allow-credentials: ${NAIKAN_CORS_ALLOW_CREDENTIALS:true}
+      allowed-methods: ${NAIKAN_CORS_ALLOW_METHODS:GET, PUT, POST, PATCH, DELETE, OPTIONS}
+      max-age:  ${NAIKAN_CORS_MAX_AGE:1800}
+    ldap:
+      enabled:  ${NAIKAN_LDAP_ENABLED:true}
+      userDnPatterns: ${NAIKAN_LDAP_USER_DN_PATTERNS:}
+      userSearchBase: ${NAIKAN_LDAP_USERS_SEARCH_BASE:}
+      userSearchFilter: ${NAIKAN_LDAP_USERS_SEARCH_FILTER:}
+      activeDirectoryDomain: ${NAIKAN_LDAP_ACTIVE_DIRECTORY_DOMAIN:}

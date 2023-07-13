@@ -1,0 +1,82 @@
+name: Publish image to Docker
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK 20
+        uses: actions/setup-java@v3
+        with:
+          java-version: '20'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Write release version
+        run: VERSION=${GITHUB_REF_NAME#v}; echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Set release version POMs
+        run: ./mvnw --no-transfer-progress --batch-mode versions:set -DnewVersion=${VERSION}
+
+      - name: Set release version package.json
+        working-directory: naikan-client
+        run: npm version ${VERSION}
+
+      - name: Commit & Push changes
+        uses: actions-js/push@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          message: Perform release  ${{ env.VERSION }}
+
+      - name: Maven package
+        run: ./mvnw --no-transfer-progress --batch-mode clean package
+
+      - name: Docker build and push
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: |
+            enofex/naikan:${{ env.VERSION }}
+            enofex/naikan:latest
+          labels: |
+            org.opencontainers.image.title=Naikan
+            org.opencontainers.image.description=Naikan is a software inventory management tool driven by our CI/CD pipeline.
+            org.opencontainers.image.vendor=Enofex
+            org.opencontainers.image.version=${{ env.VERSION }}
+            org.opencontainers.image.url=https://enofex.com            
+            org.opencontainers.image.source=https://github.com/enofex/naikan-projects
+            org.opencontainers.image.licenses=MIT license
+
+      - name: Set next version POMs
+        run: ./mvnw --no-transfer-progress --batch-mode build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion}-SNAPSHOT versions:commit
+
+      - name: Set next version package.json
+        working-directory: naikan-client
+        run:  npm run-script sync-pom-version
+
+      - name: Commit & Push changes
+        uses: actions-js/push@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          message: Prepare for next release
+          tags: true

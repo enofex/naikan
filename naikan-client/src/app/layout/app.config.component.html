@@ -1,0 +1,65 @@
+<button class="layout-config-button p-link" type="button" (click)="onConfigButtonClick()">
+  <i class="pi pi-cog"></i>
+</button>
+
+<p-sidebar [(visible)]="visible" position="right"
+           [transitionOptions]="'.3s cubic-bezier(0, 0, 0.2, 1)'"
+           styleClass="layout-config-sidebar w-30rem">
+  <h5 class="uppercase">Scale</h5>
+  <div class="flex align-items-center">
+    <button icon="pi pi-minus" type="button" pButton (click)="decrementScale()"
+            class="p-button-text p-button-rounded w-2rem h-2rem mr-2"
+            [disabled]="scale === scales[0]"></button>
+    <div class="flex gap-2 align-items-center">
+      <i class="pi pi-circle-fill text-300" *ngFor="let s of scales"
+         [ngClass]="{'text-primary-500': s === scale}"></i>
+    </div>
+    <button icon="pi pi-plus" type="button" pButton (click)="incrementScale()"
+            class="p-button-text p-button-rounded w-2rem h-2rem ml-2"
+            [disabled]="scale === scales[scales.length - 1]"></button>
+  </div>
+
+
+  <h5 class="mt-6 uppercase">Menu Type</h5>
+  <div class="field-radiobutton">
+    <p-radioButton name="menuMode" value="static" [(ngModel)]="menuMode"
+                   inputId="static-mode"></p-radioButton>
+    <label for="static-mode">Static</label>
+  </div>
+  <div class="field-radiobutton">
+    <p-radioButton name="menuMode" value="overlay" [(ngModel)]="menuMode"
+                   inputId="overlay-mode"></p-radioButton>
+    <label for="overlay-mode">Overlay</label>
+  </div>
+
+
+  <h5 class="mt-6 uppercase">Input Style</h5>
+  <div class="flex">
+    <div class="field-radiobutton flex-1">
+      <p-radioButton name="inputStyle" value="outlined" [(ngModel)]="inputStyle"
+                     inputId="outlined-input"></p-radioButton>
+      <label for="outlined-input">Outlined</label>
+    </div>
+    <div class="field-radiobutton flex-1">
+      <p-radioButton name="inputStyle" value="filled" [(ngModel)]="inputStyle"
+                     inputId="filled-input"></p-radioButton>
+      <label for="filled-input">Filled</label>
+    </div>
+  </div>
+
+  <h5 class="mt-6 uppercase">Color scheme</h5>
+  <div class="flex">
+    <div class="field-radiobutton flex-1">
+      <p-radioButton name="inputStyle" value="light" [ngModel]="colorScheme"
+                     inputId="layout-light"
+                     (click)="changeTheme('naikan', 'light')"></p-radioButton>
+      <label for="layout-light">Light</label>
+    </div>
+    <div class="field-radiobutton flex-1">
+      <p-radioButton name="inputStyle" value="dark" [ngModel]="colorScheme"
+                     inputId="layout-dark" (click)="changeTheme('naikan', 'dark')">
+      </p-radioButton>
+      <label for="layout-dark">Dark</label>
+    </div>
+  </div>
+</p-sidebar>

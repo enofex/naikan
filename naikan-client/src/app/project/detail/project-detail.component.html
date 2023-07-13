@@ -1,0 +1,907 @@
+<naikan-breadcrumb [items]="items" *ngIf="bom">
+  <ng-template #rightTemplate *ngIf="bom.timestamp">
+      <span class="font-normal text-500 text-sm mt-2 ml-2"> last updated <span
+          class="text-700">{{ bom.timestamp | naikanDateTime }}</span>
+      </span>
+  </ng-template>
+</naikan-breadcrumb>
+
+<div class="card card-border-none" *ngIf="bom">
+
+  <div class="grid">
+    <p-tabView orientation="left" class="w-full">
+
+      <p-tabPanel header="Overview" class="line-height-3 m-0">
+        <div class="grid" *ngIf="bom.organization">
+          <div class="col-12 mt-4 surface-50">
+            <div class="flex flex-column xl:flex-row align-items-start">
+              <div
+                  class="flex flex-column sm:flex-row justify-content-between align-items-start flex-1">
+
+                <div class="flex flex-column align-items-start">
+                  <div class="text-xl font-bold text-900">
+                    <h5>Organization</h5>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="field grid">
+              <label class="col-12 mb-2 md:col-2 md:mb-0">Name</label>
+              <div class="col-12 md:col-10">
+                {{ bom.organization?.name}}
+              </div>
+            </div>
+
+            <div class="field grid">
+              <label class="col-12 mb-2 md:col-2 md:mb-0">URL</label>
+              <div class="col-12 md:col-10">
+                <naikan-url [url]="bom.organization?.url"></naikan-url>
+              </div>
+            </div>
+
+            <div class="field grid">
+              <label class="col-12 mb-2 md:col-2 md:mb-0">Department</label>
+              <div class="col-12 md:col-10">
+                {{ bom.organization?.department}}
+              </div>
+            </div>
+
+            <div class="field grid">
+              <label class="col-12 mb-2 md:col-2 md:mb-0">Description</label>
+              <div class="col-12 md:col-10">
+                {{ bom.organization?.description}}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="col-12 mt-4">
+
+            <div class="flex flex-column xl:flex-row align-items-start">
+              <div
+                  class="flex flex-column sm:flex-row justify-content-between align-items-start flex-1">
+
+                <div class="flex flex-column align-items-start">
+                  <div class="text-xl font-bold text-900">
+                    <h5>Project</h5>
+                  </div>
+                </div>
+
+                <div class="flex sm:flex-column align-items-center sm:align-items-end">
+                  <naikan-project-version [project]="bom.project">
+                  </naikan-project-version>
+                </div>
+              </div>
+            </div>
+
+            <div class="field grid">
+              <label class="col-12 mb-2 md:col-2 md:mb-0">Name</label>
+              <div class="col-12 md:col-10">
+                {{ bom.project?.name}}
+              </div>
+            </div>
+
+            <div class="field grid">
+              <label class="col-12 mb-2 md:col-2 md:mb-0">URL</label>
+              <div class="col-12 md:col-10">
+                <naikan-url [url]="bom.project?.url"></naikan-url>
+              </div>
+            </div>
+
+            <div class="field grid">
+              <label class="col-12 mb-2 md:col-2 md:mb-0">Repository</label>
+              <div class="col-12 md:col-10">
+                <naikan-url [url]="bom.project?.repository"></naikan-url>
+              </div>
+            </div>
+
+            <div class="field grid">
+              <label class="col-12 mb-2 md:col-2 md:mb-0">Packaging</label>
+              <div class="col-12 md:col-10">
+                {{ bom.project?.packaging}}
+              </div>
+            </div>
+
+            <div class="field grid" *ngIf="bom.project?.groupId">
+              <label class="col-12 mb-2 md:col-2 md:mb-0">Group</label>
+              <div class="col-12 md:col-10">
+                {{ bom.project?.groupId}}
+              </div>
+            </div>
+
+            <div class="field grid" *ngIf="bom.project?.artifactId">
+              <label class="col-12 mb-2 md:col-2 md:mb-0">Artifact</label>
+              <div class="col-12 md:col-10">
+                {{ bom.project?.artifactId}}
+              </div>
+            </div>
+
+            <div class="field grid">
+              <label class="col-12 mb-2 md:col-2 md:mb-0">Description</label>
+              <div class="col-12 md:col-10">
+                {{ bom.project?.description}}
+              </div>
+            </div>
+
+            <div class="field grid">
+              <label class="col-12 mb-2 md:col-2 md:mb-0">Notes</label>
+              <div class="col-12 md:col-10">
+                {{ bom.project?.notes}}
+              </div>
+            </div>
+
+            <div class="field grid">
+              <label class="col-12 mb-2 md:col-2 md:mb-0">Tags</label>
+              <div class="col-12 md:col-10">
+                <naikan-tags [tags]="bom.tags"></naikan-tags>
+              </div>
+            </div>
+
+            <div class="mt-6"
+                 *ngIf="bom.project?.groupId && bom.project?.artifactId && bom.project?.version">
+              <p-tabView orientation="left" class="w-full">
+                <p-tabPanel header="Maven" class="line-height-3 m-0">
+                  <div class="relative">
+                    <div class="flex align-items-center justify-content-end absolute z-2"
+                         style="right: .75rem; top: .3rem; gap: .75rem;">
+                      <p-button icon="pi pi-copy"
+                                tooltipPosition="top"
+                                pTooltip="Copy code"
+                                styleClass="p-button-rounded p-button-secondary p-button-text"
+                                (click)="copyToClipboard(maven)">
+                      </p-button>
+                    </div>
+
+                    <pre class="surface-50 p-3 mt-3" #maven>
+&lt;dependency&gt;
+  &lt;groupId&gt;{{ bom.project?.groupId}}&lt;/groupId&gt;
+  &lt;artifactId&gt;{{ bom.project?.artifactId}}&lt;/artifactId&gt;
+  &lt;version&gt;{{ bom.project?.version}}&lt;/versiond&gt;
+&lt;/dependency&gt;
+</pre>
+                  </div>
+                </p-tabPanel>
+
+                <p-tabPanel header="Gradle" class="line-height-3 m-0">
+                  <div class="relative">
+                    <div class="flex align-items-center justify-content-end absolute z-2"
+                         style="right: .75rem; top: .3rem; gap: .75rem;">
+                      <p-button tooltipPosition="top"
+                                pTooltip="Copy code"
+                                icon="pi pi-copy"
+                                styleClass="p-button-rounded p-button-secondary p-button-text"
+                                (click)="copyToClipboard(gradle)">
+                      </p-button>
+                    </div>
+                    <pre class="surface-50 p-3 mt-3" #gradle>
+implementation "{{ bom.project?.groupId}}:{{ bom.project?.artifactId}}:{{ bom.project?.version}}"
+</pre>
+                  </div>
+                </p-tabPanel>
+              </p-tabView>
+            </div>
+          </div>
+        </div>
+      </p-tabPanel>
+
+      <p-tabPanel header="Environments"
+                  class="line-height-3 m-0"
+                  [disabled]="bom.environments && bom.environments.length === 0">
+        <p-table
+            #tableEnvironments
+            styleClass="p-datatable-striped"
+            [rowHover]="true"
+            [defaultSortOrder]="1"
+            [sortOrder]="1"
+            sortField="name"
+            sortMode="multiple"
+            [value]="bom.environments"
+            [paginator]="true"
+            [alwaysShowPaginator]="false"
+            [rows]="25"
+            [rowsPerPageOptions]="[10, 25, 50, 100, 200]"
+            [globalFilterFields]="['name', 'location', 'description']"
+        >
+
+          <ng-template pTemplate="caption">
+            <div class="flex justify-content-start flex-column sm:flex-row mb-2">
+              <naikan-search [table]="tableEnvironments"></naikan-search>
+            </div>
+          </ng-template>
+
+          <ng-template pTemplate="header">
+            <tr>
+              <th pSortableColumn="name">Name
+                <p-sortIcon field="name"></p-sortIcon>
+              </th>
+              <th pSortableColumn="location">Location
+                <p-sortIcon field="location"></p-sortIcon>
+              </th>
+              <th pSortableColumn="description">Description
+                <p-sortIcon field="description"></p-sortIcon>
+              </th>
+              <th>Tags</th>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="body" let-environment>
+            <tr>
+              <td>{{ environment.name }}</td>
+              <td>
+                <naikan-url [url]="environment.location"></naikan-url>
+              </td>
+              <td class="width-limited-column"
+                  tooltipPosition="top"
+                  pTooltip="{{ environment.description }}">
+                {{ environment.description }}
+              </td>
+              <td>
+                <naikan-tags [tags]="environment.tags"></naikan-tags>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-tabPanel>
+
+      <p-tabPanel header="Teams"
+                  class="line-height-3 m-0"
+                  [disabled]="bom.teams && bom.teams.length === 0">
+        <p-table
+            #tableTeams
+            [value]="bom.teams"
+            [paginator]="true"
+            [rows]="25"
+            styleClass="p-datatable-striped"
+            [rowHover]="true"
+            [defaultSortOrder]="1"
+            [sortOrder]="1"
+            sortField="name"
+            sortMode="multiple"
+            [alwaysShowPaginator]="false"
+            [rowsPerPageOptions]="[10, 25, 50, 100, 200]"
+            [globalFilterFields]="['name', 'description']"
+        >
+
+          <ng-template pTemplate="caption">
+            <div class="flex justify-content-start flex-column sm:flex-row mb-2">
+              <naikan-search [table]="tableTeams"></naikan-search>
+            </div>
+          </ng-template>
+
+          <ng-template pTemplate="header">
+            <tr>
+              <th pSortableColumn="name">Name
+                <p-sortIcon field="name"></p-sortIcon>
+              </th>
+              <th pSortableColumn="description">Description
+                <p-sortIcon field="description"></p-sortIcon>
+              </th>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="body" let-team>
+            <tr>
+              <td>{{ team.name }}</td>
+              <td class="width-limited-column"
+                  tooltipPosition="top"
+                  pTooltip="{{ team.description }}">
+                {{ team.description }}
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-tabPanel>
+
+      <p-tabPanel header="Developers"
+                  class="line-height-3 m-0"
+                  [disabled]="bom.developers && bom.developers.length === 0">
+        <p-table
+            #tableDevelopers
+            styleClass="p-datatable-striped"
+            [rowHover]="true"
+            [defaultSortOrder]="1"
+            [sortOrder]="1"
+            sortField="name"
+            sortMode="multiple"
+            [value]="bom.developers"
+            [paginator]="true"
+            [alwaysShowPaginator]="false"
+            [rows]="25"
+            [rowsPerPageOptions]="[10, 25, 50, 100, 200]"
+            [globalFilterFields]="['name', 'title','department','email','phone','organization','organizationUrl','timezone','description']"
+        >
+
+          <ng-template pTemplate="caption">
+            <div class="flex justify-content-start flex-column sm:flex-row mb-2">
+              <naikan-search [table]="tableDevelopers"></naikan-search>
+            </div>
+          </ng-template>
+
+          <ng-template pTemplate="header">
+            <tr>
+              <th pSortableColumn="name">Name
+                <p-sortIcon field="name"></p-sortIcon>
+              </th>
+              <th pSortableColumn="username">Username
+                <p-sortIcon field="username"></p-sortIcon>
+              </th>
+              <th pSortableColumn="title">Title
+                <p-sortIcon field="title"></p-sortIcon>
+              </th>
+              <th pSortableColumn="organization">Organization
+                <p-sortIcon field="organization"></p-sortIcon>
+              </th>
+              <th pSortableColumn="organizationUrl">Organization URL
+                <p-sortIcon field="organizationUrl"></p-sortIcon>
+              </th>
+              <th pSortableColumn="department">Department
+                <p-sortIcon field="department"></p-sortIcon>
+              </th>
+              <th pSortableColumn="email">Email
+                <p-sortIcon field="email"></p-sortIcon>
+              </th>
+              <th pSortableColumn="phone">Phone
+                <p-sortIcon field="phone"></p-sortIcon>
+              </th>
+              <th pSortableColumn="timezone">Timezone
+                <p-sortIcon field="timezone"></p-sortIcon>
+              </th>
+              <th pSortableColumn="description">Description
+                <p-sortIcon field="description"></p-sortIcon>
+              </th>
+              <th>Roles</th>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="body" let-developer>
+            <tr>
+              <td>{{ developer.name }}</td>
+              <td>{{ developer.username }}</td>
+              <td>{{ developer.title }}</td>
+              <td>{{ developer.organization }}</td>
+              <td>
+                <naikan-url [url]="developer.organizationUrl"></naikan-url>
+              </td>
+              <td>{{ developer.department }}</td>
+              <td><a href="mailto:{{ developer.email }}">{{ developer.email }}</a></td>
+              <td>{{ developer.phone }}</td>
+              <td>{{ developer.timezone }}</td>
+              <td class="width-limited-column"
+                  tooltipPosition="top"
+                  pTooltip="{{ developer.description }}">
+                {{ developer.description }}
+              </td>
+              <td>
+                <ng-container *ngFor="let role of developer.roles">
+                  <p-tag severity="info" value="{{role}}" class="mr-1"></p-tag>
+                </ng-container>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-tabPanel>
+
+      <p-tabPanel header="Contacts"
+                  class="line-height-3 m-0"
+                  [disabled]="bom.contacts && bom.contacts.length === 0">
+        <p-table
+            #tableContacts
+            styleClass="p-datatable-striped"
+            [rowHover]="true"
+            [defaultSortOrder]="1"
+            [sortOrder]="1"
+            sortField="name"
+            sortMode="multiple"
+            [value]="bom.contacts"
+            [paginator]="true"
+            [rows]="25"
+            [alwaysShowPaginator]="false"
+            [rowsPerPageOptions]="[10, 25, 50, 100, 200]"
+            [globalFilterFields]="['name', 'title','email','phone','description']"
+        >
+
+          <ng-template pTemplate="caption">
+            <div class="flex justify-content-start flex-column sm:flex-row mb-2">
+              <naikan-search [table]="tableContacts"></naikan-search>
+            </div>
+          </ng-template>
+
+          <ng-template pTemplate="header">
+            <tr>
+              <th pSortableColumn="name">Name
+                <p-sortIcon field="name"></p-sortIcon>
+              </th>
+              <th pSortableColumn="title">Title
+                <p-sortIcon field="title"></p-sortIcon>
+              </th>
+              <th pSortableColumn="email">EMail
+                <p-sortIcon field="email"></p-sortIcon>
+              </th>
+              <th pSortableColumn="phone">Phone
+                <p-sortIcon field="phone"></p-sortIcon>
+              </th>
+              <th pSortableColumn="description">Description
+                <p-sortIcon field="description"></p-sortIcon>
+              </th>
+              <th>Roles</th>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="body" let-contact>
+            <tr>
+              <td>{{ contact.name }}</td>
+              <td>{{ contact.title }}</td>
+              <td><a href="mailto:{{ contact.email }}">{{ contact.email }}</a></td>
+              <td>{{ contact.phone }}</td>
+              <td class="width-limited-column"
+                  tooltipPosition="top"
+                  pTooltip="{{ contact.description }}">
+                {{ contact.description }}
+              </td>
+              <td>
+                <ng-container *ngFor="let role of contact.roles">
+                  <p-tag severity="info" value="{{role}}" class="mr-1"></p-tag>
+                </ng-container>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-tabPanel>
+
+      <p-tabPanel header="Documentations"
+                  class="line-height-3 m-0"
+                  [disabled]="bom.documentations && bom.documentations.length === 0">
+        <p-table
+            #tableDocumentations
+            styleClass="p-datatable-striped"
+            [rowHover]="true"
+            [defaultSortOrder]="1"
+            [sortOrder]="1"
+            sortField="name"
+            sortMode="multiple"
+            [value]="bom.documentations"
+            [paginator]="true"
+            [alwaysShowPaginator]="false"
+            [rows]="25"
+            [rowsPerPageOptions]="[10, 25, 50, 100, 200]"
+            [globalFilterFields]="['name', 'location', 'description']"
+        >
+          <ng-template pTemplate="caption">
+            <div class="flex justify-content-start flex-column sm:flex-row mb-2">
+              <naikan-search [table]="tableDocumentations"></naikan-search>
+            </div>
+          </ng-template>
+
+          <ng-template pTemplate="header">
+            <tr>
+              <th pSortableColumn="name">Name
+                <p-sortIcon field="name"></p-sortIcon>
+              </th>
+              <th pSortableColumn="location">Location
+                <p-sortIcon field="location"></p-sortIcon>
+              </th>
+              <th pSortableColumn="description">Description
+                <p-sortIcon field="description"></p-sortIcon>
+              </th>
+              <th>Tags</th>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="body" let-documentation>
+            <tr>
+              <td>{{ documentation.name }}</td>
+              <td>
+                <naikan-url [url]="documentation.location"></naikan-url>
+              </td>
+              <td class="width-limited-column"
+                  tooltipPosition="top"
+                  pTooltip="{{ documentation.description }}">
+                {{ documentation.description }}
+              </td>
+              <td>
+                <naikan-tags [tags]="documentation.tags"></naikan-tags>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-tabPanel>
+
+      <p-tabPanel header="Integrations"
+                  class="line-height-3 m-0"
+                  [disabled]="bom.integrations && bom.integrations.length === 0">
+        <p-table
+            #tableIntegrations
+            styleClass="p-datatable-striped"
+            [rowHover]="true"
+            [defaultSortOrder]="1"
+            [sortOrder]="1"
+            sortField="name"
+            sortMode="multiple"
+            [value]="bom.integrations"
+            [paginator]="true"
+            [alwaysShowPaginator]="false"
+            [rows]="25"
+            [rowsPerPageOptions]="[10, 25, 50, 100, 200]"
+            [globalFilterFields]="['name', 'url', 'description']"
+        >
+
+          <ng-template pTemplate="caption">
+            <div class="flex justify-content-start flex-column sm:flex-row mb-2">
+              <naikan-search [table]="tableIntegrations"></naikan-search>
+            </div>
+          </ng-template>
+
+          <ng-template pTemplate="header">
+            <tr>
+              <th pSortableColumn="name">Name
+                <p-sortIcon field="name"></p-sortIcon>
+              </th>
+              <th pSortableColumn="url">URL
+                <p-sortIcon field="url"></p-sortIcon>
+              </th>
+              <th pSortableColumn="description">Description
+                <p-sortIcon field="description"></p-sortIcon>
+              </th>
+              <th>Tags</th>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="body" let-integration>
+            <tr>
+              <td>{{ integration.name }}</td>
+              <td>
+                <naikan-url [url]="integration.url"></naikan-url>
+              </td>
+              <td class="width-limited-column"
+                  tooltipPosition="top"
+                  pTooltip="{{ integration.description }}">
+                {{ integration.description }}
+              </td>
+              <td>
+                <naikan-tags [tags]="integration.tags"></naikan-tags>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-tabPanel>
+
+      <p-tabPanel header="Technologies"
+                  class="line-height-3 m-0"
+                  [disabled]="bom.technologies && bom.technologies.length === 0">
+        <p-table
+            #tableTechnologies
+            styleClass="p-datatable-striped"
+            [rowHover]="true"
+            [defaultSortOrder]="1"
+            [sortOrder]="1"
+            sortField="name"
+            sortMode="multiple"
+            [value]="bom.technologies"
+            [paginator]="true"
+            [alwaysShowPaginator]="false"
+            [rows]="25"
+            [rowsPerPageOptions]="[10, 25, 50, 100, 200]"
+            [globalFilterFields]="['name', 'version', 'description']"
+        >
+          <ng-template pTemplate="caption">
+            <div class="flex justify-content-start flex-column sm:flex-row mb-2">
+              <naikan-search [table]="tableTechnologies"></naikan-search>
+            </div>
+          </ng-template>
+
+          <ng-template pTemplate="header">
+            <tr>
+              <th pSortableColumn="name">Name
+                <p-sortIcon field="name"></p-sortIcon>
+              </th>
+              <th pSortableColumn="version">Version
+                <p-sortIcon field="version"></p-sortIcon>
+              </th>
+              <th pSortableColumn="description">Description
+                <p-sortIcon field="description"></p-sortIcon>
+              </th>
+              <th>Tags</th>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="body" let-technology>
+            <tr>
+              <td>{{ technology.name }}</td>
+              <td>
+                <p-tag severity="success" value="{{ technology.version }}"></p-tag>
+              </td>
+              <td class="width-limited-column"
+                  tooltipPosition="top"
+                  pTooltip="{{technology.description }}">
+                {{ technology.description }}
+              </td>
+              <td>
+                <naikan-tags [tags]="technology.tags"></naikan-tags>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-tabPanel>
+
+      <p-tabPanel header="Deployments"
+                  class="line-height-3 m-0"
+                  [disabled]="bom.deployments && bom.deployments.length === 0">
+
+        <div class="card border-none px-0" *ngIf="bom.deployments?.length > 0">
+          <p-chart type="bar" height="200px" [data]="chartData" [options]="chartOptions">
+          </p-chart>
+        </div>
+
+        <p-table
+            #tableDeployments
+            styleClass="p-datatable-striped"
+            [rowHover]="true"
+            sortMode="multiple"
+            [value]="bom.deployments"
+            [paginator]="true"
+            [alwaysShowPaginator]="false"
+            [rows]="25"
+            [rowsPerPageOptions]="[10, 25, 50, 100, 200]"
+            [globalFilterFields]="['environment', 'location', 'timestamp','version']"
+        >
+          <ng-template pTemplate="caption">
+            <div class="flex justify-content-between flex-wrap">
+              <div class="flex align-items-center justify-content-center">
+                <naikan-search #searchDeployments [table]="tableDeployments"></naikan-search>
+              </div>
+              <div class="flex align-items-center justify-content-center">
+                <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
+                        (click)="tableDeployments.reset(); searchDeployments.clear()"></button>
+              </div>
+            </div>
+          </ng-template>
+
+          <ng-template pTemplate="header">
+            <tr>
+              <th pSortableColumn="environment">
+                <div class="flex align-items-center">
+                  <span class="mr-2">Environment</span>
+                  <p-columnFilter field="environment" display="menu"
+                                  placeholder="Environment">
+                  </p-columnFilter>
+                  <p-sortIcon field="environment"></p-sortIcon>
+                </div>
+              </th>
+              <th pSortableColumn="location">
+                <div class="flex align-items-center">
+                  <span class="mr-2">Location</span>
+                  <p-columnFilter field="location" display="menu"
+                                  placeholder="Location">
+                  </p-columnFilter>
+                  <p-sortIcon field="location"></p-sortIcon>
+                </div>
+              </th>
+              <th pSortableColumn="timestamp">
+                <div class="flex align-items-center">
+                  <span class="mr-2">Timestamp</span>
+                  <p-columnFilter type="date" field="timestamp" display="menu"
+                                  placeholder="Timestamp">
+                  </p-columnFilter>
+                  <p-sortIcon field="timestamp"></p-sortIcon>
+                </div>
+              </th>
+              <th class="w-12rem" pSortableColumn="version">
+                <div class="flex align-items-center">
+                  <span class="mr-2">Version</span>
+                  <p-columnFilter field="version" display="menu"
+                                  placeholder="Version">
+                  </p-columnFilter>
+                  <p-sortIcon field="version"></p-sortIcon>
+                </div>
+              </th>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="body" let-deployment>
+            <tr>
+              <td>{{ deployment.environment }}</td>
+              <td>
+                <naikan-url [url]="deployment.location"></naikan-url>
+              </td>
+              <td>{{ deployment.timestamp | naikanDateTime }}</td>
+              <td>
+                <p-tag severity="success" value="{{ deployment.version }}"></p-tag>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+
+      </p-tabPanel>
+
+      <p-tabPanel header="Versions"
+                  class="line-height-3 m-0"
+                  [disabled]="bom.deployments && bom.deployments.length === 0">
+
+        <div class="card surface-50 border-none">
+          <div class="flex justify-content-between align-items-center mb-3">
+            <h5>Deployed versions</h5>
+          </div>
+
+          <div style="max-height: 300px; overflow-y: auto;">
+            <ul class="list-none p-0 m-0" *ngFor="let environment of latestVersionPerEnvironment">
+              <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4">
+                <div>
+                  <span class="text-900 font-medium mr-2 mb-1 md:mb-0">
+                    {{environment.environment}}
+                  </span>
+                  <span class="ml-1 text-500">
+                    <naikan-url [url]="environment.deployment.location"></naikan-url>
+                  </span>
+                  <div class="mt-1 text-600 text-sm">
+                    {{environment.deployment.timestamp  | naikanDateTime }}
+                  </div>
+                </div>
+                <div class="mt-2 md:mt-0 flex align-items-center">
+                  <p-tag severity="success" value="{{ environment.deployment.version }}"></p-tag>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <p-table
+            #tableVersions
+            dataKey="version"
+            styleClass="p-datatable-striped"
+            [rowHover]="true"
+            sortMode="multiple"
+            [value]="groupedDeploymentsPerVersion"
+            [paginator]="true"
+            [alwaysShowPaginator]="false"
+            [expandedRowKeys]="expandedVersionRows"
+            [rows]="25"
+            [rowsPerPageOptions]="[10, 25, 50, 100, 200]"
+            [globalFilterFields]="['version']"
+        >
+          <ng-template pTemplate="caption">
+            <div class="flex justify-content-start flex-column sm:flex-row mb-2">
+              <naikan-search [table]="tableVersions"></naikan-search>
+            </div>
+          </ng-template>
+
+          <ng-template pTemplate="header">
+            <tr>
+              <th class="w-3rem">
+                <p-button *ngIf="tableVersions.totalRecords > 0"
+                          styleClass="p-button-primary"
+                          icon="{{expandedVersionRows && Object.keys(expandedVersionRows).length ? 'pi pi-angle-down' : 'pi pi-angle-right'}}"
+                          (click)="expandVersions()"
+                          tooltipPosition="top"
+                          pTooltip="Toggle rows">
+                </p-button>
+              </th>
+              <th pSortableColumn="version">Version
+                <p-sortIcon field="version"></p-sortIcon>
+              </th>
+              <th class="w-12rem" pSortableColumn="deploymentsCount">Deployments
+                <p-sortIcon field="deploymentsCount"></p-sortIcon>
+              </th>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="body" let-versionGroup let-expanded="expanded">
+            <tr>
+              <td>
+                <button type="button"
+                        pButton [pRowToggler]="versionGroup"
+                        class="p-button-text p-button-rounded p-button-plain"
+                        [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'">
+                </button>
+              </td>
+              <td>
+                <p-tag severity="success" value="{{ versionGroup.version }}"></p-tag>
+              </td>
+              <td>
+                <p-tag severity="primary"
+                       value="{{ versionGroup.deploymentsCount }}"
+                       [rounded]="true"></p-tag>
+              </td>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="rowexpansion" let-group>
+            <tr>
+              <td></td>
+              <td colspan="2">
+                <p-table
+                    [value]="group.deployments"
+                    [defaultSortOrder]="-1"
+                    [sortOrder]="-1"
+                    sortField="timestamp"
+                >
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th pSortableColumn="environment">Environment
+                        <p-sortIcon field="environment"></p-sortIcon>
+                      </th>
+                      <th pSortableColumn="location">Location
+                        <p-sortIcon field="location"></p-sortIcon>
+                      </th>
+                      <th pSortableColumn="timestamp">Timestamp
+                        <p-sortIcon field="timestamp"></p-sortIcon>
+                      </th>
+                    </tr>
+                  </ng-template>
+
+                  <ng-template pTemplate="body" let-groupItem>
+                    <tr>
+                      <td class="w-20rem">{{ groupItem.environment }}</td>
+                      <td>
+                        <naikan-url [url]="groupItem.location"></naikan-url>
+                      </td>
+                      <td class="w-15rem">{{ groupItem.timestamp | naikanDateTime }}</td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-tabPanel>
+
+      <p-tabPanel header="Licenses"
+                  class="line-height-3 m-0"
+                  [disabled]="bom.licenses && bom.licenses.length === 0">
+        <p-table
+            #tableLicenses
+            styleClass="p-datatable-striped"
+            [rowHover]="true"
+            [defaultSortOrder]="1"
+            [sortOrder]="1"
+            sortField="name"
+            sortMode="multiple"
+            [value]="bom.licenses"
+            [paginator]="true"
+            [alwaysShowPaginator]="false"
+            [rows]="25"
+            [rowsPerPageOptions]="[10, 25, 50, 100, 200]"
+            [globalFilterFields]="['name', 'url', 'description']"
+        >
+
+          <ng-template pTemplate="caption">
+            <div class="flex justify-content-start flex-column sm:flex-row mb-2">
+              <naikan-search [table]="tableLicenses"></naikan-search>
+            </div>
+          </ng-template>
+
+          <ng-template pTemplate="header">
+            <tr>
+              <th pSortableColumn="name">Name
+                <p-sortIcon field="name"></p-sortIcon>
+              </th>
+              <th pSortableColumn="url">URL
+                <p-sortIcon field="url"></p-sortIcon>
+              </th>
+              <th pSortableColumn="description">Description
+                <p-sortIcon field="description"></p-sortIcon>
+              </th>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="body" let-license>
+            <tr>
+              <td>{{ license.name }}</td>
+              <td>
+                <naikan-url [url]="license.url"></naikan-url>
+              </td>
+              <td class="width-limited-column"
+                  tooltipPosition="top"
+                  pTooltip="{{ license.description }}">
+                {{ license.description }}
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-tabPanel>
+
+    </p-tabView>
+  </div>
+</div>

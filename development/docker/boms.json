@@ -1,0 +1,901 @@
+[
+  {
+    "specVersion": "1.0",
+    "bomFormat": "Naikan",
+    "timestamp": "2022-12-28T08:29:10.079226",
+    "project": {
+      "name": "Naikan",
+      "url": "https://naikan.io",
+      "repository": "https://github.com/naikan-projects",
+      "groupId": "io.naikan",
+      "artifactId": "naikan-core",
+      "packaging": "jar",
+      "version": "1.0.0-SNAPSHOT",
+      "description": "Naikan is a software inventory management tool that allows organizations to keep track of information related to their software projects.",
+      "notes": "Naikan notes"
+    },
+    "organization": {
+      "name": "Enofex",
+      "url": "https://enofex.com",
+      "department": "Software department",
+      "description": "Company projects at a glance!"
+    },
+    "environments": [
+      {
+        "name": "Staging",
+        "location": "staging.naikan.io",
+        "description": "Staging description",
+        "tags": [
+          "Staging"
+        ]
+      },
+      {
+        "name": "Production",
+        "location": "naikan.io",
+        "description": "Production description"
+      }
+    ],
+    "teams": [
+      {
+        "name": "Naikan Core Team",
+        "description": "Naikan Core Team"
+      },
+      {
+        "name": "Naikan UI Team",
+        "description": "Naikan UI Team"
+      },
+      {
+        "name": "Naikan AWS Team",
+        "description": "Naikan AWS Team"
+      }
+    ],
+    "developers": [
+      {
+        "name": "Trev Cooksey",
+        "title": "Principal Software Engineer",
+        "department": "Naikan Software Engineering",
+        "email": "tcooksey1@geocities.jp",
+        "phone": "1212-12-90999",
+        "organization": "Edgetag",
+        "organizationUrl": "https://www.edgetag.tech",
+        "timezone": "America/New_York",
+        "description": "Best developer!",
+        "roles": [
+          "architect",
+          "developer"
+        ]
+      },
+      {
+        "name": "Trev Cooksey 2",
+        "title": "Principal Software Engineer",
+        "department": "Naikan Software Engineering",
+        "email": "tcooksey1@geocities.jp",
+        "phone": "1212-12-90999",
+        "organization": "Edgetag",
+        "organizationUrl": "https://www.edgetag.tech",
+        "timezone": "America/New_York",
+        "description": "Best developer!",
+        "roles": [
+          "architect",
+          "developer"
+        ]
+      },
+      {
+        "name": "Trev Cooksey 3",
+        "title": "Principal Software Engineer",
+        "department": "Naikan Software Engineering",
+        "email": "tcooksey1@geocities.jp",
+        "phone": "1212-12-90999",
+        "organization": "Edgetag",
+        "organizationUrl": "https://www.edgetag.tech",
+        "timezone": "America/New_York",
+        "description": "Best developer!",
+        "roles": [
+          "architect",
+          "developer"
+        ]
+      }
+    ],
+    "contacts": [
+      {
+        "name": "John Doe",
+        "title": "Product Owner",
+        "email": "jdoe@example.com",
+        "phone": "461-355-2912",
+        "description": "Responsible for this project",
+        "roles": [
+          "PO"
+        ]
+      }
+    ],
+    "technologies": [
+      {
+        "name": "Java",
+        "version": "19",
+        "description": "Best programming language",
+        "tags": [
+          "backend"
+        ]
+      },
+      {
+        "name": "Angular",
+        "version": "15.0",
+        "description": "React or Angular",
+        "tags": [
+          "frontend"
+        ]
+      },
+      {
+        "name": "Spring Boot",
+        "version": "3.1",
+        "description": "Best framework",
+        "tags": [
+          "backend"
+        ]
+      }
+    ],
+    "licenses": [
+      {
+        "name": "Apache-2.0",
+        "url": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+        "description": "Or MIT license?"
+      }
+    ],
+    "documentations": [
+      {
+        "name": "Architecture overview",
+        "location": "naikan.io/arch24",
+        "description": "ARC24",
+        "tags": [
+          "Architecture",
+          "ARC24"
+        ]
+      },
+      {
+        "name": "Technical dept",
+        "location": "wiki.naikan.io/techdept",
+        "description": "Should be reduced!"
+      }
+    ],
+    "integrations": [
+      {
+        "name": "Bitbucket",
+        "url": "http://127.0.0.1/bitbucket/naikan",
+        "description": "Scm description",
+        "tags": [
+          "Scm"
+        ]
+      },
+      {
+        "name": "Bamboo",
+        "url": "http://127.0.0.1:8080/bamboo/naikan",
+        "description": "Ci description"
+      },
+      {
+        "name": "Jira",
+        "url": "http://127.0.0.1/jira/naikan",
+        "description": "JDD"
+      },
+      {
+        "name": "SonarQube",
+        "url": "http://127.0.0.1/sonar/naikan",
+        "description": "Great tools!",
+        "tags": [
+          "Security"
+        ]
+      },
+      {
+        "name": "DependencyTrack",
+        "url": "http://127.0.0.1/dtrack/naikan",
+        "description": "Must have!",
+        "tags": [
+          "Security"
+        ]
+      }
+    ],
+    "tags": [
+      "web",
+      "intern"
+    ],
+    "deployments": [
+      {
+        "environment": "Staging",
+        "location": "staging.naikan.io",
+        "version": "1.0.0",
+        "timestamp": "2021-12-28T08:29:10.079226"
+      },
+      {
+        "environment": "Staging",
+        "location": "staging.naikan.io",
+        "version": "1.0.0",
+        "timestamp": "2021-12-28T08:29:10.079226"
+      },
+      {
+        "environment": "Staging",
+        "location": "staging.naikan.io",
+        "version": "1.0.0",
+        "timestamp": "2021-12-28T08:29:10.079226"
+      },
+      {
+        "environment": "Production",
+        "location": "naikan.io",
+        "version": "1.0.1",
+        "timestamp": "2022-12-28T08:29:10.079226"
+      },
+      {
+        "environment": "Staging",
+        "location": "staging.naikan.io",
+        "version": "1.0.0",
+        "timestamp": "2022-09-02T08:29:10.079226"
+      },
+      {
+        "environment": "Production",
+        "location": "naikan.io",
+        "version": "1.0.1",
+        "timestamp": "2022-11-28T08:29:10.079226"
+      },
+      {
+        "environment": "Staging",
+        "location": "staging.naikan.io",
+        "version": "1.0.0",
+        "timestamp": "2021-11-28T08:29:10.079226"
+      },
+      {
+        "environment": "Production",
+        "location": "naikan.io",
+        "version": "1.0.1",
+        "timestamp": "2022-01-28T08:29:10.079226"
+      },
+      {
+        "environment": "Production",
+        "location": "naikan.io",
+        "version": "1.0.1",
+        "timestamp": "2022-01-28T08:29:10.079226"
+      },
+      {
+        "environment": "Production",
+        "location": "naikan.io",
+        "version": "1.0.1",
+        "timestamp": "2022-01-28T08:29:10.079226"
+      },
+      {
+        "environment": "Production",
+        "location": "naikan.io",
+        "version": "1.0.1",
+        "timestamp": "2022-01-28T08:29:10.079226"
+      },
+      {
+        "environment": "Production",
+        "location": "naikan.io",
+        "version": "1.0.1",
+        "timestamp": "2022-01-28T08:29:10.079226"
+      }
+    ]
+  },
+  {
+    "specVersion": "1.0",
+    "bomFormat": "Naikan",
+    "timestamp": "2022-12-28T08:29:10.079226",
+    "project": {
+      "name": "Sample Project",
+      "url": "https://naikan.io",
+      "repository": "https://github.com/naikan-projects",
+      "groupId": "io.naikan",
+      "artifactId": "naikan-core",
+      "packaging": "jar",
+      "version": "1.1.2",
+      "description": "Naikan is a software inventory management tool that allows organizations to keep track of information related to their software projects.",
+      "notes": "Naikan notes"
+    },
+    "organization": {
+      "name": "Enofex",
+      "url": "https://enofex.com",
+      "department": "Software department",
+      "description": "Company projects at a glance!"
+    },
+    "environments": [
+      {
+        "name": "Staging DE",
+        "location": "staging.naikan.io",
+        "description": "Staging description",
+        "tags": [
+          "Staging"
+        ]
+      },
+      {
+        "name": "Production DE",
+        "location": "naikan.io",
+        "description": "Production description"
+      },
+      {
+        "name": "Staging SE",
+        "location": "staging.naikan.io",
+        "description": "Staging description",
+        "tags": [
+          "Staging"
+        ]
+      },
+      {
+        "name": "Production SE",
+        "location": "naikan.io",
+        "description": "Production description"
+      },
+      {
+        "name": "Staging",
+        "location": "staging.naikan.io",
+        "description": "Staging description",
+        "tags": [
+          "Staging"
+        ]
+      },
+      {
+        "name": "Production",
+        "location": "naikan.io",
+        "description": "Production description"
+      }
+    ],
+    "teams": [
+      {
+        "name": "Naikan Team 1",
+        "description": "Naikan Core Team"
+      },
+      {
+        "name": "Naikan Team 2",
+        "description": "Naikan Core Team"
+      },
+      {
+        "name": "Naikan Team 3",
+        "description": "Naikan Core Team"
+      }
+    ],
+    "developers": [
+      {
+        "name": "Trev Cooksey",
+        "title": "Principal Software Engineer",
+        "department": "Naikan Software Engineering",
+        "email": "tcooksey1@geocities.jp",
+        "phone": "1212-12-90999",
+        "organization": "Edgetag",
+        "organizationUrl": "https://www.edgetag.tech",
+        "timezone": "America/New_York",
+        "description": "Best developer!",
+        "roles": [
+          "architect",
+          "developer"
+        ]
+      },
+      {
+        "name": "Trev Cooksey 2",
+        "title": "Principal Software Engineer",
+        "department": "Naikan Software Engineering",
+        "email": "tcooksey1@geocities.jp",
+        "phone": "1212-12-90999",
+        "organization": "Edgetag",
+        "organizationUrl": "https://www.edgetag.tech",
+        "timezone": "America/New_York",
+        "description": "Best developer!",
+        "roles": [
+          "architect",
+          "developer"
+        ]
+      },
+      {
+        "name": "Trev Cooksey 3",
+        "title": "Principal Software Engineer",
+        "department": "Naikan Software Engineering",
+        "email": "tcooksey1@geocities.jp",
+        "phone": "1212-12-90999",
+        "organization": "Edgetag",
+        "organizationUrl": "https://www.edgetag.tech",
+        "timezone": "America/New_York",
+        "description": "Best developer!",
+        "roles": [
+          "architect",
+          "developer"
+        ]
+      }
+    ],
+    "contacts": [
+      {
+        "name": "John Doe",
+        "title": "Product Owner",
+        "email": "jdoe@example.com",
+        "phone": "461-355-2912",
+        "description": "Responsible for this project",
+        "roles": [
+          "PO"
+        ]
+      },
+      {
+        "name": "John Doe 2",
+        "title": "Product Owner",
+        "email": "jdoe@example.com",
+        "phone": "461-355-2912",
+        "description": "Responsible for this project",
+        "roles": [
+          "PO"
+        ]
+      },
+      {
+        "name": "John Doe 3",
+        "title": "Product Owner",
+        "email": "jdoe@example.com",
+        "phone": "461-355-2912",
+        "description": "Responsible for this project",
+        "roles": [
+          "PO"
+        ]
+      },
+      {
+        "name": "John Doe 4",
+        "title": "Product Owner",
+        "email": "jdoe@example.com",
+        "phone": "461-355-2912",
+        "description": "Responsible for this project",
+        "roles": [
+          "PO"
+        ]
+      },
+      {
+        "name": "John Doe 5",
+        "title": "Product Owner",
+        "email": "jdoe@example.com",
+        "phone": "461-355-2912",
+        "description": "Responsible for this project",
+        "roles": [
+          "PO"
+        ]
+      }
+    ],
+    "technologies": [
+      {
+        "name": "Java",
+        "version": "20",
+        "description": "Best programming language",
+        "tags": [
+          "backend"
+        ]
+      },
+      {
+        "name": "Angular",
+        "version": "15.0",
+        "description": "React or Angular",
+        "tags": [
+          "frontend"
+        ]
+      },
+      {
+        "name": "Spring Boot",
+        "version": "2.4",
+        "description": "Best programming language",
+        "tags": [
+          "backend"
+        ]
+      },
+      {
+        "name": "NPM",
+        "version": "15.0",
+        "description": "React or Angular",
+        "tags": [
+          "frontend"
+        ]
+      },
+      {
+        "name": "Mongo",
+        "version": "5",
+        "description": "Best programming language",
+        "tags": [
+          "backend"
+        ]
+      },
+      {
+        "name": "Testcontainers",
+        "version": "1.0.0",
+        "description": "React or Angular",
+        "tags": [
+          "frontend"
+        ]
+      },
+      {
+        "name": "Alpine",
+        "version": "19",
+        "description": "Best programming language",
+        "tags": [
+          "backend"
+        ]
+      },
+      {
+        "name": "NodeJS",
+        "version": "15.0",
+        "description": "React or Angular",
+        "tags": [
+          "frontend"
+        ]
+      }
+    ],
+    "licenses": [
+      {
+        "name": "Apache-2.0",
+        "url": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+        "description": "Or MIT license?"
+      }
+    ],
+    "documentations": [
+      {
+        "name": "Architecture overview 1",
+        "location": "naikan.io/arch24",
+        "description": "ARC24",
+        "tags": [
+          "Architecture",
+          "ARC24"
+        ]
+      },
+      {
+        "name": "Architecture overview 2",
+        "location": "naikan.io/arch24",
+        "description": "ARC24",
+        "tags": [
+          "Architecture",
+          "ARC24"
+        ]
+      },
+      {
+        "name": "Technical dept",
+        "location": "wiki.naikan.io/techdept",
+        "description": "Should be reduced!"
+      }
+    ],
+    "integrations": [
+      {
+        "name": "Bitbucket",
+        "url": "http://127.0.0.1/bitbucket/naikan",
+        "description": "Scm description",
+        "tags": [
+          "Scm"
+        ]
+      },
+      {
+        "name": "Bitbucket",
+        "url": "http://127.0.0.1/bitbucket/naikan",
+        "description": "Scm description",
+        "tags": [
+          "Scm"
+        ]
+      },
+      {
+        "name": "Bamboo",
+        "url": "http://127.0.0.1:8080/bamboo/naikan",
+        "description": "Ci description"
+      },
+      {
+        "name": "Jira",
+        "url": "http://127.0.0.1/jira/naikan",
+        "description": "JDD"
+      },
+      {
+        "name": "SonarQube",
+        "url": "http://127.0.0.1/sonar/naikan",
+        "description": "Great tools!",
+        "tags": [
+          "Security"
+        ]
+      },
+      {
+        "name": "DependencyTrack",
+        "url": "http://127.0.0.1/dtrack/naikan",
+        "description": "Must have!",
+        "tags": [
+          "Security"
+        ]
+      }
+    ],
+    "tags": [
+      "web",
+      "intern"
+    ],
+    "deployments": [
+      {
+        "environment": "Staging",
+        "location": "staging.naikan.io",
+        "version": "1.0.0",
+        "timestamp": "2022-11-28T08:29:10.079226"
+      },
+      {
+        "environment": "Staging",
+        "location": "staging.naikan.io",
+        "version": "1.0.0",
+        "timestamp": "2022-11-28T08:29:10.079226"
+      },
+      {
+        "environment": "Production",
+        "location": "naikan.io",
+        "version": "1.0.1",
+        "timestamp": "2021-12-28T08:29:10.079226"
+      },
+      {
+        "environment": "Production",
+        "location": "naikan.io",
+        "version": "1.0.1",
+        "timestamp": "2021-12-28T08:29:10.079226"
+      },
+      {
+        "environment": "Production",
+        "location": "naikan.io",
+        "version": "1.0.1",
+        "timestamp": "2021-12-28T08:29:10.079226"
+      },
+      {
+        "environment": "Production",
+        "location": "naikan.io",
+        "version": "1.0.1",
+        "timestamp": "2021-12-28T08:29:10.079226"
+      },
+      {
+        "environment": "Staging",
+        "location": "staging.naikan.io",
+        "version": "1.0.0",
+        "timestamp": "2022-01-28T08:29:10.079226"
+      },
+      {
+        "environment": "Production",
+        "location": "naikan.io",
+        "version": "1.0.1",
+        "timestamp": "2022-10-28T08:29:10.079226"
+      },
+      {
+        "environment": "Staging",
+        "location": "staging.naikan.io",
+        "version": "1.0.0",
+        "timestamp": "2022-03-28T08:29:10.079226"
+      },
+      {
+        "environment": "Production",
+        "location": "naikan.io",
+        "version": "1.0.1",
+        "timestamp": "2022-06-28T08:29:10.079226"
+      }
+    ]
+  },
+  {
+    "specVersion": "1.0",
+    "bomFormat": "Naikan",
+    "timestamp": "2022-11-28T08:29:10.079226",
+    "project": {
+      "name": "My Project",
+      "url": "https://myproject.com",
+      "repository": "https://github.com/myusername/myproject",
+      "groupId": "com.myproject",
+      "artifactId": "myproject-core",
+      "packaging": "jar",
+      "version": "1.1-SNAPSHOT",
+      "description": "My Project is a tool for managing projects.",
+      "notes": "This is a sample BOM for My Project"
+    },
+    "organization": {
+      "name": "My Organization",
+      "url": "https://myorganization.com",
+      "department": "Software Engineering",
+      "description": "We develop awesome software!"
+    },
+    "environments": [
+      {
+        "name": "Development",
+        "location": "dev.myproject.com",
+        "description": "Development environment",
+        "tags": [
+          "Development"
+        ]
+      },
+      {
+        "name": "Production",
+        "location": "myproject.com",
+        "description": "Production environment"
+      }
+    ],
+    "teams": [
+      {
+        "name": "Core Team",
+        "description": "The core team responsible for My Project"
+      },
+      {
+        "name": "UI Team",
+        "description": "The UI team responsible for My Project"
+      },
+      {
+        "name": "DevOps Team",
+        "description": "The DevOps team responsible for My Project"
+      }
+    ],
+    "developers": [
+      {
+        "name": "John Doe",
+        "title": "Software Engineer",
+        "department": "Software Engineering",
+        "email": "johndoe@myorganization.com",
+        "phone": "555-555-1212",
+        "organization": "My Organization",
+        "organizationUrl": "https://myorganization.com",
+        "timezone": "America/Los_Angeles",
+        "description": "A skilled software engineer",
+        "roles": [
+          "developer"
+        ]
+      },
+      {
+        "name": "Jane Smith",
+        "title": "Senior Software Engineer",
+        "department": "Software Engineering",
+        "email": "janesmith@myorganization.com",
+        "phone": "555-555-1212",
+        "organization": "My Organization",
+        "organizationUrl": "https://myorganization.com",
+        "timezone": "America/Los_Angeles",
+        "description": "A seasoned software engineer",
+        "roles": [
+          "developer",
+          "architect"
+        ]
+      }
+    ],
+    "contacts": [
+      {
+        "name": "Joe Johnson",
+        "title": "Product Owner",
+        "email": "jjohnson@myorganization.com",
+        "phone": "555-555-1212",
+        "description": "Responsible for this project",
+        "roles": [
+          "PO"
+        ]
+      }
+    ],
+    "technologies": [
+      {
+        "name": "React",
+        "version": "17.0.2",
+        "description": "A JavaScript library for building user interfaces",
+        "tags": [
+          "frontend"
+        ]
+      },
+      {
+        "name": "Django",
+        "version": "3.2",
+        "description": "A high-level Python web framework",
+        "tags": [
+          "backend"
+        ]
+      },
+      {
+        "name": "Kubernetes",
+        "version": "1.22.0",
+        "description": "An open-source container orchestration system",
+        "tags": [
+          "devops"
+        ]
+      }
+    ],
+    "licenses": [
+      {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT",
+        "description": "A permissive software license"
+      },
+      {
+        "name": "GPL-3.0",
+        "url": "https://www.gnu.org/licenses/gpl-3.0.en.html",
+        "description": "A copyleft license"
+      }
+    ],
+    "documentations": [
+      {
+        "name": "Getting started",
+        "location": "naikan.io/docs/getting-started",
+        "description": "A guide to getting started with Naikan",
+        "tags": [
+          "documentation"
+        ]
+      },
+      {
+        "name": "API reference",
+        "location": "naikan.io/docs/api",
+        "description": "A reference guide to Naikan's API",
+        "tags": [
+          "documentation"
+        ]
+      }
+    ],
+    "integrations": [
+      {
+        "name": "Slack",
+        "url": "https://slack.com/",
+        "description": "A messaging app for teams",
+        "tags": [
+          "communication"
+        ]
+      },
+      {
+        "name": "AWS",
+        "url": "https://aws.amazon.com/",
+        "description": "A cloud computing platform",
+        "tags": [
+          "cloud"
+        ]
+      }
+    ],
+    "tags": [
+      "web",
+      "intern",
+      "backend",
+      "frontend",
+      "devops",
+      "documentation",
+      "security"
+    ],
+    "deployments": [
+      {
+        "environment": "Test",
+        "location": "test.naikan.io",
+        "version": "1.0.0",
+        "timestamp": "2022-08-28T08:29:10.079226"
+      },
+      {
+        "environment": "Development",
+        "location": "dev.naikan.io",
+        "version": "1.0.1",
+        "timestamp": "2022-12-28T08:29:10.079226"
+      },
+      {
+        "environment": "Test",
+        "location": "test.naikan.io",
+        "version": "1.0.1",
+        "timestamp": "2022-07-28T08:29:10.079226"
+      },
+      {
+        "environment": "Development",
+        "location": "dev.naikan.io",
+        "version": "1.0.1",
+        "timestamp": "2022-07-28T08:29:10.079226"
+      },
+      {
+        "environment": "Test",
+        "location": "test.naikan.io",
+        "version": "1.0.2",
+        "timestamp": "2022-08-28T08:29:10.079226"
+      },
+      {
+        "environment": "Development",
+        "location": "dev.naikan.io",
+        "version": "1.0.2",
+        "timestamp": "2022-08-28T08:29:10.079226"
+      },
+      {
+        "environment": "Development",
+        "location": "dev.naikan.io",
+        "version": "1.0.2",
+        "timestamp": "2022-08-28T09:29:10.079226"
+      },
+      {
+        "environment": "Development",
+        "location": "dev.naikan.io",
+        "version": "1.0.2",
+        "timestamp": "2022-08-28T10:29:10.079226"
+      }
+    ]
+  },
+  {
+    "specVersion": "1.0",
+    "bomFormat": "Naikan",
+    "project": {
+      "name": "Empty Project",
+      "url": "https://myproject.com",
+      "repository": "https://github.com/myusername/myproject",
+      "groupId": "com.myproject",
+      "artifactId": "myproject-core",
+      "packaging": "jar",
+      "version": "4.2.9-SNAPSHOT",
+      "description": "My Project is a tool for managing projects.",
+      "notes": "This is a sample BOM for My Project"
+    }
+  }
+]

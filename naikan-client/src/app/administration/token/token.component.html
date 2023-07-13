@@ -1,0 +1,108 @@
+<naikan-breadcrumb
+    [items]="[{label: 'Administration', routerLink: '/administration'}, {label: 'Tokens', routerLink: '/administration/tokens'}]">
+</naikan-breadcrumb>
+
+<p-confirmDialog [style]="{width: '40vw'}"></p-confirmDialog>
+
+<p-messages [enableService]="true" [closable]="true"></p-messages>
+
+<div class="card card-border-none">
+  <h5> {{page?.totalElements}} Tokens</h5>
+
+  <p-table class="w-full"
+           dataKey="id"
+           #tableAdministrationTokens
+           styleClass="p-datatable-striped"
+           [rowHover]="true"
+           [value]="page?.content"
+           [lazy]="true"
+           (onLazyLoad)="loadTokens($event)"
+           [paginator]="true"
+           [alwaysShowPaginator]="false"
+           [rows]="25"
+           [defaultSortOrder]="-1"
+           [sortOrder]="-1"
+           sortField="created"
+           [rowsPerPageOptions]="[10, 25, 50, 100, 200]"
+           [totalRecords]="page?.totalElements">
+
+    <ng-template pTemplate="caption">
+      <div class="flex justify-content-between flex-wrap mb-2 mt-4">
+        <div class="flex align-items-center justify-content-center">
+          <naikan-search #search [table]="tableAdministrationTokens"></naikan-search>
+        </div>
+        <div class="flex align-items-center justify-content-center">
+          <button pButton label="Clear" class="p-button-outlined"
+                  icon="pi pi-filter-slash"
+                  (click)="tableAdministrationTokens.reset(); search.clear()">
+          </button>
+          <button pButton icon="pi pi-plus" class="ml-1" tooltipPosition="top" pTooltip="Add token"
+                  (click)="openNewTokenDialog()"></button>
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="token">Token
+          <p-sortIcon field="token"></p-sortIcon>
+        </th>
+        <th pSortableColumn="created">Created
+          <p-sortIcon field="created"></p-sortIcon>
+        </th>
+        <th pSortableColumn="createdBy">Created by
+          <p-sortIcon field="createdBy"></p-sortIcon>
+        </th>
+        <th pSortableColumn="lastUsed">Last used
+          <p-sortIcon field="lastUsed"></p-sortIcon>
+        </th>
+        <th pSortableColumn="description">Description
+          <p-sortIcon field="description"></p-sortIcon>
+        </th>
+        <th class="w-4rem"></th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-item>
+      <tr>
+        <td>
+          {{ item.token }}
+          <p-tag class="ml-1" severity="success" value="new"
+                 *ngIf="isDateWithinFiveMinutes(item.created)"></p-tag>
+        </td>
+        <td>{{ item.created | naikanDateTime }}</td>
+        <td>
+          <naikan-url [url]="item.createdBy"></naikan-url>
+        </td>
+        <td>{{ item.lastUsed | naikanDateTime }}</td>
+        <td class="width-limited-column"
+            tooltipPosition="top"
+            pTooltip="{{ item.description }}">
+          {{ item.description }}
+        </td>
+        <td>
+          <p-button icon="pi pi-trash" styleClass="p-button-rounded p-button-text"
+                    (click)="confirmDelete(item.id)"></p-button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+
+<p-dialog [(visible)]="newTokenDialog" [style]="{ width: '450px' }" header="Add new token"
+          [modal]="true" styleClass="p-fluid">
+  <ng-template pTemplate="content">
+    <div class="field">
+      <label for="description">Description</label>
+      <textarea id="description" pInputTextarea [(ngModel)]="description" rows="3"
+                cols="20"></textarea>
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <button pButton label="Cancel" icon="pi pi-times" class="p-button-outlined"
+            (click)="hide()"></button>
+    <button pButton label="Save" icon="pi pi-check" (click)="save()"></button>
+  </ng-template>
+</p-dialog>

@@ -1,0 +1,48 @@
+.sidebar-filter {
+
+  .p-accordion {
+    border-radius: 0;
+
+    &:first-child {
+      border: none
+    }
+
+    &:last-child {
+      border: none
+    }
+
+    .p-accordion-header {
+      border-top: 1px solid #eee;
+      border-bottom: none;
+
+      .p-accordion-header-link {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+    }
+
+    .p-accordion-tab {
+      box-shadow: none;
+      margin-left: -1rem;
+      margin-right: -1rem;
+
+      &:not(.p-accordion-tab-active) {
+        .p-toggleable-content {
+          height: 0;
+          overflow: hidden;
+        }
+      }
+    }
+  }
+
+  .p-sidebar .p-sidebar-header {
+    padding-bottom: 0;
+  }
+
+  .p-sidebar .p-sidebar-footer {
+    border-top: 1px solid #eee;
+  }
+}
+
+
+
