@@ -54,7 +54,7 @@ John Rambo > username: jnrambo, password: 123, role: user
 ## Contributing
 
 If you want to contribute to this project, then follow please
-these [instructions](https://github.com/enofex/naikan-projects/blob/main/CONTRIBUTING.md).
+these [instructions](CONTRIBUTING.md).
 
 ## Website
 
