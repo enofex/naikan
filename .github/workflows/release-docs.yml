@@ -1,9 +1,8 @@
 name: Release docs
 on:
   push:
-    branches:
-      - master
-      - main
+    tags:
+      - v*
 permissions:
   contents: write
 jobs:
