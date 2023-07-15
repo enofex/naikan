@@ -1,4 +1,4 @@
-PUT http://localhost:8080/api/public/projects
+POST http://localhost:8080/api/public/projects
 Authorization: Bearer 3b6b77d9-3ab6-44db-be03-623e6ffb91bd
 Content-Type: application/json
 
