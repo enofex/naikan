@@ -12,7 +12,7 @@
 
 Use git to clone the Naikan repository by running the following command:
 
-`git clone git@github.com:naikan-projects/naikan.git`
+`git clone git@github.com:enofex/naikan.git`
 
 ## Install dependencies
 
