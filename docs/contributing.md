@@ -3,21 +3,21 @@
 Thank you for your interest in contributing to *Naikan*! We welcome contributions from the community
 to help make the project even better. Here are some ways you can get involved:
 
-* Star the Project:
+* **Star the Project**:
 
     - Show your support by starring the project
       on [GitHub](https://github.com/enofex/naikan).
     - This helps increase visibility and encourages others to discover and contribute to the
       project.
 
-* Review the Contribution Guide:
+* **Review the Contribution Guide**:
 
     - Familiarize yourself with the guidelines and procedures outlined in our contribution guide.
     - The contribution guide provides detailed information on how to get started and the different
       ways
       you can contribute.
 
-* Follow Contribution Guidelines:
+* **Follow Contribution Guidelines**:
 
     - Ensure that you follow our
       contribution [guidelines](https://github.com/enofex/naikan/blob/main/CONTRIBUTING.md)
@@ -25,34 +25,31 @@ to help make the project even better. Here are some ways you can get involved:
     - These guidelines cover aspects such as code formatting, documentation standards, and other
       important considerations.
 
-* Pull Requests:
+* **Pull Requests**:
 
     - If you have improvements or fixes to propose, submit a Pull Request (PR) to the relevant
-      module or
-      repository.
+      module or repository.
     - Clearly describe the purpose and changes made in your PR, providing enough context for the
       reviewers to understand your contribution.
     - Be open to feedback and engage in discussions to refine your contribution.
 
-* Bug Reports and Feature Requests:
+* **Bug Reports and Feature Requests**:
 
     - Help us improve *Naikan* by reporting any bugs or issues you encounter.
     - If you have ideas for new features or enhancements, submit a feature request.
     - Use the issue tracker in the respective repository to provide detailed information about the
       problem or request.
 
-* Spread the Word:
+* **Spread the Word**:
 
     - Share your positive experience with *Naikan* and encourage others to contribute.
     - Tweet about your contributions, write blog posts, or mention *Naikan* in relevant communities
-      to
-      increase awareness.
+      to increase awareness.
 
-* Help with Documentation:
+* **Help with Documentation**:
 
     - Contribute to improving the documentation by identifying areas that need clarification or
-      adding
-      examples and tutorials.
+      adding examples and tutorials.
     - Submit documentation PRs to enhance the usability and understanding of *Naikan*.
 
 Remember, contributions of all sizes are valuable and appreciated. We look forward to your
