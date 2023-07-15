@@ -38,7 +38,7 @@ graph TD;
     naikan-maven-plugin-->naikan-test;
 ```
 
-### Naikan Module (WIP)
+### Naikan Module
 The [naikan](https://github.com/enofex/naikan) module is the Naikan project. It provides a set of APIs and services that developers can use to register and push their applications data to Naikan. This module also contains the user interface for the application.
 
 ### Naikan Model Module
