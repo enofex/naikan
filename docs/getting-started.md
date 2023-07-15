@@ -32,17 +32,33 @@ After downloading the docker-compose.yml file, review it and identify the servic
 
 The Naikan container can be configured using any of the available configuration properties:
 
-#### MongoDB
+#### MongoDB 
 
-| Property                             | Default     | Description                         |
-|:-------------------------------------|:------------|:------------------------------------|
-| `NAIKAN_MONGODB_HOST`                | `localhost` | Mongo server host.                  |   
-| `NAIKAN_MONGODB_PORT`                | `27017`     | Mongo server port.                  |
-| `NAIKAN_MONGODB_DATABASE`            | `naikan`    | Database name.                      |
-| `NAIKAN_MONGODB_REPLICA_SET`         |             | Replica set name.                   |
-| `NAIKAN_MONGODB_USERNAME`            |             | Login user of the mongo server.     |
-| `NAIKAN_MONGODB_PASSWORD`            |             | Login password of the mongo server. |
-| `NAIKAN_MONGODB_TRANSACTION_ENABLED` | `true`      | Enable transaction.                 |
+**Via URI**
+
+[Connection String URI Format](https://www.mongodb.com/docs/manual/reference/connection-string/)
+
+| Property                             | Default   | Description                           |
+|:-------------------------------------|:----------|:--------------------------------------|
+| `NAIKAN_MONGODB_URI`                 |           | Mongo database URI.                   | 
+| `NAIKAN_MONGODB_DATABASE`            | `naikan`  | Database name. Override URI database. |
+
+**Via specific property's**
+
+| Property                          | Default     | Description                         |
+|:----------------------------------|:------------|:------------------------------------|
+| `NAIKAN_MONGODB_HOST`             | `localhost` | Mongo server host.                  |   
+| `NAIKAN_MONGODB_PORT`             | `27017`     | Mongo server port.                  |
+| `NAIKAN_MONGODB_DATABASE`         | `naikan`    | Database name.                      |
+| `NAIKAN_MONGODB_REPLICA_SET_NAME` |             | Replica set name.                   |
+| `NAIKAN_MONGODB_USERNAME`         |             | Login user of the mongo server.     |
+| `NAIKAN_MONGODB_PASSWORD`         |             | Login password of the mongo server. |
+
+#### Common property
+
+| Property                             | Default     | Description                          |
+|:-------------------------------------|:------------|:-------------------------------------|
+| `NAIKAN_MONGODB_TRANSACTION_ENABLED` | `true`      | Enable transaction.                  |
 
 #### LDAP
 

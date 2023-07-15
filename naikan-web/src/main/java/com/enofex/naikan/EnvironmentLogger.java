@@ -1,5 +1,6 @@
 package com.enofex.naikan;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.boot.ApplicationArguments;
@@ -27,10 +28,16 @@ class EnvironmentLogger implements ApplicationRunner {
   }
 
   private void mongodb() {
-    this.logger.info("Mongodb uri: %s".formatted(this.mongoProperties.getUri()));
-    this.logger.info("Mongodb database: %s".formatted(this.mongoProperties.getDatabase()));
-    this.logger.info("Mongodb host: %s".formatted(this.mongoProperties.getHost()));
-    this.logger.info("Mongodb port: %s".formatted(this.mongoProperties.getPort()));
+    if (StringUtils.isNotBlank(this.mongoProperties.getUri())) {
+      this.logger.info("Mongodb uri: %s".formatted(this.mongoProperties.getUri()));
+      this.logger.info("Mongodb database: %s".formatted(this.mongoProperties.getDatabase()));
+    } else {
+      this.logger.info("Mongodb database: %s".formatted(this.mongoProperties.getDatabase()));
+      this.logger.info("Mongodb host: %s".formatted(this.mongoProperties.getHost()));
+      this.logger.info("Mongodb port: %s".formatted(this.mongoProperties.getPort()));
+      this.logger.info("Replica set name: %s".formatted(this.mongoProperties.getReplicaSetName()));
+    }
+
     this.logger.info("Mongodb transaction enabled: %s".formatted(
         this.naikanProperties.mongodb().transaction().enable()));
   }
