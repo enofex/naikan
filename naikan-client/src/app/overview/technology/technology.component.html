@@ -3,10 +3,15 @@
 </naikan-breadcrumb>
 
 <div class="card card-border-none">
-  <h5> {{page?.totalElements}} Technologies</h5>
+  <h5> {{page?.totalElements}} Technologies
+    <i class="pi pi-angle-down" (click)="decreaseTopN()"></i>
+    <i class="pi pi-angle-up" (click)="increaseTopN()"></i>
+  </h5>
 
-  <p-chart type="bar" height="200px" [data]="chartData" [options]="chartOptions"
+  <div id="overview-chart-wrapper">
+    <p-chart type="bar" [data]="chartData" [options]="chartOptions"
            *ngIf="chartData?.datasets"></p-chart>
+  </div>
 
   <p-table
       #tableOverviewGroups

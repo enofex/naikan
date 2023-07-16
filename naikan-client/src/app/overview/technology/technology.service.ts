@@ -18,7 +18,7 @@ export class TechnologyService {
     return this.http.get<Page<OverviewGroup<Technology>>>(`/${endpoint}`, {params: Pageables.toPageRequestHttpParams(event)});
   }
 
-  getTopGroups(): Observable<OverviewTopGroups> {
-    return this.http.get<OverviewTopGroups>(`/${endpoint}/top`);
+  getTopGroups(topN: number): Observable<OverviewTopGroups> {
+    return this.http.get<OverviewTopGroups>(`/${endpoint}/top/${topN}`);
   }
 }

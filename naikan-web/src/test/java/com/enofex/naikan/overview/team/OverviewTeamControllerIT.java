@@ -43,7 +43,7 @@ class OverviewTeamControllerIT {
   @Test
   void shouldFindOverviewTopTeams() throws Exception {
     this.mvc.perform(
-            get("/api/overview/teams/top"))
+            get("/api/overview/teams/top/5"))
         .andExpect(handler().methodName("findTopTeams"))
         .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))

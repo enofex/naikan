@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,8 +33,8 @@ class OverviewTechnologyController {
     return ResponseEntity.ok(this.overviewTechnologyService.findAll(filterable, pageable));
   }
 
-  @GetMapping(path = "/top", produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<OverviewTopGroups> findTopTechnologies() {
-    return ResponseEntity.ok(this.overviewTechnologyService.findTopTechnologies());
+  @GetMapping(path = "/top/{topN}", produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<OverviewTopGroups> findTopTechnologies(@PathVariable long topN) {
+    return ResponseEntity.ok(this.overviewTechnologyService.findTopTechnologies(topN));
   }
 }

@@ -43,13 +43,13 @@ class OverviewTeamMongoRepository extends OverviewRepository implements Overview
   }
 
   @Override
-  public OverviewTopGroups findTopTeams() {
+  public OverviewTopGroups findTopTeams(long topN) {
     Aggregation aggregation = newAggregation(
         unwind("teams"),
         group("teams.name").count().as("count"),
         project("count").and("teams.name").previousOperation(),
         sort(Sort.Direction.DESC, "count"),
-        limit(OVERVIEW_TOP_LIMIT),
+        limit(topN),
         group().push("teams.name").as("names").push("count").as("counts"),
         project("names", "counts")
     );

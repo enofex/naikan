@@ -42,7 +42,7 @@ export class TeamComponent extends AbstractOverviewComponent<OverviewGroup<Team>
   }
 
   override initChart(): void {
-    this.teamService.getTopGroups()
+    this.teamService.getTopGroups(this.topN)
     .subscribe(data => {
       if (data) {
         const documentStyle = Charts.documentStyle();
@@ -59,7 +59,7 @@ export class TeamComponent extends AbstractOverviewComponent<OverviewGroup<Team>
           ]
         };
 
-        Object.assign(this.chartOptions.plugins.title, {'text': 'Top 5 Teams'});
+        Object.assign(this.chartOptions.plugins.title, {'text': `Top ${this.topN} Teams`});
       }
     });
   }

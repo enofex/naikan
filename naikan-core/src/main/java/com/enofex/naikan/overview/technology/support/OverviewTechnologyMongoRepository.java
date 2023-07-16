@@ -53,13 +53,13 @@ class OverviewTechnologyMongoRepository extends OverviewRepository implements
   }
 
   @Override
-  public OverviewTopGroups findTopTechnologies() {
+  public OverviewTopGroups findTopTechnologies(long topN) {
     Aggregation aggregation = newAggregation(
         unwind("technologies"),
         group("technologies.name").count().as("count"),
         project("count").and("technologies.name").previousOperation(),
         sort(Sort.Direction.DESC, "count"),
-        limit(OVERVIEW_TOP_LIMIT),
+        limit(topN),
         group().push("technologies.name").as("names").push("count").as("counts"),
         project("names", "counts")
     );

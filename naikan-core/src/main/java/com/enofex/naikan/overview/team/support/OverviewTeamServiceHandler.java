@@ -26,7 +26,7 @@ class OverviewTeamServiceHandler implements OverviewTeamService {
   }
 
   @Override
-  public OverviewTopGroups findTopTeams() {
-    return this.overviewTeamRepository.findTopTeams();
+  public OverviewTopGroups findTopTeams(long topN) {
+    return this.overviewTeamRepository.findTopTeams(topN);
   }
 }

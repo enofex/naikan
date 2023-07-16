@@ -10,6 +10,6 @@ public interface OverviewTechnologyService {
 
   Page<OverviewGroup> findAll(Filterable filterable, Pageable pageable);
 
-  OverviewTopGroups findTopTechnologies();
+  OverviewTopGroups findTopTechnologies(long topN);
 
 }

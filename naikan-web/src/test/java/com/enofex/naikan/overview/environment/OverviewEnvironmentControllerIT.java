@@ -43,7 +43,7 @@ class OverviewEnvironmentControllerIT {
   @Test
   void shouldFindOverviewTopEnvironments() throws Exception {
     this.mvc.perform(
-            get("/api/overview/environments/top"))
+            get("/api/overview/environments/top/5"))
         .andExpect(handler().methodName("findTopEnvironments"))
         .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))

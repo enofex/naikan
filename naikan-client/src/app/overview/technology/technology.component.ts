@@ -42,7 +42,7 @@ export class TechnologyComponent extends AbstractOverviewComponent<OverviewGroup
   }
 
   override initChart(): void {
-    this.technologyService.getTopGroups()
+    this.technologyService.getTopGroups(this.topN)
     .subscribe(data => {
       if (data) {
         const documentStyle = Charts.documentStyle();
@@ -59,7 +59,7 @@ export class TechnologyComponent extends AbstractOverviewComponent<OverviewGroup
           ]
         };
 
-        Object.assign(this.chartOptions.plugins.title, {'text': 'Top 5 Technologies'});
+        Object.assign(this.chartOptions.plugins.title, {'text': `Top ${this.topN} Technologies`});
       }
     });
   }
