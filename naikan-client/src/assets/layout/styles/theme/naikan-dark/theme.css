@@ -5081,9 +5081,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 }
 
 .p-tabview .p-tabview-nav li .p-tabview-nav-link {
-  border: solid rgba(255, 255, 255, 0.12);
-  border-width: 0 0 1px 0;
-  border-color: transparent transparent rgba(255, 255, 255, 0.12) transparent;
+  border: none;
   background: transparent;
   color: rgba(255, 255, 255, 0.6);
   padding: 1rem 1.5rem;
