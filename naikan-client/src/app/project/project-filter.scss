@@ -14,10 +14,16 @@
     .p-accordion-header {
       border-top: 1px solid #eee;
       border-bottom: none;
+      border-radius: 0px;
 
       .p-accordion-header-link {
         padding-left: 1rem;
         padding-right: 1rem;
+      }
+
+      &:has(.has-filters) {
+        border-right: 6px solid var(--primary-color);
+        border-radius: 0px;
       }
     }
 

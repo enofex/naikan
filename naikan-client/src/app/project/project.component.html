@@ -48,7 +48,12 @@
           <button pButton
                   type="button"
                   class="mr-3" (click)="naikanProjectFilter.show()"
-                  icon="pi pi-filter">
+                  icon="pi {{
+                    ProjectFilters.hasFilters(projectsTable.filters)
+                    ? 'pi-filter-fill'
+                    : 'pi-filter'
+                  }}">
+
           </button>
 
           <p-dropdown [options]="sortOptions"

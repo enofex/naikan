@@ -11,6 +11,7 @@ import {Table, TableLazyLoadEvent, TableModule} from 'primeng/table';
 import {InputSwitchModule, InputSwitchOnChangeEvent} from "primeng/inputswitch";
 import {FormsModule} from "@angular/forms";
 import {TooltipModule} from "primeng/tooltip";
+import {ProjectFilters} from "./project-filters";
 
 @Component({
   templateUrl: './project.component.html',
@@ -19,6 +20,8 @@ import {TooltipModule} from "primeng/tooltip";
   providers: [ProjectService, DatePipe]
 })
 export class ProjectComponent implements OnInit {
+
+  protected readonly ProjectFilters = ProjectFilters;
 
   private readonly FAVORITES_KEY = "project-favorites";
 
