@@ -34,7 +34,7 @@ The Naikan container can be configured using any of the available configuration 
 
 #### MongoDB 
 
-**Via URI**
+##### Via URI
 
 [Connection String URI Format](https://www.mongodb.com/docs/manual/reference/connection-string/)
 
@@ -43,7 +43,7 @@ The Naikan container can be configured using any of the available configuration 
 | `NAIKAN_MONGODB_URI`                 |           | Mongo database URI.                   | 
 | `NAIKAN_MONGODB_DATABASE`            | `naikan`  | Database name. Override URI database. |
 
-**Via specific property's**
+##### Via specific property's
 
 | Property                          | Default     | Description                         |
 |:----------------------------------|:------------|:------------------------------------|
