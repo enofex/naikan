@@ -50,7 +50,7 @@ class OverviewEnvironmentMongoRepositoryIT {
 
   @Test
   void shouldFindTopEnvironments() {
-    OverviewTopGroups groups = this.repository.findTopEnvironments();
+    OverviewTopGroups groups = this.repository.findTopEnvironments(5);
 
     assertEquals(2, groups.counts().size());
     assertEquals(2, groups.names().size());

@@ -9,6 +9,6 @@ public interface OverviewDeploymentRepository {
 
   Page<OverviewDeployment> findAll(Filterable filterable, Pageable pageable);
 
-  OverviewTopGroups findTopProjects();
+  OverviewTopGroups findTopProjects(long topN);
 }
 

@@ -54,13 +54,13 @@ class OverviewDeploymentMongoRepository extends OverviewRepository implements
   }
 
   @Override
-  public OverviewTopGroups findTopProjects() {
+  public OverviewTopGroups findTopProjects(long topN) {
     Aggregation aggregation = newAggregation(
         unwind("deployments"),
         group("project.name").count().as("count"),
         project("count").and("project.name").previousOperation(),
         sort(Sort.Direction.DESC, "count"),
-        limit(OVERVIEW_TOP_LIMIT),
+        limit(topN),
         group().push("project.name").as("names").push("count").as("counts"),
         project("names", "counts")
     );

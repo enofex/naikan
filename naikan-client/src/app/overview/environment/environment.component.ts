@@ -43,7 +43,7 @@ export class EnvironmentComponent extends AbstractOverviewComponent<OverviewGrou
   }
 
   override initChart(): void {
-    this.environmentService.getTopGroups()
+    this.environmentService.getTopGroups(this.topN)
     .subscribe(data => {
       if (data) {
         const documentStyle = Charts.documentStyle();
@@ -60,7 +60,7 @@ export class EnvironmentComponent extends AbstractOverviewComponent<OverviewGrou
           ]
         };
 
-        Object.assign(this.chartOptions.plugins.title, {'text': 'Top 5 Environments'});
+        Object.assign(this.chartOptions.plugins.title, {'text': `Top ${this.topN} Environments`});
       }
     });
   }

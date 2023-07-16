@@ -11,9 +11,12 @@ export abstract class AbstractOverviewComponent<T> implements OnDestroy, OnInit 
   page: Page<T>;
   subscription!: Subscription;
   expandedRows = {};
+  topN = 10;
 
   chartData: any;
   chartOptions = {
+    responsive: true,
+    maintainAspectRatio: true,
     plugins: {
       legend: {
         display: false
@@ -48,6 +51,20 @@ export abstract class AbstractOverviewComponent<T> implements OnDestroy, OnInit 
 
       }
     }
+  }
+
+  protected decreaseTopN(): void {
+    if (this.topN > 1) {
+      this.topN--;
+    }
+    this.initChart();
+  }
+
+  protected increaseTopN(): void {
+    if (this.topN < 50) {
+      this.topN++;
+    }
+    this.initChart();
   }
 
   ngOnInit(): void {

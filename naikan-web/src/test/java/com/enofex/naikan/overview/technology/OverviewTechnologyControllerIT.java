@@ -43,7 +43,7 @@ class OverviewTechnologyControllerIT {
   @Test
   void shouldFindOverviewTopTechnologies() throws Exception {
     this.mvc.perform(
-            get("/api/overview/technologies/top"))
+            get("/api/overview/technologies/top/5"))
         .andExpect(handler().methodName("findTopTechnologies"))
         .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))

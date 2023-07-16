@@ -50,7 +50,7 @@ class OverviewTechnologyMongoRepositoryIT {
 
   @Test
   void shouldFindTopTechnologies() {
-    OverviewTopGroups groups = this.repository.findTopTechnologies();
+    OverviewTopGroups groups = this.repository.findTopTechnologies(5);
 
     assertEquals(2, groups.counts().size());
     assertEquals(2, groups.names().size());

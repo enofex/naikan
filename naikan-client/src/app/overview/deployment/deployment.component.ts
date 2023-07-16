@@ -46,7 +46,7 @@ export class DeploymentComponent extends AbstractOverviewComponent<OverviewDeplo
   }
 
   override initChart(): void {
-    this.deploymentService.getTopGroups()
+    this.deploymentService.getTopGroups(this.topN)
     .subscribe(data => {
       if (data) {
         const documentStyle = Charts.documentStyle();
@@ -63,7 +63,7 @@ export class DeploymentComponent extends AbstractOverviewComponent<OverviewDeplo
           ]
         };
 
-        Object.assign(this.chartOptions.plugins.title, {'text': 'Top 5 Projects'});
+        Object.assign(this.chartOptions.plugins.title, {'text': `Top ${this.topN} Projects`});
       }
     });
 

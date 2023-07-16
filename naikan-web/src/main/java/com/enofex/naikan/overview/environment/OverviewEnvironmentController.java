@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,8 +34,8 @@ class OverviewEnvironmentController {
         this.overviewEnvironmentService.findAll(filterable, pageable));
   }
 
-  @GetMapping(path = "/top", produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<OverviewTopGroups> findTopEnvironments() {
-    return ResponseEntity.ok(this.overviewEnvironmentService.findTopEnvironments());
+  @GetMapping(path = "/top/{topN}", produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<OverviewTopGroups> findTopEnvironments(@PathVariable long topN) {
+    return ResponseEntity.ok(this.overviewEnvironmentService.findTopEnvironments(topN));
   }
 }

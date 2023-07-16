@@ -10,5 +10,5 @@ public interface OverviewTeamRepository {
 
   Page<OverviewGroup> findAll(Filterable filterable, Pageable pageable);
 
-  OverviewTopGroups findTopTeams();
+  OverviewTopGroups findTopTeams(long topN);
 }

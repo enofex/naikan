@@ -15,8 +15,6 @@ import org.springframework.data.mongodb.core.query.Criteria;
 
 public class OverviewRepository extends AbstractRepository {
 
-  public static final long OVERVIEW_TOP_LIMIT = 5;
-
   protected OverviewRepository(MongoTemplate template) {
     super(template);
   }

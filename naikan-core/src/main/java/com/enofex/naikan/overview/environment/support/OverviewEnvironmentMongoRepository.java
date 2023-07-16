@@ -45,13 +45,13 @@ class OverviewEnvironmentMongoRepository extends OverviewRepository implements
   }
 
   @Override
-  public OverviewTopGroups findTopEnvironments() {
+  public OverviewTopGroups findTopEnvironments(long topN) {
     Aggregation aggregation = newAggregation(
         unwind("environments"),
         group("environments.name").count().as("count"),
         project("count").and("environments.name").previousOperation(),
         sort(Sort.Direction.DESC, "count"),
-        limit(OVERVIEW_TOP_LIMIT),
+        limit(topN),
         group().push("environments.name").as("names").push("count").as("counts"),
         project("names", "counts")
     );

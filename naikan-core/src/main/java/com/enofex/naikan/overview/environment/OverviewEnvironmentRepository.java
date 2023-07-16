@@ -10,6 +10,6 @@ public interface OverviewEnvironmentRepository {
 
   Page<OverviewGroup> findAll(Filterable filterable, Pageable pageable);
 
-  OverviewTopGroups findTopEnvironments();
+  OverviewTopGroups findTopEnvironments(long topN);
 
 }

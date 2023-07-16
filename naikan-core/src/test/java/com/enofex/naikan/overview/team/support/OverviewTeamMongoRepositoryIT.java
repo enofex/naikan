@@ -50,7 +50,7 @@ class OverviewTeamMongoRepositoryIT {
 
   @Test
   void shouldFindTopTeams() {
-    OverviewTopGroups groups = this.repository.findTopTeams();
+    OverviewTopGroups groups = this.repository.findTopTeams(5);
 
     assertEquals(1, groups.counts().size());
     assertEquals(1, groups.names().size());

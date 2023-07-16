@@ -26,8 +26,8 @@ class OverviewEnvironmentServiceHandler implements OverviewEnvironmentService {
   }
 
   @Override
-  public OverviewTopGroups findTopEnvironments() {
-    return this.overviewEnvironmentRepository.findTopEnvironments();
+  public OverviewTopGroups findTopEnvironments(long topN) {
+    return this.overviewEnvironmentRepository.findTopEnvironments(topN);
   }
 
 }

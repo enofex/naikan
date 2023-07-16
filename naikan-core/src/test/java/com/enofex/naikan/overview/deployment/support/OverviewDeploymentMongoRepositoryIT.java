@@ -49,7 +49,7 @@ class OverviewDeploymentMongoRepositoryIT {
 
   @Test
   void shouldFindTopProjects() {
-    OverviewTopGroups groups = this.repository.findTopProjects();
+    OverviewTopGroups groups = this.repository.findTopProjects(5);
 
     assertEquals(1, groups.counts().size());
     assertEquals(1, groups.names().size());

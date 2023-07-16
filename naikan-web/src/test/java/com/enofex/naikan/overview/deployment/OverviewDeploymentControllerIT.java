@@ -43,7 +43,7 @@ class OverviewDeploymentControllerIT {
   @Test
   void shouldFindOverviewTopProjects() throws Exception {
     this.mvc.perform(
-            get("/api/overview/deployments/top"))
+            get("/api/overview/deployments/top/5"))
         .andExpect(handler().methodName("findTopProjects"))
         .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))

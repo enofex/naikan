@@ -26,7 +26,7 @@ class OverviewDeploymentServiceHandler implements OverviewDeploymentService {
   }
 
   @Override
-  public OverviewTopGroups findTopProjects() {
-    return this.overviewDeploymentRepository.findTopProjects();
+  public OverviewTopGroups findTopProjects(long topN) {
+    return this.overviewDeploymentRepository.findTopProjects(topN);
   }
 }

@@ -26,7 +26,7 @@ class OverviewTechnologyServiceHandler implements OverviewTechnologyService {
   }
 
   @Override
-  public OverviewTopGroups findTopTechnologies() {
-    return this.overviewTechnologyRepository.findTopTechnologies();
+  public OverviewTopGroups findTopTechnologies(long topN) {
+    return this.overviewTechnologyRepository.findTopTechnologies(topN);
   }
 }
