@@ -5,11 +5,16 @@
 
 version: 2
 updates:
-  - package-ecosystem: "maven" # See documentation for possible values
-    directory: "/" # Location of package manifests
+  - package-ecosystem: maven
+    directory: "/"
     schedule:
       interval: "weekly"
-  - package-ecosystem: "npm" # See documentation for possible values
-    directory: "/naikan-client" # Location of package manifests
+  - package-ecosystem: npm
+    directory: "/naikan-client"
     schedule:
       interval: "weekly"
+  - package-ecosystem: github-actions
+    open-pull-requests-limit: 10
+    directory: "/"
+    schedule:
+      interval: weekly
