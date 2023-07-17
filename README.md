@@ -26,6 +26,15 @@ Naikan is a powerful inventory management tool that allows organizations to keep
 
 * **License management**: Naikan lets you keep track of licenses for each project and ensure compliance, preventing any potential legal issues.
 
+## Installation
+
+```
+curl -LO https://naikan.io/docker-compose.yml
+docker-compose up -d
+```
+
+Visit the [Naikan](https://naikan.io) for configuration documentation.
+
 ## Modules
 The Naikan Project is a software that consists of four modules: naikan-test, naikan-model, naikan-maven-plugin and naikan. 
 
@@ -50,7 +59,6 @@ The [naikan-test](https://github.com/enofex/naikan-test) module provides a set o
 ### Naikan Maven Plugin Module (WIP)
 The [naikan-maven-plugin](https://github.com/enofex/naikan-maven-plugin) module provides a maven plugin, which allows to enrich or update the Naikan model automatically.
 
- 
 ## Build on Open Source Software
 
 Naikan is built using open source software technologies, including:
