@@ -11,6 +11,7 @@ export * from './component/breadcrumb';
 export * from './component/tags'
 export * from './util/urls';
 export * from './util/pageables';
+export * from './util/block-ui.service';
 export * from './util/charts'
 export * from './pipe/date-time-pipe';
 export * from './model/page';

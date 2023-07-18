@@ -1,15 +1,28 @@
 <div class="card card-border-none">
-  <h5>
-    <p-inputSwitch
-        [(ngModel)]="favorites"
-        tooltipPosition="top"
-        pTooltip="Toggle favorites"
-        (onChange)="toggleFavorites($event)">
-    </p-inputSwitch>
+  <div class="flex justify-content-between flex-wrap mb-4">
+    <div class="flex align-items-center justify-content-center">
+      <h5>
+      <p-inputSwitch
+          [(ngModel)]="favorites"
+          tooltipPosition="top"
+          pTooltip="Toggle favorites"
+          (onChange)="toggleFavorites($event)">
+      </p-inputSwitch>
 
-    <span class="ml-4">{{page?.totalElements}} Projects </span>
-    <span class="text-500 text-sm">showing {{favorites ? 'favorites' : 'all'}}</span>
-  </h5>
+        <span class="ml-4">{{page?.totalElements}} Projects </span>
+        <span class="text-500 text-sm ml-2">showing {{favorites ? 'favorites' : 'all'}}</span>
+      </h5>
+    </div>
+
+    <div class="flex align-items-center justify-content-center">
+      <button pButton
+              label="Export"
+              class="p-button-outlined"
+              icon="pi pi-download"
+              (click)="export()">
+      </button>
+    </div>
+  </div>
 
   <p-table
       #projectsTable

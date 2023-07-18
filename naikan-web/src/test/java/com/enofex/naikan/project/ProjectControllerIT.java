@@ -1,6 +1,7 @@
 package com.enofex.naikan.project;
 
 import static com.enofex.naikan.test.model.Boms.validBom0asInputStream;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.handler;
@@ -73,5 +74,15 @@ class ProjectControllerIT {
         .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
         .andExpect(jsonPath("$.length()").value(22));
+  }
+
+  @Test
+  void shouldExportToXlsx() throws Exception {
+    this.mvc.perform(
+            get("/api/projects?xlsx")
+                .contentType(MediaType.APPLICATION_JSON)
+                .with(csrf()))
+        .andExpect(handler().methodName("xlsx"))
+        .andExpect(status().isOk());
   }
 }

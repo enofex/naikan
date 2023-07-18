@@ -6,6 +6,12 @@ import {TableLazyLoadEvent} from "primeng/table";
 @Injectable()
 export class Pageables {
 
+  public static toAllPagesRequestHttpParams(event: TableLazyLoadEvent): HttpParams {
+    let httpParams = Pageables.toPageRequestHttpParams(event);
+
+    return httpParams.delete('page').delete('size');
+  }
+
   public static toPageRequestHttpParams(event: TableLazyLoadEvent): HttpParams {
     if (event) {
       let params = new HttpParams()

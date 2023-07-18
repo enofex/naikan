@@ -1,11 +1,12 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {Bom, Page, Pageables, Principal, User} from '../shared';
+import {BlockUIService, Bom, Page, Pageables, Principal, User} from '../shared';
 import {finalize, Observable} from 'rxjs';
 import {FilterMatchMode} from 'primeng/api';
 import {ProjectFilter} from "./project-filter";
 import {FilterMetadata} from "primeng/api/filtermetadata";
 import {TableLazyLoadEvent} from "primeng/table";
+import {saveAs} from 'file-saver';
 
 const endpoint = 'projects';
 
@@ -15,7 +16,8 @@ export class ProjectService {
   user: User;
 
   constructor(private readonly http: HttpClient,
-              private readonly principal: Principal) {
+              private readonly principal: Principal,
+              private readonly blockUIService: BlockUIService) {
   }
 
   getBoms(event?: TableLazyLoadEvent, favorites: boolean = false): Observable<Page<Bom>> {
@@ -33,7 +35,9 @@ export class ProjectService {
       });
     }
 
-    return this.http.get<Page<Bom>>(`/${endpoint}`, {params: Pageables.toPageRequestHttpParams(event)});
+    return this.http.get<Page<Bom>>(`/${endpoint}`, {
+      params: Pageables.toPageRequestHttpParams(event)
+    });
   }
 
   getBom(id: string): Observable<Bom> {
@@ -46,6 +50,15 @@ export class ProjectService {
 
   updateUserFavorites(favorites: string[]): Observable<any> {
     return this.http.patch(`/${endpoint}/favorites`, favorites);
+  }
+
+  export(event?: TableLazyLoadEvent) {
+    return this.http.get(`/${endpoint}?xlsx`, {
+      responseType: 'blob',
+      params: Pageables.toAllPagesRequestHttpParams(event)
+    })
+    .pipe(this.blockUIService.blockUntil())
+    .subscribe(res => saveAs(res, `${endpoint}`, {autoBom: false}));
   }
 
   private addFavoritesFilter(event: TableLazyLoadEvent): void {

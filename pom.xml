@@ -24,6 +24,7 @@
 
     <naikan-model.version>0.0.3</naikan-model.version>
     <naikan-test.version>0.0.2</naikan-test.version>
+    <apache.poi.version>5.2.3</apache.poi.version>
     <archunit.version>1.0.1</archunit.version>
     <maven-enforcer-plugin.version>3.3.0</maven-enforcer-plugin.version>
     <exec-maven-plugin.version>3.1.0</exec-maven-plugin.version>
@@ -51,6 +52,16 @@
         <groupId>com.enofex</groupId>
         <artifactId>naikan-web</artifactId>
         <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.poi</groupId>
+        <artifactId>poi</artifactId>
+        <version>${apache.poi.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.poi</groupId>
+        <artifactId>poi-ooxml</artifactId>
+        <version>${apache.poi.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
