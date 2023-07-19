@@ -17,7 +17,6 @@ import org.springframework.web.servlet.view.document.AbstractXlsxStreamingView;
 
 final class ProjectXlsxView extends AbstractXlsxStreamingView {
 
-  private final List<Bom> boms;
   private static final Map<String, Function<Bom, String>> COLUMNS = new LinkedHashMap<>() {{
     put("Id", Bom::id);
     put("Timestamp", bom -> bom.timestamp() != null ? bom.timestamp().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME) :"");
@@ -44,6 +43,8 @@ final class ProjectXlsxView extends AbstractXlsxStreamingView {
     put("Deployments", bom -> String.valueOf(bom.deployments().all().size()));
     put("Licenses", bom -> String.valueOf(bom.licenses().all().size()));
   }};
+
+  private final List<Bom> boms;
 
   ProjectXlsxView(List<Bom> boms) {
     this.boms = boms;
