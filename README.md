@@ -70,7 +70,11 @@ Naikan is built using open source software technologies, including:
 * MongoDB
 * JUnit 5, ArchUnit, Testcontainers
 * Docker
-  
+
+## Backers
+
+The Open Source Community and [Enofex](https://enofex.com)
+
 ## Contributing
 
 If you want to contribute to this project, then follow please these [instructions](CONTRIBUTING.md). Follow this [documentation](DEVELOPING.md) starting this application locally.
