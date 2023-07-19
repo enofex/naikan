@@ -32,17 +32,17 @@ To contribute to this project, please fork the repository and submit a pull requ
 
 1. Always check out the `main` branch and submit pull requests against it.
 
-1. Choose the granularity of your commits consciously and squash commits that represent
+2. Choose the granularity of your commits consciously and squash commits that represent
    multiple edits or corrections of the same logical change. See
    [Rewriting History section of Pro Git](https://git-scm.com/book/en/Git-Tools-Rewriting-History)
    for an overview of streamlining the commit history.
 
-1. Format commit messages using 55 characters for the subject line, 72 characters per line
+3. Format commit messages using 55 characters for the subject line, 72 characters per line
    for the description, followed by the issue fixed, e.g. `Closes gh-12279`. See the
    [Commit Guidelines section of Pro Git](https://git-scm.com/book/en/Distributed-Git-Contributing-to-a-Project#Commit-Guidelines)
    for best practices around commit messages, and use `git log` to see some examples.
 
-1. If there is a prior issue, reference the GitHub issue number in the description of the
+4. If there is a prior issue, reference the GitHub issue number in the description of the
    pull request.
 
 
