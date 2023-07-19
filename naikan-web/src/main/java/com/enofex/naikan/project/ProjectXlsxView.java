@@ -63,7 +63,7 @@ final class ProjectXlsxView extends AbstractXlsxStreamingView {
     Row header = sheet.createRow(0);
 
     COLUMNS.keySet().forEach(name ->
-        header.createCell(header.getLastCellNum() + 1).setCellValue(name)
+        header.createCell(lastCellNum(header.getLastCellNum())).setCellValue(name)
     );
   }
 
@@ -74,9 +74,14 @@ final class ProjectXlsxView extends AbstractXlsxStreamingView {
         Row row = sheet.createRow(r + 1);
 
         for (Entry<String, Function<Bom, String>> entry : COLUMNS.entrySet()) {
-          row.createCell(row.getLastCellNum() + 1).setCellValue(entry.getValue().apply(bom));
+          row.createCell(lastCellNum(row.getLastCellNum()))
+              .setCellValue(entry.getValue().apply(bom));
         }
       }
     }
+  }
+
+  private short lastCellNum(short lastCellNum) {
+    return lastCellNum == -1 ? 0 : lastCellNum;
   }
 }
