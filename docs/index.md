@@ -68,6 +68,10 @@ By becoming a [sponsor](https://github.com/sponsors/mnhock), you enable me to co
 Naikan's capabilities by fixing bugs immediately and continually adding new useful features. Your
 sponsorship plays an important role in making *Naikan* even better.
 
+## Backers
+
+The Open Source Community and [Enofex](https://enofex.com) 
+
 ## License
 
 See [LICENSE](https://github.com/enofex/naikan/blob/main/LICENSE).
