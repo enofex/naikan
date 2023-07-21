@@ -5,7 +5,7 @@
 [Get Started](./getting-started/){ .md-button .md-button--primary }
 [View on GitHub :simple-github:](https://github.com/enofex/naikan){ .md-button }
 
-*Naikan* is a powerful inventory management tool that allows organizations to keep track of critical
+*Naikan* is a powerful inventory management tool for developer teams, that allows organizations to keep track of critical
 information related to their software projects. It enables users to manage their projects' essential
 details, including project name, organization, team, contacts, developers, integrations, licenses,
 deployments, environments, and technologies used. The tool can be integrated into CI/CD pipelines to
