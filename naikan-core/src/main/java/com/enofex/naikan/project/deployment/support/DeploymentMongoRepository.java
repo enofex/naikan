@@ -25,10 +25,6 @@ class DeploymentMongoRepository extends AbstractRepository implements Deployment
     Query query = new Query(where("id").is(id.id()));
     Update update = new Update().addToSet("deployments" , deployment);
 
-    if (deployment.timestamp() == null) {
-      update.currentDate("timestamp");
-    }
-
     FindAndModifyOptions options = new FindAndModifyOptions().returnNew(true).upsert(false);
 
     return template().findAndModify(query, update, options, Bom.class, collectionName());

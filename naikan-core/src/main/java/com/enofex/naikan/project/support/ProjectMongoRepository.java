@@ -208,10 +208,6 @@ class ProjectMongoRepository extends AbstractRepository implements ProjectReposi
         .addToSet("deployments")
         .each(bom.deployments().all());
 
-    if (bom.timestamp() == null) {
-      update.currentDate("timestamp");
-    }
-
     FindAndModifyOptions options = new FindAndModifyOptions().returnNew(true).upsert(upsert);
 
     return template().findAndModify(query, update, options, Bom.class, collectionName());
