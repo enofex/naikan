@@ -21,17 +21,21 @@ import com.enofex.naikan.model.Team;
 import com.enofex.naikan.model.Teams;
 import com.enofex.naikan.model.Technologies;
 import com.enofex.naikan.model.Technology;
+import java.util.ArrayList;
 import java.util.List;
+import org.bson.Document;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.data.convert.Jsr310Converters.StringToLocalDateTimeConverter;
 import org.springframework.data.convert.ReadingConverter;
 import org.springframework.data.convert.WritingConverter;
 import org.springframework.data.mongodb.MongoDatabaseFactory;
 import org.springframework.data.mongodb.MongoTransactionManager;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.convert.DefaultMongoTypeMapper;
+
 import org.springframework.data.mongodb.core.convert.MappingMongoConverter;
 import org.springframework.data.mongodb.core.convert.MongoCustomConversions;
 
@@ -82,92 +86,245 @@ public class MongoConfiguration {
 
   @ReadingConverter
   private enum ToEnvironmentsReadingConverter implements
-      Converter<List<Environment>, Environments> {
+      Converter<List<Document>, Environments> {
 
     INSTANCE;
 
     @Override
-    public Environments convert(List<Environment> source) {
-      return new Environments(source);
+    public Environments convert(List<Document> source) {
+      if (source == null) {
+        return null;
+      }
+
+      List<Environment> environments = new ArrayList<>(source.size());
+
+      for (Document element : source) {
+        environments.add(new Environment(
+            element.getString("name"),
+            element.getString("location"),
+            element.getString("description"),
+            ToTagsReadingConverter.INSTANCE.convert(element.getList("tags", String.class))
+        ));
+      }
+
+      return new Environments(environments);
     }
   }
 
   @ReadingConverter
-  private enum ToTeamsReadingConverter implements Converter<List<Team>, Teams> {
+  private enum ToTeamsReadingConverter implements Converter<List<Document>, Teams> {
 
     INSTANCE;
 
     @Override
-    public Teams convert(List<Team> source) {
-      return new Teams(source);
+    public Teams convert(List<Document> source) {
+      if (source == null) {
+        return null;
+      }
+
+      List<Team> teams = new ArrayList<>(source.size());
+
+      for (Document element : source) {
+        teams.add(new Team(
+            element.getString("name"),
+            element.getString("description")
+        ));
+      }
+
+      return new Teams(teams);
     }
   }
 
   @ReadingConverter
-  private enum ToDevelopersReadingConverter implements Converter<List<Developer>, Developers> {
+  private enum ToDevelopersReadingConverter implements Converter<List<Document>, Developers> {
 
     INSTANCE;
 
     @Override
-    public Developers convert(List<Developer> source) {
-      return new Developers(source);
+    public Developers convert(List<Document> source) {
+      if (source == null) {
+        return null;
+      }
+
+      List<Developer> developers = new ArrayList<>(source.size());
+
+      for (Document element : source) {
+        developers.add(new Developer(
+            element.getString("name"),
+            element.getString("username"),
+            element.getString("title"),
+            element.getString("department"),
+            element.getString("email"),
+            element.getString("phone"),
+            element.getString("organization"),
+            element.getString("organizationUrl"),
+            element.getString("timezone"),
+            element.getString("description"),
+            ToRolesReadingConverter.INSTANCE.convert(element.getList("roles", String.class))
+        ));
+      }
+
+      return new Developers(developers);
     }
   }
 
   @ReadingConverter
-  private enum ToContactsReadingConverter implements Converter<List<Contact>, Contacts> {
+  private enum ToContactsReadingConverter implements Converter<List<Document>, Contacts> {
 
     INSTANCE;
 
     @Override
-    public Contacts convert(List<Contact> source) {
-      return new Contacts(source);
+    public Contacts convert(List<Document> source) {
+      if (source == null) {
+        return null;
+      }
+
+      List<Contact> contacts = new ArrayList<>(source.size());
+
+      for (Document element : source) {
+        contacts.add(new Contact(
+            element.getString("name"),
+            element.getString("title"),
+            element.getString("email"),
+            element.getString("phone"),
+            element.getString("description"),
+            ToRolesReadingConverter.INSTANCE.convert(element.getList("roles", String.class))
+        ));
+      }
+
+      return new Contacts(contacts);
     }
   }
 
   @ReadingConverter
-  private enum ToTechnologiesReadingConverter implements Converter<List<Technology>, Technologies> {
+  private enum ToTechnologiesReadingConverter implements Converter<List<Document>, Technologies> {
 
     INSTANCE;
 
     @Override
-    public Technologies convert(List<Technology> source) {
-      return new Technologies(source);
+    public Technologies convert(List<Document> source) {
+      if (source == null) {
+        return null;
+      }
+
+      List<Technology> technologies = new ArrayList<>(source.size());
+
+      for (Document element : source) {
+        technologies.add(new Technology(
+            element.getString("name"),
+            element.getString("version"),
+            element.getString("description"),
+            ToTagsReadingConverter.INSTANCE.convert(element.getList("tags", String.class))
+        ));
+      }
+
+      return new Technologies(technologies);
     }
   }
 
   @ReadingConverter
-  private enum ToLicencesReadingConverter implements Converter<List<License>, Licenses> {
+  private enum ToLicencesReadingConverter implements Converter<List<Document>, Licenses> {
 
     INSTANCE;
 
     @Override
-    public Licenses convert(List<License> source) {
-      return new Licenses(source);
+    public Licenses convert(List<Document> source) {
+      if (source == null) {
+        return null;
+      }
+
+      List<License> licenses = new ArrayList<>(source.size());
+
+      for (Document element : source) {
+        licenses.add(new License(
+            element.getString("name"),
+            element.getString("url"),
+            element.getString("description")
+        ));
+      }
+
+      return new Licenses(licenses);
     }
   }
 
   @ReadingConverter
   private enum ToDocumentationsReadingConverter implements
-      Converter<List<Documentation>, Documentations> {
+      Converter<List<Document>, Documentations> {
 
     INSTANCE;
 
     @Override
-    public Documentations convert(List<Documentation> source) {
-      return new Documentations(source);
+    public Documentations convert(List<Document> source) {
+      if (source == null) {
+        return null;
+      }
+
+      List<Documentation> documentations = new ArrayList<>(source.size());
+
+      for (Document element : source) {
+        documentations.add(new Documentation(
+            element.getString("name"),
+            element.getString("location"),
+            element.getString("description"),
+            ToTagsReadingConverter.INSTANCE.convert(element.getList("tags", String.class))
+        ));
+      }
+
+      return new Documentations(documentations);
     }
   }
 
   @ReadingConverter
   private enum ToIntegrationsReadingConverter implements
-      Converter<List<Integration>, Integrations> {
+      Converter<List<Document>, Integrations> {
 
     INSTANCE;
 
     @Override
-    public Integrations convert(List<Integration> source) {
-      return new Integrations(source);
+    public Integrations convert(List<Document> source) {
+      if (source == null) {
+        return null;
+      }
+
+      List<Integration> integrations = new ArrayList<>(source.size());
+
+      for (Document element : source) {
+        integrations.add(new Integration(
+            element.getString("name"),
+            element.getString("url"),
+            element.getString("description"),
+            ToTagsReadingConverter.INSTANCE.convert(element.getList("tags", String.class))
+        ));
+      }
+
+      return new Integrations(integrations);
+    }
+  }
+
+
+  @ReadingConverter
+  private enum ToDeploymentsReadingConverter implements Converter<List<Document>, Deployments> {
+
+    INSTANCE;
+
+    @Override
+    public Deployments convert(List<Document> source) {
+      if (source == null) {
+        return null;
+      }
+
+      List<Deployment> deployments = new ArrayList<>(source.size());
+
+      for (Document element : source) {
+        deployments.add(new Deployment(
+            element.getString("environment"),
+            element.getString("location"),
+            element.getString("version"),
+            StringToLocalDateTimeConverter.INSTANCE.convert(element.getString("timestamp"))
+        ));
+      }
+
+      return new Deployments(deployments);
     }
   }
 
@@ -190,17 +347,6 @@ public class MongoConfiguration {
     @Override
     public Roles convert(List<String> source) {
       return new Roles(source);
-    }
-  }
-
-  @ReadingConverter
-  private enum ToDeploymentsReadingConverter implements Converter<List<Deployment>, Deployments> {
-
-    INSTANCE;
-
-    @Override
-    public Deployments convert(List<Deployment> source) {
-      return new Deployments(source);
     }
   }
 }
