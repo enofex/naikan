@@ -4,13 +4,14 @@
 
 <div class="card card-border-none">
   <h5> {{page?.totalElements}} Deployments
-    <i class="pi pi-angle-down" (click)="decreaseTopN()"></i>
-    <i class="pi pi-angle-up" (click)="increaseTopN()"></i>
+    <ng-container *ngIf="chartData?.datasets">
+      <i class="pi pi-angle-down" (click)="decreaseTopN()"></i>
+      <i class="pi pi-angle-up" (click)="increaseTopN()"></i>
+    </ng-container>
   </h5>
 
-  <div id="overview-chart-wrapper">
-    <p-chart type="bar" [data]="chartData" [options]="chartOptions"
-           *ngIf="chartData?.datasets"></p-chart>
+  <div id="overview-chart-wrapper" *ngIf="chartData?.datasets">
+    <p-chart type="bar" [data]="chartData" [options]="chartOptions"></p-chart>
   </div>
 
   <p-table
