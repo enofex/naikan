@@ -72,7 +72,7 @@ final class ProjectXlsxView extends AbstractXlsxStreamingView {
       row(sheet, "Artifact", this.bom.project().artifactId());
       row(sheet, "Description", this.bom.project().description());
       row(sheet, "Notes", this.bom.project().notes());
-      row(sheet, "Tags", this.bom.tags().all().stream().collect(Collectors.joining(", ")));
+      row(sheet, "Tags", String.join(", ", this.bom.tags().all()));
     }
   }
 
@@ -82,7 +82,7 @@ final class ProjectXlsxView extends AbstractXlsxStreamingView {
       put("Name", Environment::name);
       put("Location", Environment::location);
       put("Description", Environment::description);
-      put("Tags", env -> env.tags().all().stream().collect(Collectors.joining(", ")));
+      put("Tags", env -> String.join(", ", env.tags().all()));
     }};
 
     writeRows(sheet, columns, this.bom.environments().all());
@@ -111,7 +111,7 @@ final class ProjectXlsxView extends AbstractXlsxStreamingView {
       put("Phone", Developer::phone);
       put("Timezone", Developer::timezone);
       put("Description", Developer::description);
-      put("Roles", developer -> developer.roles().all().stream().collect(Collectors.joining(", ")));
+      put("Roles", developer -> String.join(", ", developer.roles().all()));
     }};
 
     writeRows(sheet, columns, this.bom.developers().all());
@@ -125,7 +125,7 @@ final class ProjectXlsxView extends AbstractXlsxStreamingView {
       put("Email", Contact::email);
       put("Phone", Contact::phone);
       put("Description", Contact::description);
-      put("Roles", contact -> contact.roles().all().stream().collect(Collectors.joining(", ")));
+      put("Roles", contact -> String.join(", ", contact.roles().all()));
     }};
 
     writeRows(sheet, columns, this.bom.contacts().all());
@@ -138,7 +138,7 @@ final class ProjectXlsxView extends AbstractXlsxStreamingView {
       put("Location", Documentation::location);
       put("Description", Documentation::description);
       put("Tags",
-          documentation -> documentation.tags().all().stream().collect(Collectors.joining(", ")));
+          documentation -> String.join(", ", documentation.tags().all()));
     }};
 
     writeRows(sheet, columns, this.bom.documentations().all());
@@ -151,7 +151,7 @@ final class ProjectXlsxView extends AbstractXlsxStreamingView {
       put("URL", Integration::url);
       put("Description", Integration::description);
       put("Tags",
-          documentation -> documentation.tags().all().stream().collect(Collectors.joining(", ")));
+          documentation -> String.join(", ", documentation.tags().all()));
     }};
 
     writeRows(sheet, columns, this.bom.integrations().all());
@@ -164,7 +164,7 @@ final class ProjectXlsxView extends AbstractXlsxStreamingView {
       put("Version", Technology::version);
       put("Description", Technology::description);
       put("Tags",
-          technology -> technology.tags().all().stream().collect(Collectors.joining(", ")));
+          technology -> String.join(", ", technology.tags().all()));
     }};
 
     writeRows(sheet, columns, this.bom.technologies().all());
