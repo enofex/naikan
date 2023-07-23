@@ -28,7 +28,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
-import org.springframework.data.convert.Jsr310Converters.StringToLocalDateTimeConverter;
+import org.springframework.data.convert.Jsr310Converters.DateToLocalDateTimeConverter;
 import org.springframework.data.convert.ReadingConverter;
 import org.springframework.data.convert.WritingConverter;
 import org.springframework.data.mongodb.MongoDatabaseFactory;
@@ -320,7 +320,7 @@ public class MongoConfiguration {
             element.getString("environment"),
             element.getString("location"),
             element.getString("version"),
-            StringToLocalDateTimeConverter.INSTANCE.convert(element.getString("timestamp"))
+            DateToLocalDateTimeConverter.INSTANCE.convert(element.getDate("timestamp"))
         ));
       }
 
