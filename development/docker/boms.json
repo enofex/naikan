@@ -2,7 +2,9 @@
   {
     "specVersion": "1.0",
     "bomFormat": "Naikan",
-    "timestamp": "2022-12-28T08:29:10.079226",
+    "timestamp": {
+      "$date": "2021-07-28T00:00:00Z"
+    },
     "project": {
       "name": "Naikan",
       "url": "https://naikan.io",
@@ -202,80 +204,106 @@
         "environment": "Staging",
         "location": "staging.naikan.io",
         "version": "1.0.0",
-        "timestamp": "2021-12-28T08:29:10.079226"
+        "timestamp": {
+          "$date": "2021-12-28T08:29:10Z"
+        }
       },
       {
         "environment": "Staging",
         "location": "staging.naikan.io",
         "version": "1.0.0",
-        "timestamp": "2021-12-28T08:29:10.079226"
+        "timestamp": {
+          "$date": "2021-12-28T08:29:10Z"
+        }
       },
       {
         "environment": "Staging",
         "location": "staging.naikan.io",
         "version": "1.0.0",
-        "timestamp": "2021-12-28T08:29:10.079226"
+        "timestamp": {
+          "$date": "2021-12-28T08:29:10Z"
+        }
       },
       {
         "environment": "Production",
         "location": "naikan.io",
         "version": "1.0.1",
-        "timestamp": "2022-12-28T08:29:10.079226"
+        "timestamp": {
+          "$date": "2022-12-28T08:29:10Z"
+        }
       },
       {
         "environment": "Staging",
         "location": "staging.naikan.io",
         "version": "1.0.0",
-        "timestamp": "2022-09-02T08:29:10.079226"
+        "timestamp": {
+          "$date": "2022-09-02T08:29:10Z"
+        }
       },
       {
         "environment": "Production",
         "location": "naikan.io",
         "version": "1.0.1",
-        "timestamp": "2022-11-28T08:29:10.079226"
+        "timestamp": {
+          "$date": "2022-11-28T08:29:10Z"
+        }
       },
       {
         "environment": "Staging",
         "location": "staging.naikan.io",
         "version": "1.0.0",
-        "timestamp": "2021-11-28T08:29:10.079226"
+        "timestamp": {
+          "$date": "2021-11-28T08:29:10Z"
+        }
       },
       {
         "environment": "Production",
         "location": "naikan.io",
         "version": "1.0.1",
-        "timestamp": "2022-01-28T08:29:10.079226"
+        "timestamp": {
+          "$date": "2022-01-28T08:29:10Z"
+        }
       },
       {
         "environment": "Production",
         "location": "naikan.io",
         "version": "1.0.1",
-        "timestamp": "2022-01-28T08:29:10.079226"
+        "timestamp": {
+          "$date": "2022-01-28T08:29:10Z"
+        }
       },
       {
         "environment": "Production",
         "location": "naikan.io",
         "version": "1.0.1",
-        "timestamp": "2022-01-28T08:29:10.079226"
+        "timestamp": {
+          "$date": "2022-01-28T08:29:10Z"
+        }
       },
       {
         "environment": "Production",
         "location": "naikan.io",
         "version": "1.0.1",
-        "timestamp": "2022-01-28T08:29:10.079226"
+        "timestamp": {
+          "$date": "2022-01-28T08:29:10Z"
+        }
       },
       {
         "environment": "Production",
         "location": "naikan.io",
         "version": "1.0.1",
-        "timestamp": "2022-01-28T08:29:10.079226"
+        "timestamp": {
+          "$date": "2022-01-28T08:29:10Z"
+        }
       }
     ]
   },
   {
     "specVersion": "1.0",
     "bomFormat": "Naikan",
-    "timestamp": "2022-12-28T08:29:10.079226",
+    "timestamp": {
+      "$date": "2022-12-28T08:29:10Z"
+    },
     "project": {
       "name": "Sample Project",
       "url": "https://naikan.io",
@@ -598,68 +626,90 @@
         "environment": "Staging",
         "location": "staging.naikan.io",
         "version": "1.0.0",
-        "timestamp": "2022-11-28T08:29:10.079226"
+        "timestamp": {
+          "$date": "2022-11-28T08:29:10Z"
+        }
       },
       {
         "environment": "Staging",
         "location": "staging.naikan.io",
         "version": "1.0.0",
-        "timestamp": "2022-11-28T08:29:10.079226"
+        "timestamp": {
+          "$date": "2022-11-28T08:29:10Z"
+        }
       },
       {
         "environment": "Production",
         "location": "naikan.io",
         "version": "1.0.1",
-        "timestamp": "2021-12-28T08:29:10.079226"
+        "timestamp": {
+          "$date": "2021-12-28T08:29:10Z"
+        }
       },
       {
         "environment": "Production",
         "location": "naikan.io",
         "version": "1.0.1",
-        "timestamp": "2021-12-28T08:29:10.079226"
+        "timestamp": {
+          "$date": "2021-12-28T08:29:10Z"
+        }
       },
       {
         "environment": "Production",
         "location": "naikan.io",
         "version": "1.0.1",
-        "timestamp": "2021-12-28T08:29:10.079226"
+        "timestamp": {
+          "$date": "2021-12-28T08:29:10Z"
+        }
       },
       {
         "environment": "Production",
         "location": "naikan.io",
         "version": "1.0.1",
-        "timestamp": "2021-12-28T08:29:10.079226"
+        "timestamp": {
+          "$date": "2021-12-28T08:29:10Z"
+        }
       },
       {
         "environment": "Staging",
         "location": "staging.naikan.io",
         "version": "1.0.0",
-        "timestamp": "2022-01-28T08:29:10.079226"
+        "timestamp": {
+          "$date": "2022-01-28T08:29:10Z"
+        }
       },
       {
         "environment": "Production",
         "location": "naikan.io",
         "version": "1.0.1",
-        "timestamp": "2022-10-28T08:29:10.079226"
+        "timestamp": {
+          "$date": "2022-10-28T08:29:10Z"
+        }
       },
       {
         "environment": "Staging",
         "location": "staging.naikan.io",
         "version": "1.0.0",
-        "timestamp": "2022-03-28T08:29:10.079226"
+        "timestamp": {
+          "$date": "2022-03-28T08:29:10Z"
+        }
       },
       {
         "environment": "Production",
         "location": "naikan.io",
         "version": "1.0.1",
-        "timestamp": "2022-06-28T08:29:10.079226"
+        "timestamp": {
+          "$date": "2022-06-28T08:29:10Z"
+        }
       }
     ]
   },
   {
     "specVersion": "1.0",
     "bomFormat": "Naikan",
-    "timestamp": "2022-11-28T08:29:10.079226",
+    "timestamp": {
+      "$date": "2022-11-28T08:29:10Z"
+    },
     "project": {
       "name": "My Project",
       "url": "https://myproject.com",
@@ -837,55 +887,74 @@
         "environment": "Test",
         "location": "test.naikan.io",
         "version": "1.0.0",
-        "timestamp": "2022-08-28T08:29:10.079226"
+        "timestamp": {
+          "$date": "2022-08-28T08:29:10Z"
+        }
       },
       {
         "environment": "Development",
         "location": "dev.naikan.io",
         "version": "1.0.1",
-        "timestamp": "2022-12-28T08:29:10.079226"
+        "timestamp": {
+          "$date": "2022-12-28T08:29:10Z"
+        }
       },
       {
         "environment": "Test",
         "location": "test.naikan.io",
         "version": "1.0.1",
-        "timestamp": "2022-07-28T08:29:10.079226"
+        "timestamp": {
+          "$date": "2022-07-28T08:29:10Z"
+        }
       },
       {
         "environment": "Development",
         "location": "dev.naikan.io",
         "version": "1.0.1",
-        "timestamp": "2022-07-28T08:29:10.079226"
+        "timestamp": {
+          "$date": "2022-07-28T08:29:10Z"
+        }
       },
       {
         "environment": "Test",
         "location": "test.naikan.io",
         "version": "1.0.2",
-        "timestamp": "2022-08-28T08:29:10.079226"
+        "timestamp": {
+          "$date": "2022-08-28T08:29:10Z"
+        }
       },
       {
         "environment": "Development",
         "location": "dev.naikan.io",
         "version": "1.0.2",
-        "timestamp": "2022-08-28T08:29:10.079226"
+        "timestamp": {
+          "$date": "2022-08-28T08:29:10Z"
+        }
       },
       {
         "environment": "Development",
         "location": "dev.naikan.io",
         "version": "1.0.2",
-        "timestamp": "2022-08-28T09:29:10.079226"
+        "timestamp": {
+          "$date": "2022-08-28T09:29:10Z"
+        }
       },
       {
         "environment": "Development",
         "location": "dev.naikan.io",
         "version": "1.0.2",
-        "timestamp": "2022-08-28T10:29:10.079226"
+        "timestamp": {
+          "$date": "2022-08-28T10:29:10Z"
+        }
       }
     ]
   },
   {
     "specVersion": "1.0",
     "bomFormat": "Naikan",
+    "timestamp": {
+      "$date": "2013-11-20T23:32:18Z"
+    },
     "project": {
       "name": "Empty Project",
       "url": "https://myproject.com",
