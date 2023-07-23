@@ -1,8 +1,12 @@
 <naikan-breadcrumb [items]="items" *ngIf="bom">
-  <ng-template #rightTemplate *ngIf="bom.timestamp">
-      <span class="font-normal text-500 text-sm mt-2 ml-2"> last updated <span
-          class="text-700">{{ bom.timestamp | naikanDateTime }}</span>
-      </span>
+  <ng-template #rightTemplate>
+    <span *ngIf="bom.timestamp" class="font-normal text-500 text-sm mt-2 ml-2"> last updated <span
+        class="text-700">{{ bom.timestamp | naikanDateTime }}</span>
+    </span>
+    <i tooltipPosition="top"
+       pTooltip="Export"
+       class="pi pi-download ml-4 text-primary"
+       (click)="export()"></i>
   </ng-template>
 </naikan-breadcrumb>
 

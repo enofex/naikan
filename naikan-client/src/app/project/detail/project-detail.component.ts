@@ -91,6 +91,10 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
     }
   }
 
+  export(): void {
+    this.projectService.export(this.id);
+  }
+
   private loadBom(id: string): void {
     this.projectService.getBom(id)
     .pipe(finalize(() => {

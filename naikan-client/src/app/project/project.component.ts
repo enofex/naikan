@@ -3,7 +3,7 @@ import {SelectItem, SharedModule} from 'primeng/api';
 import {ProjectService} from './project.service';
 import {Bom, Page, Search} from '../shared';
 import {ProjectOverview} from './project-overview';
-import {AsyncPipe, DatePipe, NgClass} from '@angular/common';
+import {AsyncPipe, DatePipe, NgClass, NgIf} from '@angular/common';
 import {DropdownModule} from 'primeng/dropdown';
 import {ButtonModule} from 'primeng/button';
 import {ProjectFilter} from './project-filter';
@@ -17,7 +17,7 @@ import {BlockUIModule} from "primeng/blockui";
 @Component({
   templateUrl: './project.component.html',
   standalone: true,
-  imports: [TableModule, SharedModule, ProjectFilter, Search, ButtonModule, InputSwitchModule, DropdownModule, NgClass, ProjectOverview, InputSwitchModule, FormsModule, TooltipModule, AsyncPipe, BlockUIModule],
+  imports: [TableModule, SharedModule, ProjectFilter, Search, ButtonModule, InputSwitchModule, DropdownModule, NgClass, ProjectOverview, InputSwitchModule, FormsModule, TooltipModule, AsyncPipe, BlockUIModule, NgIf],
   providers: [ProjectService, DatePipe]
 })
 export class ProjectComponent implements OnInit {
@@ -59,8 +59,8 @@ export class ProjectComponent implements OnInit {
     .subscribe(data => this.page = data);
   }
 
-  export(): void {
-    this.projectService.export(this.projectsTable.createLazyLoadMetadata());
+  exportAll(): void {
+    this.projectService.exportAll(this.projectsTable.createLazyLoadMetadata());
   }
 
   private initTableSort(): void {

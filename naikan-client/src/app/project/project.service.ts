@@ -52,13 +52,21 @@ export class ProjectService {
     return this.http.patch(`/${endpoint}/favorites`, favorites);
   }
 
-  export(event?: TableLazyLoadEvent) {
+  export(id: string) {
+    return this.http.get(`/${endpoint}/${id}?xlsx`, {
+      responseType: 'blob'
+    })
+    .pipe(this.blockUIService.blockUntil())
+    .subscribe(res => saveAs(res, `${id}.xlsx`, {autoBom: false}));
+  }
+
+  exportAll(event?: TableLazyLoadEvent) {
     return this.http.get(`/${endpoint}?xlsx`, {
       responseType: 'blob',
       params: Pageables.toAllPagesRequestHttpParams(event)
     })
     .pipe(this.blockUIService.blockUntil())
-    .subscribe(res => saveAs(res, `${endpoint}`, {autoBom: false}));
+    .subscribe(res => saveAs(res, `${endpoint}.xlsx`, {autoBom: false}));
   }
 
   private addFavoritesFilter(event: TableLazyLoadEvent): void {

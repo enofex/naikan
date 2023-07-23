@@ -77,9 +77,23 @@ class ProjectControllerIT {
   }
 
   @Test
-  void shouldExportToXlsx() throws Exception {
+  void shouldExportAllToXlsx() throws Exception {
     this.mvc.perform(
             get("/api/projects?xlsx")
+                .contentType(MediaType.APPLICATION_JSON)
+                .with(csrf()))
+        .andExpect(handler().methodName("xlsxAll"))
+        .andExpect(status().isOk());
+  }
+
+  @Test
+  void shouldExportToXlsx() throws Exception {
+    Bom savedBom = this.template.save(
+        DeserializerFactory.newJsonDeserializer().of(validBom0asInputStream()),
+        "projects");
+
+    this.mvc.perform(
+            get("/api/projects/%s?xlsx".formatted(savedBom.id()))
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(csrf()))
         .andExpect(handler().methodName("xlsx"))

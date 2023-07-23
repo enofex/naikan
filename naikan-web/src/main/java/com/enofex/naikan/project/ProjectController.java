@@ -38,9 +38,9 @@ class ProjectController {
   }
 
   @GetMapping(params = "xlsx")
-  public ModelAndView xlsx(Filterable filterable, Pageable pageable) {
+  public ModelAndView xlsxAll(Filterable filterable, Pageable pageable) {
     List<Bom> boms = this.projectService.findAll(filterable, pageable).getContent();
-    return new ModelAndView(new ProjectXlsxView(boms));
+    return new ModelAndView(new ProjectAllXlsxView(boms));
   }
 
   @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -48,6 +48,13 @@ class ProjectController {
     return this.projectService.findById(id)
         .map(ResponseEntity::ok)
         .orElseGet(() -> ResponseEntity.notFound().build());
+  }
+
+  @GetMapping(params = "xlsx", value = "/{id}")
+  public ModelAndView xlsx(@PathVariable ProjectId id) {
+    return this.projectService.findById(id)
+        .map(bom -> new ModelAndView(new ProjectXlsxView(bom)))
+        .orElseGet(ModelAndView::new);
   }
 
   @GetMapping(value = "/filter", produces = MediaType.APPLICATION_JSON_VALUE)
