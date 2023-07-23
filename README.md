@@ -10,7 +10,7 @@
 
 # Naikan: A Comprehensive Software Inventory Management Tool for Dev Teams
 
-Naikan is a powerful inventory management tool for developer teams that allows organizations to keep track of critical information related to their software projects. It enables users to manage their projects' essential details, including project name, organization, team, contacts, developers, integrations, licenses, deployments, environments, and technologies used. The tool can be integrated into CI/CD pipelines to automatically push data for new projects and updates.
+Tired of scattered spreadsheets and scattered information? Our user-friendly interface simplifies project inventory tool for your dev teams, ensuring seamless access to all information about your projects, whenever they need it. It enables users to manage their projects' essential details, including project name, organization, team, contacts, developers, integrations, licenses, deployments, environments, and technologies used. The tool can be integrated into CI/CD pipelines to automatically push data for new projects and updates.
 
 ## Features
 
