@@ -52,12 +52,20 @@ export class ProjectService {
     return this.http.patch(`/${endpoint}/favorites`, favorites);
   }
 
-  export(id: string) {
+  exportXsxl(id: string) {
     return this.http.get(`/${endpoint}/${id}?xlsx`, {
       responseType: 'blob'
     })
     .pipe(this.blockUIService.blockUntil())
     .subscribe(res => saveAs(res, `${id}.xlsx`, {autoBom: false}));
+  }
+
+  exportJson(id: string) {
+    return this.http.get(`/${endpoint}/${id}`, {
+      responseType: 'blob'
+    })
+    .pipe(this.blockUIService.blockUntil())
+    .subscribe(res => saveAs(res, `${id}.json`, {autoBom: false}));
   }
 
   exportAll(event?: TableLazyLoadEvent) {

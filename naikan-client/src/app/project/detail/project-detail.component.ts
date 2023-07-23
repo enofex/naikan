@@ -23,6 +23,7 @@ import {TooltipModule} from 'primeng/tooltip';
 import {ButtonModule} from 'primeng/button';
 import {TabViewModule} from 'primeng/tabview';
 import {DatePipe, NgFor, NgIf} from '@angular/common';
+import {SplitButtonModule} from "primeng/splitbutton";
 
 interface GroupedDeploymentPerVersion {
   version: string;
@@ -38,7 +39,7 @@ interface LatestVersionPerEnvironment {
 @Component({
   templateUrl: './project-detail.component.html',
   standalone: true,
-  imports: [NgIf, Breadcrumb, TabViewModule, Url, ProjectVersion, NaikanTags, ButtonModule, TooltipModule, TableModule, SharedModule, Search, NgFor, TagModule, ChartModule, DatePipe, DateTimePipe],
+  imports: [NgIf, Breadcrumb, TabViewModule, Url, ProjectVersion, NaikanTags, ButtonModule, TooltipModule, TableModule, SharedModule, Search, NgFor, TagModule, ChartModule, DatePipe, DateTimePipe, SplitButtonModule],
   providers: [ProjectService, DatePipe]
 })
 export class ProjectDetailComponent implements OnInit, OnDestroy {
@@ -54,6 +55,20 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
   subscription!: Subscription;
   expandedVersionRows = {};
   items: MenuItem[];
+  exportItems = [
+    {
+      label: 'XSXL',
+      command: () => {
+        this.exportXsxl();
+      }
+    },
+    {
+      label: 'JSON',
+      command: () => {
+        this.exportJson();
+      }
+    }
+  ] as MenuItem[];
 
   constructor(private readonly route: ActivatedRoute,
               private readonly projectService: ProjectService,
@@ -63,6 +78,7 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
     this.subscription = this.layoutService.configUpdate$.subscribe(() => {
       this.initChart();
     });
+
   }
 
   ngOnInit(): void {
@@ -91,8 +107,12 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
     }
   }
 
-  export(): void {
-    this.projectService.export(this.id);
+  exportXsxl(): void {
+    this.projectService.exportXsxl(this.id);
+  }
+
+  exportJson(): void {
+    this.projectService.exportJson(this.id);
   }
 
   private loadBom(id: string): void {

@@ -3,10 +3,14 @@
     <span *ngIf="bom.timestamp" class="font-normal text-500 text-sm mt-2 ml-2"> last updated <span
         class="text-700">{{ bom.timestamp | naikanDateTime }}</span>
     </span>
-    <i tooltipPosition="top"
-       pTooltip="Export"
-       class="pi pi-download ml-4 text-primary"
-       (click)="export()"></i>
+
+    <p-splitButton label="Export"
+                   icon="pi pi-download"
+                   [model]="this.exportItems"
+                   (onClick)="exportXsxl()"
+                   appendTo="body"
+                   styleClass="p-button-sm p-button-outlined ml-4">
+    </p-splitButton>
   </ng-template>
 </naikan-breadcrumb>
 
