@@ -127,8 +127,8 @@
       ]
     },
     {
-      "name": "Technical dept",
-      "location": "wiki.naikan.io/techdept",
+      "name": "Technical debt",
+      "location": "wiki.naikan.io/techdebt",
       "description": "Should be reduced!"
     }
   ],
