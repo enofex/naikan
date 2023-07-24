@@ -60,9 +60,13 @@ class OverviewDeploymentMongoRepository extends OverviewRepository implements
         group("project.name").count().as("count"),
         project("count").and("project.name").previousOperation(),
         sort(Sort.Direction.DESC, "count"),
-        limit(topN),
         group().push("project.name").as("names").push("count").as("counts"),
-        project("names", "counts")
+        project("names", "counts"),
+        unwind("names"),
+        sort(Sort.Direction.DESC, "counts"),
+        sort(Sort.Direction.ASC, "names"),
+        limit(topN),
+        group().push("names").as("names").first("counts").as("counts")
     );
 
     return template().aggregate(aggregation, collectionName(), OverviewTopGroups.class)

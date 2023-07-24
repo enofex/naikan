@@ -418,9 +418,7 @@ export class ProjectOverview implements OnInit, OnDestroy {
 
   private initChart(): void {
     this.chartOptions = {
-      animation: {
-        duration: 0
-      },
+      animation: false,
       plugins: {
         legend: {
           display: false

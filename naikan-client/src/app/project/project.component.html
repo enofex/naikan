@@ -46,11 +46,12 @@
           #naikanProjectFilter>
       </naikan-project-filter>
 
-      <div class="flex justify-content-between flex-wrap mb-4 mt-4">
-        <div class="flex align-items-center justify-content-center">
+      <div class="flex flex-column md:flex-row justify-content-between mb-4 mt-4">
+        <div class="flex">
           <naikan-search #search [table]="projectsTable"></naikan-search>
         </div>
-        <div class="flex align-items-center justify-content-center">
+
+        <div class="flex align-items-center">
           <button pButton
                   label="Clear"
                   class="p-button-outlined mr-3"

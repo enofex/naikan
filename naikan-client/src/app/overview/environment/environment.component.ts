@@ -47,6 +47,7 @@ export class EnvironmentComponent extends AbstractOverviewComponent<OverviewGrou
     .subscribe(data => {
       if (data) {
         const documentStyle = Charts.documentStyle();
+        this.topN = data.names?.length;
 
         this.chartData = {
           labels: data.names,

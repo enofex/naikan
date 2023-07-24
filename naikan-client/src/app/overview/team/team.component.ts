@@ -46,6 +46,7 @@ export class TeamComponent extends AbstractOverviewComponent<OverviewGroup<Team>
     .subscribe(data => {
       if (data) {
         const documentStyle = Charts.documentStyle();
+        this.topN = data.names?.length;
 
         this.chartData = {
           labels: data.names,

@@ -15,8 +15,12 @@ export abstract class AbstractOverviewComponent<T> implements OnDestroy, OnInit 
 
   chartData: any;
   chartOptions = {
-    responsive: true,
-    maintainAspectRatio: true,
+    responsive: false,
+    maintainAspectRatio: false,
+    animation: false,
+    aspectRatio: 0.8,
+    barThickness: 20,
+    barPercentage: 0.6,
     plugins: {
       legend: {
         display: false
@@ -29,9 +33,6 @@ export abstract class AbstractOverviewComponent<T> implements OnDestroy, OnInit 
       ticks: {
         precision: 0
       }
-    },
-    animation: {
-      duration: 0
     },
     indexAxis: 'y'
   };

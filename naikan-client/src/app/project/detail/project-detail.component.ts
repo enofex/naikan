@@ -170,9 +170,7 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
           precision: 0
         }
       },
-      animation: {
-        duration: 0
-      },
+      animation: false,
       indexAxis: 'y'
     };
   }

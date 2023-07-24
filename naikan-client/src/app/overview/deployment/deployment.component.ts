@@ -50,6 +50,7 @@ export class DeploymentComponent extends AbstractOverviewComponent<OverviewDeplo
     .subscribe(data => {
       if (data) {
         const documentStyle = Charts.documentStyle();
+        this.topN = data.names?.length;
 
         this.chartData = {
           labels: data.names,

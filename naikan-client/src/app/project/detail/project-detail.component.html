@@ -1,7 +1,7 @@
 <naikan-breadcrumb [items]="items" *ngIf="bom">
   <ng-template #rightTemplate>
-    <span *ngIf="bom.timestamp" class="font-normal text-500 text-sm mt-2 ml-2"> last updated <span
-        class="text-700">{{ bom.timestamp | naikanDateTime }}</span>
+    <span *ngIf="bom.timestamp" class="hidden md:inline-block font-normal text-500 text-sm mt-2 ml-2"> last updated
+      <span class="text-700"> {{ bom.timestamp | naikanDateTime }}</span>
     </span>
 
     <p-splitButton label="Export"
@@ -22,17 +22,8 @@
       <p-tabPanel header="Overview" class="line-height-3 m-0">
         <div class="grid" *ngIf="bom.organization">
           <div class="col-12 mt-4 surface-50">
-            <div class="flex flex-column xl:flex-row align-items-start">
-              <div
-                  class="flex flex-column sm:flex-row justify-content-between align-items-start flex-1">
-
-                <div class="flex flex-column align-items-start">
-                  <div class="text-xl font-bold text-900">
-                    <h5>Organization</h5>
-                  </div>
-                </div>
-
-              </div>
+            <div class="text-xl font-bold text-900">
+              <h5>Organization</h5>
             </div>
 
             <div class="field grid">
@@ -68,20 +59,15 @@
         <div class="grid">
           <div class="col-12 mt-4">
 
-            <div class="flex flex-column xl:flex-row align-items-start">
-              <div
-                  class="flex flex-column sm:flex-row justify-content-between align-items-start flex-1">
-
-                <div class="flex flex-column align-items-start">
-                  <div class="text-xl font-bold text-900">
-                    <h5>Project</h5>
-                  </div>
+            <div class="grid">
+              <div class="col-8" >
+                <div class="text-xl font-bold text-900">
+                  <h5>Project</h5>
                 </div>
-
-                <div class="flex sm:flex-column align-items-center sm:align-items-end">
-                  <naikan-project-version [project]="bom.project">
-                  </naikan-project-version>
-                </div>
+              </div>
+              <div class="col-4 text-right">
+                <naikan-project-version [project]="bom.project">
+                </naikan-project-version>
               </div>
             </div>
 
