@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -217,7 +216,7 @@ final class ProjectXlsxView extends AbstractXlsxStreamingView {
 
     if (CollectionUtils.isNotEmpty(elements)) {
       for (int r = 0, size = elements.size(); r < size; r++) {
-        T element = (T) elements.get(r);
+        T element = elements.get(r);
         Row row = sheet.createRow(r + 1);
 
         for (Entry<String, Function<T, String>> entry : columns.entrySet()) {
