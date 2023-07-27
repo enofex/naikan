@@ -57,12 +57,6 @@
           </p-columnFilter>
           <p-sortIcon field="group.name"></p-sortIcon>
         </th>
-        <th pSortableColumn="group.location">Location
-          <p-columnFilter field="group.location" display="menu"
-                          placeholder="Location">
-          </p-columnFilter>
-          <p-sortIcon field="group.location"></p-sortIcon>
-        </th>
         <th pSortableColumn="count" class="w-10rem">Projects
           <p-sortIcon field="count"></p-sortIcon>
         </th>
@@ -77,11 +71,7 @@
                   [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
         </td>
         <td>
-                    <span tooltipPosition="top"
-                          pTooltip="{{ overviewGroup.group.description }}">{{ overviewGroup.group.name }}</span>
-        </td>
-        <td>
-          <naikan-url [url]="overviewGroup.group.location"></naikan-url>
+          {{ overviewGroup.group.name }}
         </td>
         <td class="text-center w-4rem">
           <p-tag severity="primary" value="{{ overviewGroup.count }}" [rounded]="true"></p-tag>
@@ -92,9 +82,9 @@
     <ng-template pTemplate="rowexpansion" let-group>
       <tr>
         <td></td>
-        <td colspan="3">
-          <naikan-overview-project-table
-              [overviewBoms]="group.boms"></naikan-overview-project-table>
+        <td colspan="2">
+          <naikan-overview-project-table [overviewBoms]="group.boms">
+          </naikan-overview-project-table>
         </td>
       </tr>
     </ng-template>

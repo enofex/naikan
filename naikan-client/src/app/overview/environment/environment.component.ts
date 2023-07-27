@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {EnvironmentService} from './environment.service';
-import {Breadcrumb, Charts, Developer, Search, Url} from '../../shared';
+import {Breadcrumb, Charts, Search, Url} from '../../shared';
 import {SharedModule} from 'primeng/api';
 import {LayoutService} from '../../layout/app.layout.service';
 import {AbstractOverviewComponent} from "../abstract-overview.component";
@@ -31,7 +31,7 @@ import {OverviewGroup} from "../overview";
   ],
   providers: [EnvironmentService, DatePipe]
 })
-export class EnvironmentComponent extends AbstractOverviewComponent<OverviewGroup<Developer>> {
+export class EnvironmentComponent extends AbstractOverviewComponent<OverviewGroup> {
 
   constructor(private readonly environmentService: EnvironmentService, layoutService: LayoutService) {
     super(layoutService);

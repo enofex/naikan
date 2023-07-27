@@ -56,8 +56,9 @@ public abstract class AbstractRepository {
       operations.add(limit(pageable.getPageSize()));
     }
 
-    List<S> result = template().aggregate(Aggregation.newAggregation(operations), collectionName(),
-        clazz).getMappedResults();
+    List<S> result = template()
+        .aggregate(Aggregation.newAggregation(operations), collectionName(), clazz)
+        .getMappedResults();
 
     return PageableExecutionUtils.getPage(result, pageable,
         () -> Long.parseLong(template()

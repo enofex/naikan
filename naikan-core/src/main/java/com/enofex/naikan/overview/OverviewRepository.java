@@ -8,6 +8,7 @@ import static org.springframework.data.mongodb.core.aggregation.Aggregation.unwi
 import com.enofex.naikan.AbstractRepository;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
@@ -20,11 +21,14 @@ public class OverviewRepository extends AbstractRepository {
   }
 
   public List<AggregationOperation> defaultOverviewGroupOperations(String overviewGroupName,
-      Criteria searchCriteria) {
+      List<String> fields, Criteria searchCriteria, Criteria filters) {
+    Objects.requireNonNull(overviewGroupName);
+    Objects.requireNonNull(fields);
+
     List<AggregationOperation> operations = new ArrayList<>();
 
     operations.add(unwind(overviewGroupName));
-    operations.add(group(overviewGroupName + ".name")
+    operations.add(group(fields.toArray(String[]::new))
         .first(overviewGroupName).as("group")
         .push(Aggregation.ROOT).as("boms"));
     operations.add(project("group" , "boms")
@@ -32,6 +36,10 @@ public class OverviewRepository extends AbstractRepository {
 
     if (searchCriteria != null) {
       operations.add(match(searchCriteria));
+    }
+
+    if (filters != null) {
+      operations.add(match(filters));
     }
 
     return operations;

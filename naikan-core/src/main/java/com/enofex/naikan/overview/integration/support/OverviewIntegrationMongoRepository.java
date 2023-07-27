@@ -1,7 +1,5 @@
 package com.enofex.naikan.overview.integration.support;
 
-import static org.springframework.data.mongodb.core.aggregation.Aggregation.match;
-
 import com.enofex.naikan.Filterable;
 import com.enofex.naikan.FilterableCriteriaBuilder;
 import com.enofex.naikan.overview.OverviewGroup;
@@ -26,10 +24,11 @@ class OverviewIntegrationMongoRepository extends OverviewRepository implements
   public Page<OverviewGroup> findAll(Filterable filterable, Pageable pageable) {
     FilterableCriteriaBuilder builder = new FilterableCriteriaBuilder(filterable);
 
-    List<AggregationOperation> operations = defaultOverviewGroupOperations("integrations",
-        builder.toSearch(List.of("group.name", "group.description", "group.url", "group.tags")));
-
-    operations.add(match(builder.toFilters()));
+    List<AggregationOperation> operations = defaultOverviewGroupOperations(
+        "integrations",
+        List.of("integrations.name"),
+        builder.toSearch(List.of("group.name")),
+        builder.toFilters());
 
     return findAll(OverviewGroup.class, operations, pageable);
   }

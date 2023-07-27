@@ -1,7 +1,7 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {Developer, Page, Pageables} from '../../shared';
+import {Page, Pageables} from '../../shared';
 import {OverviewGroup} from "../overview";
 import {TableLazyLoadEvent} from "primeng/table";
 
@@ -13,7 +13,7 @@ export class DeveloperService {
   constructor(private readonly http: HttpClient) {
   }
 
-  getOverviews(event?: TableLazyLoadEvent): Observable<Page<OverviewGroup<Developer>>> {
-    return this.http.get<Page<OverviewGroup<Developer>>>(`/${endpoint}`, {params: Pageables.toPageRequestHttpParams(event)});
+  getOverviews(event?: TableLazyLoadEvent): Observable<Page<OverviewGroup>> {
+    return this.http.get<Page<OverviewGroup>>(`/${endpoint}`, {params: Pageables.toPageRequestHttpParams(event)});
   }
 }

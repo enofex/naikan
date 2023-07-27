@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {LayoutService} from 'src/app/layout/app.layout.service';
 import {TechnologyService} from './technology.service';
-import {Breadcrumb, Charts, Search, Technology} from '../../shared';
+import {Breadcrumb, Charts, Search} from '../../shared';
 import {SharedModule} from 'primeng/api';
 import {AbstractOverviewComponent} from "../abstract-overview.component";
 import {OverviewProjectTable} from '../overview-project-table';
@@ -11,7 +11,7 @@ import {ButtonModule} from 'primeng/button';
 import {TableLazyLoadEvent, TableModule} from 'primeng/table';
 import {ChartModule} from 'primeng/chart';
 import {DatePipe, NgIf} from '@angular/common';
-import {OverviewGroup} from "../overview";
+import {TechnologyGroup} from "./overview";
 
 @Component({
   templateUrl: './technology.component.html',
@@ -30,7 +30,7 @@ import {OverviewGroup} from "../overview";
   ],
   providers: [TechnologyService, DatePipe]
 })
-export class TechnologyComponent extends AbstractOverviewComponent<OverviewGroup<Technology>> {
+export class TechnologyComponent extends AbstractOverviewComponent<TechnologyGroup> {
 
   constructor(private readonly technologyService: TechnologyService, layoutService: LayoutService) {
     super(layoutService);

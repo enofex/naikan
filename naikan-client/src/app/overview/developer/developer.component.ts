@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {DeveloperService} from './developer.service';
 import {SharedModule} from 'primeng/api';
-import {Breadcrumb, Developer, Search} from '../../shared';
+import {Breadcrumb, Search} from '../../shared';
 import {AbstractOverviewComponent} from "../abstract-overview.component";
 import {LayoutService} from "../../layout/app.layout.service";
 import {OverviewProjectTable} from '../overview-project-table';
@@ -28,7 +28,7 @@ import {OverviewGroup} from "../overview";
   ],
   providers: [DeveloperService, DatePipe]
 })
-export class DeveloperComponent extends AbstractOverviewComponent<OverviewGroup<Developer>> {
+export class DeveloperComponent extends AbstractOverviewComponent<OverviewGroup> {
 
   constructor(private readonly developerService: DeveloperService, layoutService: LayoutService) {
     super(layoutService)

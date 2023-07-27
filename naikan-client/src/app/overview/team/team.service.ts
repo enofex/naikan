@@ -1,6 +1,6 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {Page, Pageables, Team} from '../../shared';
+import {Page, Pageables} from '../../shared';
 import {Observable} from 'rxjs';
 import {OverviewTopGroups} from '../overview-top-groups';
 import {OverviewGroup} from "../overview";
@@ -14,8 +14,8 @@ export class TeamService {
   constructor(private readonly http: HttpClient) {
   }
 
-  getOverviews(event?: TableLazyLoadEvent): Observable<Page<OverviewGroup<Team>>> {
-    return this.http.get<Page<OverviewGroup<Team>>>(`/${endpoint}`, {params: Pageables.toPageRequestHttpParams(event)});
+  getOverviews(event?: TableLazyLoadEvent): Observable<Page<OverviewGroup>> {
+    return this.http.get<Page<OverviewGroup>>(`/${endpoint}`, {params: Pageables.toPageRequestHttpParams(event)});
   }
 
   getTopGroups(topN: number): Observable<OverviewTopGroups> {

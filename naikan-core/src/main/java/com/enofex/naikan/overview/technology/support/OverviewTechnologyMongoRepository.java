@@ -2,7 +2,7 @@ package com.enofex.naikan.overview.technology.support;
 
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.group;
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.limit;
-import static org.springframework.data.mongodb.core.aggregation.Aggregation.match;
+
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.newAggregation;
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.project;
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.sort;
@@ -10,11 +10,12 @@ import static org.springframework.data.mongodb.core.aggregation.Aggregation.unwi
 
 import com.enofex.naikan.Filterable;
 import com.enofex.naikan.FilterableCriteriaBuilder;
-import com.enofex.naikan.overview.OverviewGroup;
 import com.enofex.naikan.overview.OverviewRepository;
 import com.enofex.naikan.overview.OverviewTopGroups;
+
 import com.enofex.naikan.overview.technology.OverviewTechnologyRepository;
-import java.util.ArrayList;
+
+import com.enofex.naikan.overview.technology.TechnologyGroup;
 import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -33,23 +34,16 @@ class OverviewTechnologyMongoRepository extends OverviewRepository implements
   }
 
   @Override
-  public Page<OverviewGroup> findAll(Filterable filterable, Pageable pageable) {
+  public Page<TechnologyGroup> findAll(Filterable filterable, Pageable pageable) {
     FilterableCriteriaBuilder builder = new FilterableCriteriaBuilder(filterable);
-    List<AggregationOperation> operations = new ArrayList<>();
 
-    operations.add(unwind("technologies"));
-    operations.add(group("technologies.name", "technologies.version")
-        .first("technologies").as("group")
-        .push(Aggregation.ROOT).as("boms"));
-    operations.add(project("group", "boms")
-        .and("boms").size().as("count"));
+    List<AggregationOperation> operations = defaultOverviewGroupOperations(
+        "technologies",
+        List.of("technologies.name", "technologies.version"),
+        builder.toSearch(List.of("group.name", "group.version")),
+        builder.toFilters());
 
-    operations.add(match(builder.toSearch(
-        List.of("group.name", "group.description", "group.version", "group.tags"))));
-
-    operations.add(match(builder.toFilters()));
-
-    return findAll(OverviewGroup.class, operations, pageable);
+    return findAll(TechnologyGroup.class, operations, pageable);
   }
 
   @Override

@@ -76,9 +76,7 @@
                   [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
         </td>
         <td>
-          <span tooltipPosition="top" pTooltip="{{ overviewGroup.group.description }}">
-            {{ overviewGroup.group.name }}
-          </span>
+          {{ overviewGroup.group.name }}
         </td>
         <td class="text-center w-4rem">
           <p-tag severity="primary" value="{{ overviewGroup.count }}" [rounded]="true"></p-tag>

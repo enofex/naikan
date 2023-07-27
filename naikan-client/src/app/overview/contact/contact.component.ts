@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {ContactService} from './contact.service';
-import {Breadcrumb, Contact, Search} from '../../shared';
+import {Breadcrumb, Search} from '../../shared';
 import {SharedModule} from 'primeng/api';
 import {AbstractOverviewComponent} from "../abstract-overview.component";
 import {LayoutService} from "../../layout/app.layout.service";
@@ -28,7 +28,7 @@ import {OverviewGroup} from "../overview";
   ],
   providers: [ContactService, DatePipe]
 })
-export class ContactComponent extends AbstractOverviewComponent<OverviewGroup<Contact>> {
+export class ContactComponent extends AbstractOverviewComponent<OverviewGroup> {
 
   constructor(private readonly contactService: ContactService, layoutService: LayoutService) {
     super(layoutService)

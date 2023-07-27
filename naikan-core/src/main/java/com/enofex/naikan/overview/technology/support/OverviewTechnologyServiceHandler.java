@@ -1,10 +1,10 @@
 package com.enofex.naikan.overview.technology.support;
 
 import com.enofex.naikan.Filterable;
-import com.enofex.naikan.overview.OverviewGroup;
 import com.enofex.naikan.overview.OverviewTopGroups;
 import com.enofex.naikan.overview.technology.OverviewTechnologyRepository;
 import com.enofex.naikan.overview.technology.OverviewTechnologyService;
+import com.enofex.naikan.overview.technology.TechnologyGroup;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ class OverviewTechnologyServiceHandler implements OverviewTechnologyService {
   }
 
   @Override
-  public Page<OverviewGroup> findAll(Filterable filterable, Pageable pageable) {
+  public Page<TechnologyGroup> findAll(Filterable filterable, Pageable pageable) {
     return this.overviewTechnologyRepository.findAll(filterable, pageable);
   }
 

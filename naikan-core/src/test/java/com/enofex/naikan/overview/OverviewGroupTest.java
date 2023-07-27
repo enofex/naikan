@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.enofex.naikan.model.Project;
 import com.enofex.naikan.model.deserializer.DeserializerFactory;
+import com.enofex.naikan.overview.OverviewGroup.Group;
 import com.enofex.naikan.test.model.Boms;
 import java.time.LocalDateTime;
 import java.util.Collections;
@@ -22,12 +23,12 @@ class OverviewGroupTest {
   @Test
   void shouldCreateOverviewGroup() {
     OverviewBom overviewBom = new OverviewBom("1" , LocalDateTime.now(), this.project);
-    OverviewGroup<Project> overviewGroup = new OverviewGroup<>("123" , this.project,
+    OverviewGroup overviewGroup = new OverviewGroup("123", new Group("name"),
         List.of(overviewBom), 1);
 
     assertAll(
         () -> assertEquals("123" , overviewGroup.uuid()),
-        () -> assertEquals(this.project, overviewGroup.group()),
+        () -> assertEquals("name", overviewGroup.group().name()),
         () -> assertEquals(1, overviewGroup.count()),
         () -> assertIterableEquals(Collections.singletonList(overviewBom), overviewGroup.boms())
     );
@@ -35,7 +36,7 @@ class OverviewGroupTest {
 
   @Test
   void shouldCreateRandomUuidWhenUuidIsNull() {
-    OverviewGroup<Project> overviewGroup = new OverviewGroup<>(null, this.project, List.of(), 0);
+    OverviewGroup overviewGroup = new OverviewGroup(null, new Group("name"), List.of(), 0);
 
     assertNotNull(overviewGroup.uuid());
   }
@@ -43,7 +44,7 @@ class OverviewGroupTest {
   @Test
   void shouldCreateOverviewGroupWithUnmodifiableBomsList() {
     OverviewBom overviewBom = new OverviewBom("1" , LocalDateTime.now(), this.project);
-    OverviewGroup<Project> overviewGroup = new OverviewGroup<>("123" , this.project,
+    OverviewGroup overviewGroup = new OverviewGroup("123", new Group("name"),
         Collections.singletonList(overviewBom), 1);
 
     assertThrows(UnsupportedOperationException.class, () -> overviewGroup.boms().add(overviewBom));

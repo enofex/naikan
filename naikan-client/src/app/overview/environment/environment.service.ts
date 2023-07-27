@@ -1,7 +1,7 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {Environment, Page, Pageables} from '../../shared';
+import {Page, Pageables} from '../../shared';
 import {OverviewTopGroups} from '../overview-top-groups';
 import {OverviewGroup} from "../overview";
 import {TableLazyLoadEvent} from "primeng/table";
@@ -14,8 +14,8 @@ export class EnvironmentService {
   constructor(private readonly http: HttpClient) {
   }
 
-  getOverviews(event?: TableLazyLoadEvent): Observable<Page<OverviewGroup<Environment>>> {
-    return this.http.get<Page<OverviewGroup<Environment>>>(`/${endpoint}`, {params: Pageables.toPageRequestHttpParams(event)});
+  getOverviews(event?: TableLazyLoadEvent): Observable<Page<OverviewGroup>> {
+    return this.http.get<Page<OverviewGroup>>(`/${endpoint}`, {params: Pageables.toPageRequestHttpParams(event)});
   }
 
   getTopGroups(topN: number): Observable<OverviewTopGroups> {

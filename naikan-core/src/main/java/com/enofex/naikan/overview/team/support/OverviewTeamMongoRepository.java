@@ -2,7 +2,6 @@ package com.enofex.naikan.overview.team.support;
 
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.group;
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.limit;
-import static org.springframework.data.mongodb.core.aggregation.Aggregation.match;
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.newAggregation;
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.project;
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.sort;
@@ -34,10 +33,11 @@ class OverviewTeamMongoRepository extends OverviewRepository implements Overview
   public Page<OverviewGroup> findAll(Filterable filterable, Pageable pageable) {
     FilterableCriteriaBuilder builder = new FilterableCriteriaBuilder(filterable);
 
-    List<AggregationOperation> operations = defaultOverviewGroupOperations("teams",
-        builder.toSearch(List.of("group.name", "group.description")));
-
-    operations.add(match(builder.toFilters()));
+    List<AggregationOperation> operations = defaultOverviewGroupOperations(
+        "teams",
+        List.of("teams.name"),
+        builder.toSearch(List.of("group.name")),
+        builder.toFilters());
 
     return findAll(OverviewGroup.class, operations, pageable);
   }

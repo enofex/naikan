@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.enofex.naikan.Filterable;
 import com.enofex.naikan.model.deserializer.DeserializerFactory;
-import com.enofex.naikan.overview.OverviewGroup;
 import com.enofex.naikan.overview.OverviewTopGroups;
 import com.enofex.naikan.overview.technology.OverviewTechnologyRepository;
+import com.enofex.naikan.overview.technology.TechnologyGroup;
 import com.enofex.naikan.test.IntegrationTest;
 import com.enofex.naikan.test.model.Boms;
 import org.junit.jupiter.api.BeforeEach;
@@ -33,7 +33,7 @@ class OverviewTechnologyMongoRepositoryIT {
 
   @Test
   void shouldFindAll() {
-    Page<OverviewGroup> page = this.repository.findAll(
+    Page<TechnologyGroup> page = this.repository.findAll(
         Filterable.emptySearch(), Pageable.ofSize(20));
 
     assertEquals(2, page.getContent().size());
@@ -41,7 +41,7 @@ class OverviewTechnologyMongoRepositoryIT {
 
   @Test
   void shouldFindAllOverviewsWithSearch() {
-    Page<OverviewGroup> page = this.repository.findAll(
+    Page<TechnologyGroup> page = this.repository.findAll(
         Filterable.of("Java"), Pageable.ofSize(20));
 
     assertEquals(1, page.getContent().size());

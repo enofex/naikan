@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {IntegrationService} from './integration.service';
-import {Breadcrumb, Integration, Search, Url} from '../../shared';
+import {Breadcrumb, Search, Url} from '../../shared';
 import {SharedModule} from 'primeng/api';
 import {AbstractOverviewComponent} from "../abstract-overview.component";
 import {LayoutService} from "../../layout/app.layout.service";
@@ -29,7 +29,7 @@ import {OverviewGroup} from "../overview";
   ],
   providers: [IntegrationService, DatePipe]
 })
-export class IntegrationComponent extends AbstractOverviewComponent<OverviewGroup<Integration>> {
+export class IntegrationComponent extends AbstractOverviewComponent<OverviewGroup> {
 
   constructor(private readonly integrationService: IntegrationService, layoutService: LayoutService) {
     super(layoutService)

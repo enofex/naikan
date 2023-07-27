@@ -1,10 +1,14 @@
 import {Project} from '../shared';
 
-export interface OverviewGroup<T> {
+export interface OverviewGroup {
   uuid: string;
-  group: T;
+  group: Group;
   boms?: OverviewBom[];
   count: number;
+}
+
+export interface Group {
+  name: string;
 }
 
 export interface OverviewBom {

@@ -54,30 +54,6 @@
           </p-columnFilter>
           <p-sortIcon field="group.name"></p-sortIcon>
         </th>
-        <th pSortableColumn="group.title">Title
-          <p-columnFilter field="group.title" display="menu"
-                          placeholder="Title">
-          </p-columnFilter>
-          <p-sortIcon field="group.title"></p-sortIcon>
-        </th>
-        <th pSortableColumn="group.organization">Organization
-          <p-columnFilter field="group.email" display="menu"
-                          placeholder="Organization">
-          </p-columnFilter>
-          <p-sortIcon field="group.organization"></p-sortIcon>
-        </th>
-        <th pSortableColumn="group.email">Email
-          <p-columnFilter field="group.email" display="menu"
-                          placeholder="Email">
-          </p-columnFilter>
-          <p-sortIcon field="group.email"></p-sortIcon>
-        </th>
-        <th pSortableColumn="group.phone">Phone
-          <p-columnFilter field="group.phone" display="menu"
-                          placeholder="Phone">
-          </p-columnFilter>
-          <p-sortIcon field="group.phone"></p-sortIcon>
-        </th>
         <th pSortableColumn="count" class="w-10rem">Projects
           <p-sortIcon field="count"></p-sortIcon>
         </th>
@@ -93,23 +69,10 @@
           </button>
         </td>
         <td>
-          <span tooltipPosition="top" pTooltip="{{ overviewGroup.group.description }}">
-            {{ overviewGroup.group.name }}
-          </span>
+          {{ overviewGroup.group.name }}
         </td>
-        <td>{{ overviewGroup.group.title }}</td>
-        <td>
-          <span tooltipPosition="top" pTooltip="{{ overviewGroup.group.organizationUrl }}">
-            {{ overviewGroup.group.organization }}
-          </span>
-        </td>
-        <td>
-          <a href="mailto:{{ overviewGroup.group.email }}">{{ overviewGroup.group.email }}</a>
-        </td>
-        <td>{{ overviewGroup.group.phone }}</td>
         <td class="text-center w-4rem">
-          <p-tag severity="primary" value="{{ overviewGroup.count }}"
-                 [rounded]="true"></p-tag>
+          <p-tag severity="primary" value="{{ overviewGroup.count }}" [rounded]="true"></p-tag>
         </td>
       </tr>
     </ng-template>
@@ -117,7 +80,7 @@
     <ng-template pTemplate="rowexpansion" let-group>
       <tr>
         <td></td>
-        <td colspan="6">
+        <td colspan="2">
           <naikan-overview-project-table [overviewBoms]="group.boms">
           </naikan-overview-project-table>
         </td>
