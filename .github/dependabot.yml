@@ -12,7 +12,7 @@ updates:
   - package-ecosystem: npm
     directory: "/naikan-client"
     schedule:
-      interval: weekly
+      interval: daily
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
