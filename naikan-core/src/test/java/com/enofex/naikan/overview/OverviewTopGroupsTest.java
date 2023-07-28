@@ -12,7 +12,7 @@ class OverviewTopGroupsTest {
 
   @Test
   void shouldCreateOverviewTopGroups() {
-    List<String> names = Arrays.asList("Group A" , "Group B" , "Group C");
+    List<String> names = Arrays.asList("Group A", "Group B", "Group C");
     List<Long> counts = Arrays.asList(10L, 20L, 30L);
 
     OverviewTopGroups overviewTopGroups = new OverviewTopGroups(names, counts);

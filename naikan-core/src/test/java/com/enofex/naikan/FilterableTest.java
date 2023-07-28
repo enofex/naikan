@@ -1,5 +1,6 @@
 package com.enofex.naikan;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -49,23 +50,29 @@ class FilterableTest {
 
   @Test
   void shouldReturnFilterMatchMode() {
-    assertNull(Filterable.FilterMatchMode.of(null));
-    assertNull(Filterable.FilterMatchMode.of("do not exists"));
-    assertEquals(FilterMatchMode.CONTAINS, Filterable.FilterMatchMode.of("contains"));
+    assertAll(
+        () -> assertNull(Filterable.FilterMatchMode.of(null)),
+        () -> assertNull(Filterable.FilterMatchMode.of("do not exists")),
+        () -> assertEquals(FilterMatchMode.CONTAINS, Filterable.FilterMatchMode.of("contains"))
+    );
   }
 
   @Test
   void shouldReturnFilterMatchModeName() {
-    assertEquals("contains", FilterMatchMode.CONTAINS.getName());
-    assertEquals("contains", FilterMatchMode.CONTAINS.toString());
+    assertAll(
+        () -> assertEquals("contains", FilterMatchMode.CONTAINS.getName()),
+        () -> assertEquals("contains", FilterMatchMode.CONTAINS.toString())
+    );
   }
 
   @Test
   void shouldReturnFilterOperator() {
-    assertNull(Filterable.FilterOperator.of(null));
-    assertNull(Filterable.FilterOperator.of("do not exists"));
-    assertEquals(FilterOperator.AND, Filterable.FilterOperator.of("and"));
-    assertEquals(FilterOperator.OR, Filterable.FilterOperator.of("or"));
+    assertAll(
+        () -> assertNull(Filterable.FilterOperator.of(null)),
+        () -> assertNull(Filterable.FilterOperator.of("do not exists")),
+        () -> assertEquals(FilterOperator.AND, Filterable.FilterOperator.of("and")),
+        () -> assertEquals(FilterOperator.OR, Filterable.FilterOperator.of("or"))
+    );
   }
 }
 

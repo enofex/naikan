@@ -22,6 +22,5 @@ class TestNaikanApplication {
     MongoDBContainer mongoDBContainer() {
       return new MongoDBContainer("mongo:5");
     }
-
   }
 }
