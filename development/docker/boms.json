@@ -8,7 +8,7 @@
     "project": {
       "name": "Naikan",
       "url": "https://naikan.io",
-      "repository": "https://github.com/naikan",
+      "repository": "https://github.com/enofex/naikan",
       "groupId": "io.naikan",
       "artifactId": "naikan-core",
       "packaging": "jar",
@@ -307,7 +307,7 @@
     "project": {
       "name": "Sample Project",
       "url": "https://naikan.io",
-      "repository": "https://github.com/naikan",
+      "repository": "https://github.com/enofex/naikan",
       "groupId": "io.naikan",
       "artifactId": "naikan-core",
       "packaging": "jar",
