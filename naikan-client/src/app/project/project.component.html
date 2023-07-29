@@ -2,12 +2,12 @@
   <div class="flex justify-content-between flex-wrap mb-4">
     <div class="flex align-items-center justify-content-center">
       <h5>
-      <p-inputSwitch
-          [(ngModel)]="favorites"
-          tooltipPosition="top"
-          pTooltip="Toggle favorites"
-          (onChange)="toggleFavorites($event)">
-      </p-inputSwitch>
+        <p-inputSwitch
+            [(ngModel)]="favorites"
+            tooltipPosition="top"
+            pTooltip="Toggle favorites"
+            (onChange)="toggleFavorites($event)">
+        </p-inputSwitch>
 
         <span class="ml-4">{{page?.totalElements}} Projects </span>
         <span class="text-500 text-sm ml-2">showing {{favorites ? 'favorites' : 'all'}}</span>
@@ -24,6 +24,11 @@
     </div>
   </div>
 
+  <p-tabMenu [model]="viewMenuItems"
+             [activeItem]="viewMenuActiveItem"
+             (activeItemChange)="onViewMenuActiveItemChange($event)"></p-tabMenu>
+
+
   <p-table
       #projectsTable
       dataKey="id"
@@ -37,9 +42,10 @@
       [sortOrder]="sortOrder"
       [defaultSortOrder]="1"
       [rows]="25"
-      [totalRecords]="page?.totalElements">
+      [totalRecords]="page?.totalElements"
+      styleClass="p-datatable-striped">
 
-    <ng-template pTemplate="header">
+    <ng-template pTemplate="caption">
 
       <naikan-project-filter
           [table]="projectsTable"
@@ -67,7 +73,6 @@
                     ? 'pi-filter-fill'
                     : 'pi-filter'
                   }}">
-
           </button>
 
           <p-dropdown [options]="sortOptions"
@@ -85,9 +90,13 @@
       </div>
     </ng-template>
 
+    <ng-template pTemplate="header">
+      <tr *ngIf="viewMenuActiveItem.id === '1'" class="naikan-project-view-condensed-header"></tr>
+    </ng-template>
+
     <ng-template let-bom pTemplate="body">
-      <naikan-project-overview [bom]="bom"></naikan-project-overview>
+      <div *ngIf="viewMenuActiveItem.id === '0'" class="naikan-project-view-overview-body" [bom]="bom"></div>
+      <tr  *ngIf="viewMenuActiveItem.id === '1'" class="naikan-project-view-condensed-body" [bom]="bom"></tr>
     </ng-template>
   </p-table>
-
 </div>

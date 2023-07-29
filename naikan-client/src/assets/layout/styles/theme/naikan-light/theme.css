@@ -3157,8 +3157,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 .p-datatable .p-datatable-header {
   background: #ffffff;
   color: rgba(0, 0, 0, 0.87);
-  border: 1px solid #e4e4e4;
-  border-width: 0 0 1px 0;
+  border: none;
   padding: 1rem 1rem;
   font-weight: 500;
 }
@@ -6625,9 +6624,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 }
 
 .p-tabmenu .p-tabmenu-nav .p-tabmenuitem .p-menuitem-link {
-  border: solid rgba(0, 0, 0, 0.12);
-  border-width: 0 0 1px 0;
-  border-color: transparent transparent rgba(0, 0, 0, 0.12) transparent;
+  border: none;
   background: #ffffff;
   color: rgba(0, 0, 0, 0.6);
   padding: 1rem 1.5rem;
