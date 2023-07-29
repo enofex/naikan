@@ -1,8 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {SelectItem, SharedModule} from 'primeng/api';
+import {MenuItem, SelectItem, SharedModule} from 'primeng/api';
 import {ProjectService} from './project.service';
 import {Bom, Page, Search} from '../shared';
-import {ProjectOverview} from './project-overview';
+import {ProjectViewOverviewBody} from './project-view-overview.component';
+import {
+  ProjectViewCondensedBody,
+  ProjectViewCondensedHeader
+} from './project-view-condensed.component';
 import {AsyncPipe, DatePipe, NgClass, NgIf} from '@angular/common';
 import {DropdownModule} from 'primeng/dropdown';
 import {ButtonModule} from 'primeng/button';
@@ -13,11 +17,12 @@ import {FormsModule} from "@angular/forms";
 import {TooltipModule} from "primeng/tooltip";
 import {ProjectFilters} from "./project-filters";
 import {BlockUIModule} from "primeng/blockui";
+import {TabMenuModule} from "primeng/tabmenu";
 
 @Component({
   templateUrl: './project.component.html',
   standalone: true,
-  imports: [TableModule, SharedModule, ProjectFilter, Search, ButtonModule, InputSwitchModule, DropdownModule, NgClass, ProjectOverview, InputSwitchModule, FormsModule, TooltipModule, AsyncPipe, BlockUIModule, NgIf],
+  imports: [TableModule, SharedModule, ProjectFilter, Search, ButtonModule, InputSwitchModule, DropdownModule, NgClass, ProjectViewOverviewBody, ProjectViewCondensedBody, ProjectViewCondensedHeader, InputSwitchModule, FormsModule, TooltipModule, AsyncPipe, BlockUIModule, NgIf, TabMenuModule],
   providers: [ProjectService, DatePipe]
 })
 export class ProjectComponent implements OnInit {
@@ -32,6 +37,8 @@ export class ProjectComponent implements OnInit {
   sortField: string;
   sortOrder: number;
   favorites: boolean;
+  viewMenuItems: MenuItem[] | undefined;
+  viewMenuActiveItem: MenuItem | undefined;
 
   constructor(private readonly projectService: ProjectService) {
   }
@@ -39,6 +46,7 @@ export class ProjectComponent implements OnInit {
   ngOnInit(): void {
     this.favorites = localStorage.getItem(this.FAVORITES_KEY) === 'true';
     this.initTableSort();
+    this.initViewMenuItems();
   }
 
   onSortChange(event): void {
@@ -63,6 +71,10 @@ export class ProjectComponent implements OnInit {
     this.projectService.exportAll(this.projectsTable.createLazyLoadMetadata());
   }
 
+  onViewMenuActiveItemChange(event: MenuItem): void {
+    this.viewMenuActiveItem = event;
+  }
+
   private initTableSort(): void {
     this.sortOptions = [
       {label: 'Name ', value: 'project.name'},
@@ -81,5 +93,19 @@ export class ProjectComponent implements OnInit {
     ];
     this.sortField = this.sortOptions[0].value;
     this.sortOrder = 1;
+  }
+
+  private initViewMenuItems(): void {
+    this.viewMenuItems = [
+      {
+        id: "0",
+        label: 'Overview'
+      },
+      {
+        id: "1",
+        label: 'Condensed',
+      },
+    ];
+    this.viewMenuActiveItem = this.viewMenuItems[0];
   }
 }

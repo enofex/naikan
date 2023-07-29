@@ -1,7 +1,6 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  Input,
   OnDestroy,
   OnInit,
   ViewEncapsulation
@@ -9,25 +8,26 @@ import {
 import {NgClass, NgIf} from '@angular/common';
 import {TooltipModule} from 'primeng/tooltip';
 import {
-  Bom,
   Charts,
   DateTimePipe,
   Deployment,
   NaikanTags,
   Principal,
   ProjectUrlIcon,
-  ProjectVersion,
-  User
+  ProjectVersion
 } from "../shared";
 import {ChartModule} from "primeng/chart";
 import {RouterLink} from "@angular/router";
 import {ProjectService} from "./project.service";
 import {LayoutService} from "../layout/app.layout.service";
 import {Subscription} from "rxjs";
+import {AbstractProjectView} from "./abstract-project-view.component";
+import {SharedModule} from "primeng/api";
 
 @Component({
-  selector: 'naikan-project-overview',
+  selector: '.naikan-project-view-overview-body',
   template: `
+
     <div class="card mb-2">
       <div class="flex flex-column justify-content-between sm:flex-row sm:align-items-start p-4">
 
@@ -227,32 +227,28 @@ import {Subscription} from "rxjs";
     ChartModule,
     DateTimePipe,
     NgClass,
+    SharedModule,
   ],
 })
-export class ProjectOverview implements OnInit, OnDestroy {
+export class ProjectViewOverviewBody extends AbstractProjectView implements OnInit, OnDestroy {
 
-  user: User;
   chartOptions: any;
   subscription!: Subscription;
 
-  @Input() bom: Bom;
-
   constructor(
-      private readonly projectService: ProjectService,
-      private readonly layoutService: LayoutService,
-      private readonly principal: Principal) {
+      projectService: ProjectService,
+      principal: Principal,
+      private readonly layoutService: LayoutService) {
+
+    super(projectService, principal)
+
     this.subscription = this.layoutService.configUpdate$.subscribe(() => {
       this.initChart();
     });
   }
 
-  ngOnInit(): void {
-    this.principal.identity()
-    .subscribe({
-      next: user => {
-        this.user = user;
-      }
-    });
+  override ngOnInit(): void {
+    super.ngOnInit();
     this.initChart()
   }
 
@@ -260,65 +256,6 @@ export class ProjectOverview implements OnInit, OnDestroy {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
-  }
-
-  tooltipNames(objects: any[]): string {
-    let tooltip = "";
-
-    if (objects) {
-      let found = 0;
-
-      for (let i = 0; i < objects.length; i++) {
-        const name = objects[i]['name'];
-
-        if (name) {
-          found++;
-          tooltip += name;
-
-          if (found === 10) {
-            tooltip += " ...";
-            break;
-          }
-
-          if (i < objects.length - 1) {
-            tooltip += ", ";
-          }
-        }
-      }
-    }
-
-    return tooltip;
-  }
-
-  tooltipProject(bom: Bom): string {
-    let tooltip = "";
-
-    if (bom) {
-      let found = false;
-
-      if (bom.organization?.name) {
-        tooltip += bom.organization?.name;
-        found = true;
-      }
-
-      if (bom.organization?.department) {
-        if (found) {
-          tooltip += ", ";
-        }
-        tooltip += bom.organization?.department;
-        found = true;
-      }
-
-      if (bom.project?.description) {
-        if (found) {
-          tooltip += "<br><br>";
-        }
-
-        tooltip += bom.project?.description;
-      }
-    }
-
-    return tooltip;
   }
 
   projectDeploymentsChart(deployments: Deployment[]): any {
@@ -396,25 +333,6 @@ export class ProjectOverview implements OnInit, OnDestroy {
   hasDeployments(deployments: Deployment[]): boolean {
     return deployments && deployments.length > 0;
   }
-
-  isFavorite(id: string): boolean {
-    return this.user.favorites && this.user.favorites.includes(id);
-  }
-
-  onFavoriteToggle(id: string): void {
-    if (this.user.favorites) {
-      this.user.favorites = this.user.favorites.includes(id)
-          ? this.user.favorites.filter(item => item !== id)
-          : [...this.user.favorites, id];
-    } else {
-      this.user.favorites = [id];
-    }
-
-    this.projectService
-    .updateUserFavorites(this.user.favorites)
-    .subscribe();
-  }
-
 
   private initChart(): void {
     this.chartOptions = {
