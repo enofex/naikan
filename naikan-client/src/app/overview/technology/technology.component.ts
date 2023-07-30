@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {LayoutService} from 'src/app/layout/app.layout.service';
 import {TechnologyService} from './technology.service';
-import {Breadcrumb, Charts, Search} from '../../shared';
+import {Breadcrumb, Search} from '../../shared';
 import {SharedModule} from 'primeng/api';
 import {AbstractOverviewComponent} from "../abstract-overview.component";
 import {OverviewProjectTable} from '../overview-project-table';
@@ -44,24 +44,7 @@ export class TechnologyComponent extends AbstractOverviewComponent<TechnologyGro
   override initChart(): void {
     this.technologyService.getTopGroups(this.topN)
     .subscribe(data => {
-      if (data) {
-        const documentStyle = Charts.documentStyle();
-        this.topN = data.names?.length;
-
-        this.chartData = {
-          labels: data.names,
-          datasets: [
-            {
-              label: "Projects",
-              data: data.counts,
-              backgroundColor: documentStyle,
-              borderColor: documentStyle
-            }
-          ]
-        };
-
-        Object.assign(this.chartOptions.plugins.title, {'text': `Top ${this.topN} Technologies`});
-      }
+      this.initChartData(data, "Technologies");
     });
   }
 }

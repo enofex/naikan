@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {EnvironmentService} from './environment.service';
-import {Breadcrumb, Charts, Search, Url} from '../../shared';
+import {Breadcrumb, Search, Url} from '../../shared';
 import {SharedModule} from 'primeng/api';
 import {LayoutService} from '../../layout/app.layout.service';
 import {AbstractOverviewComponent} from "../abstract-overview.component";
@@ -45,24 +45,7 @@ export class EnvironmentComponent extends AbstractOverviewComponent<OverviewGrou
   override initChart(): void {
     this.environmentService.getTopGroups(this.topN)
     .subscribe(data => {
-      if (data) {
-        const documentStyle = Charts.documentStyle();
-        this.topN = data.names?.length;
-
-        this.chartData = {
-          labels: data.names,
-          datasets: [
-            {
-              label: "Projects",
-              data: data.counts,
-              backgroundColor: documentStyle,
-              borderColor: documentStyle
-            }
-          ]
-        };
-
-        Object.assign(this.chartOptions.plugins.title, {'text': `Top ${this.topN} Environments`});
-      }
+      this.initChartData(data, "Environments");
     });
   }
 }

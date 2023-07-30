@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {TagService} from './tag.service';
-import {Breadcrumb, Charts, Search, Url} from '../../shared';
+import {Breadcrumb, Search, Url} from '../../shared';
 import {SharedModule} from 'primeng/api';
 import {LayoutService} from '../../layout/app.layout.service';
 import {AbstractOverviewComponent} from "../abstract-overview.component";
@@ -45,24 +45,8 @@ export class TagComponent extends AbstractOverviewComponent<OverviewGroup> {
   override initChart(): void {
     this.tagService.getTopGroups(this.topN)
     .subscribe(data => {
-      if (data) {
-        const documentStyle = Charts.documentStyle();
-        this.topN = data.names?.length;
-
-        this.chartData = {
-          labels: data.names,
-          datasets: [
-            {
-              label: "Projects",
-              data: data.counts,
-              backgroundColor: documentStyle,
-              borderColor: documentStyle
-            }
-          ]
-        };
-
-        Object.assign(this.chartOptions.plugins.title, {'text': `Top ${this.topN} Tags`});
-      }
+      this.initChartData(data, "Tags");
     });
   }
+
 }

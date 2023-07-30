@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {LayoutService} from 'src/app/layout/app.layout.service';
 import {TeamService} from './team.service';
-import {Breadcrumb, Charts, Search} from '../../shared';
+import {Breadcrumb, Search} from '../../shared';
 import {AbstractOverviewComponent} from "../abstract-overview.component";
 import {SharedModule} from "primeng/api";
 import {OverviewProjectTable} from '../overview-project-table';
@@ -44,24 +44,7 @@ export class TeamComponent extends AbstractOverviewComponent<OverviewGroup> {
   override initChart(): void {
     this.teamService.getTopGroups(this.topN)
     .subscribe(data => {
-      if (data) {
-        const documentStyle = Charts.documentStyle();
-        this.topN = data.names?.length;
-
-        this.chartData = {
-          labels: data.names,
-          datasets: [
-            {
-              label: "Projects",
-              data: data.counts,
-              backgroundColor: documentStyle,
-              borderColor: documentStyle
-            }
-          ]
-        };
-
-        Object.assign(this.chartOptions.plugins.title, {'text': `Top ${this.topN} Teams`});
-      }
+      this.initChartData(data, "Teams");
     });
   }
 }

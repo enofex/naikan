@@ -1,7 +1,8 @@
 import {Component, OnDestroy, OnInit} from "@angular/core";
 import {Subscription} from "rxjs";
-import {Page} from "../shared";
+import {Charts, Page} from "../shared";
 import {LayoutService} from "../layout/app.layout.service";
+import {OverviewTopGroups} from "./overview-top-groups";
 
 @Component({template: ''})
 export abstract class AbstractOverviewComponent<T> implements OnDestroy, OnInit {
@@ -70,6 +71,27 @@ export abstract class AbstractOverviewComponent<T> implements OnDestroy, OnInit 
 
   ngOnInit(): void {
     this.initChart();
+  }
+
+  initChartData(data: OverviewTopGroups, title: string, label: string = "Projects") {
+    if (data) {
+      const documentStyle = Charts.documentStyle();
+      this.topN = data.names?.length;
+
+      this.chartData = {
+        labels: data.names,
+        datasets: [
+          {
+            label: label,
+            data: data.counts,
+            backgroundColor: documentStyle,
+            borderColor: documentStyle
+          }
+        ]
+      };
+
+      Object.assign(this.chartOptions.plugins.title, {'text': `Top ${this.topN} ${title}`});
+    }
   }
 
   ngOnDestroy(): void {

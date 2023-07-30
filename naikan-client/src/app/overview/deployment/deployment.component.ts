@@ -4,7 +4,7 @@ import {DeploymentService} from './deployment.service';
 import {SharedModule} from "primeng/api";
 import {OverviewDeployment} from "./overview-deployment";
 import {AbstractOverviewComponent} from "../abstract-overview.component";
-import {Breadcrumb, Charts, DateTimePipe, ProjectUrlIcon, Search, Url} from "../../shared";
+import {Breadcrumb, DateTimePipe, ProjectUrlIcon, Search, Url} from "../../shared";
 import {TagModule} from 'primeng/tag';
 import {RouterLink} from '@angular/router';
 import {TooltipModule} from 'primeng/tooltip';
@@ -48,25 +48,7 @@ export class DeploymentComponent extends AbstractOverviewComponent<OverviewDeplo
   override initChart(): void {
     this.deploymentService.getTopGroups(this.topN)
     .subscribe(data => {
-      if (data) {
-        const documentStyle = Charts.documentStyle();
-        this.topN = data.names?.length;
-
-        this.chartData = {
-          labels: data.names,
-          datasets: [
-            {
-              label: "Deployments",
-              data: data.counts,
-              backgroundColor: documentStyle,
-              borderColor: documentStyle
-            }
-          ]
-        };
-
-        Object.assign(this.chartOptions.plugins.title, {'text': `Top ${this.topN} Projects`});
-      }
+      this.initChartData(data, "Projects", "Deployments");
     });
-
   }
 }
