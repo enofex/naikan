@@ -1,6 +1,7 @@
-package com.enofex.naikan.overview.team;
+package com.enofex.naikan.overview.tag;
 
-import static com.enofex.naikan.overview.team.OverviewTeamController.REQUEST_PATH;
+
+import static com.enofex.naikan.overview.tag.OverviewTagController.REQUEST_PATH;
 
 import com.enofex.naikan.Filterable;
 import com.enofex.naikan.overview.OverviewGroup;
@@ -17,23 +18,23 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(REQUEST_PATH)
-class OverviewTeamController {
+class OverviewTagController {
 
-  static final String REQUEST_PATH = OverviewRequest.PATH + "/teams";
+  static final String REQUEST_PATH = OverviewRequest.PATH + "/tags";
 
-  private final OverviewTeamService overviewTeamService;
+  private final OverviewTagService overviewTagService;
 
-  OverviewTeamController(OverviewTeamService overviewTeamService) {
-    this.overviewTeamService = overviewTeamService;
+  OverviewTagController(OverviewTagService overviewTagService) {
+    this.overviewTagService = overviewTagService;
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Page<OverviewGroup>> findAll(Filterable filterable, Pageable pageable) {
-    return ResponseEntity.ok(this.overviewTeamService.findAll(filterable, pageable));
+    return ResponseEntity.ok(this.overviewTagService.findAll(filterable, pageable));
   }
 
   @GetMapping(path = "/top/{topN}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<OverviewTopGroups> findTopTeams(@PathVariable long topN) {
-    return ResponseEntity.ok(this.overviewTeamService.findTopTeams(topN));
+  public ResponseEntity<OverviewTopGroups> findTopTags(@PathVariable long topN) {
+    return ResponseEntity.ok(this.overviewTagService.findTopTags(topN));
   }
 }

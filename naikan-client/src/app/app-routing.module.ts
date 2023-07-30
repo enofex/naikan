@@ -47,6 +47,10 @@ export const APP_ROUTES: Routes = [
         loadChildren: () => import('./overview/deployment/deployment-routing.module').then(m => m.DeploymentRoutingModule)
       },
       {
+        path: 'overview/tags',
+        loadChildren: () => import('./overview/tag/tag-routing.module').then(m => m.TagRoutingModule)
+      },
+      {
         path: 'administration',
         loadChildren: () => import('./administration/administration.routing.module').then(m => m.AdministrationRoutingModule)
       },
