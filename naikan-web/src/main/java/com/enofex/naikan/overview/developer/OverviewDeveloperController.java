@@ -26,8 +26,7 @@ class OverviewDeveloperController {
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<Page<OverviewGroup>> findAll(Filterable filterable,
-      Pageable pageable) {
+  public ResponseEntity<Page<OverviewGroup>> findAll(Filterable filterable, Pageable pageable) {
     return ResponseEntity.ok(this.overviewDeveloperService.findAll(filterable, pageable));
   }
 }

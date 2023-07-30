@@ -26,8 +26,7 @@ class OverviewContactController {
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<Page<OverviewGroup>> findAll(Filterable filterable,
-      Pageable pageable) {
+  public ResponseEntity<Page<OverviewGroup>> findAll(Filterable filterable, Pageable pageable) {
     return ResponseEntity.ok(this.overviewContactService.findAll(filterable, pageable));
   }
 }

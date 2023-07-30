@@ -27,8 +27,7 @@ class OverviewTechnologyController {
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<Page<TechnologyGroup>> findAll(Filterable filterable,
-      Pageable pageable) {
+  public ResponseEntity<Page<TechnologyGroup>> findAll(Filterable filterable, Pageable pageable) {
     return ResponseEntity.ok(this.overviewTechnologyService.findAll(filterable, pageable));
   }
 

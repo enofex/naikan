@@ -23,21 +23,14 @@ export class AppMenuComponent implements OnInit {
       {
         label: 'Overviews',
         items: [
-          {
-            label: 'Environments',
-            icon: 'pi pi-fw pi-box',
-            routerLink: ['/overview/environments']
-          },
+          {label: 'Environments', icon: 'pi pi-fw pi-box', routerLink: ['/overview/environments']},
           {label: 'Teams', icon: 'pi pi-fw pi-users', routerLink: ['/overview/teams']},
           {label: 'Developers', icon: 'pi pi-fw pi-user', routerLink: ['/overview/developers']},
           {label: 'Contacts', icon: 'pi pi-fw pi-envelope', routerLink: ['/overview/contacts']},
           {label: 'Integrations', icon: 'pi pi-fw pi-link', routerLink: ['/overview/integrations']},
           {label: 'Technologies', icon: 'pi pi-fw pi-code', routerLink: ['/overview/technologies']},
-          {
-            label: 'Deployments',
-            icon: 'pi pi-fw pi-cloud-upload',
-            routerLink: ['/overview/deployments']
-          }
+          {label: 'Deployments', icon: 'pi pi-fw pi-cloud-upload', routerLink: ['/overview/deployments']},
+          {label: 'Tags', icon: 'pi pi-fw pi-tags', routerLink: ['/overview/tags']},
         ]
       }
     ];

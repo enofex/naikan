@@ -26,9 +26,7 @@ class OverviewIntegrationController {
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<Page<OverviewGroup>> findAll(Filterable filterable,
-      Pageable pageable) {
-    return ResponseEntity.ok(
-        this.overviewIntegrationService.findAll(filterable, pageable));
+  public ResponseEntity<Page<OverviewGroup>> findAll(Filterable filterable, Pageable pageable) {
+    return ResponseEntity.ok(this.overviewIntegrationService.findAll(filterable, pageable));
   }
 }
