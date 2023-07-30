@@ -5,7 +5,8 @@
 </p>
 <p align="center">
     <img src="https://github.com/enofex/naikan/actions/workflows/maven.yml/badge.svg" /></a>
-     <img src="https://img.shields.io/badge/Java%20Version-20-orange" /></a>
+    <img src="https://img.shields.io/badge/Java%20Version-20-orange" /></a>
+    <img height="20" src="https://sonarcloud.io/images/project_badges/sonarcloud-orange.svg">
 </p>
 
 # Naikan: A Comprehensive Software Inventory Management Tool for Dev Teams
