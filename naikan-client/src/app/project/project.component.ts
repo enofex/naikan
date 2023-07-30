@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MenuItem, SelectItem, SharedModule} from 'primeng/api';
 import {ProjectService} from './project.service';
-import {Bom, Page, Search} from '../shared';
+import {Bom, Page, Principal, Search, User} from '../shared';
 import {ProjectViewOverviewBody} from './project-view-overview.component';
 import {
   ProjectViewCondensedBody,
@@ -39,14 +39,25 @@ export class ProjectComponent implements OnInit {
   favorites: boolean;
   viewMenuItems: MenuItem[] | undefined;
   viewMenuActiveItem: MenuItem | undefined;
+  user: User;
 
-  constructor(private readonly projectService: ProjectService) {
+  constructor(
+      private readonly projectService: ProjectService,
+      private readonly principal: Principal) {
   }
 
   ngOnInit(): void {
     this.favorites = localStorage.getItem(this.FAVORITES_KEY) === 'true';
+
     this.initTableSort();
     this.initViewMenuItems();
+
+    this.principal.identity()
+    .subscribe({
+      next: user => {
+        this.user = user;
+      }
+    });
   }
 
   onSortChange(event): void {

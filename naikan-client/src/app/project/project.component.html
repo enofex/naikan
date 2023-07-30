@@ -6,6 +6,7 @@
             [(ngModel)]="favorites"
             tooltipPosition="top"
             pTooltip="Toggle favorites"
+            [disabled]="user.favorites?.length === 0"
             (onChange)="toggleFavorites($event)">
         </p-inputSwitch>
 
