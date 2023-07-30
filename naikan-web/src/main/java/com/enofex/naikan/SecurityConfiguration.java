@@ -71,7 +71,7 @@ class SecurityConfiguration {
     SecurityFilterChain ldapSecurityFilterChain(HttpSecurity http, AuthenticationProvider provider)
         throws Exception {
       http
-          .securityMatchers((matchers) ->
+          .securityMatchers(matchers ->
               matchers.requestMatchers(new NegatedRequestMatcher(
                   new AntPathRequestMatcher(API_URLS)))
           )
@@ -177,9 +177,8 @@ class SecurityConfiguration {
     @Bean
     @Order(1)
     SecurityFilterChain apiSecurityFilterChain(HttpSecurity http) throws Exception {
-
       http
-          .securityMatchers((matchers) -> matchers.requestMatchers(
+          .securityMatchers(matchers -> matchers.requestMatchers(
               new AntPathRequestMatcher(API_URLS))
           )
           .csrf(AbstractHttpConfigurer::disable)
