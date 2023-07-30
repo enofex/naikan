@@ -4,7 +4,6 @@ import static org.springframework.data.mongodb.core.aggregation.Aggregation.ROOT
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.group;
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.limit;
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.match;
-import static org.springframework.data.mongodb.core.aggregation.Aggregation.newAggregation;
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.project;
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.sort;
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.unwind;
@@ -19,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
@@ -55,18 +54,17 @@ class OverviewDeploymentMongoRepository extends OverviewRepository implements
 
   @Override
   public OverviewTopGroups findTopProjects(long topN) {
-    Aggregation aggregation = newAggregation(
+    Aggregation aggregation = Aggregation.newAggregation(
         unwind("deployments"),
         group("project.name").count().as("count"),
-        project("count").and("project.name").previousOperation(),
-        sort(Sort.Direction.DESC, "count"),
-        group().push("project.name").as("names").push("count").as("counts"),
-        project("names", "counts"),
-        unwind("names"),
-        sort(Sort.Direction.DESC, "counts"),
-        sort(Sort.Direction.ASC, "names"),
+        sort(Direction.DESC, "count").and(Direction.ASC, "project.name"),
         limit(topN),
-        group().push("names").as("names").first("counts").as("counts")
+        group()
+            .push("_id").as("names")
+            .push("count").as("counts"),
+        project()
+            .and("names").as("names")
+            .and("counts").as("counts")
     );
 
     return template().aggregate(aggregation, collectionName(), OverviewTopGroups.class)
