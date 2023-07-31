@@ -85,7 +85,6 @@ class SecurityConfiguration {
           .anonymous(AbstractHttpConfigurer::disable)
           .addFilterAfter(new SpaWebFilter(), BasicAuthenticationFilter.class)
           .addFilterAfter(new CookieCsrfFilter(), BasicAuthenticationFilter.class)
-          .anonymous(AbstractHttpConfigurer::disable)
           .exceptionHandling(exceptionHandlingConfigurer -> exceptionHandlingConfigurer
               .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
           )
