@@ -5,7 +5,6 @@ import com.enofex.naikan.administration.user.User;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 
@@ -33,7 +32,7 @@ public class HttpStatusReturningAuthenticationSuccessHandler extends
       }
     }
 
-    response.setStatus(HttpStatus.OK.value());
+    response.setStatus(HttpServletResponse.SC_OK);
   }
 
   private boolean isFirstUserAndShouldBeAdmin() {
