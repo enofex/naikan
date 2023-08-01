@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MenuItem, SelectItem, SharedModule} from 'primeng/api';
 import {ProjectService} from './project.service';
-import {Bom, Page, Principal, Search, User} from '../shared';
+import {Bom, Page, Principal, Search, User} from "@naikan/shared";
 import {ProjectViewOverviewBody} from './project-view-overview.component';
 import {
   ProjectViewCondensedBody,

@@ -15,11 +15,11 @@ import {
   Principal,
   ProjectUrlIcon,
   ProjectVersion
-} from "../shared";
+} from "@naikan/shared";
 import {ChartModule} from "primeng/chart";
 import {RouterLink} from "@angular/router";
 import {ProjectService} from "./project.service";
-import {LayoutService} from "../layout/app.layout.service";
+import {LayoutService} from "@naikan/layout/app.layout.service";
 import {Subscription} from "rxjs";
 import {AbstractProjectView} from "./abstract-project-view.component";
 import {SharedModule} from "primeng/api";

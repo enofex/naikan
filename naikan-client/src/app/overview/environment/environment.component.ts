@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {EnvironmentService} from './environment.service';
-import {Breadcrumb, Search, Url} from '../../shared';
+import {Breadcrumb, Search, Url} from "@naikan/shared";
 import {SharedModule} from 'primeng/api';
-import {LayoutService} from '../../layout/app.layout.service';
+import {LayoutService} from '@naikan/layout/app.layout.service';
 import {AbstractOverviewComponent} from "../abstract-overview.component";
 import {OverviewProjectTable} from '../overview-project-table';
 import {TagModule} from 'primeng/tag';

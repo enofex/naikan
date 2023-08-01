@@ -2,7 +2,7 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {Token} from "./token";
-import {Page, Pageables} from "../../shared";
+import {Page, Pageables} from "@naikan/shared";
 import {TableLazyLoadEvent} from "primeng/table";
 
 const endpoint = 'administration/tokens';

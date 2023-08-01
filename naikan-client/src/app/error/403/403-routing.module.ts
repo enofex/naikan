@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
-import {AuthGuard} from "../../shared";
+import {AuthGuard} from "@naikan/shared";
 import {Error403Component} from "./403.component";
 
 @NgModule({

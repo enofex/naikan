@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {LoginService} from './login.service';
-import {LayoutService} from "../layout/app.layout.service";
+import {LayoutService} from "@naikan/layout/app.layout.service";
 import {ButtonModule} from 'primeng/button';
 import {PasswordModule} from 'primeng/password';
 import {InputTextModule} from 'primeng/inputtext';

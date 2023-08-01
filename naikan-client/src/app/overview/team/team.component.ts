@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
-import {LayoutService} from 'src/app/layout/app.layout.service';
+import {LayoutService} from "@naikan/layout/app.layout.service";
 import {TeamService} from './team.service';
-import {Breadcrumb, Search} from '../../shared';
+import {Breadcrumb, Search} from "@naikan/shared";
 import {AbstractOverviewComponent} from "../abstract-overview.component";
 import {SharedModule} from "primeng/api";
 import {OverviewProjectTable} from '../overview-project-table';

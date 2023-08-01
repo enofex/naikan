@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from "@angular/core";
-import {Bom, Principal, User} from "../shared";
+import {Bom, Principal, User} from "@naikan/shared";
 import {ProjectService} from "./project.service";
 
 @Component({template: ''})

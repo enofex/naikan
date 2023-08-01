@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnInit,
-  ViewEncapsulation
-} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {NgClass, NgIf} from '@angular/common';
 import {TooltipModule} from 'primeng/tooltip';
 import {
@@ -11,8 +6,9 @@ import {
   NaikanTags,
   Principal,
   ProjectUrlIcon,
-  ProjectVersion, Url,
-} from "../shared";
+  ProjectVersion,
+  Url,
+} from "@naikan/shared";
 import {ChartModule} from "primeng/chart";
 import {RouterLink} from "@angular/router";
 import {ProjectService} from "./project.service";

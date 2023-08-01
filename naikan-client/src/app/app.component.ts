@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {PrimeNGConfig} from 'primeng/api';
 import {RouterOutlet} from '@angular/router';
 import {BlockUIModule} from "primeng/blockui";
-import {BlockUIService} from "./shared";
+import {BlockUIService} from "@naikan/shared";
 import {AsyncPipe} from "@angular/common";
 
 @Component({

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {RouterLink} from '@angular/router';
-import {Breadcrumb, Principal, Url, User} from "../../shared";
+import {Breadcrumb, Principal, Url, User} from "@naikan/shared";
 import {NgForOf, NgIf} from "@angular/common";
 import {TagModule} from "primeng/tag";
 

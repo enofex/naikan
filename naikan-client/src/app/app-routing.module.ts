@@ -1,6 +1,6 @@
 import {Routes} from '@angular/router';
-import {AppLayoutComponent} from './layout/app.layout.component';
-import {AuthGuard} from "./shared";
+import {AppLayoutComponent} from '@naikan/layout/app.layout.component';
+import {AuthGuard} from "@naikan/shared";
 
 export const APP_ROUTES: Routes = [
   {

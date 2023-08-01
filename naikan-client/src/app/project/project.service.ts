@@ -1,6 +1,6 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {BlockUIService, Bom, Page, Pageables, Principal, User} from '../shared';
+import {BlockUIService, Bom, Page, Pageables, Principal, User} from "@naikan/shared";
 import {finalize, Observable} from 'rxjs';
 import {FilterMatchMode} from 'primeng/api';
 import {ProjectFilter} from "./project-filter";

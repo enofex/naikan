@@ -3,7 +3,7 @@ import {HttpErrorResponse, HttpInterceptorFn, HttpStatusCode} from '@angular/com
 import {throwError} from 'rxjs';
 import {Router} from '@angular/router';
 import {catchError} from 'rxjs/operators';
-import {Principal} from "../auth/principal.service";
+import {Principal} from "@naikan/shared";
 
 export const statusInterceptor: HttpInterceptorFn = (req, next) => {
 

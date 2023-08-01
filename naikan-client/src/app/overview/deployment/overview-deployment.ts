@@ -1,5 +1,5 @@
 import {OverviewBom} from "../overview";
-import {Deployment} from "../../shared";
+import {Deployment} from "@naikan/shared";
 
 export interface OverviewDeployment {
   bom: OverviewBom;

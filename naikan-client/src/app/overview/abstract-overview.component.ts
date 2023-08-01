@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from "@angular/core";
 import {Subscription} from "rxjs";
-import {Charts, Page} from "../shared";
-import {LayoutService} from "../layout/app.layout.service";
+import {Charts, Page} from "@naikan/shared";
+import {LayoutService} from "@naikan/layout/app.layout.service";
 import {OverviewTopGroups} from "./overview-top-groups";
 
 @Component({template: ''})

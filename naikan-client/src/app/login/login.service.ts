@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {AuthService} from "../shared";
+import {AuthService} from "@naikan/shared";
 import {from, Observable} from "rxjs";
 import {switchMap} from "rxjs/operators";
 import {Router} from "@angular/router";

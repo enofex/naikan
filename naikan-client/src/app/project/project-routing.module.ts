@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {ProjectComponent} from './project.component';
 import {DETAIL_ROUTE} from './detail/project-detail.route';
-import {AuthGuard} from "../shared";
+import {AuthGuard} from "@naikan/shared";
 
 @NgModule({
   imports: [

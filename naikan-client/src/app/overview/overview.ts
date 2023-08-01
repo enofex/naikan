@@ -1,4 +1,4 @@
-import {Project} from '../shared';
+import {Project} from "@naikan/shared";
 
 export interface OverviewGroup {
   uuid: string;

@@ -1,7 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {AdministrationProjectService} from "./project.service";
-import {Breadcrumb, DateTimePipe, Page, Search, Url} from "../../shared";
+import {Breadcrumb, DateTimePipe, Page, Search, Url} from "@naikan/shared";
 import {Project} from "./project";
 import {ConfirmationService, MessageService,} from "primeng/api";
 import {DatePipe} from "@angular/common";

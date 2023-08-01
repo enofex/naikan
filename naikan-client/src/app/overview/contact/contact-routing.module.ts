@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {ContactComponent} from './contact.component';
-import {AuthGuard} from "../../shared";
+import {AuthGuard} from "@naikan/shared";
 
 @NgModule({
   imports: [RouterModule.forChild([{

@@ -1,7 +1,7 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
-import {Page, Pageables} from "../../shared";
+import {Page, Pageables} from "@naikan/shared";
 import {OverviewDeployment} from "./overview-deployment";
 import {OverviewTopGroups} from "../overview-top-groups";
 import {TableLazyLoadEvent} from "primeng/table";

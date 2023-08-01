@@ -2,7 +2,7 @@ import {ChangeDetectionStrategy, Component, Input, ViewEncapsulation} from '@ang
 import {TooltipModule} from 'primeng/tooltip';
 import {RouterLink} from '@angular/router';
 import {TableModule} from 'primeng/table';
-import {DateTimePipe, ProjectUrlIcon, ProjectVersion, Url} from '../shared';
+import {DateTimePipe, ProjectUrlIcon, ProjectVersion, Url} from "@naikan/shared";
 import {SharedModule as SharedModule_1} from 'primeng/api';
 import {OverviewBom} from "./overview";
 

@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Clipboard} from '@angular/cdk/clipboard';
 import {finalize, Subscription} from 'rxjs';
-import {LayoutService} from '../../layout/app.layout.service';
+import {LayoutService} from '@naikan/layout/app.layout.service';
 import {
   Bom,
   Breadcrumb,
@@ -13,7 +13,7 @@ import {
   ProjectVersion,
   Search,
   Url
-} from '../../shared';
+} from '@naikan/shared';
 import {ProjectService} from '../project.service';
 import {MenuItem, SharedModule} from "primeng/api";
 import {ChartModule} from 'primeng/chart';

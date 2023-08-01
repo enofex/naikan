@@ -1,10 +1,10 @@
 import {Component} from '@angular/core';
-import {LayoutService} from 'src/app/layout/app.layout.service';
+import {LayoutService} from "@naikan/layout/app.layout.service";
 import {DeploymentService} from './deployment.service';
 import {SharedModule} from "primeng/api";
 import {OverviewDeployment} from "./overview-deployment";
 import {AbstractOverviewComponent} from "../abstract-overview.component";
-import {Breadcrumb, DateTimePipe, ProjectUrlIcon, Search, Url} from "../../shared";
+import {Breadcrumb, DateTimePipe, ProjectUrlIcon, Search, Url} from "@naikan/shared";
 import {TagModule} from 'primeng/tag';
 import {RouterLink} from '@angular/router';
 import {TooltipModule} from 'primeng/tooltip';

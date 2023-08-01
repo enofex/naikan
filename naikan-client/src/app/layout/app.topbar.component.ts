@@ -1,7 +1,7 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {MenuItem} from 'primeng/api';
 import {LayoutService} from './app.layout.service';
-import {AuthService, Principal, User} from "../shared";
+import {AuthService, Principal, User} from "@naikan/shared";
 import {MenuModule} from 'primeng/menu';
 import {TooltipModule} from 'primeng/tooltip';
 import {ButtonModule} from 'primeng/button';

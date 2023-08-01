@@ -6,7 +6,7 @@ import {DatePipe, NgIf} from "@angular/common";
 import {ConfirmationService, MessageService} from "primeng/api";
 import {Token} from "./token";
 import {AdministrationTokenService} from "./token.service";
-import {Breadcrumb, DateTimePipe, Page, Search, Url} from "../../shared";
+import {Breadcrumb, DateTimePipe, Page, Search, Url} from "@naikan/shared";
 import {ButtonModule} from "primeng/button";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {MessagesModule} from "primeng/messages";

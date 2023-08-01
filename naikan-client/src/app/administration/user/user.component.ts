@@ -4,7 +4,7 @@ import {Table, TableLazyLoadEvent, TableModule} from "primeng/table";
 import {MenuModule} from "primeng/menu";
 import {NgIf} from "@angular/common";
 import {ConfirmationService, MessageService} from "primeng/api";
-import {Breadcrumb, Page, Search, Url} from "../../shared";
+import {Breadcrumb, Page, Search, Url} from "@naikan/shared";
 import {ButtonModule} from "primeng/button";
 import {MessagesModule} from "primeng/messages";
 import {AdministrationUserService} from "./user.service";

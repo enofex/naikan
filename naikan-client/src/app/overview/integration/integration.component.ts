@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
 import {IntegrationService} from './integration.service';
-import {Breadcrumb, Search, Url} from '../../shared';
+import {Breadcrumb, Search, Url} from "@naikan/shared";
 import {SharedModule} from 'primeng/api';
 import {AbstractOverviewComponent} from "../abstract-overview.component";
-import {LayoutService} from "../../layout/app.layout.service";
+import {LayoutService} from "@naikan/layout/app.layout.service";
 import {OverviewProjectTable} from '../overview-project-table';
 import {TagModule} from 'primeng/tag';
 import {TooltipModule} from 'primeng/tooltip';
