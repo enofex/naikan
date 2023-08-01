@@ -1,4 +1,4 @@
-package com.enofex.naikan.security;
+package com.enofex.naikan.web;
 
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
