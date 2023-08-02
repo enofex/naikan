@@ -46,7 +46,7 @@ class OverviewTeamMongoRepository extends OverviewRepository implements Overview
     Aggregation aggregation = Aggregation.newAggregation(
         unwind("teams"),
         group("teams.name").count().as("count"),
-        sort(Direction.DESC, "count").and(Direction.ASC, "teams.name"),
+        sort(Direction.DESC, "count").and(Direction.ASC, "_id"),
         limit(topN),
         group()
             .push("_id").as("names")

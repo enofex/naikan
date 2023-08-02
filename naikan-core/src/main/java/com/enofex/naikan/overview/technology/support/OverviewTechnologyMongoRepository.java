@@ -48,7 +48,7 @@ class OverviewTechnologyMongoRepository extends OverviewRepository implements
     Aggregation aggregation = Aggregation.newAggregation(
         unwind("technologies"),
         group("technologies.name").count().as("count"),
-        sort(Direction.DESC, "count").and(Direction.ASC, "technologies.name"),
+        sort(Direction.DESC, "count").and(Direction.ASC, "_id"),
         limit(topN),
         group()
             .push("_id").as("names")

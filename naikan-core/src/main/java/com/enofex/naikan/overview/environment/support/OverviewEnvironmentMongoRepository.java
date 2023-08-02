@@ -47,7 +47,7 @@ class OverviewEnvironmentMongoRepository extends OverviewRepository implements
     Aggregation aggregation = Aggregation.newAggregation(
         unwind("environments"),
         group("environments.name").count().as("count"),
-        sort(Direction.DESC, "count").and(Direction.ASC, "environments.name"),
+        sort(Direction.DESC, "count").and(Direction.ASC, "_id"),
         limit(topN),
         group()
             .push("_id").as("names")
