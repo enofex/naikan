@@ -3180,6 +3180,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   color: rgba(255, 255, 255, 0.87);
   background: #1e1e1e;
   transition: none;
+  white-space: nowrap;
 }
 
 .p-datatable .p-datatable-tfoot > tr > td {
