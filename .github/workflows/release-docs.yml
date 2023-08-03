@@ -1,10 +1,8 @@
 name: Release docs
 on:
   push:
-    tags:
-      - v*
-    paths:
-      - 'docs/**'
+    branches:
+      - main
 permissions:
   contents: write
 jobs:
