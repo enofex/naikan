@@ -4,7 +4,7 @@ on:
     tags:
       - v*
     paths:
-      - ./docs/**
+      - 'docs/**'
 permissions:
   contents: write
 jobs:
