@@ -32,23 +32,16 @@ After downloading the docker-compose.yml file, review it and identify the servic
 
 The Naikan container can be configured using any of the available configuration properties:
 
-#### MongoDB 
-
-##### Via URI
+#### MongoDB
 
 [Connection String URI Format](https://www.mongodb.com/docs/manual/reference/connection-string/)
 
-| Property                             | Default                                            | Description                           |
-|:-------------------------------------|:---------------------------------------------------|:--------------------------------------|
-| `NAIKAN_MONGODB_URI`                 | `mongodb://localhost:27071/naikan?replicaSet=rs0`  | Mongo database URI.                   | 
-| `NAIKAN_MONGODB_DATABASE`            | `naikan`                                           | Database name. Override URI database. |
+| Property                             | Default                                           | Description                           |
+|:-------------------------------------|:--------------------------------------------------|:--------------------------------------|
+| `NAIKAN_MONGODB_URI`                 | `mongodb://localhost:27071/naikan?replicaSet=rs0` | Mongo database URI.                   | 
+| `NAIKAN_MONGODB_DATABASE`            | `naikan`                                          | Database name. Override URI database. |
+| `NAIKAN_MONGODB_TRANSACTION_ENABLED` | `true`                                            | Enable transaction.                   |
 
-
-#### Common property
-
-| Property                             | Default     | Description                          |
-|:-------------------------------------|:------------|:-------------------------------------|
-| `NAIKAN_MONGODB_TRANSACTION_ENABLED` | `true`      | Enable transaction.                  |
 
 #### LDAP
 
