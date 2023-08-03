@@ -58,6 +58,19 @@ The Naikan container can be configured using any of the available configuration 
 | `NAIKAN_LDAP_USERS_SEARCH_FILTER`       |                        | The filter expression used in the user search.                                                                           |
 | `NAIKAN_LDAP_ACTIVE_DIRECTORY_DOMAIN`   |                        | The domain name. Must be provided for Active Directory.                                                                  |
 
+Following some example configurations that are known to work of each server implementation. This configuration depends on our schema.
+
+=== "Microsoft Active Directory"
+
+    ``` sh
+     - NAIKAN_LDAP_SERVER_URL=ldaps://ldap.example.com:636/
+     - NAIKAN_LDAP_BASEDN=dc=example,dc=com
+     - NAIKAN_LDAP_BIND_USERNAME=user@example.com
+     - NAIKAN_LDAP_BIND_PASSWORD=password 
+     - NAIKAN_LDAP_USERS_SEARCH_FILTER=(&(objectClass=user)(userPrincipalName={0}))
+     - NAIKAN_LDAP_ACTIVE_DIRECTORY_DOMAIN=example.com
+    ```
+
 #### CORS Headers
 
 | Property                        | Default                                            | Description                                                                                             |
