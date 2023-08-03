@@ -6,6 +6,7 @@ volumes:
 services:
   naikan:
     image: enofex/naikan
+    container_name: naikan
     #environment:
     # The Naikan container can be configured using any of the available configuration properties:
     #
