@@ -3,6 +3,8 @@ on:
   push:
     tags:
       - v*
+    paths:
+      - docs/**      
 permissions:
   contents: write
 jobs:
