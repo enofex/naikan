@@ -11,13 +11,8 @@ services:
     # The Naikan container can be configured using any of the available configuration properties:
     #
     # MongoDB Properties
-    # - NAIKAN_MONGODB_URI=
-    # - NAIKAN_MONGODB_HOST=localhost
-    # - NAIKAN_MONGODB_PORT=27017
+    # - NAIKAN_MONGODB_URI=mongodb://localhost:27071/naikan?replicaSet=rs0
     # - NAIKAN_MONGODB_DATABASE=naikan
-    # - NAIKAN_MONGODB_REPLICA_SET_NAME=
-    # - NAIKAN_MONGODB_USERNAME=
-    # - NAIKAN_MONGODB_PASSWORD=
     # - NAIKAN_MONGODB_TRANSACTION_ENABLED=true
     #
     # LDAP Properties

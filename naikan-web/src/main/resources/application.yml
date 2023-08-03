@@ -13,12 +13,7 @@ spring:
   data:
     mongodb:
       uri: ${NAIKAN_MONGODB_URI:}
-      host: ${NAIKAN_MONGODB_HOST:localhost}
-      port: ${NAIKAN_MONGODB_PORT:27017}
       database: ${NAIKAN_MONGODB_DATABASE:naikan}
-      replica-set-name: ${NAIKAN_MONGODB_REPLICA_SET_NAME}
-      username: ${NAIKAN_MONGODB_USERNAME}
-      password: ${NAIKAN_MONGODB_PASSWORD}
     web:
       pageable:
         default-page-size: 2000
