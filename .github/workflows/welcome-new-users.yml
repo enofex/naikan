@@ -1,0 +1,57 @@
+# Welcome new users by creating a comment in the first time issue/PR.
+# Adding a friendly message in the comment to tip non-stargazers to star our repo.
+#
+# Props to https://github.com/wow-actions/welcome 
+
+name: Welcome New Users with Thanks and Tip non-stargazers ;-)
+on:
+  pull_request_target:
+    types: [opened, closed]
+  issues:
+    types: [opened]
+jobs:
+  run:
+    # Do not run on bots and maintainers
+    if: ${{ !contains(fromJson('["github-actions[bot]", "dependabot[bot]", "dependabot-preview[bot]", "allcontributors[bot]"]'), github.actor) }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: wow-actions/welcome@v1
+        with:
+          FIRST_ISSUE_REACTIONS: '+1, hooray, rocket, heart'
+          
+          FIRST_ISSUE: |
+            👋 @{{ author }}
+            
+            Welcome to the Naikan community! 💖
+            
+            Thanks and congrats 🎉 for opening your first issue here!
+ 
+            Hope you have a great time there! 
+          
+          FIRST_PR_REACTIONS: '+1, hooray, rocket, heart'
+          
+          FIRST_PR: |
+            👋 @{{ author }}
+            
+            Welcome to the Naikan community! 💖
+            
+            Thanks and congrats 🎉 for opening your first pull request here! Be sure to follow our contributing guidelines.
+            
+            Hope you have a great time there! 
+          
+          FIRST_PR_MERGED: |
+            🎉 @{{ author }}
+            
+            You are now a Naiakn community contributor! 💖
+            
+            Thanks and congrats 🚀 on merging your first pull request! We are delighted and very proud of you! 👏 
+
+            Kudos and please keep going, we need you 🙌
+            
+          STAR_MESSAGE: |
+            🌟 ~~~~~~~~~ 🌟
+
+            📢 If you like Naikan, please ⭐ star ⭐ our repo to support it!
+            
+            🙏 It really helps the project to gain momentum and credibility. It's a small contribution back to the project with a big impact.
+            
