@@ -1,4 +1,4 @@
-name: Release docs
+name: Release Docs
 on:
   push:
     paths:

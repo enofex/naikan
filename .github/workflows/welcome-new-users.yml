@@ -3,7 +3,7 @@
 #
 # Props to https://github.com/wow-actions/welcome 
 
-name: Welcome New Users with Thanks and Tip non-stargazers ;-)
+name: Welcome new Users
 on:
   pull_request_target:
     types: [opened, closed]
