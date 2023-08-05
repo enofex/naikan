@@ -42,7 +42,7 @@ jobs:
           FIRST_PR_MERGED: |
             🎉 @{{ author }}
             
-            You are now a Naiakn community contributor! 💖
+            You are now a Naikan community contributor! 💖
             
             Thanks and congrats 🚀 on merging your first pull request! We are delighted and very proud of you! 👏 
 
