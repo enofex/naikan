@@ -3,6 +3,7 @@ package com.enofex.naikan.security;
 
 import com.enofex.naikan.administration.user.AdministrationUserService;
 import com.enofex.naikan.administration.user.User;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import org.springframework.http.HttpStatus;
@@ -43,7 +44,7 @@ class AuthenticationController {
 
     UserResource(Authentication authentication, User user) {
       this.authentication = Objects.requireNonNull(authentication);
-      this.user = Objects.requireNonNull(user);
+      this.user = user;
     }
 
     public String getUsername() {
@@ -51,7 +52,7 @@ class AuthenticationController {
     }
 
     public List<String> getFavorites() {
-      return this.user.favorites();
+      return this.user != null ? this.user.favorites() : Collections.emptyList();
     }
 
     public Object getDetails() {
