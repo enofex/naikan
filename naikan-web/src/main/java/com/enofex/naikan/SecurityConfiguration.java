@@ -90,8 +90,9 @@ class SecurityConfiguration {
           )
           .authorizeHttpRequests(authorizeRequests -> authorizeRequests
               .requestMatchers(RESOURCES).permitAll()
+              .requestMatchers(AUTHENTICATE_URL).permitAll()
               .requestMatchers(ADMINISTRATION_URLS)
-              .hasAuthority(AuthorityType.ROLE_ADMIN.getAuthority())
+                .hasAuthority(AuthorityType.ROLE_ADMIN.getAuthority())
               .requestMatchers("/api/**").authenticated()
           )
           .formLogin(login -> login
