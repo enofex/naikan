@@ -88,3 +88,8 @@ Following some example configurations that are known to work of each server impl
 |:-----------------------|:--------|:----------------------------------------------------------------------------------|
 | `EXTRA_JAVA_OPTIONS`   |         | To provide more JVM arguments to the JVM, <br/>i.e. `-XX:ActiveProcessorCount=4`  |
 
+=== "DEBUG Level"
+
+    ``` sh
+     - EXTRA_JAVA_OPTIONS=-Dlogging.level.root=DEBUG
+    ```
