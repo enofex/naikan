@@ -15,12 +15,7 @@ spring:
 
 logging:
   level:
-    org:
-      springframework:
-        data:
-          mongodb:
-            core:
-              MongoTemplate: DEBUG
+    root: DEBUG
 
 naikan:
   security:
