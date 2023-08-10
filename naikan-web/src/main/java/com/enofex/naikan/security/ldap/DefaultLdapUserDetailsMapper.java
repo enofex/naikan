@@ -29,8 +29,12 @@ public final class DefaultLdapUserDetailsMapper extends LdapUserDetailsMapper {
   }
 
   private boolean hasAdminAuthority(com.enofex.naikan.administration.user.User user) {
-    return user != null
+    return isFirstUserAndShouldBeAdmin() ? true : user != null
         && user.authorities() != null
         && user.authorities().contains(AuthorityType.ROLE_ADMIN.getAuthority());
+  }
+
+  private boolean isFirstUserAndShouldBeAdmin() {
+    return this.userService.count() == 0;
   }
 }
