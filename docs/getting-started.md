@@ -82,7 +82,7 @@ Following some example configurations that are known to work of each server impl
 | `NAIKAN_CORS_ALLOW_CREDENTIALS` | `true`                                             | Whether user credentials are supported.                                                                 |
 | `NAIKAN_CORS_MAX_AGE`           | `1800`                                             | Configure how long, as a duration, the response from a pre-flight request can be cached by clients.     |
 
-#### JVM
+#### Server
 
 | Property                        | Default | Description                                   |
 |:--------------------------------|:--------|:----------------------------------------------|
