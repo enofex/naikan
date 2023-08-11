@@ -84,6 +84,12 @@ Following some example configurations that are known to work of each server impl
 
 #### JVM
 
+| Property                        | Default | Description                                   |
+|:--------------------------------|:--------|:----------------------------------------------|
+| `NAIKAN_SERVER_COOKIE_SECURE`   | false   | Whether to always mark the cookie as secure.  |
+
+#### JVM
+
 | Property               | Default | Description                                                                       |
 |:-----------------------|:--------|:----------------------------------------------------------------------------------|
 | `EXTRA_JAVA_OPTIONS`   |         | To provide more JVM arguments to the JVM, <br/>i.e. `-XX:ActiveProcessorCount=4`  |
