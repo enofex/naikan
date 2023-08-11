@@ -42,9 +42,9 @@ services:
     deploy:
       resources:
         limits:
-          memory: 12288m
+          memory: 12G
         reservations:
-          memory: 8192m
+          memory: 8G
       restart_policy:
         condition: on-failure
     ports:
