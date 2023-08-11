@@ -26,13 +26,13 @@ class OverviewEnvironmentControllerIT {
 
   @BeforeEach
   void setUp() {
-    template.save(DeserializerFactory.newJsonDeserializer().of(Boms.validBom0asInputStream()),
+    this.template.save(DeserializerFactory.newJsonDeserializer().of(Boms.validBom0asInputStream()),
         "projects");
   }
 
   @Test
   void shouldFindAll() throws Exception {
-    mvc.perform(
+    this.mvc.perform(
             get("/api/overview/environments"))
         .andExpect(handler().methodName("findAll"))
         .andExpect(status().isOk())
@@ -42,7 +42,7 @@ class OverviewEnvironmentControllerIT {
 
   @Test
   void shouldFindOverviewTopEnvironments() throws Exception {
-    mvc.perform(
+    this.mvc.perform(
             get("/api/overview/environments/top/5"))
         .andExpect(handler().methodName("findTopEnvironments"))
         .andExpect(status().isOk())

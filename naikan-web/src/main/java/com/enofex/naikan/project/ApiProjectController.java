@@ -25,8 +25,8 @@ class ApiProjectController {
 
   @PutMapping("/{id}")
   public ResponseEntity<Void> update(@PathVariable ProjectId id, @RequestBody Bom bom) {
-    if (projectService.findById(id).isPresent()) {
-      projectService.update(id, bom);
+    if (this.projectService.findById(id).isPresent()) {
+      this.projectService.update(id, bom);
 
       return ResponseEntity.ok().build();
     }
@@ -37,8 +37,8 @@ class ApiProjectController {
   @PostMapping
   public ResponseEntity<Void> upsertByProjectName(@RequestBody Bom bom) {
     if (new DefaultValidator().isValid(bom)) {
-      boolean existsAlready = projectService.existsByProjectName(bom.project().name());
-      Bom newBom = projectService.upsertByProjectName(bom);
+      boolean existsAlready = this.projectService.existsByProjectName(bom.project().name());
+      Bom newBom = this.projectService.upsertByProjectName(bom);
 
       if (existsAlready) {
         return ResponseEntity.ok().build();

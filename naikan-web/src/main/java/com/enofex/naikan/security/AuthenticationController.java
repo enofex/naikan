@@ -29,7 +29,7 @@ class AuthenticationController {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
     if (authentication != null) {
-      User user = administrationUserService.findByName(authentication.getName());
+      User user = this.administrationUserService.findByName(authentication.getName());
 
       return ResponseEntity.ok(new UserResource(authentication, user));
     }
@@ -48,15 +48,15 @@ class AuthenticationController {
     }
 
     public String getUsername() {
-      return authentication.getName();
+      return this.authentication.getName();
     }
 
     public List<String> getFavorites() {
-      return user != null ? user.favorites() : Collections.emptyList();
+      return this.user != null ? this.user.favorites() : Collections.emptyList();
     }
 
     public Object getDetails() {
-      if (authentication.getPrincipal() instanceof InetOrgPerson principal) {
+      if (this.authentication.getPrincipal() instanceof InetOrgPerson principal) {
         return new InetOrgPersonResource(principal);
       }
 
@@ -64,7 +64,7 @@ class AuthenticationController {
     }
 
     public List<String> getAuthorities() {
-      return authentication.getAuthorities()
+      return this.authentication.getAuthorities()
           .stream()
           .map(GrantedAuthority::getAuthority)
           .toList();
@@ -80,27 +80,27 @@ class AuthenticationController {
     }
 
     public String getTitle() {
-      return principal.getTitle();
+      return this.principal.getTitle();
     }
 
     public String getDisplayName() {
-      return principal.getDisplayName();
+      return this.principal.getDisplayName();
     }
 
     public String getGivenName() {
-      return principal.getGivenName();
+      return this.principal.getGivenName();
     }
 
     public String getMail() {
-      return principal.getMail();
+      return this.principal.getMail();
     }
 
     public String getMobile() {
-      return principal.getMobile();
+      return this.principal.getMobile();
     }
 
     public String getTelephoneNumber() {
-      return principal.getTelephoneNumber();
+      return this.principal.getTelephoneNumber();
     }
   }
 }

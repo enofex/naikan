@@ -14,8 +14,8 @@ class JacksonConfiguration {
 
   @Bean
   Module naikanModule() {
-    if (logger.isDebugEnabled()) {
-      logger.debug("Registering Naikan Jackson Module");
+    if (this.logger.isDebugEnabled()) {
+      this.logger.debug("Registering Naikan Jackson Module");
     }
 
     return new NaikanModule();

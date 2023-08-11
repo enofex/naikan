@@ -22,11 +22,11 @@ class OverviewTechnologyServiceHandler implements OverviewTechnologyService {
 
   @Override
   public Page<TechnologyGroup> findAll(Filterable filterable, Pageable pageable) {
-    return overviewTechnologyRepository.findAll(filterable, pageable);
+    return this.overviewTechnologyRepository.findAll(filterable, pageable);
   }
 
   @Override
   public OverviewTopGroups findTopTechnologies(long topN) {
-    return overviewTechnologyRepository.findTopTechnologies(topN);
+    return this.overviewTechnologyRepository.findTopTechnologies(topN);
   }
 }

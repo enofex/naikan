@@ -20,7 +20,7 @@ public final class DefaultLdapUserDetailsMapper extends LdapUserDetailsMapper {
   @Override
   public UserDetails mapUserFromContext(DirContextOperations ctx, String username,
       Collection<? extends GrantedAuthority> authorities) {
-    com.enofex.naikan.administration.user.User savedUser = userService.findByName(username);
+    com.enofex.naikan.administration.user.User savedUser = this.userService.findByName(username);
 
     return super.mapUserFromContext(
         ctx,
@@ -35,6 +35,6 @@ public final class DefaultLdapUserDetailsMapper extends LdapUserDetailsMapper {
   }
 
   private boolean isFirstUserAndShouldBeAdmin() {
-    return userService.count() == 0;
+    return this.userService.count() == 0;
   }
 }

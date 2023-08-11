@@ -49,29 +49,29 @@ final class ProjectXlsxView extends AbstractXlsxStreamingView {
 
   private void overview(Workbook workbook) {
     Sheet sheet = workbook.createSheet("Overview");
-    sheet.createRow(0).createCell(0).setCellValue(bom.id());
+    sheet.createRow(0).createCell(0).setCellValue(this.bom.id());
 
-    if (bom.organization() != null) {
+    if (this.bom.organization() != null) {
       emptyRow(sheet);
       row(sheet, "Organization");
-      row(sheet, "Name", bom.organization().name());
-      row(sheet, "URL", bom.organization().url());
-      row(sheet, "Department", bom.organization().department());
-      row(sheet, "Description", bom.organization().description());
+      row(sheet, "Name", this.bom.organization().name());
+      row(sheet, "URL", this.bom.organization().url());
+      row(sheet, "Department", this.bom.organization().department());
+      row(sheet, "Description", this.bom.organization().description());
     }
 
-    if (bom.project() != null) {
+    if (this.bom.project() != null) {
       emptyRow(sheet);
       row(sheet, "Project");
-      row(sheet, "Name", bom.project().name());
-      row(sheet, "URL", bom.project().url());
-      row(sheet, "Repository", bom.project().repository());
-      row(sheet, "Packaging", bom.project().packaging());
-      row(sheet, "Group", bom.project().groupId());
-      row(sheet, "Artifact", bom.project().artifactId());
-      row(sheet, "Description", bom.project().description());
-      row(sheet, "Notes", bom.project().notes());
-      row(sheet, "Tags", String.join(", ", bom.tags().all()));
+      row(sheet, "Name", this.bom.project().name());
+      row(sheet, "URL", this.bom.project().url());
+      row(sheet, "Repository", this.bom.project().repository());
+      row(sheet, "Packaging", this.bom.project().packaging());
+      row(sheet, "Group", this.bom.project().groupId());
+      row(sheet, "Artifact", this.bom.project().artifactId());
+      row(sheet, "Description", this.bom.project().description());
+      row(sheet, "Notes", this.bom.project().notes());
+      row(sheet, "Tags", String.join(", ", this.bom.tags().all()));
     }
   }
 
@@ -84,7 +84,7 @@ final class ProjectXlsxView extends AbstractXlsxStreamingView {
       put("Tags", env -> String.join(", ", env.tags().all()));
     }};
 
-    writeRows(sheet, columns, bom.environments().all());
+    writeRows(sheet, columns, this.bom.environments().all());
   }
 
   private void teams(Workbook workbook) {
@@ -94,7 +94,7 @@ final class ProjectXlsxView extends AbstractXlsxStreamingView {
       put("Description", Team::description);
     }};
 
-    writeRows(sheet, columns, bom.teams().all());
+    writeRows(sheet, columns, this.bom.teams().all());
   }
 
   private void developers(Workbook workbook) {
@@ -113,7 +113,7 @@ final class ProjectXlsxView extends AbstractXlsxStreamingView {
       put("Roles", developer -> String.join(", ", developer.roles().all()));
     }};
 
-    writeRows(sheet, columns, bom.developers().all());
+    writeRows(sheet, columns, this.bom.developers().all());
   }
 
   private void contacts(Workbook workbook) {
@@ -127,7 +127,7 @@ final class ProjectXlsxView extends AbstractXlsxStreamingView {
       put("Roles", contact -> String.join(", ", contact.roles().all()));
     }};
 
-    writeRows(sheet, columns, bom.contacts().all());
+    writeRows(sheet, columns, this.bom.contacts().all());
   }
 
   private void documentations(Workbook workbook) {
@@ -140,7 +140,7 @@ final class ProjectXlsxView extends AbstractXlsxStreamingView {
           documentation -> String.join(", ", documentation.tags().all()));
     }};
 
-    writeRows(sheet, columns, bom.documentations().all());
+    writeRows(sheet, columns, this.bom.documentations().all());
   }
 
   private void integrations(Workbook workbook) {
@@ -153,7 +153,7 @@ final class ProjectXlsxView extends AbstractXlsxStreamingView {
           documentation -> String.join(", ", documentation.tags().all()));
     }};
 
-    writeRows(sheet, columns, bom.integrations().all());
+    writeRows(sheet, columns, this.bom.integrations().all());
   }
 
   private void technologies(Workbook workbook) {
@@ -166,7 +166,7 @@ final class ProjectXlsxView extends AbstractXlsxStreamingView {
           technology -> String.join(", ", technology.tags().all()));
     }};
 
-    writeRows(sheet, columns, bom.technologies().all());
+    writeRows(sheet, columns, this.bom.technologies().all());
   }
 
   private void deployments(Workbook workbook) {
@@ -179,7 +179,7 @@ final class ProjectXlsxView extends AbstractXlsxStreamingView {
       put("Version", Deployment::version);
     }};
 
-    writeRows(sheet, columns, bom.deployments().all());
+    writeRows(sheet, columns, this.bom.deployments().all());
   }
 
   private void licenses(Workbook workbook) {
@@ -190,7 +190,7 @@ final class ProjectXlsxView extends AbstractXlsxStreamingView {
       put("Description", License::description);
     }};
 
-    writeRows(sheet, columns, bom.licenses().all());
+    writeRows(sheet, columns, this.bom.licenses().all());
   }
 
 

@@ -35,20 +35,20 @@ class ApiDeploymentsControllerIT {
 
   @BeforeEach
   void beforeEach() {
-    template.save(token(), "tokens");
+    this.template.save(token(), "tokens");
   }
 
   @Test
   void shouldSaveBom() throws Exception {
-    Bom savedBom = template.save(
+    Bom savedBom = this.template.save(
         DeserializerFactory.newJsonDeserializer().of(validBom0asInputStream()),
         "projects");
 
-    mvc.perform(
+    this.mvc.perform(
             post("/api/public/projects/" + savedBom.id() + "/deployments")
-                .header("authorization", "Bearer " + token.token())
+                .header("authorization", "Bearer " + this.token.token())
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(mapper.writeValueAsString(deployment())))
+                .content(this.mapper.writeValueAsString(deployment())))
         .andExpect(handler().methodName("save"))
         .andExpect(status().isCreated())
         .andExpect(
@@ -57,9 +57,9 @@ class ApiDeploymentsControllerIT {
 
   @Test
   void shouldNotSaveBom() throws Exception {
-    mvc.perform(
+    this.mvc.perform(
             post("/api/public/projects/1/deployments")
-                .header("authorization", "Bearer " + token.token())
+                .header("authorization", "Bearer " + this.token.token())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(Boms.invalidBom0asInputStream().readAllBytes()))
         .andExpect(handler().methodName("save"))
@@ -68,7 +68,7 @@ class ApiDeploymentsControllerIT {
 
   @Test
   void shouldNotSaveBomWhenIsUnauthorized() throws Exception {
-    mvc.perform(
+    this.mvc.perform(
             post("/api/public/projects/1/deployments")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(Boms.invalidBom0asInputStream().readAllBytes()))

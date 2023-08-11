@@ -26,50 +26,50 @@ class AdministrationTokenMongoRepositoryIT {
 
   @BeforeEach
   void setUp() {
-    repository = new AdministrationTokenMongoRepository(template);
+    this.repository = new AdministrationTokenMongoRepository(this.template);
   }
 
   @Test
   void shouldFindAll() {
-    repository.save(token());
+    this.repository.save(token());
 
-    assertEquals(1, repository.findAll(Filterable.emptySearch(),
+    assertEquals(1, this.repository.findAll(Filterable.emptySearch(),
         Pageable.ofSize(10)).getTotalElements());
 
-    assertEquals(0, repository.findAll(Filterable.of("do_not_exists"),
+    assertEquals(0, this.repository.findAll(Filterable.of("do_not_exists"),
         Pageable.ofSize(10)).getTotalElements());
 
-    assertEquals(1, repository.findAll(Filterable.of(token().token()),
+    assertEquals(1, this.repository.findAll(Filterable.of(token().token()),
         Pageable.ofSize(10)).getTotalElements());
   }
 
   @Test
   void shouldDelete() {
-    Token savedToken = repository.save(token());
+    Token savedToken = this.repository.save(token());
 
-    assertEquals(1, repository.findAll(Filterable.emptySearch(),
+    assertEquals(1, this.repository.findAll(Filterable.emptySearch(),
         Pageable.ofSize(10)).getTotalElements());
 
-    repository.delete(TokenId.of(savedToken.id()));
+    this.repository.delete(TokenId.of(savedToken.id()));
 
-    assertEquals(0, repository.findAll(Filterable.emptySearch(),
+    assertEquals(0, this.repository.findAll(Filterable.emptySearch(),
         Pageable.ofSize(10)).getTotalElements());
   }
 
   @Test
   void shouldExists() {
-    Token savedToken = repository.save(token());
+    Token savedToken = this.repository.save(token());
 
-    assertFalse(repository.exists("do_not_exists"));
-    assertTrue(repository.exists(savedToken.token()));
+    assertFalse(this.repository.exists("do_not_exists"));
+    assertTrue(this.repository.exists(savedToken.token()));
   }
 
   @Test
   void shouldUpdateLastUsed() {
-    Token savedToken = repository.save(token());
+    Token savedToken = this.repository.save(token());
 
-    assertEquals(0, repository.updateLastUsed("do_not_exists"));
-    assertEquals(1, repository.updateLastUsed(savedToken.token()));
+    assertEquals(0, this.repository.updateLastUsed("do_not_exists"));
+    assertEquals(1, this.repository.updateLastUsed(savedToken.token()));
   }
 
 

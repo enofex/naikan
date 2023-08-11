@@ -30,26 +30,26 @@ class AdministrationUserController {
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Page<User>> findAll(Filterable filterable, Pageable pageable) {
-    return ResponseEntity.ok(administrationUserService.findAll(filterable, pageable));
+    return ResponseEntity.ok(this.administrationUserService.findAll(filterable, pageable));
   }
 
   @PatchMapping("/{id}")
   public ResponseEntity<Void> updateAuthorities(@PathVariable UserId id,
       @RequestBody String[] authorities) {
-    User user = administrationUserService.findById(id);
+    User user = this.administrationUserService.findById(id);
 
     if (user == null) {
       return ResponseEntity.notFound().build();
     }
 
-    administrationUserService.save(User.ofAuthorities(user, authorities));
+    this.administrationUserService.save(User.ofAuthorities(user, authorities));
 
     return ResponseEntity.noContent().build();
   }
 
   @DeleteMapping("/{id}")
   public ResponseEntity<Void> delete(@PathVariable UserId id) {
-    return administrationUserService.delete(id) > 0
+    return this.administrationUserService.delete(id) > 0
         ? ResponseEntity.ok().build()
         : ResponseEntity.notFound().build();
   }

@@ -27,15 +27,15 @@ class EnvironmentLogger implements ApplicationRunner {
   }
 
   private void mongodb() {
-    logger.info("Mongodb uri: %s".formatted(mongoProperties.getUri()));
-    logger.info("Mongodb database: %s".formatted(mongoProperties.getDatabase()));
+    this.logger.info("Mongodb uri: %s".formatted(this.mongoProperties.getUri()));
+    this.logger.info("Mongodb database: %s".formatted(this.mongoProperties.getDatabase()));
 
-    logger.info("Mongodb transaction enabled: %s".formatted(
-        naikanProperties.mongodb().transaction().enable()));
+    this.logger.info("Mongodb transaction enabled: %s".formatted(
+        this.naikanProperties.mongodb().transaction().enable()));
   }
 
   private void ldap() {
-    logger.info(
-        "Ldap enabled: %s".formatted(naikanProperties.security().ldap().enabled()));
+    this.logger.info(
+        "Ldap enabled: %s".formatted(this.naikanProperties.security().ldap().enabled()));
   }
 }

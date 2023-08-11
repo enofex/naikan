@@ -27,36 +27,36 @@ class AdministrationProjectMongoRepositoryIT {
 
   @BeforeEach
   void setUp() {
-    repository = new AdministrationProjectMongoRepository(template);
+    this.repository = new AdministrationProjectMongoRepository(this.template);
   }
 
   @Test
   void shouldFindAll() {
-    template.save(newJsonDeserializer().of(validBom0asInputStream()), "projects");
-    template.save(newJsonDeserializer().of(validBom1asInputStream()), "projects");
-    template.save(newJsonDeserializer().of(validBom2asInputStream()), "projects");
+    this.template.save(newJsonDeserializer().of(validBom0asInputStream()), "projects");
+    this.template.save(newJsonDeserializer().of(validBom1asInputStream()), "projects");
+    this.template.save(newJsonDeserializer().of(validBom2asInputStream()), "projects");
 
-    assertEquals(3, repository.findAll(Filterable.emptySearch(),
+    assertEquals(3, this.repository.findAll(Filterable.emptySearch(),
         Pageable.ofSize(10)).getTotalElements());
 
-    assertEquals(0, repository.findAll(Filterable.of("do_not_exists"),
+    assertEquals(0, this.repository.findAll(Filterable.of("do_not_exists"),
         Pageable.ofSize(10)).getTotalElements());
 
-    assertEquals(1, repository.findAll(Filterable.of("Naikan III"),
+    assertEquals(1, this.repository.findAll(Filterable.of("Naikan III"),
         Pageable.ofSize(10)).getTotalElements());
   }
 
   @Test
   void shouldDelete() {
-    Bom savedBom = template.save(newJsonDeserializer().of(validBom0asInputStream()),
+    Bom savedBom = this.template.save(newJsonDeserializer().of(validBom0asInputStream()),
         "projects");
 
-    assertEquals(1, repository.findAll(Filterable.emptySearch(),
+    assertEquals(1, this.repository.findAll(Filterable.emptySearch(),
         Pageable.ofSize(10)).getTotalElements());
 
-    repository.delete(ProjectId.of(savedBom.id()));
+    this.repository.delete(ProjectId.of(savedBom.id()));
 
-    assertEquals(0, repository.findAll(Filterable.emptySearch(),
+    assertEquals(0, this.repository.findAll(Filterable.emptySearch(),
         Pageable.ofSize(10)).getTotalElements());
   }
 }

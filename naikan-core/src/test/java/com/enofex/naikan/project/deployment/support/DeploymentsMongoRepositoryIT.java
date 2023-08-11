@@ -25,7 +25,7 @@ class DeploymentsMongoRepositoryIT {
 
   @BeforeEach
   void setUp() {
-    repository = new DeploymentMongoRepository(template);
+    this.repository = new DeploymentMongoRepository(this.template);
   }
 
   @Test
@@ -34,8 +34,8 @@ class DeploymentsMongoRepositoryIT {
 
     assertEquals(2, bom.deployments().all().size());
 
-    Bom savedBom = template.save(bom, "projects");
-    Bom updatedDeployments = repository.save(ProjectId.of(savedBom.id()), deployment());
+    Bom savedBom = this.template.save(bom, "projects");
+    Bom updatedDeployments = this.repository.save(ProjectId.of(savedBom.id()), deployment());
 
     assertEquals(3, updatedDeployments.deployments().all().size());
   }

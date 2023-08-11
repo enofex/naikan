@@ -27,7 +27,7 @@ class AdministrationTokenServiceHandler implements AdministrationTokenService {
 
   @Override
   public Page<Token> findAll(Filterable filterable, Pageable pageable) {
-    return administrationTokenRepository.findAll(filterable, pageable);
+    return this.administrationTokenRepository.findAll(filterable, pageable);
   }
 
   @Override
@@ -35,27 +35,27 @@ class AdministrationTokenServiceHandler implements AdministrationTokenService {
     String name = SecurityContextHolder.getContext().getAuthentication().getName();
 
     Token token = new Token(
-        tokenProvider.token(),
+        this.tokenProvider.token(),
         name,
         LocalDateTime.now(),
         null,
         description);
 
-    return administrationTokenRepository.save(token);
+    return this.administrationTokenRepository.save(token);
   }
 
   @Override
   public long updateLastUsed(String token) {
-    return administrationTokenRepository.updateLastUsed(token);
+    return this.administrationTokenRepository.updateLastUsed(token);
   }
 
   @Override
   public long delete(TokenId id) {
-    return administrationTokenRepository.delete(id);
+    return this.administrationTokenRepository.delete(id);
   }
 
   @Override
   public boolean exists(String token) {
-    return administrationTokenRepository.exists(token);
+    return this.administrationTokenRepository.exists(token);
   }
 }

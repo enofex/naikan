@@ -30,21 +30,21 @@ public class BearerTokenAuthenticationFilter extends OncePerRequestFilter {
       FilterChain chain) throws IOException, ServletException {
 
     try {
-      String token = bearerTokenResolver.resolve(request);
+      String token = this.bearerTokenResolver.resolve(request);
 
       if (StringUtils.isBlank(token)) {
-        logger.warn("Failed to parse token!");
+        this.logger.warn("Failed to parse token!");
         throw new InsufficientAuthenticationException(
             "Did not process request since did not find bearer token on request");
       }
 
-      if (logger.isDebugEnabled()) {
-        logger.debug(
+      if (this.logger.isDebugEnabled()) {
+        this.logger.debug(
             "Bearer Authentication Authorization header found for token '%s'".formatted(token));
       }
 
-      if (!administrationTokenService.exists(token)) {
-        logger.warn("Token '%s' is not configured in database!".formatted(token));
+      if (!this.administrationTokenService.exists(token)) {
+        this.logger.warn("Token '%s' is not configured in database!".formatted(token));
         throw new InsufficientAuthenticationException(
             "Did not process request since did not find bearer token in database");
       }
@@ -56,21 +56,21 @@ public class BearerTokenAuthenticationFilter extends OncePerRequestFilter {
       context.setAuthentication(bearerTokenAuthentication);
       SecurityContextHolder.setContext(context);
 
-      if (logger.isDebugEnabled()) {
-        logger.debug("Set SecurityContextHolder to '%s'".formatted(bearerTokenAuthentication));
+      if (this.logger.isDebugEnabled()) {
+        this.logger.debug("Set SecurityContextHolder to '%s'".formatted(bearerTokenAuthentication));
       }
 
-      administrationTokenService.updateLastUsed(token);
+      this.administrationTokenService.updateLastUsed(token);
 
       chain.doFilter(request, response);
     } catch (AuthenticationException failed) {
       SecurityContextHolder.clearContext();
 
-      if (logger.isDebugEnabled()) {
-        logger.debug("Authentication request for failed: " + failed);
+      if (this.logger.isDebugEnabled()) {
+        this.logger.debug("Authentication request for failed: " + failed);
       }
 
-      authenticationEntryPoint.commence(request, response, failed);
+      this.authenticationEntryPoint.commence(request, response, failed);
     }
   }
 

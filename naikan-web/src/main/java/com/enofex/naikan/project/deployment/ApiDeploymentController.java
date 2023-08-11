@@ -32,7 +32,7 @@ class ApiDeploymentController {
   @PostMapping
   public ResponseEntity<String> save(@PathVariable ProjectId id,
       @RequestBody Deployment deployment) {
-    Bom newBom = deploymentService.save(id, deployment);
+    Bom newBom = this.deploymentService.save(id, deployment);
 
     if (newBom != null) {
       URI location = ServletUriComponentsBuilder

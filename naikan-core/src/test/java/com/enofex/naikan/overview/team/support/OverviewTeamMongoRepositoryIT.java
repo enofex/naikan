@@ -26,14 +26,14 @@ class OverviewTeamMongoRepositoryIT {
 
   @BeforeEach
   void setUp() {
-    repository = new OverviewTeamMongoRepository(template);
-    template.save(DeserializerFactory.newJsonDeserializer().of(Boms.validBom0asInputStream()),
+    this.repository = new OverviewTeamMongoRepository(this.template);
+    this.template.save(DeserializerFactory.newJsonDeserializer().of(Boms.validBom0asInputStream()),
         "projects");
   }
 
   @Test
   void shouldFindAll() {
-    Page<OverviewGroup> page = repository.findAll(
+    Page<OverviewGroup> page = this.repository.findAll(
         Filterable.emptySearch(),
         Pageable.ofSize(20));
 
@@ -42,7 +42,7 @@ class OverviewTeamMongoRepositoryIT {
 
   @Test
   void shouldFindAllOverviewsWithSearch() {
-    Page<OverviewGroup> page = repository.findAll(
+    Page<OverviewGroup> page = this.repository.findAll(
         Filterable.of("Naikan Team"), Pageable.ofSize(20));
 
     assertEquals(1, page.getContent().size());
@@ -50,7 +50,7 @@ class OverviewTeamMongoRepositoryIT {
 
   @Test
   void shouldFindTopTeams() {
-    OverviewTopGroups groups = repository.findTopTeams(5);
+    OverviewTopGroups groups = this.repository.findTopTeams(5);
 
     assertEquals(1, groups.counts().size());
     assertEquals(1, groups.names().size());

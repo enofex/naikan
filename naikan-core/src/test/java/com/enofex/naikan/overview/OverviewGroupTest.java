@@ -22,7 +22,7 @@ class OverviewGroupTest {
 
   @Test
   void shouldCreateOverviewGroup() {
-    OverviewBom overviewBom = new OverviewBom("1" , LocalDateTime.now(), project);
+    OverviewBom overviewBom = new OverviewBom("1" , LocalDateTime.now(), this.project);
     OverviewGroup overviewGroup = new OverviewGroup("123", new Group("name"),
         List.of(overviewBom), 1);
 
@@ -43,7 +43,7 @@ class OverviewGroupTest {
 
   @Test
   void shouldCreateOverviewGroupWithUnmodifiableBomsList() {
-    OverviewBom overviewBom = new OverviewBom("1" , LocalDateTime.now(), project);
+    OverviewBom overviewBom = new OverviewBom("1" , LocalDateTime.now(), this.project);
     OverviewGroup overviewGroup = new OverviewGroup("123", new Group("name"),
         Collections.singletonList(overviewBom), 1);
 

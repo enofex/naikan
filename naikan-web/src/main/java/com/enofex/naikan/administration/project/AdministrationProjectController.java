@@ -30,12 +30,12 @@ class AdministrationProjectController {
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Page<Project>> findAll(Filterable filterable, Pageable pageable) {
-    return ResponseEntity.ok(administrationProjectService.findAll(filterable, pageable));
+    return ResponseEntity.ok(this.administrationProjectService.findAll(filterable, pageable));
   }
 
   @DeleteMapping("/{id}")
   public ResponseEntity<Void> delete(@PathVariable ProjectId id) {
-    return administrationProjectService.delete(id) > 0
+    return this.administrationProjectService.delete(id) > 0
         ? ResponseEntity.ok().build()
         : ResponseEntity.notFound().build();
   }

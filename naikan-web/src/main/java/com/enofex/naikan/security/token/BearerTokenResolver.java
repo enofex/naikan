@@ -23,11 +23,11 @@ final class BearerTokenResolver {
     String token = extractHeaderToken(request);
 
     if (token == null) {
-      logger.debug("Token not found in headers. Trying request parameters.");
+      this.logger.debug("Token not found in headers. Trying request parameters.");
       token = request.getParameter(ACCESS_TOKEN);
 
       if (token == null) {
-        logger.debug("Token not found in request parameters. Not an Token request.");
+        this.logger.debug("Token not found in request parameters. Not an Token request.");
       }
     }
 

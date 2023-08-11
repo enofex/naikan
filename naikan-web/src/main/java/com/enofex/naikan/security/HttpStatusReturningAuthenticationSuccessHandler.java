@@ -22,18 +22,18 @@ public class HttpStatusReturningAuthenticationSuccessHandler extends
       Authentication authentication) {
 
     if (isFirstUserAndShouldBeAdmin()) {
-      userService.save(new User(
+      this.userService.save(new User(
           authentication.getName(),
           List.of(AuthorityType.ROLE_ADMIN.getAuthority()))
       );
-    } else if (userService.findByName(authentication.getName()) == null) {
-        userService.save(new User(authentication.getName()));
+    } else if (this.userService.findByName(authentication.getName()) == null) {
+      this.userService.save(new User(authentication.getName()));
       }
 
     response.setStatus(HttpServletResponse.SC_OK);
   }
 
   private boolean isFirstUserAndShouldBeAdmin() {
-    return userService.count() == 0;
+    return this.userService.count() == 0;
   }
 }

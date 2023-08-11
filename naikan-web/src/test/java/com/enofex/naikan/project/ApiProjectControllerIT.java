@@ -32,15 +32,15 @@ class ApiProjectControllerIT {
 
   @BeforeEach
   void beforeEach() {
-    template.save(token(), "tokens");
+    this.template.save(token(), "tokens");
   }
 
   @Test
   void shouldSaveBom() throws Exception {
-    mvc.perform(
+    this.mvc.perform(
             post("/api/public/projects")
                 .contentType(MediaType.APPLICATION_JSON)
-                .header("authorization", "Bearer " + token.token())
+                .header("authorization", "Bearer " + this.token.token())
                 .content(validBom0asInputStream().readAllBytes()))
         .andExpect(handler().methodName("upsertByProjectName"))
         .andExpect(status().isCreated())
@@ -49,19 +49,19 @@ class ApiProjectControllerIT {
 
   @Test
   void shouldUpdateBom() throws Exception {
-    mvc.perform(
+    this.mvc.perform(
             post("/api/public/projects")
                 .contentType(MediaType.APPLICATION_JSON)
-                .header("authorization", "Bearer " + token.token())
+                .header("authorization", "Bearer " + this.token.token())
                 .content(validBom0asInputStream().readAllBytes()))
         .andExpect(handler().methodName("upsertByProjectName"))
         .andExpect(status().isCreated())
         .andExpect(redirectedUrlPattern("http://localhost/api/projects/*"));
 
-    mvc.perform(
+    this.mvc.perform(
             post("/api/public/projects")
                 .contentType(MediaType.APPLICATION_JSON)
-                .header("authorization", "Bearer " + token.token())
+                .header("authorization", "Bearer " + this.token.token())
                 .content(validBom0asInputStream().readAllBytes()))
         .andExpect(handler().methodName("upsertByProjectName"))
         .andExpect(status().isOk());
@@ -69,10 +69,10 @@ class ApiProjectControllerIT {
 
   @Test
   void shouldNotSaveBom() throws Exception {
-    mvc.perform(
+    this.mvc.perform(
             post("/api/public/projects")
                 .contentType(MediaType.APPLICATION_JSON)
-                .header("authorization", "Bearer " + token.token())
+                .header("authorization", "Bearer " + this.token.token())
                 .content(Boms.invalidBom3asInputStream().readAllBytes()))
         .andExpect(handler().methodName("upsertByProjectName"))
         .andExpect(status().isBadRequest());
@@ -80,7 +80,7 @@ class ApiProjectControllerIT {
 
   @Test
   void shouldNotSaveBomWhenIsUnauthorized() throws Exception {
-    mvc.perform(
+    this.mvc.perform(
             post("/api/public/projects")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(Boms.validBom0asInputStream().readAllBytes()))
@@ -89,14 +89,14 @@ class ApiProjectControllerIT {
 
   @Test
   void shouldUpdateBomByProjectId() throws Exception {
-    Bom savedBom = template.save(
+    Bom savedBom = this.template.save(
         DeserializerFactory.newJsonDeserializer().of(validBom0asInputStream()),
         "projects");
 
-    mvc.perform(
+    this.mvc.perform(
             put("/api/public/projects/%s".formatted(savedBom.id()))
                 .contentType(MediaType.APPLICATION_JSON)
-                .header("authorization", "Bearer " + token.token())
+                .header("authorization", "Bearer " + this.token.token())
                 .content(validBom0asInputStream().readAllBytes()))
         .andExpect(handler().methodName("update"))
         .andExpect(status().isOk());
@@ -104,10 +104,10 @@ class ApiProjectControllerIT {
 
   @Test
   void shouldNotUpdateBomByProjectId() throws Exception {
-    mvc.perform(
+    this.mvc.perform(
             put("/api/public/projects/%s".formatted("do_not_exits"))
                 .contentType(MediaType.APPLICATION_JSON)
-                .header("authorization", "Bearer " + token.token())
+                .header("authorization", "Bearer " + this.token.token())
                 .content(validBom0asInputStream().readAllBytes()))
         .andExpect(handler().methodName("update"))
         .andExpect(status().isNotFound());

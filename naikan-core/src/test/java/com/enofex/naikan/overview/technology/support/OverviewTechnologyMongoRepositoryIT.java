@@ -26,14 +26,14 @@ class OverviewTechnologyMongoRepositoryIT {
 
   @BeforeEach
   void setUp() {
-    repository = new OverviewTechnologyMongoRepository(template);
-    template.save(DeserializerFactory.newJsonDeserializer().of(Boms.validBom0asInputStream()),
+    this.repository = new OverviewTechnologyMongoRepository(this.template);
+    this.template.save(DeserializerFactory.newJsonDeserializer().of(Boms.validBom0asInputStream()),
         "projects");
   }
 
   @Test
   void shouldFindAll() {
-    Page<TechnologyGroup> page = repository.findAll(
+    Page<TechnologyGroup> page = this.repository.findAll(
         Filterable.emptySearch(), Pageable.ofSize(20));
 
     assertEquals(2, page.getContent().size());
@@ -41,7 +41,7 @@ class OverviewTechnologyMongoRepositoryIT {
 
   @Test
   void shouldFindAllOverviewsWithSearch() {
-    Page<TechnologyGroup> page = repository.findAll(
+    Page<TechnologyGroup> page = this.repository.findAll(
         Filterable.of("Java"), Pageable.ofSize(20));
 
     assertEquals(1, page.getContent().size());
@@ -50,7 +50,7 @@ class OverviewTechnologyMongoRepositoryIT {
 
   @Test
   void shouldFindTopTechnologies() {
-    OverviewTopGroups groups = repository.findTopTechnologies(5);
+    OverviewTopGroups groups = this.repository.findTopTechnologies(5);
 
     assertEquals(2, groups.counts().size());
     assertEquals(2, groups.names().size());

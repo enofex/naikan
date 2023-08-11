@@ -26,13 +26,13 @@ class OverviewDeploymentControllerIT {
 
   @BeforeEach
   void setUp() {
-    template.save(DeserializerFactory.newJsonDeserializer().of(Boms.validBom0asInputStream()),
+    this.template.save(DeserializerFactory.newJsonDeserializer().of(Boms.validBom0asInputStream()),
         "projects");
   }
 
   @Test
   void shouldFindAll() throws Exception {
-    mvc.perform(
+    this.mvc.perform(
             get("/api/overview/deployments"))
         .andExpect(handler().methodName("findAll"))
         .andExpect(status().isOk())
@@ -42,7 +42,7 @@ class OverviewDeploymentControllerIT {
 
   @Test
   void shouldFindOverviewTopProjects() throws Exception {
-    mvc.perform(
+    this.mvc.perform(
             get("/api/overview/deployments/top/5"))
         .andExpect(handler().methodName("findTopProjects"))
         .andExpect(status().isOk())

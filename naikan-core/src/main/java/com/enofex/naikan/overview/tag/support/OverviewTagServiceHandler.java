@@ -22,12 +22,12 @@ class OverviewTagServiceHandler implements OverviewTagService {
 
   @Override
   public Page<OverviewGroup> findAll(Filterable filterable, Pageable pageable) {
-    return overviewTagRepository.findAll(filterable, pageable);
+    return this.overviewTagRepository.findAll(filterable, pageable);
   }
 
   @Override
   public OverviewTopGroups findTopTags(long topN) {
-    return overviewTagRepository.findTopTags(topN);
+    return this.overviewTagRepository.findTopTags(topN);
   }
 
 }

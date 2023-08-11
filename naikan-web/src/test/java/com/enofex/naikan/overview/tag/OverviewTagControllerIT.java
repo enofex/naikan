@@ -26,13 +26,13 @@ class OverviewTagControllerIT {
 
   @BeforeEach
   void setUp() {
-    template.save(DeserializerFactory.newJsonDeserializer().of(Boms.validBom0asInputStream()),
+    this.template.save(DeserializerFactory.newJsonDeserializer().of(Boms.validBom0asInputStream()),
         "projects");
   }
 
   @Test
   void shouldFindAll() throws Exception {
-    mvc.perform(
+    this.mvc.perform(
             get("/api/overview/tags"))
         .andExpect(handler().methodName("findAll"))
         .andExpect(status().isOk())
@@ -42,7 +42,7 @@ class OverviewTagControllerIT {
 
   @Test
   void shouldFindOverviewTopTags() throws Exception {
-    mvc.perform(
+    this.mvc.perform(
             get("/api/overview/tags/top/5"))
         .andExpect(handler().methodName("findTopTags"))
         .andExpect(status().isOk())

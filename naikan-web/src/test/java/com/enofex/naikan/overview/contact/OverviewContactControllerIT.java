@@ -26,13 +26,13 @@ class OverviewContactControllerIT {
 
   @BeforeEach
   void setUp() {
-    template.save(DeserializerFactory.newJsonDeserializer().of(Boms.validBom0asInputStream()),
+    this.template.save(DeserializerFactory.newJsonDeserializer().of(Boms.validBom0asInputStream()),
         "projects");
   }
 
   @Test
   void shouldFindAll() throws Exception {
-    mvc.perform(get("/api/overview/contacts"))
+    this.mvc.perform(get("/api/overview/contacts"))
         .andExpect(handler().methodName("findAll"))
         .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))

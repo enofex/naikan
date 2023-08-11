@@ -24,32 +24,32 @@ class ProjectServiceHandler implements ProjectService {
 
   @Override
   public Page<Bom> findAll(Filterable filterable, Pageable pageable) {
-    return projectRepository.findAll(filterable, pageable);
+    return this.projectRepository.findAll(filterable, pageable);
   }
 
   @Override
   public ProjectFilter findFilter() {
-    return projectRepository.findFilter();
+    return this.projectRepository.findFilter();
   }
 
   @Override
   public Optional<Bom> findById(ProjectId id) {
-    return projectRepository.findById(id);
+    return this.projectRepository.findById(id);
   }
 
   @Override
   public boolean existsByProjectName(String projectName) {
-    return projectRepository.existsByProjectName(projectName);
+    return this.projectRepository.existsByProjectName(projectName);
   }
 
   @Override
   public Bom update(ProjectId id, Bom bom) {
-    return projectRepository.update(id, bom);
+    return this.projectRepository.update(id, bom);
   }
 
   @Override
   public Bom upsertByProjectName(Bom bom) {
-    return projectRepository.upsertByProjectName(bom);
+    return this.projectRepository.upsertByProjectName(bom);
   }
 
 }

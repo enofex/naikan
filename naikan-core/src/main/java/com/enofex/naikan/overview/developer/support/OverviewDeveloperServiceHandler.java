@@ -21,6 +21,6 @@ class OverviewDeveloperServiceHandler implements OverviewDeveloperService {
 
   @Override
   public Page<OverviewGroup> findAll(Filterable filterable, Pageable pageable) {
-    return overviewDeveloperRepository.findAll(filterable, pageable);
+    return this.overviewDeveloperRepository.findAll(filterable, pageable);
   }
 }

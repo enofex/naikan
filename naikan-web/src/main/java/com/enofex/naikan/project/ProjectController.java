@@ -34,44 +34,44 @@ class ProjectController {
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Page<Bom>> findAll(Filterable filterable, Pageable pageable) {
-    return ResponseEntity.ok(projectService.findAll(filterable, pageable));
+    return ResponseEntity.ok(this.projectService.findAll(filterable, pageable));
   }
 
   @GetMapping(params = "xlsx")
   public ModelAndView xlsxAll(Filterable filterable, Pageable pageable) {
-    List<Bom> boms = projectService.findAll(filterable, pageable).getContent();
+    List<Bom> boms = this.projectService.findAll(filterable, pageable).getContent();
     return new ModelAndView(new ProjectAllXlsxView(boms));
   }
 
   @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Bom> findById(@PathVariable ProjectId id) {
-    return projectService.findById(id)
+    return this.projectService.findById(id)
         .map(ResponseEntity::ok)
         .orElseGet(() -> ResponseEntity.notFound().build());
   }
 
   @GetMapping(params = "xlsx", value = "/{id}")
   public ModelAndView xlsx(@PathVariable ProjectId id) {
-    return projectService.findById(id)
+    return this.projectService.findById(id)
         .map(bom -> new ModelAndView(new ProjectXlsxView(bom)))
         .orElseGet(ModelAndView::new);
   }
 
   @GetMapping(value = "/filter", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<ProjectFilter> findFilter() {
-    return ResponseEntity.ok(projectService.findFilter());
+    return ResponseEntity.ok(this.projectService.findFilter());
   }
 
   @PatchMapping("/favorites")
   public ResponseEntity<Void> updateUserFavorites(@RequestBody String[] favorites,
       Authentication authentication) {
-    User user = administrationUserService.findByName(authentication.getName());
+    User user = this.administrationUserService.findByName(authentication.getName());
 
     if (user == null) {
       return ResponseEntity.notFound().build();
     }
 
-    administrationUserService.save(User.ofFavorites(user, favorites));
+    this.administrationUserService.save(User.ofFavorites(user, favorites));
 
     return ResponseEntity.noContent().build();
   }

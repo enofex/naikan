@@ -26,13 +26,13 @@ class OverviewDeveloperControllerIT {
 
   @BeforeEach
   void setUp() {
-    template.save(DeserializerFactory.newJsonDeserializer().of(Boms.validBom0asInputStream()),
+    this.template.save(DeserializerFactory.newJsonDeserializer().of(Boms.validBom0asInputStream()),
         "projects");
   }
 
   @Test
   void shouldFindAll() throws Exception {
-    mvc.perform(
+    this.mvc.perform(
             get("/api/overview/developers"))
         .andExpect(handler().methodName("findAll"))
         .andExpect(status().isOk())

@@ -68,9 +68,9 @@ final class ProjectAllXlsxView extends AbstractXlsxStreamingView {
   }
 
   private void writeRows(Sheet sheet) {
-    if (CollectionUtils.isNotEmpty(boms)) {
-      for (int r = 0, size = boms.size(); r < size; r++) {
-        Bom bom = boms.get(r);
+    if (CollectionUtils.isNotEmpty(this.boms)) {
+      for (int r = 0, size = this.boms.size(); r < size; r++) {
+        Bom bom = this.boms.get(r);
         Row row = sheet.createRow(r + 1);
 
         for (Entry<String, Function<Bom, String>> entry : COLUMNS.entrySet()) {

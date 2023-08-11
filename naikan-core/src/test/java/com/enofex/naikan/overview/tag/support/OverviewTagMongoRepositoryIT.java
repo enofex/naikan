@@ -27,14 +27,14 @@ class OverviewTagMongoRepositoryIT {
 
   @BeforeEach
   void setUp() {
-    repository = new OverviewTagMongoRepository(template);
-    template.save(DeserializerFactory.newJsonDeserializer().of(Boms.validBom0asInputStream()),
+    this.repository = new OverviewTagMongoRepository(this.template);
+    this.template.save(DeserializerFactory.newJsonDeserializer().of(Boms.validBom0asInputStream()),
         "projects");
   }
 
   @Test
   void shouldFindAll() {
-    Page<OverviewGroup> page = repository.findAll(
+    Page<OverviewGroup> page = this.repository.findAll(
         Filterable.emptySearch(), Pageable.ofSize(20));
 
     assertEquals(2, page.getContent().size());
@@ -42,7 +42,7 @@ class OverviewTagMongoRepositoryIT {
 
   @Test
   void shouldFindAllOverviewsWithSearch() {
-    Page<OverviewGroup> page = repository.findAll(
+    Page<OverviewGroup> page = this.repository.findAll(
         Filterable.of("intern"), Pageable.ofSize(20));
 
     assertEquals(1, page.getContent().size());
@@ -51,7 +51,7 @@ class OverviewTagMongoRepositoryIT {
 
   @Test
   void shouldFindTopTags() {
-    OverviewTopGroups groups = repository.findTopTags(5);
+    OverviewTopGroups groups = this.repository.findTopTags(5);
 
     assertEquals(2, groups.counts().size());
     assertEquals(2, groups.names().size());

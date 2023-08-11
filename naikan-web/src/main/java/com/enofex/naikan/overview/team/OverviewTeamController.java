@@ -29,11 +29,11 @@ class OverviewTeamController {
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Page<OverviewGroup>> findAll(Filterable filterable, Pageable pageable) {
-    return ResponseEntity.ok(overviewTeamService.findAll(filterable, pageable));
+    return ResponseEntity.ok(this.overviewTeamService.findAll(filterable, pageable));
   }
 
   @GetMapping(path = "/top/{topN}", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<OverviewTopGroups> findTopTeams(@PathVariable long topN) {
-    return ResponseEntity.ok(overviewTeamService.findTopTeams(topN));
+    return ResponseEntity.ok(this.overviewTeamService.findTopTeams(topN));
   }
 }

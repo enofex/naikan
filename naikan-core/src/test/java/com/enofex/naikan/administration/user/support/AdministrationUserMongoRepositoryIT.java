@@ -23,47 +23,47 @@ class AdministrationUserMongoRepositoryIT {
 
   @BeforeEach
   void setUp() {
-    repository = new AdministrationUserMongoRepository(template);
+    this.repository = new AdministrationUserMongoRepository(this.template);
   }
 
   @Test
   void shouldFindAll() {
-    repository.save(user());
+    this.repository.save(user());
 
-    assertEquals(1, repository.findAll(Filterable.emptySearch(),
+    assertEquals(1, this.repository.findAll(Filterable.emptySearch(),
         Pageable.ofSize(10)).getTotalElements());
 
-    assertEquals(0, repository.findAll(Filterable.of("do_not_exists"),
+    assertEquals(0, this.repository.findAll(Filterable.of("do_not_exists"),
         Pageable.ofSize(10)).getTotalElements());
 
-    assertEquals(1, repository.findAll(Filterable.of(user().name()),
+    assertEquals(1, this.repository.findAll(Filterable.of(user().name()),
         Pageable.ofSize(10)).getTotalElements());
   }
 
   @Test
   void shouldFindById() {
-    User savedUser = repository.save(user());
+    User savedUser = this.repository.save(user());
 
-    assertEquals(savedUser.id(), repository.findById(UserId.of(savedUser.id())).id());
+    assertEquals(savedUser.id(), this.repository.findById(UserId.of(savedUser.id())).id());
   }
 
   @Test
   void shouldFindByName() {
-    User savedUser = repository.save(user());
+    User savedUser = this.repository.save(user());
 
-    assertEquals(savedUser.name(), repository.findByName(savedUser.name()).name());
+    assertEquals(savedUser.name(), this.repository.findByName(savedUser.name()).name());
   }
 
   @Test
   void shouldDelete() {
-    User savedUser = repository.save(user());
+    User savedUser = this.repository.save(user());
 
-    assertEquals(1, repository.findAll(Filterable.emptySearch(),
+    assertEquals(1, this.repository.findAll(Filterable.emptySearch(),
         Pageable.ofSize(10)).getTotalElements());
 
-    repository.delete(UserId.of(savedUser.id()));
+    this.repository.delete(UserId.of(savedUser.id()));
 
-    assertEquals(0, repository.findAll(Filterable.emptySearch(),
+    assertEquals(0, this.repository.findAll(Filterable.emptySearch(),
         Pageable.ofSize(10)).getTotalElements());
   }
 

@@ -21,6 +21,6 @@ class OverviewIntegrationServiceHandler implements OverviewIntegrationService {
 
   @Override
   public Page<OverviewGroup> findAll(Filterable filterable, Pageable pageable) {
-    return overviewIntegrationRepository.findAll(filterable, pageable);
+    return this.overviewIntegrationRepository.findAll(filterable, pageable);
   }
 }

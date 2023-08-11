@@ -21,6 +21,6 @@ class OverviewContactServiceHandler implements OverviewContactService {
 
   @Override
   public Page<OverviewGroup> findAll(Filterable filterable, Pageable pageable) {
-    return overviewContactRepository.findAll(filterable, pageable);
+    return this.overviewContactRepository.findAll(filterable, pageable);
   }
 }
