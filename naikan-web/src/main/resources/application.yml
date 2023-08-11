@@ -31,7 +31,7 @@ server:
     session:
       timeout: 7200s
       cookie:
-        secure: true
+        secure: ${NAIKAN_SERVER_COOKIE_SECURE:false}
   compression:
     enabled: true
     mime-types:

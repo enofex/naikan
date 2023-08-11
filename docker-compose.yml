@@ -26,6 +26,9 @@ services:
     # - NAIKAN_LDAP_USERS_SEARCH_BASE=
     # - NAIKAN_LDAP_USERS_SEARCH_FILTER=
     #
+    # Server Properties
+    # - NAIKAN_SERVER_COOKIE_SECURE=false
+    #
     # Optional Cross-Origin Resource Sharing (CORS) Headers
     # - NAIKAN_CORS_ENABLED=true
     # - NAIKAN_CORS_ALLOW_ORIGIN=*
