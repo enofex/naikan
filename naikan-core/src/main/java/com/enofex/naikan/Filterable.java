@@ -19,19 +19,19 @@ public final class Filterable {
   }
 
   public String search() {
-    return this.search;
+    return search;
   }
 
   public boolean hasSearch() {
-    return this.search != null && !this.search.isEmpty();
+    return search != null && !search.isEmpty();
   }
 
   public Map<String, List<FilterMetadata>> filters() {
-    return this.filters;
+    return filters;
   }
 
   public boolean hasFilters() {
-    return this.filters != null && !this.filters.isEmpty();
+    return filters != null && !filters.isEmpty();
   }
 
   public static Filterable of(String search) {
@@ -92,12 +92,12 @@ public final class Filterable {
     }
 
     public String getName() {
-      return this.name;
+      return name;
     }
 
     @Override
     public String toString() {
-      return this.name;
+      return name;
     }
 
     public static FilterMatchMode of(String name) {

@@ -22,11 +22,11 @@ class AdministrationProjectServiceHandler implements AdministrationProjectServic
 
   @Override
   public Page<Project> findAll(Filterable filterable, Pageable pageable) {
-    return this.administrationRepository.findAll(filterable, pageable);
+    return administrationRepository.findAll(filterable, pageable);
   }
 
   @Override
   public long delete(ProjectId id) {
-    return this.administrationRepository.delete(id);
+    return administrationRepository.delete(id);
   }
 }

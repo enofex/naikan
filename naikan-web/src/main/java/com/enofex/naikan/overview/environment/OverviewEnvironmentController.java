@@ -29,11 +29,11 @@ class OverviewEnvironmentController {
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Page<OverviewGroup>> findAll(Filterable filterable, Pageable pageable) {
-    return ResponseEntity.ok(this.overviewEnvironmentService.findAll(filterable, pageable));
+    return ResponseEntity.ok(overviewEnvironmentService.findAll(filterable, pageable));
   }
 
   @GetMapping(path = "/top/{topN}", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<OverviewTopGroups> findTopEnvironments(@PathVariable long topN) {
-    return ResponseEntity.ok(this.overviewEnvironmentService.findTopEnvironments(topN));
+    return ResponseEntity.ok(overviewEnvironmentService.findTopEnvironments(topN));
   }
 }

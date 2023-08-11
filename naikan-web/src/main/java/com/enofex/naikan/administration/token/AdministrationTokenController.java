@@ -33,12 +33,12 @@ class AdministrationTokenController {
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Page<Token>> findAll(Filterable filterable, Pageable pageable) {
-    return ResponseEntity.ok(this.administrationTokenService.findAll(filterable, pageable));
+    return ResponseEntity.ok(administrationTokenService.findAll(filterable, pageable));
   }
 
   @PostMapping
   public ResponseEntity<String> save(@RequestBody(required = false) String description) {
-    Token newToken = this.administrationTokenService.save(description);
+    Token newToken = administrationTokenService.save(description);
 
     URI location = ServletUriComponentsBuilder
         .fromCurrentRequest()
@@ -51,7 +51,7 @@ class AdministrationTokenController {
 
   @DeleteMapping("/{id}")
   public ResponseEntity<Void> delete(@PathVariable TokenId id) {
-    return this.administrationTokenService.delete(id) > 0
+    return administrationTokenService.delete(id) > 0
         ? ResponseEntity.ok().build()
         : ResponseEntity.notFound().build();
   }

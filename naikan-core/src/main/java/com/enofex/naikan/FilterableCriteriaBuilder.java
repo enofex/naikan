@@ -26,11 +26,11 @@ public final class FilterableCriteriaBuilder {
   }
 
   public Criteria toFilters() {
-    if (this.filterable != null && this.filterable.hasFilters()) {
+    if (filterable != null && filterable.hasFilters()) {
       List<Criteria> ors = new ArrayList<>();
       List<Criteria> ands = new ArrayList<>();
 
-      this.filterable.filters().forEach((key, filterMetadata) -> filterMetadata.forEach(meta -> {
+      filterable.filters().forEach((key, filterMetadata) -> filterMetadata.forEach(meta -> {
         if (meta.operator() == null || FilterOperator.AND == meta.operator()) {
           ands.add(FILTER_CRITERIA.get(meta.matchMode()).apply(meta));
         } else if (FilterOperator.OR == meta.operator()) {
@@ -54,10 +54,10 @@ public final class FilterableCriteriaBuilder {
   }
 
   public Criteria toSearch(List<String> fields) {
-    if (this.filterable != null && this.filterable.hasSearch()) {
+    if (filterable != null && filterable.hasSearch()) {
       return new Criteria().orOperator(fields
           .stream()
-          .map(field -> Criteria.where(field).regex(this.filterable.search(), "i"))
+          .map(field -> Criteria.where(field).regex(filterable.search(), "i"))
           .toList());
     }
 

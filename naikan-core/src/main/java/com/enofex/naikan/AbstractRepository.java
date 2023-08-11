@@ -35,11 +35,11 @@ public abstract class AbstractRepository {
   }
 
   public MongoTemplate template() {
-    return this.template;
+    return template;
   }
 
   public String collectionName() {
-    return this.collectionName;
+    return collectionName;
   }
 
   public <S> Page<S> findAll(Class<S> clazz, List<AggregationOperation> operations,
@@ -74,9 +74,9 @@ public abstract class AbstractRepository {
       query.addCriteria(criteria);
     }
 
-    List<S> result = this.template.find(query, clazz, this.collectionName);
+    List<S> result = template.find(query, clazz, collectionName);
 
     return PageableExecutionUtils.getPage(result, pageable,
-        () -> this.template.count(Query.of(query).limit(-1).skip(-1), clazz, this.collectionName));
+        () -> template.count(Query.of(query).limit(-1).skip(-1), clazz, collectionName));
   }
 }

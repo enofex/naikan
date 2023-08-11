@@ -33,9 +33,9 @@ class AdministrationTokenControllerIT {
 
   @Test
   void shouldFindAll() throws Exception {
-    this.template.save(token(), "tokens");
+    template.save(token(), "tokens");
 
-    this.mvc.perform(
+    mvc.perform(
             get("/api/administration/tokens"))
         .andExpect(handler().methodName("findAll"))
         .andExpect(status().isOk())
@@ -47,9 +47,9 @@ class AdministrationTokenControllerIT {
 
   @Test
   void shouldDelete() throws Exception {
-    Token savedToken = this.template.save(token(), "tokens");
+    Token savedToken = template.save(token(), "tokens");
 
-    this.mvc.perform(
+    mvc.perform(
             delete("/api/administration/tokens/" + savedToken.id())
                 .with(csrf()))
         .andExpect(handler().methodName("delete"))
@@ -58,7 +58,7 @@ class AdministrationTokenControllerIT {
 
   @Test
   void shouldNotDelete() throws Exception {
-    this.mvc.perform(
+    mvc.perform(
             delete("/api/administration/tokens/not-exist")
                 .with(csrf()))
         .andExpect(handler().methodName("delete"))
@@ -67,11 +67,11 @@ class AdministrationTokenControllerIT {
 
   @Test
   void shouldSave() throws Exception {
-    this.mvc.perform(
+    mvc.perform(
             post("/api/administration/tokens")
                 .with(csrf())
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(this.mapper.writeValueAsString(token())))
+                .content(mapper.writeValueAsString(token())))
         .andExpect(handler().methodName("save"))
         .andExpect(status().isCreated())
         .andExpect(redirectedUrlPattern("http://localhost/api/administration/tokens/*"));

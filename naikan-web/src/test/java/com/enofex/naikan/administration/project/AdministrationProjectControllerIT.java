@@ -30,11 +30,11 @@ class AdministrationProjectControllerIT {
 
   @Test
   void shouldFindAll() throws Exception {
-    Bom savedBom = this.template.save(
+    Bom savedBom = template.save(
         DeserializerFactory.newJsonDeserializer().of(validBom0asInputStream()),
         "projects");
 
-    this.mvc.perform(
+    mvc.perform(
             get("/api/administration/projects"))
         .andExpect(handler().methodName("findAll"))
         .andExpect(status().isOk())
@@ -45,11 +45,11 @@ class AdministrationProjectControllerIT {
 
   @Test
   void shouldDelete() throws Exception {
-    Bom savedBom = this.template.save(
+    Bom savedBom = template.save(
         DeserializerFactory.newJsonDeserializer().of(validBom0asInputStream()),
         "projects");
 
-    this.mvc.perform(
+    mvc.perform(
             delete("/api/administration/projects/" + savedBom.id())
                 .with(csrf()))
         .andExpect(handler().methodName("delete"))
@@ -58,7 +58,7 @@ class AdministrationProjectControllerIT {
 
   @Test
   void shouldNotDelete() throws Exception {
-    this.mvc.perform(
+    mvc.perform(
             delete("/api/administration/projects/not-exist")
                 .with(csrf()))
         .andExpect(handler().methodName("delete"))

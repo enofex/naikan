@@ -22,31 +22,31 @@ class AdministrationUserServiceHandler implements AdministrationUserService {
 
   @Override
   public Page<User> findAll(Filterable filterable, Pageable pageable) {
-    return this.administrationUserRepository.findAll(filterable, pageable);
+    return administrationUserRepository.findAll(filterable, pageable);
   }
 
   @Override
   public User findById(UserId id) {
-    return this.administrationUserRepository.findById(id);
+    return administrationUserRepository.findById(id);
   }
 
   @Override
   public User findByName(String name) {
-    return this.administrationUserRepository.findByName(name);
+    return administrationUserRepository.findByName(name);
   }
 
   @Override
   public User save(User user) {
-    return this.administrationUserRepository.save(user);
+    return administrationUserRepository.save(user);
   }
 
   @Override
   public long delete(UserId id) {
-    return this.administrationUserRepository.delete(id);
+    return administrationUserRepository.delete(id);
   }
 
   @Override
   public long count() {
-    return this.administrationUserRepository.count();
+    return administrationUserRepository.count();
   }
 }

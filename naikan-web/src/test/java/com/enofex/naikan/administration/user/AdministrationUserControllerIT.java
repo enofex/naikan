@@ -32,9 +32,9 @@ class AdministrationUserControllerIT {
 
   @Test
   void shouldFindAll() throws Exception {
-    this.template.save(user(), "users");
+    template.save(user(), "users");
 
-    this.mvc.perform(
+    mvc.perform(
             get("/api/administration/users"))
         .andExpect(handler().methodName("findAll"))
         .andExpect(status().isOk())
@@ -46,11 +46,11 @@ class AdministrationUserControllerIT {
 
   @Test
   void shouldUpdateAuthorities() throws Exception {
-    User saveUser = this.template.save(user(), "users");
-    String authorities = this.mapper.writeValueAsString(
+    User saveUser = template.save(user(), "users");
+    String authorities = mapper.writeValueAsString(
         new String[]{AuthorityType.ROLE_ADMIN.getAuthority()});
 
-    this.mvc.perform(
+    mvc.perform(
             patch("/api/administration/users/" + saveUser.id())
                 .with(csrf())
                 .contentType(MediaType.APPLICATION_JSON)
@@ -61,10 +61,10 @@ class AdministrationUserControllerIT {
 
   @Test
   void shouldNotUpdateAuthorities() throws Exception {
-    String authorities = this.mapper.writeValueAsString(
+    String authorities = mapper.writeValueAsString(
         new String[]{AuthorityType.ROLE_ADMIN.getAuthority()});
 
-    this.mvc.perform(
+    mvc.perform(
             patch("/api/administration/users/not-exist")
                 .with(csrf())
                 .contentType(MediaType.APPLICATION_JSON)
@@ -75,9 +75,9 @@ class AdministrationUserControllerIT {
 
   @Test
   void shouldDelete() throws Exception {
-    User savedUser = this.template.save(user(), "users");
+    User savedUser = template.save(user(), "users");
 
-    this.mvc.perform(
+    mvc.perform(
             delete("/api/administration/users/" + savedUser.id())
                 .with(csrf()))
         .andExpect(handler().methodName("delete"))
@@ -86,7 +86,7 @@ class AdministrationUserControllerIT {
 
   @Test
   void shouldNotDelete() throws Exception {
-    this.mvc.perform(
+    mvc.perform(
             delete("/api/administration/users/not-exist")
                 .with(csrf()))
         .andExpect(handler().methodName("delete"))

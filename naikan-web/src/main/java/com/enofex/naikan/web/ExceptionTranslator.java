@@ -20,7 +20,7 @@ class ExceptionTranslator {
     ResponseStatus responseStatus = ex != null
         ? AnnotationUtils.findAnnotation(ex.getClass(), ResponseStatus.class)
         : null;
-    this.logger.warn(ex);
+    logger.warn(ex);
 
     if (responseStatus != null) {
       return ProblemDetail.forStatus(responseStatus.value());

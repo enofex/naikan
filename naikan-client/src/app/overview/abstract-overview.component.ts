@@ -47,10 +47,9 @@ export abstract class AbstractOverviewComponent<T> implements OnDestroy, OnInit 
   expand(): void {
     if (this.expandedRows && Object.keys(this.expandedRows).length) {
       this.expandedRows = {};
-    } else {
-      for (const group of this.page?.content) {
+    } else if (this.page) {
+      for (const group of this.page.content) {
         this.expandedRows[group['uuid']] = true;
-
       }
     }
   }

@@ -20,6 +20,6 @@ class DeploymentServiceHandler implements DeploymentService {
 
   @Override
   public Bom save(ProjectId id, Deployment deployment) {
-    return this.deploymentRepository.save(id, deployment);
+    return deploymentRepository.save(id, deployment);
   }
 }

@@ -22,12 +22,12 @@ class OverviewEnvironmentServiceHandler implements OverviewEnvironmentService {
 
   @Override
   public Page<OverviewGroup> findAll(Filterable filterable, Pageable pageable) {
-    return this.overviewEnvironmentRepository.findAll(filterable, pageable);
+    return overviewEnvironmentRepository.findAll(filterable, pageable);
   }
 
   @Override
   public OverviewTopGroups findTopEnvironments(long topN) {
-    return this.overviewEnvironmentRepository.findTopEnvironments(topN);
+    return overviewEnvironmentRepository.findTopEnvironments(topN);
   }
 
 }

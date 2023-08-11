@@ -26,13 +26,13 @@ class OverviewTechnologyControllerIT {
 
   @BeforeEach
   void setUp() {
-    this.template.save(DeserializerFactory.newJsonDeserializer().of(Boms.validBom0asInputStream()),
+    template.save(DeserializerFactory.newJsonDeserializer().of(Boms.validBom0asInputStream()),
         "projects");
   }
 
   @Test
   void shouldFindAll() throws Exception {
-    this.mvc.perform(
+    mvc.perform(
             get("/api/overview/technologies"))
         .andExpect(handler().methodName("findAll"))
         .andExpect(status().isOk())
@@ -42,7 +42,7 @@ class OverviewTechnologyControllerIT {
 
   @Test
   void shouldFindOverviewTopTechnologies() throws Exception {
-    this.mvc.perform(
+    mvc.perform(
             get("/api/overview/technologies/top/5"))
         .andExpect(handler().methodName("findTopTechnologies"))
         .andExpect(status().isOk())

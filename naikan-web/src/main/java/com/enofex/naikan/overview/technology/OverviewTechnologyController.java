@@ -28,11 +28,11 @@ class OverviewTechnologyController {
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Page<TechnologyGroup>> findAll(Filterable filterable, Pageable pageable) {
-    return ResponseEntity.ok(this.overviewTechnologyService.findAll(filterable, pageable));
+    return ResponseEntity.ok(overviewTechnologyService.findAll(filterable, pageable));
   }
 
   @GetMapping(path = "/top/{topN}", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<OverviewTopGroups> findTopTechnologies(@PathVariable long topN) {
-    return ResponseEntity.ok(this.overviewTechnologyService.findTopTechnologies(topN));
+    return ResponseEntity.ok(overviewTechnologyService.findTopTechnologies(topN));
   }
 }

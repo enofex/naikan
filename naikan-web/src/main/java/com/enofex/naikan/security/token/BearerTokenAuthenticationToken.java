@@ -18,11 +18,11 @@ final class BearerTokenAuthenticationToken extends AbstractAuthenticationToken {
 
   @Override
   public Object getCredentials() {
-    return this.token;
+    return token;
   }
 
   @Override
   public Object getPrincipal() {
-    return this.token;
+    return token;
   }
 }

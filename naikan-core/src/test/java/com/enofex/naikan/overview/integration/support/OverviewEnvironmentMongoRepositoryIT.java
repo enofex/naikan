@@ -25,14 +25,14 @@ class OverviewEnvironmentMongoRepositoryIT {
 
   @BeforeEach
   void setUp() {
-    this.repository = new OverviewIntegrationMongoRepository(this.template);
-    this.template.save(DeserializerFactory.newJsonDeserializer().of(Boms.validBom0asInputStream()),
+    repository = new OverviewIntegrationMongoRepository(template);
+    template.save(DeserializerFactory.newJsonDeserializer().of(Boms.validBom0asInputStream()),
         "projects");
   }
 
   @Test
   void shouldFindAll() {
-    Page<OverviewGroup> page = this.repository.findAll(
+    Page<OverviewGroup> page = repository.findAll(
         Filterable.emptySearch(), Pageable.ofSize(20));
 
     assertEquals(5, page.getContent().size());
@@ -40,7 +40,7 @@ class OverviewEnvironmentMongoRepositoryIT {
 
   @Test
   void shouldFindAllOverviewsWithSearch() {
-    Page<OverviewGroup> page = this.repository.findAll(
+    Page<OverviewGroup> page = repository.findAll(
         Filterable.of("DependencyTrack"), Pageable.ofSize(20));
 
     assertEquals(1, page.getContent().size());

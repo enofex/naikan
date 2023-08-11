@@ -16,16 +16,16 @@ class UserTest {
 
   @BeforeEach
   void setUp() {
-    this.user = new User("123", "John Doe", List.of("ROLE_USER"), List.of("Book1", "Book2"));
+    user = new User("123", "John Doe", List.of("ROLE_USER"), List.of("Book1", "Book2"));
   }
 
   @Test
   void shouldCreateUserWithIdNameAuthoritiesAndFavorites() {
     assertAll(
-        () -> assertEquals("123", this.user.id()),
-        () -> assertEquals("John Doe", this.user.name()),
-        () -> assertEquals(List.of("ROLE_USER"), this.user.authorities()),
-        () -> assertEquals(List.of("Book1", "Book2"), this.user.favorites())
+        () -> assertEquals("123", user.id()),
+        () -> assertEquals("John Doe", user.name()),
+        () -> assertEquals(List.of("ROLE_USER"), user.authorities()),
+        () -> assertEquals(List.of("Book1", "Book2"), user.favorites())
     );
   }
 

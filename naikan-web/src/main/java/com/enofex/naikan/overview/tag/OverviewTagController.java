@@ -30,11 +30,11 @@ class OverviewTagController {
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Page<OverviewGroup>> findAll(Filterable filterable, Pageable pageable) {
-    return ResponseEntity.ok(this.overviewTagService.findAll(filterable, pageable));
+    return ResponseEntity.ok(overviewTagService.findAll(filterable, pageable));
   }
 
   @GetMapping(path = "/top/{topN}", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<OverviewTopGroups> findTopTags(@PathVariable long topN) {
-    return ResponseEntity.ok(this.overviewTagService.findTopTags(topN));
+    return ResponseEntity.ok(overviewTagService.findTopTags(topN));
   }
 }

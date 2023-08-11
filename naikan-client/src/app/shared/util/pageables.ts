@@ -23,9 +23,9 @@ export class Pageables {
       }
 
       if (event.multiSortMeta && event.multiSortMeta.length > 0) {
-        for (let i = 0; i < event.multiSortMeta.length; i++) {
-          params = params.append('sort', event.multiSortMeta[i].field + ',' + (event.multiSortMeta[i].order === 1 ? 'asc' : 'desc'));
-        }
+        event.multiSortMeta.forEach(item => {
+          params = params.append('sort', item.field + ',' + (item.order === 1 ? 'asc' : 'desc'));
+        });
       } else {
         if (event.sortField && event.sortField.length > 0) {
           params = params.append('sort', event.sortField + ',' + (event.sortOrder === 1 ? 'asc' : 'desc'));

@@ -27,8 +27,8 @@ class CorsFilterConfiguration {
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 
     if (configuration != null) {
-      if (this.logger.isDebugEnabled()) {
-        this.logger.debug("Registering CORS filter");
+      if (logger.isDebugEnabled()) {
+        logger.debug("Registering CORS filter");
       }
       source.registerCorsConfiguration("/**", configuration.applyPermitDefaultValues());
     }

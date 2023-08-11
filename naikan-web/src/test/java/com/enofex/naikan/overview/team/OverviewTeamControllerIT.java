@@ -26,13 +26,13 @@ class OverviewTeamControllerIT {
 
   @BeforeEach
   void setUp() {
-    this.template.save(DeserializerFactory.newJsonDeserializer().of(Boms.validBom0asInputStream()),
+    template.save(DeserializerFactory.newJsonDeserializer().of(Boms.validBom0asInputStream()),
         "projects");
   }
 
   @Test
   void shouldFindAll() throws Exception {
-    this.mvc.perform(
+    mvc.perform(
             get("/api/overview/teams"))
         .andExpect(handler().methodName("findAll"))
         .andExpect(status().isOk())
@@ -42,7 +42,7 @@ class OverviewTeamControllerIT {
 
   @Test
   void shouldFindOverviewTopTeams() throws Exception {
-    this.mvc.perform(
+    mvc.perform(
             get("/api/overview/teams/top/5"))
         .andExpect(handler().methodName("findTopTeams"))
         .andExpect(status().isOk())

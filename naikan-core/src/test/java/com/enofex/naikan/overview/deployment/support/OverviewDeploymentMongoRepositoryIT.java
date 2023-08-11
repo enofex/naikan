@@ -26,14 +26,14 @@ class OverviewDeploymentMongoRepositoryIT {
 
   @BeforeEach
   void setUp() {
-    this.repository = new OverviewDeploymentMongoRepository(this.template);
-    this.template.save(DeserializerFactory.newJsonDeserializer().of(Boms.validBom0asInputStream()),
+    repository = new OverviewDeploymentMongoRepository(template);
+    template.save(DeserializerFactory.newJsonDeserializer().of(Boms.validBom0asInputStream()),
         "projects");
   }
 
   @Test
   void shouldFindAll() {
-    Page<OverviewDeployment> page = this.repository.findAll(
+    Page<OverviewDeployment> page = repository.findAll(
         Filterable.emptySearch(), Pageable.ofSize(20));
 
     assertEquals(2, page.getContent().size());
@@ -41,7 +41,7 @@ class OverviewDeploymentMongoRepositoryIT {
 
   @Test
   void shouldFindAllOverviewsWithSearch() {
-    Page<OverviewDeployment> page = this.repository.findAll(
+    Page<OverviewDeployment> page = repository.findAll(
         Filterable.of("Staging"), Pageable.ofSize(20));
 
     assertEquals(1, page.getContent().size());
@@ -49,7 +49,7 @@ class OverviewDeploymentMongoRepositoryIT {
 
   @Test
   void shouldFindTopProjects() {
-    OverviewTopGroups groups = this.repository.findTopProjects(5);
+    OverviewTopGroups groups = repository.findTopProjects(5);
 
     assertEquals(1, groups.counts().size());
     assertEquals(1, groups.names().size());

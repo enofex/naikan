@@ -22,11 +22,11 @@ class OverviewDeploymentServiceHandler implements OverviewDeploymentService {
 
   @Override
   public Page<OverviewDeployment> findAll(Filterable filterable, Pageable pageable) {
-    return this.overviewDeploymentRepository.findAll(filterable, pageable);
+    return overviewDeploymentRepository.findAll(filterable, pageable);
   }
 
   @Override
   public OverviewTopGroups findTopProjects(long topN) {
-    return this.overviewDeploymentRepository.findTopProjects(topN);
+    return overviewDeploymentRepository.findTopProjects(topN);
   }
 }

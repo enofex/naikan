@@ -27,11 +27,11 @@ class ProjectControllerIT {
 
   @Test
   void shouldFindAll() throws Exception {
-    Bom savedBom = this.template.save(
+    Bom savedBom = template.save(
         DeserializerFactory.newJsonDeserializer().of(validBom0asInputStream()),
         "projects");
 
-    this.mvc.perform(
+    mvc.perform(
             get("/api/projects"))
         .andExpect(handler().methodName("findAll"))
         .andExpect(status().isOk())
@@ -42,11 +42,11 @@ class ProjectControllerIT {
 
   @Test
   void shouldFindById() throws Exception {
-    Bom savedBom = this.template.save(
+    Bom savedBom = template.save(
         DeserializerFactory.newJsonDeserializer().of(validBom0asInputStream()),
         "projects");
 
-    this.mvc.perform(
+    mvc.perform(
             get("/api/projects/" + savedBom.id()))
         .andExpect(handler().methodName("findById"))
         .andExpect(status().isOk())
@@ -56,7 +56,7 @@ class ProjectControllerIT {
 
   @Test
   void shouldNotFindById() throws Exception {
-    this.mvc.perform(
+    mvc.perform(
             get("/api/projects/1234"))
         .andExpect(handler().methodName("findById"))
         .andExpect(status().isNotFound());
@@ -64,11 +64,11 @@ class ProjectControllerIT {
 
   @Test
   void shouldFindFilter() throws Exception {
-    this.template.save(
+    template.save(
         DeserializerFactory.newJsonDeserializer().of(validBom0asInputStream()),
         "projects");
 
-    this.mvc.perform(
+    mvc.perform(
             get("/api/projects/filter"))
         .andExpect(handler().methodName("findFilter"))
         .andExpect(status().isOk())
@@ -78,7 +78,7 @@ class ProjectControllerIT {
 
   @Test
   void shouldExportAllToXlsx() throws Exception {
-    this.mvc.perform(
+    mvc.perform(
             get("/api/projects?xlsx")
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(csrf()))
@@ -88,11 +88,11 @@ class ProjectControllerIT {
 
   @Test
   void shouldExportToXlsx() throws Exception {
-    Bom savedBom = this.template.save(
+    Bom savedBom = template.save(
         DeserializerFactory.newJsonDeserializer().of(validBom0asInputStream()),
         "projects");
 
-    this.mvc.perform(
+    mvc.perform(
             get("/api/projects/%s?xlsx".formatted(savedBom.id()))
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(csrf()))

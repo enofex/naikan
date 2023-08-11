@@ -22,11 +22,11 @@ class OverviewTeamServiceHandler implements OverviewTeamService {
 
   @Override
   public Page<OverviewGroup> findAll(Filterable filterable, Pageable pageable) {
-    return this.overviewTeamRepository.findAll(filterable, pageable);
+    return overviewTeamRepository.findAll(filterable, pageable);
   }
 
   @Override
   public OverviewTopGroups findTopTeams(long topN) {
-    return this.overviewTeamRepository.findTopTeams(topN);
+    return overviewTeamRepository.findTopTeams(topN);
   }
 }

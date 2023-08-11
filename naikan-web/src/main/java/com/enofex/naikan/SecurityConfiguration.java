@@ -116,19 +116,19 @@ class SecurityConfiguration {
     AuthenticationProvider ldapAuthenticationProvider(LdapContextSource contextSource) {
       AbstractLdapAuthenticationProvider provider;
 
-      if (StringUtils.isBlank(this.properties.security().ldap().activeDirectoryDomain())) {
+      if (StringUtils.isBlank(properties.security().ldap().activeDirectoryDomain())) {
         provider = new LdapAuthenticationProvider(authenticator(contextSource));
       } else {
         provider = new ActiveDirectoryLdapAuthenticationProvider(
-            this.properties.security().ldap().activeDirectoryDomain(),
+            properties.security().ldap().activeDirectoryDomain(),
             contextSource.getUrls()[0]
         );
 
         ((ActiveDirectoryLdapAuthenticationProvider) provider).setSearchFilter(
-            this.properties.security().ldap().userSearchFilter());
+            properties.security().ldap().userSearchFilter());
       }
 
-      provider.setUserDetailsContextMapper(new DefaultLdapUserDetailsMapper(this.userService));
+      provider.setUserDetailsContextMapper(new DefaultLdapUserDetailsMapper(userService));
 
       return provider;
     }
@@ -136,16 +136,16 @@ class SecurityConfiguration {
     private LdapAuthenticator authenticator(BaseLdapPathContextSource contextSource) {
       AbstractLdapAuthenticator authenticator = new BindAuthenticator(contextSource);
 
-      if (StringUtils.isNotEmpty(this.properties.security().ldap().userDnPatterns())) {
+      if (StringUtils.isNotEmpty(properties.security().ldap().userDnPatterns())) {
         authenticator.setUserDnPatterns(
-            new String[]{this.properties.security().ldap().userDnPatterns()}
+            new String[]{properties.security().ldap().userDnPatterns()}
         );
-      } else if (StringUtils.isNotEmpty(this.properties.security().ldap().userSearchFilter())) {
+      } else if (StringUtils.isNotEmpty(properties.security().ldap().userSearchFilter())) {
         authenticator.setUserSearch(
             new FilterBasedLdapUserSearch(
-                StringUtils.isNotBlank(this.properties.security().ldap().userSearchBase())
-                    ? this.properties.security().ldap().userSearchBase() : "",
-                this.properties.security().ldap().userSearchFilter(),
+                StringUtils.isNotBlank(properties.security().ldap().userSearchBase())
+                    ? properties.security().ldap().userSearchBase() : "",
+                properties.security().ldap().userSearchFilter(),
                 contextSource)
         );
       }
@@ -161,7 +161,7 @@ class SecurityConfiguration {
 
     @Bean
     AuthenticationSuccessHandler authenticationSuccessHandler() {
-      return new HttpStatusReturningAuthenticationSuccessHandler(this.userService);
+      return new HttpStatusReturningAuthenticationSuccessHandler(userService);
     }
 
     @Bean
@@ -196,7 +196,7 @@ class SecurityConfiguration {
               .anyRequest().permitAll()
           )
           .addFilterBefore(
-              new BearerTokenAuthenticationFilter(this.administrationTokenService),
+              new BearerTokenAuthenticationFilter(administrationTokenService),
               UsernamePasswordAuthenticationFilter.class
           );
 

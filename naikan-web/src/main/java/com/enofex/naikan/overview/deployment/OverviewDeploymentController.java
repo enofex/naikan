@@ -29,11 +29,11 @@ class OverviewDeploymentController {
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Page<OverviewDeployment>> findAll(Filterable filterable,
       Pageable pageable) {
-    return ResponseEntity.ok(this.overviewDeploymentService.findAll(filterable, pageable));
+    return ResponseEntity.ok(overviewDeploymentService.findAll(filterable, pageable));
   }
 
   @GetMapping(path = "/top/{topN}", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<OverviewTopGroups> findTopProjects(@PathVariable long topN) {
-    return ResponseEntity.ok(this.overviewDeploymentService.findTopProjects(topN));
+    return ResponseEntity.ok(overviewDeploymentService.findTopProjects(topN));
   }
 }

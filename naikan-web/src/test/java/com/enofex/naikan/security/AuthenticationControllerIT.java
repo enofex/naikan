@@ -25,12 +25,12 @@ class AuthenticationControllerIT {
 
   @BeforeEach
   void beforeEach() {
-    this.template.save(new User("user@company.com"), "users");
+    template.save(new User("user@company.com"), "users");
   }
 
   @Test
   void shouldReturnUser() throws Exception {
-    this.mvc.perform(
+    mvc.perform(
             get("/api/authenticated"))
         .andExpect(handler().methodName("authenticated"))
         .andExpect(status().isOk())
