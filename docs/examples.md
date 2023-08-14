@@ -25,8 +25,8 @@
   "timestamp": "2022-12-29T08:29:10.079226",
   "project": {
     "name": "Naikan I",
-    "inceptionYear" : "2003",
     "url": "https://naikan.io",
+    "inceptionYear" : "2003",
     "repository": "https://github.com/enofex/naikan",
     "packaging": "jar",
     "groupId": "com.enofex",
