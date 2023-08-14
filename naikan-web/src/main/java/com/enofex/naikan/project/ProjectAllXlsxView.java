@@ -22,6 +22,7 @@ final class ProjectAllXlsxView extends AbstractXlsxStreamingView {
     put("Timestamp", bom -> bom.timestamp() != null ? bom.timestamp().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME) :"");
     put("Name", bom -> bom.project().name());
     put("URL", bom -> bom.project().url());
+    put("Inception Year", bom -> bom.project().inceptionYear());
     put("Repository", bom -> bom.project().repository());
     put("Packaging", bom -> bom.project().packaging());
     put("Group", bom -> bom.project().groupId());

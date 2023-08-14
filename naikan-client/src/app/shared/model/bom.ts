@@ -20,6 +20,7 @@ export interface Bom {
 export interface Project {
   name?: string;
   url?: string;
+  inceptionYear?: string;
   repository?: string;
   packaging?: string;
   groupId?: string;

@@ -65,6 +65,7 @@ final class ProjectXlsxView extends AbstractXlsxStreamingView {
       row(sheet, "Project");
       row(sheet, "Name", this.bom.project().name());
       row(sheet, "URL", this.bom.project().url());
+      row(sheet, "Inception Year", this.bom.project().inceptionYear());
       row(sheet, "Repository", this.bom.project().repository());
       row(sheet, "Packaging", this.bom.project().packaging());
       row(sheet, "Group", this.bom.project().groupId());

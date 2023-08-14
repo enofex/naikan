@@ -8,6 +8,7 @@
     "project": {
       "name": "Naikan",
       "url": "https://naikan.io",
+      "inceptionYear": "2023",
       "repository": "https://github.com/enofex/naikan",
       "groupId": "io.naikan",
       "artifactId": "naikan-core",

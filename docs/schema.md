@@ -36,6 +36,9 @@ or the last one below.
         "name": {
           "type": "string"
         },
+        "inceptionYear": {
+          "type": "string"
+        },
         "url": {
           "type": "string"
         },
