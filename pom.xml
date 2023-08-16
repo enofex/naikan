@@ -23,7 +23,7 @@
     <java.version>20</java.version>
 
     <naikan-model.version>0.1.5</naikan-model.version>
-    <naikan-test.version>0.0.6</naikan-test.version>
+    <naikan-test.version>0.0.7</naikan-test.version>
     <apache.poi.version>5.2.3</apache.poi.version>
     <archunit.version>1.1.0</archunit.version>
     <maven-enforcer-plugin.version>3.3.0</maven-enforcer-plugin.version>
