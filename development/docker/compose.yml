@@ -16,7 +16,7 @@ services:
     command: --copy-service
 
   mongodb:
-    image: mongo:6
+    image: mongo:5
     container_name: mongodb
     hostname: mongodb
     environment:
