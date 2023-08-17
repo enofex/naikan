@@ -57,7 +57,7 @@ The [naikan-model](https://github.com/enofex/naikan-model) module provides the d
 ### Naikan Test Module
 The [naikan-test](https://github.com/enofex/naikan-test) module provides a set of tools and utilities for testing this application. 
 
-### Naikan Maven Plugin Module (WIP, comming end of august)
+### Naikan Maven Plugin Module
 The [naikan-maven-plugin](https://github.com/enofex/naikan-maven-plugin) module provides a maven plugin, which allows to enrich or update the Naikan model automatically from POM, custom provider or a Naikan BOM.
 
 ## Build on Open Source Software
