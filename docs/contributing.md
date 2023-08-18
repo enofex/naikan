@@ -82,10 +82,6 @@ utilities for testing this application.
 
 ### *Naikan* Maven Plugin Module
 
-!!! note "Work in progress"
-
-    The Maven Plugin Module is not published at the moment.
-
 The [naikan-maven-plugin](https://github.com/enofex/naikan-maven-plugin) module provides a maven
 plugin, which allows to enrich or update the *Naikan* model automatically.
 
