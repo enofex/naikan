@@ -27,6 +27,9 @@ monitoring and analysis purposes.
 
 * **JSON File Configuration (Optional)**: Create a JSON file that contains the necessary project information you want to override from the generated file created by the Naikan Maven Plugin.The JSON file should follow a predefined structure to ensure compatibility with Naikan's data
   requirements.
+  
+* **Custom Provider (Optional)**: One of the standout features of the Naikan Maven Plugin is its support for custom providers. Developers have the freedom to define their own data providers, allowing for tailored integration. This extensibility enables the plugin to adapt to the unique needs and structures of different projects. Additionally, the plugin offers the capability to fine-tune the order in which these custom providers are employed. 
+
 
 * **CI/CD Pipeline Setup**: Configure a CI/CD pipeline using your preferred tool (e.g., Jenkins,
   GitLab CI/CD, Bamboo, Travis CI). Define the necessary pipeline stages and steps to ensure the
