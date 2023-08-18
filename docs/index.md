@@ -23,10 +23,10 @@ monitoring and analysis purposes.
 
 ## Workflow Steps
 
-* **JSON File Configuration**: Create a JSON file that contains the necessary project information.
-  The JSON file should follow a predefined structure to ensure compatibility with Naikan's data
-  requirements. Include relevant details such as project name, key metrics, status updates, and any
-  other pertinent information.
+* **Naikan Maven Plugin Configuration**: Begin by configuring the Maven Naikan Plugin within your project's Maven POM file. This Plugin will extract all information automatically and created a JSON file you can push to Naikan. 
+
+* **JSON File Configuration (Optional)**: Create a JSON file that contains the necessary project information you want to override from the generated file created by the Naikan Maven Plugin.The JSON file should follow a predefined structure to ensure compatibility with Naikan's data
+  requirements.
 
 * **CI/CD Pipeline Setup**: Configure a CI/CD pipeline using your preferred tool (e.g., Jenkins,
   GitLab CI/CD, Bamboo, Travis CI). Define the necessary pipeline stages and steps to ensure the
