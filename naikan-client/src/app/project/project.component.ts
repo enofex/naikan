@@ -110,12 +110,14 @@ export class ProjectComponent implements OnInit {
     this.viewMenuItems = [
       {
         id: "0",
-        label: 'Overview'
+        label: 'Overview',
+        icon: 'pi pi-eye'
       },
       {
         id: "1",
         label: 'Condensed',
-      },
+        icon: 'pi pi-bars'
+      }
     ];
     this.viewMenuActiveItem = this.viewMenuItems[0];
   }
