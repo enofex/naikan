@@ -50,8 +50,28 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
   bom: Bom;
   groupedDeploymentsPerVersion: GroupedDeploymentPerVersion[];
   latestVersionPerEnvironment: LatestVersionPerEnvironment[];
-  chartData = {labels: [], datasets: []} as any;
-  chartOptions: any;
+  chart= {
+    data: {} as any,
+    options: {
+      plugins: {
+        legend: {
+          display: false
+        },
+        title: {
+          display: true,
+          text: 'Top 5 Environments'
+        }
+      },
+      scale: {
+        ticks: {
+          precision: 0
+        }
+      },
+      animation: false,
+      indexAxis: 'y'
+    }
+  }
+
   subscription!: Subscription;
   expandedVersionRows = {};
   items: MenuItem[];
@@ -142,7 +162,7 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
         environments[environment].push(deployment);
       });
 
-      this.chartData = {
+      this.chart.data = {
         labels: Object.keys(environments).slice(0, 5),
         datasets: [
           {
@@ -154,25 +174,6 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
         ]
       };
     }
-
-    this.chartOptions = {
-      plugins: {
-        legend: {
-          display: false
-        },
-        title: {
-          display: true,
-          text: 'Top 5 Environments'
-        }
-      },
-      scale: {
-        ticks: {
-          precision: 0
-        }
-      },
-      animation: false,
-      indexAxis: 'y'
-    };
   }
 
   private initGroupedDeploymentsPerVersion(): void {

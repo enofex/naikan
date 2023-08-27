@@ -632,7 +632,7 @@ implementation "{{ bom.project?.groupId}}:{{ bom.project?.artifactId}}:{{ bom.pr
                   [disabled]="bom.deployments && bom.deployments.length === 0">
 
         <div class="card border-none px-0" *ngIf="bom.deployments?.length > 0">
-          <p-chart type="bar" height="200px" [data]="chartData" [options]="chartOptions">
+          <p-chart type="bar" height="200px" [data]="chart.data" [options]="chart.options">
           </p-chart>
         </div>
 
