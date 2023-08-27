@@ -14,29 +14,31 @@ export abstract class AbstractOverviewComponent<T> implements OnDestroy, OnInit 
   expandedRows = {};
   topN = 10;
 
-  chartData: any;
-  chartOptions = {
-    responsive: false,
-    maintainAspectRatio: false,
-    animation: false,
-    aspectRatio: 0.8,
-    barThickness: 20,
-    barPercentage: 0.6,
-    plugins: {
-      legend: {
-        display: false
+  chart= {
+    data: {} as any,
+    options: {
+      responsive: false,
+      maintainAspectRatio: false,
+      animation: false,
+      aspectRatio: 0.8,
+      barThickness: 20,
+      barPercentage: 0.6,
+      plugins: {
+        legend: {
+          display: false
+        },
+        title: {
+          display: true
+        }
       },
-      title: {
-        display: true
-      }
-    },
-    scale: {
-      ticks: {
-        precision: 0
-      }
-    },
-    indexAxis: 'y'
-  };
+      scale: {
+        ticks: {
+          precision: 0
+        }
+      },
+      indexAxis: 'y'
+    }
+  }
 
   protected constructor(private readonly layoutService: LayoutService) {
     this.subscription = this.layoutService.configUpdate$.subscribe(() => {
@@ -77,7 +79,7 @@ export abstract class AbstractOverviewComponent<T> implements OnDestroy, OnInit 
       const documentStyle = Charts.documentStyle();
       this.topN = data.names?.length;
 
-      this.chartData = {
+      this.chart.data = {
         labels: data.names,
         datasets: [
           {
@@ -89,7 +91,7 @@ export abstract class AbstractOverviewComponent<T> implements OnDestroy, OnInit 
         ]
       };
 
-      Object.assign(this.chartOptions.plugins.title, {'text': `Top ${this.topN} ${title}`});
+      Object.assign(this.chart.options.plugins.title, {'text': `Top ${this.topN} ${title}`});
     }
   }
 
