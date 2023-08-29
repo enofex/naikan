@@ -6,7 +6,6 @@ import {LayoutService} from '@naikan/layout/app.layout.service';
 import {
   Bom,
   Breadcrumb,
-  Charts,
   DateTimePipe,
   Deployment,
   NaikanTags,
@@ -67,7 +66,6 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
           precision: 0
         }
       },
-      animation: false,
       indexAxis: 'y'
     }
   }
@@ -150,7 +148,6 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
 
   private initChart(): void {
     if (this.bom?.deployments) {
-      const documentStyle = Charts.documentStyle();
       const environments = {} as any;
 
       this.bom.deployments.forEach(deployment => {
@@ -167,9 +164,7 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
         datasets: [
           {
             label: "Deployments",
-            data: Object.keys(environments).flatMap(environment => environments[environment].length).slice(0, 5),
-            backgroundColor: documentStyle,
-            borderColor: documentStyle,
+            data: Object.keys(environments).flatMap(environment => environments[environment].length).slice(0, 5)
           }
         ]
       };

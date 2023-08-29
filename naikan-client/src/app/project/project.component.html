@@ -37,8 +37,8 @@
       [paginator]="true"
       [lazy]="true"
       (onLazyLoad)="loadProjects($event)"
-      [alwaysShowPaginator]="false"
-      [rowsPerPageOptions]="[10, 25, 50, 100]"
+      [alwaysShowPaginator]="true"
+      [rowsPerPageOptions]="[10, 25, 50, 100, 500, 1000]"
       [sortField]="sortField"
       [sortOrder]="sortOrder"
       [defaultSortOrder]="1"
@@ -91,13 +91,28 @@
       </div>
     </ng-template>
 
+
     <ng-template pTemplate="header">
-      <tr *ngIf="viewMenuActiveItem.id === '1'" class="naikan-project-view-condensed-header"></tr>
+      <ng-container *ngIf="viewMenuActiveItem.id === '1'">
+        <tr class="naikan-project-view-condensed-header"></tr>
+      </ng-container>
+
+      <ng-container *ngIf="viewMenuActiveItem.id === '2'">
+        <div class="naikan-project-view-insights-header" [boms]="page?.content"></div>
+      </ng-container>
     </ng-template>
 
     <ng-template let-bom pTemplate="body">
-      <div *ngIf="viewMenuActiveItem.id === '0'" class="naikan-project-view-overview-body" [bom]="bom"></div>
-      <tr  *ngIf="viewMenuActiveItem.id === '1'" class="naikan-project-view-condensed-body" [bom]="bom"></tr>
+      <div *ngIf="viewMenuActiveItem.id === '0'"
+           class="naikan-project-view-overview-body"
+           [bom]="bom"></div>
+
+      <tr *ngIf="viewMenuActiveItem.id === '1'"
+          class="naikan-project-view-condensed-body"
+          [bom]="bom"></tr>
     </ng-template>
+
   </p-table>
+
+
 </div>

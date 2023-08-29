@@ -261,6 +261,7 @@ export class ProjectViewOverviewBody extends AbstractProjectView implements OnIn
   projectDeploymentsChart(deployments: Deployment[]): any {
     if (this.hasDeployments(this.bom.deployments)) {
       const documentStyle = Charts.documentStyle();
+      const documentStyleWithDefaultOpacity = Charts.documentStyleWithDefaultOpacity();
 
       const countsByMonth = deployments.reduce((acc, deployment) => {
         if (deployment.timestamp) {
@@ -276,10 +277,11 @@ export class ProjectViewOverviewBody extends AbstractProjectView implements OnIn
           {
             label: 'Projects',
             data: Object.values(countsByMonth),
-            fill: false,
-            backgroundColor: documentStyle,
+            fill: true,
+            backgroundColor: documentStyleWithDefaultOpacity,
             borderColor: documentStyle,
-            borderWidth: 1
+            borderWidth: 1,
+            pointStyle: false
           }
         ]
       };
@@ -336,7 +338,6 @@ export class ProjectViewOverviewBody extends AbstractProjectView implements OnIn
 
   private initChart(): void {
     this.chartOptions = {
-      animation: false,
       plugins: {
         legend: {
           display: false
