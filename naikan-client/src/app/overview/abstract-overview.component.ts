@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from "@angular/core";
 import {Subscription} from "rxjs";
-import {Charts, Page} from "@naikan/shared";
+import {Page} from "@naikan/shared";
 import {LayoutService} from "@naikan/layout/app.layout.service";
 import {OverviewTopGroups} from "./overview-top-groups";
 
@@ -14,7 +14,7 @@ export abstract class AbstractOverviewComponent<T> implements OnDestroy, OnInit 
   expandedRows = {};
   topN = 10;
 
-  chart= {
+  chart = {
     data: {} as any,
     options: {
       responsive: false,
@@ -76,7 +76,6 @@ export abstract class AbstractOverviewComponent<T> implements OnDestroy, OnInit 
 
   initChartData(data: OverviewTopGroups, title: string, label: string = "Projects") {
     if (data) {
-      const documentStyle = Charts.documentStyle();
       this.topN = data.names?.length;
 
       this.chart.data = {
@@ -85,8 +84,6 @@ export abstract class AbstractOverviewComponent<T> implements OnDestroy, OnInit 
           {
             label: label,
             data: data.counts,
-            backgroundColor: documentStyle,
-            borderColor: documentStyle
           }
         ]
       };

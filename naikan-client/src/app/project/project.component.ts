@@ -7,6 +7,7 @@ import {
   ProjectViewCondensedBody,
   ProjectViewCondensedHeader
 } from './project-view-condensed.component';
+import {ProjectViewInsightsHeader} from "./project-view-insights.component";
 import {AsyncPipe, DatePipe, NgClass, NgIf} from '@angular/common';
 import {DropdownModule} from 'primeng/dropdown';
 import {ButtonModule} from 'primeng/button';
@@ -22,7 +23,7 @@ import {TabMenuModule} from "primeng/tabmenu";
 @Component({
   templateUrl: './project.component.html',
   standalone: true,
-  imports: [TableModule, SharedModule, ProjectFilter, Search, ButtonModule, InputSwitchModule, DropdownModule, NgClass, ProjectViewOverviewBody, ProjectViewCondensedBody, ProjectViewCondensedHeader, InputSwitchModule, FormsModule, TooltipModule, AsyncPipe, BlockUIModule, NgIf, TabMenuModule],
+  imports: [TableModule, SharedModule, ProjectFilter, Search, ButtonModule, InputSwitchModule, DropdownModule, NgClass, ProjectViewOverviewBody, ProjectViewCondensedBody, ProjectViewCondensedHeader, InputSwitchModule, FormsModule, TooltipModule, AsyncPipe, BlockUIModule, NgIf, TabMenuModule, ProjectViewInsightsHeader],
   providers: [ProjectService, DatePipe]
 })
 export class ProjectComponent implements OnInit {
@@ -117,7 +118,12 @@ export class ProjectComponent implements OnInit {
         id: "1",
         label: 'Condensed',
         icon: 'pi pi-bars'
-      }
+      },
+      {
+        id: "2",
+        label: 'Insights',
+        icon: 'pi pi-chart-bar'
+      },
     ];
     this.viewMenuActiveItem = this.viewMenuItems[0];
   }
