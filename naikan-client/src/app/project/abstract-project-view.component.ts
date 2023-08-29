@@ -95,7 +95,6 @@ export abstract class AbstractProjectView implements OnInit {
     .subscribe();
   }
 
-
   isFavorite(id: string): boolean {
     return this.user.favorites?.includes(id);
   }
