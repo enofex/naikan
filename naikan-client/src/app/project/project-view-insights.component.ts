@@ -250,12 +250,17 @@ export class ProjectViewInsightsHeader extends AbstractProjectView implements On
       return;
     }
 
-    const documentStyle = Charts.documentStyle();
-    const documentStyleWithDefaultOpacity = Charts.documentStyleWithDefaultOpacity();
     const today = new Date();
     const twentyFourMonthsAgo = new Date(today.getFullYear(), today.getMonth() - ProjectViewInsightsHeader.LAST_MONTHS - 1, 1);
     const deploymentCounts = new Map<string, number>();
     let deployments = 0;
+
+    let currentMonth = new Date(twentyFourMonthsAgo);
+    for (let i = 0; i < ProjectViewInsightsHeader.LAST_MONTHS; i++) {
+      const yearMonth = `${currentMonth.getFullYear()}-${(currentMonth.getMonth() + 1).toString().padStart(2, '0')}`;
+      deploymentCounts.set(yearMonth, 0);
+      currentMonth.setMonth(currentMonth.getMonth() + 1);
+    }
 
     this._boms.forEach(bom => bom.deployments.forEach((deployment) => {
       if (deployment.timestamp) {
@@ -286,7 +291,7 @@ export class ProjectViewInsightsHeader extends AbstractProjectView implements On
         borderWidth: 1,
         fill: false,
         pointStyle: false,
-        borderColor: documentStyle,
+        borderColor: Charts.documentStyle(),
         borderDash: [5, 5]
       },
       {
@@ -294,8 +299,8 @@ export class ProjectViewInsightsHeader extends AbstractProjectView implements On
         borderWidth: 1,
         fill: true,
         pointStyle: false,
-        borderColor: documentStyle,
-        backgroundColor: documentStyleWithDefaultOpacity,
+        borderColor: Charts.documentStyle(),
+        backgroundColor: Charts.documentStyleWithDefaultOpacity(),
       }];
 
     if (this.chartDeploymentsRef?.chart) {
