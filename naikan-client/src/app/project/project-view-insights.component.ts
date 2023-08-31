@@ -251,13 +251,13 @@ export class ProjectViewInsightsHeader extends AbstractProjectView implements On
     }
 
     const today = new Date();
-    const twentyFourMonthsAgo = new Date(today.getFullYear(), today.getMonth() - ProjectViewInsightsHeader.LAST_MONTHS - 1, 1);
+    const twentyFourMonthsAgo = new Date(today.getFullYear(), today.getMonth() - ProjectViewInsightsHeader.LAST_MONTHS, 1);
     const deploymentCounts = new Map<string, number>();
     let deployments = 0;
 
     let currentMonth = new Date(twentyFourMonthsAgo);
-    for (let i = 0; i < ProjectViewInsightsHeader.LAST_MONTHS; i++) {
-      const yearMonth = `${currentMonth.getFullYear()}-${(currentMonth.getMonth() + 1).toString().padStart(2, '0')}`;
+    for (let i = 0; i <= ProjectViewInsightsHeader.LAST_MONTHS + 1; i++) {
+      const yearMonth = new Date(currentMonth).toISOString().substring(0, 7)
       deploymentCounts.set(yearMonth, 0);
       currentMonth.setMonth(currentMonth.getMonth() + 1);
     }
@@ -268,7 +268,7 @@ export class ProjectViewInsightsHeader extends AbstractProjectView implements On
 
         if (timestamp >= twentyFourMonthsAgo) {
           deployments++;
-          const yearMonth = `${timestamp.getFullYear()}-${(timestamp.getMonth() + 1).toString().padStart(2, '0')}`;
+          const yearMonth = new Date(timestamp).toISOString().substring(0, 7)
           const count = deploymentCounts.get(yearMonth) || 0;
           deploymentCounts.set(yearMonth, count + 1);
         }
@@ -287,7 +287,7 @@ export class ProjectViewInsightsHeader extends AbstractProjectView implements On
     this.chartDeployments.data.labels = sortedDeployments.map(deployment => deployment.monthYear);
     this.chartDeployments.data.datasets = [
       {
-        data: Array(sortedDeployments.length).fill(deployments / ProjectViewInsightsHeader.LAST_MONTHS),
+        data: Array(sortedDeployments.length).fill(deployments / sortedDeployments.length),
         borderWidth: 1,
         fill: false,
         pointStyle: false,
