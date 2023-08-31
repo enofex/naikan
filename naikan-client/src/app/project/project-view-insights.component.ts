@@ -250,25 +250,23 @@ export class ProjectViewInsightsHeader extends AbstractProjectView implements On
       return;
     }
 
-    const today = new Date();
-    const twentyFourMonthsAgo = new Date(today.getFullYear(), today.getMonth() - ProjectViewInsightsHeader.LAST_MONTHS, 1);
     const deploymentCounts = new Map<string, number>();
-    let deployments = 0;
+    const today = new Date();
+    const since = new Date(today.getFullYear(), today.getMonth() - ProjectViewInsightsHeader.LAST_MONTHS + 1, 1);
+    const to = new Date(today.getFullYear(), today.getMonth() + 1, 1);
 
-    let currentMonth = new Date(twentyFourMonthsAgo);
-    for (let i = 0; i <= ProjectViewInsightsHeader.LAST_MONTHS + 1; i++) {
-      const yearMonth = new Date(currentMonth).toISOString().substring(0, 7)
-      deploymentCounts.set(yearMonth, 0);
-      currentMonth.setMonth(currentMonth.getMonth() + 1);
+    for (let yearMonth = new Date(since); yearMonth <= to; yearMonth.setMonth(yearMonth.getMonth() + 1)) {
+      deploymentCounts.set(yearMonth.toISOString().substring(0, 7), 0);
     }
 
+    let deployments = 0;
     this._boms.forEach(bom => bom.deployments.forEach((deployment) => {
       if (deployment.timestamp) {
         const timestamp = new Date(deployment.timestamp);
 
-        if (timestamp >= twentyFourMonthsAgo) {
+        if (timestamp >= since) {
           deployments++;
-          const yearMonth = new Date(timestamp).toISOString().substring(0, 7)
+          const yearMonth = timestamp.toISOString().substring(0, 7)
           const count = deploymentCounts.get(yearMonth) || 0;
           deploymentCounts.set(yearMonth, count + 1);
         }

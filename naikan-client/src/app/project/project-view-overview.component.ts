@@ -259,21 +259,38 @@ export class ProjectViewOverviewBody extends AbstractProjectView implements OnIn
   }
 
   projectDeploymentsChart(deployments: Deployment[]): any {
-    if (this.hasDeployments(this.bom.deployments)) {
-      const countsByMonth = deployments.reduce((acc, deployment) => {
+    if (this.hasDeployments(deployments)) {
+      const deploymentCounts = new Map<string, number>();
+      const today = new Date();
+      const since = new Date(deployments[0].timestamp);
+      const to = new Date(today.getFullYear(), today.getMonth() + 1, 1);
+
+      for (let yearMonth = new Date(since); yearMonth <= to; yearMonth.setMonth(yearMonth.getMonth() + 1)) {
+        deploymentCounts.set(yearMonth.toISOString().substring(0, 7), 0);
+      }
+
+      deployments.forEach(deployment => {
         if (deployment.timestamp) {
-          const month = new Date(deployment.timestamp).toISOString().substring(0, 7);
-          acc[month] = acc[month] ? acc[month] + 1 : 1;
+          const yearMonth = new Date(deployment.timestamp).toISOString().substring(0, 7)
+          const count = deploymentCounts.get(yearMonth) || 0;
+          deploymentCounts.set(yearMonth, count + 1);
         }
-        return acc;
-      }, {});
+      });
+
+      const sortedDeployments = Array.from(
+          deploymentCounts,
+          ([monthYear, count]) => ({
+            monthYear,
+            count
+          })).sort((a, b) => {
+        return new Date(a.monthYear).getTime() - new Date(b.monthYear).getTime();
+      });
 
       return {
-        labels: Object.keys(countsByMonth),
+        labels: sortedDeployments.map(deployment => deployment.monthYear),
         datasets: [
           {
-            label: 'Projects',
-            data: Object.values(countsByMonth),
+            data: sortedDeployments.map(deployment => deployment.count),
             fill: true,
             backgroundColor: Charts.documentStyleWithDefaultOpacity(),
             borderColor: Charts.documentStyle(),
