@@ -1,6 +1,7 @@
 <naikan-breadcrumb [items]="items" *ngIf="bom">
   <ng-template #rightTemplate>
-    <span *ngIf="bom.timestamp" class="hidden md:inline-block font-normal text-500 text-sm mt-2 ml-2"> last updated
+    <span *ngIf="bom.timestamp"
+          class="hidden md:inline-block font-normal text-500 text-sm mt-2 ml-2"> last updated
       <span class="text-700"> {{ bom.timestamp | naikanDateTime }}</span>
     </span>
 
@@ -60,7 +61,7 @@
           <div class="col-12 mt-4">
 
             <div class="grid">
-              <div class="col-8" >
+              <div class="col-8">
                 <div class="text-xl font-bold text-900">
                   <h5>Project</h5>
                 </div>
@@ -632,8 +633,10 @@ implementation "{{ bom.project?.groupId}}:{{ bom.project?.artifactId}}:{{ bom.pr
                   [disabled]="bom.deployments && bom.deployments.length === 0">
 
         <div class="card border-none px-0" *ngIf="bom.deployments?.length > 0">
-          <p-chart type="bar" height="200px" [data]="chart.data" [options]="chart.options">
-          </p-chart>
+          <naikan-deployments-chart
+              height="300px"
+              [deployments]="bom.deployments">
+          </naikan-deployments-chart>
         </div>
 
         <p-table

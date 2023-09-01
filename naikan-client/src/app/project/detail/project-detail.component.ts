@@ -1,8 +1,7 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Clipboard} from '@angular/cdk/clipboard';
-import {finalize, Subscription} from 'rxjs';
-import {LayoutService} from '@naikan/layout/app.layout.service';
+import {finalize} from 'rxjs';
 import {
   Bom,
   Breadcrumb,
@@ -23,6 +22,7 @@ import {ButtonModule} from 'primeng/button';
 import {TabViewModule} from 'primeng/tabview';
 import {DatePipe, NgFor, NgIf} from '@angular/common';
 import {SplitButtonModule} from "primeng/splitbutton";
+import {DeploymentsChart} from "../deployments-chart";
 
 interface GroupedDeploymentPerVersion {
   version: string;
@@ -38,10 +38,10 @@ interface LatestVersionPerEnvironment {
 @Component({
   templateUrl: './project-detail.component.html',
   standalone: true,
-  imports: [NgIf, Breadcrumb, TabViewModule, Url, ProjectVersion, NaikanTags, ButtonModule, TooltipModule, TableModule, SharedModule, Search, NgFor, TagModule, ChartModule, DatePipe, DateTimePipe, SplitButtonModule],
+  imports: [NgIf, Breadcrumb, TabViewModule, Url, ProjectVersion, NaikanTags, ButtonModule, TooltipModule, TableModule, SharedModule, Search, NgFor, TagModule, ChartModule, DatePipe, DateTimePipe, SplitButtonModule, DeploymentsChart],
   providers: [ProjectService, DatePipe]
 })
-export class ProjectDetailComponent implements OnInit, OnDestroy {
+export class ProjectDetailComponent implements OnInit {
 
   protected readonly Object = Object;
 
@@ -49,31 +49,9 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
   bom: Bom;
   groupedDeploymentsPerVersion: GroupedDeploymentPerVersion[];
   latestVersionPerEnvironment: LatestVersionPerEnvironment[];
-  chart= {
-    data: {} as any,
-    options: {
-      plugins: {
-        legend: {
-          display: false
-        },
-        title: {
-          display: true,
-          text: 'Top 5 Environments'
-        }
-      },
-      scale: {
-        ticks: {
-          precision: 0
-        }
-      },
-      indexAxis: 'y'
-    }
-  }
-
-  subscription!: Subscription;
   expandedVersionRows = {};
   items: MenuItem[];
-  exportItems = [
+  exportItems: MenuItem[] = [
     {
       label: 'XSXL',
       command: () => {
@@ -86,28 +64,16 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
         this.exportJson();
       }
     }
-  ] as MenuItem[];
+  ];
 
   constructor(private readonly route: ActivatedRoute,
               private readonly projectService: ProjectService,
-              private readonly layoutService: LayoutService,
               private readonly clipboard: Clipboard) {
-
-    this.subscription = this.layoutService.configUpdate$.subscribe(() => {
-      this.initChart();
-    });
-
   }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
     this.loadBom(this.id);
-  }
-
-  ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
   }
 
   copyToClipboard(value: HTMLElement): void {
@@ -137,38 +103,12 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
     this.projectService.getBom(id)
     .pipe(finalize(() => {
       this.items = [{label: this.bom.project.name}];
-      this.initChart();
       this.initGroupedDeploymentsPerVersion();
       this.initLatestVersionPerEnvironment();
     }))
     .subscribe(data => {
       this.bom = data
     });
-  }
-
-  private initChart(): void {
-    if (this.bom?.deployments) {
-      const environments = {} as any;
-
-      this.bom.deployments.forEach(deployment => {
-        const environment = deployment.environment ? deployment.environment : 'unknown';
-
-        if (!environments[environment]) {
-          environments[environment] = [];
-        }
-        environments[environment].push(deployment);
-      });
-
-      this.chart.data = {
-        labels: Object.keys(environments).slice(0, 5),
-        datasets: [
-          {
-            label: "Deployments",
-            data: Object.keys(environments).flatMap(environment => environments[environment].length).slice(0, 5)
-          }
-        ]
-      };
-    }
   }
 
   private initGroupedDeploymentsPerVersion(): void {

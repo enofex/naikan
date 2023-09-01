@@ -11,8 +11,8 @@ import {NgClass, NgIf} from '@angular/common';
 import {TooltipModule} from 'primeng/tooltip';
 import {
   Bom,
-  Charts,
   DateTimePipe,
+  Deployment,
   NaikanTags,
   Principal,
   ProjectUrlIcon,
@@ -27,6 +27,7 @@ import {SharedModule} from "primeng/api";
 import {TabViewChangeEvent, TabViewModule} from "primeng/tabview";
 import {Subscription} from "rxjs";
 import {LayoutService} from "@naikan/layout/app.layout.service";
+import {DeploymentsChart} from "./deployments-chart";
 
 @Component({
   selector: '.naikan-project-view-insights-header',
@@ -55,11 +56,10 @@ import {LayoutService} from "@naikan/layout/app.layout.service";
 
       <p-tabPanel header="Deployments">
         <div class="chart-panel">
-          <p-chart type="line" height="100%" width="100%"
-                   #chartDeploymentsRef
-                   [data]="chartDeployments.data"
-                   [options]="chartDeployments.options">
-          </p-chart>
+          <naikan-deployments-chart
+              [months]="24"
+              [deployments]="allDeployments()">
+          </naikan-deployments-chart>
         </div>
       </p-tabPanel>
     </p-tabView>
@@ -80,12 +80,11 @@ import {LayoutService} from "@naikan/layout/app.layout.service";
     NgClass,
     Url,
     SharedModule,
-    TabViewModule
+    TabViewModule,
+    DeploymentsChart
   ],
 })
 export class ProjectViewInsightsHeader extends AbstractProjectView implements OnDestroy, OnInit {
-
-  private static readonly LAST_MONTHS = 24;
 
   private _boms: Bom[];
   private activeIndex = 0;
@@ -93,9 +92,9 @@ export class ProjectViewInsightsHeader extends AbstractProjectView implements On
 
   @ViewChild('chartSummarizationRef') chartSummarizationRef: UIChart;
   @ViewChild('chartTechnologiesRef') chartTechnologiesRef: UIChart;
-  @ViewChild('chartDeploymentsRef') chartDeploymentsRef: UIChart;
 
-  @Input() set boms(boms: Bom[]) {
+  @Input()
+  set boms(boms: Bom[]) {
     this._boms = boms;
     this.initCharts();
   }
@@ -138,32 +137,6 @@ export class ProjectViewInsightsHeader extends AbstractProjectView implements On
     data: {} as any
   };
 
-  chartDeployments = {
-    options: {
-      y: {
-        display: true,
-        ticks: {
-          display: false
-        }
-      },
-      scale: {
-        ticks: {
-          precision: 0
-        }
-      },
-      plugins: {
-        legend: {
-          display: true
-        },
-        title: {
-          display: true,
-          text: `Last ${ProjectViewInsightsHeader.LAST_MONTHS} months`
-        }
-      }
-    },
-    data: {} as any
-  };
-
   constructor(
       private readonly layoutService: LayoutService,
       projectService: ProjectService,
@@ -185,6 +158,16 @@ export class ProjectViewInsightsHeader extends AbstractProjectView implements On
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
+  }
+
+  allDeployments(): Deployment[] {
+    if (!this._boms) {
+      return [];
+    }
+
+    return this._boms.flatMap((bom) =>
+        bom.deployments.map((deployment) => deployment)
+    );
   }
 
   private initSummarizationChart(): void {
@@ -245,92 +228,11 @@ export class ProjectViewInsightsHeader extends AbstractProjectView implements On
     }
   }
 
-  private initDeploymentsChart(): void {
-    if (!this._boms) {
-      return;
-    }
-
-    const deploymentCounts = new Map<string, number>();
-    const uniqueLocations = new Map<string, Set<string>>();
-    const today = new Date();
-    const since = new Date(today.getFullYear(), today.getMonth() - ProjectViewInsightsHeader.LAST_MONTHS + 1, 1);
-    const to = new Date(today.getFullYear(), today.getMonth() + 1, 1);
-
-    for (let yearMonth = new Date(since); yearMonth <= to; yearMonth.setMonth(yearMonth.getMonth() + 1)) {
-      const period = yearMonth.toISOString().substring(0, 7);
-      deploymentCounts.set(period, 0);
-      uniqueLocations.set(period, new Set<string>());
-    }
-
-    let deployments = 0;
-    this._boms.forEach(bom => bom.deployments.forEach((deployment) => {
-      if (deployment.timestamp) {
-        const timestamp = new Date(deployment.timestamp);
-
-        if (timestamp >= since) {
-          deployments++;
-          const yearMonth = timestamp.toISOString().substring(0, 7)
-          const count = deploymentCounts.get(yearMonth) || 0;
-          deploymentCounts.set(yearMonth, count + 1);
-
-          const locationSet = uniqueLocations.get(yearMonth);
-          if (locationSet) {
-            locationSet.add(deployment.location);
-          }
-        }
-      }
-    }));
-
-    const sortedDeployments = Array.from(
-        deploymentCounts,
-        ([monthYear, count]) => ({
-          monthYear,
-          count
-        })).sort((a, b) => {
-      return new Date(a.monthYear).getTime() - new Date(b.monthYear).getTime();
-    });
-
-    this.chartDeployments.data.labels = sortedDeployments.map(deployment => deployment.monthYear);
-    this.chartDeployments.data.datasets = [
-      {
-        label: 'Unique deployment locations',
-        data: Array.from(uniqueLocations.values()).map((locationSet) => locationSet.size),
-        borderWidth: 1,
-        fill: true,
-        pointStyle: false,
-        borderColor: Charts.documentStyle(),
-      },
-      {
-        label: 'Average deployments',
-        data: Array(sortedDeployments.length).fill(deployments / sortedDeployments.length),
-        borderWidth: 1,
-        fill: false,
-        pointStyle: false,
-        borderColor: Charts.documentStyle(),
-        borderDash: [5, 5]
-      },
-      {
-        label: 'Deployments',
-        data: sortedDeployments.map(deployment => deployment.count),
-        borderWidth: 1,
-        fill: true,
-        pointStyle: false,
-        borderColor: Charts.documentStyle(),
-        backgroundColor: Charts.documentStyleWithDefaultOpacity(),
-      }];
-
-    if (this.chartDeploymentsRef?.chart) {
-      this.chartDeploymentsRef.chart.update();
-    }
-  }
-
   private initCharts(): void {
     if (this.activeIndex === 0) {
       this.initSummarizationChart();
     } else if (this.activeIndex === 1) {
       this.initTechnologiesChart();
-    } else if (this.activeIndex === 2) {
-      this.initDeploymentsChart();
     }
   }
 }
