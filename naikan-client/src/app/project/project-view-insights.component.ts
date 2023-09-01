@@ -153,7 +153,7 @@ export class ProjectViewInsightsHeader extends AbstractProjectView implements On
       },
       plugins: {
         legend: {
-          display: false
+          display: true
         },
         title: {
           display: true,
@@ -251,12 +251,15 @@ export class ProjectViewInsightsHeader extends AbstractProjectView implements On
     }
 
     const deploymentCounts = new Map<string, number>();
+    const uniqueLocations = new Map<string, Set<string>>();
     const today = new Date();
     const since = new Date(today.getFullYear(), today.getMonth() - ProjectViewInsightsHeader.LAST_MONTHS + 1, 1);
     const to = new Date(today.getFullYear(), today.getMonth() + 1, 1);
 
     for (let yearMonth = new Date(since); yearMonth <= to; yearMonth.setMonth(yearMonth.getMonth() + 1)) {
-      deploymentCounts.set(yearMonth.toISOString().substring(0, 7), 0);
+      const period = yearMonth.toISOString().substring(0, 7);
+      deploymentCounts.set(period, 0);
+      uniqueLocations.set(period, new Set<string>());
     }
 
     let deployments = 0;
@@ -269,6 +272,11 @@ export class ProjectViewInsightsHeader extends AbstractProjectView implements On
           const yearMonth = timestamp.toISOString().substring(0, 7)
           const count = deploymentCounts.get(yearMonth) || 0;
           deploymentCounts.set(yearMonth, count + 1);
+
+          const locationSet = uniqueLocations.get(yearMonth);
+          if (locationSet) {
+            locationSet.add(deployment.location);
+          }
         }
       }
     }));
@@ -285,6 +293,15 @@ export class ProjectViewInsightsHeader extends AbstractProjectView implements On
     this.chartDeployments.data.labels = sortedDeployments.map(deployment => deployment.monthYear);
     this.chartDeployments.data.datasets = [
       {
+        label: 'Unique deployment locations',
+        data: Array.from(uniqueLocations.values()).map((locationSet) => locationSet.size),
+        borderWidth: 1,
+        fill: true,
+        pointStyle: false,
+        borderColor: Charts.documentStyle(),
+      },
+      {
+        label: 'Average deployments',
         data: Array(sortedDeployments.length).fill(deployments / sortedDeployments.length),
         borderWidth: 1,
         fill: false,
@@ -293,6 +310,7 @@ export class ProjectViewInsightsHeader extends AbstractProjectView implements On
         borderDash: [5, 5]
       },
       {
+        label: 'Deployments',
         data: sortedDeployments.map(deployment => deployment.count),
         borderWidth: 1,
         fill: true,
