@@ -8,47 +8,48 @@ Contact your project administrator and refer to the project-specific documentati
 
 ## **Projects**
 
-### Create or update
+### Create or Update
 
-!!! note "Project name"
+**Base URL:** `{schema}://{hostname}:{port}/api/public`
 
-     If the provided project name is found than the project will be updated if not it will be created.
+> Note: If the provided project name is found the project will be updated, if not it will be created.
 
-**Endpoint:** `POST {schema}://{hostname}:{port}/api/public/projects`
 
-**Description:** Creates or update a project.
+1) **Method:** `POST`  **Endpoint:** `/projects`        
 
-**Request Headers:**
+     **Description:** Creates or updates a project.
+     
+    **Request Headers:**
 
-- `Authorization`: Bearer token for authentication
-- `Content-Type`: application/json
+     - `Authorization`: Bearer token for authentication
+     - `Content-Type`: application/json
 
-**Request Body:**
-
-```json
-{
-  "specVersion": "1.0",
-  "bomFormat": "Naikan",
-  "project": {
-    "name": "Naikan III"
-  }
-}
-```
-
-**Response:**
-
-If the project was found with the project name, then it will be updated.
-
-``` title="HTTP Status: 200 (Ok)"
-HTTP/1.1 200
-```
-
-If the project was not found with the project name, then it will be created.
-
-``` title="HTTP Status: 201 (Created)"
-HTTP/1.1 201
-Location: {schema}://{hostname}:{port}/api/projects/{projectId}
-```
+     **Request Body:**
+     
+          ```json
+          {
+            "specVersion": "1.0",
+            "bomFormat": "Naikan",
+            "project": {
+              "name": "Naikan III"
+            }
+          }
+          ```
+     
+     **Response:**
+     
+     If the project was found with the project name, then it will be updated.
+     
+     ``` title="HTTP Status: 200 (Ok)"
+     HTTP/1.1 200
+     ```
+     
+     If the project was not found with the project name, then it will be created.
+     
+     ``` title="HTTP Status: 201 (Created)"
+     HTTP/1.1 201
+     Location: {schema}://{hostname}:{port}/api/projects/{projectId}
+     ```
 
 ### Update
 
