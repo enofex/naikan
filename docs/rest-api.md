@@ -26,25 +26,26 @@ Contact your project administrator and refer to the project-specific documentati
 
      **Request Body:**
      
-          ```json
-          {
-            "specVersion": "1.0",
-            "bomFormat": "Naikan",
-            "project": {
-              "name": "Naikan III"
-            }
-          }
-          ```
+      ```json
+      {
+        "specVersion": "1.0",
+        "bomFormat": "Naikan",
+        "project": {
+          "name": "Naikan III"
+        }
+      }
+      ```
      
      **Response:**
+
+     | Response | Description |
+   |---------|----------|
+   | 200 | Successful. project was found with the project name, then it will be updated |
+   | 201 | If the project was not found with the project name, then it will be created. |
+   
      
-     If the project was found with the project name, then it will be updated.
+    
      
-     ``` title="HTTP Status: 200 (Ok)"
-     HTTP/1.1 200
-     ```
-     
-     If the project was not found with the project name, then it will be created.
      
      ``` title="HTTP Status: 201 (Created)"
      HTTP/1.1 201
