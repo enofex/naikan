@@ -42,13 +42,8 @@ Contact your project administrator and refer to the project-specific documentati
    |---------|----------|
    | 200 | Successful. project was found with the project name, then it will be updated |
    | 201 | If the project was not found with the project name, then it will be created. |
-   
      
-    
-     
-     
-     ``` title="HTTP Status: 201 (Created)"
-     HTTP/1.1 201
+    ```
      Location: {schema}://{hostname}:{port}/api/projects/{projectId}
      ```
 
