@@ -74,6 +74,10 @@ See detail information about your projects.
 
 <img src="../assets/screenshots/project-detail.png" alt="Project details" width="1024"/>
 
+<br>
+
+<img src="../assets/screenshots/project-detail-deployments.png" alt="Project details" width="1024"/>
+
 ### Overview statistics
 
 See detail overview information and statistics about your projects.
