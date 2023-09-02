@@ -6,15 +6,29 @@ To ensure secure access to all endpoints within your application, the use of a b
 
 Contact your project administrator and refer to the project-specific documentation to obtain a valid bearer token.
 
+## Base URL
+
+The base URL is the root endpoint where all API requests originate:
+
+`{schema}://{hostname}:{port}/api/public`
+
+**{schema}** Refers to the protocol or scheme used.
+
+**{hostname}** Represents the hostname or domain name of the server hosting your API.
+
+**{port}** Signifies the port number through which your API is accessible.
+
+**/api/public** Specifies the path to the public API endpoints.
+
 ## **Projects**
 
-### Create or update
+### Create or Update
 
 !!! note "Project name"
 
-     If the provided project name is found than the project will be updated if not it will be created.
+     If the provided project name is found the project will be updated, if not it will be created.
 
-**Endpoint:** `POST {schema}://{hostname}:{port}/api/public/projects`
+**Endpoint:** `POST /projects`
 
 **Description:** Creates or update a project.
 
@@ -47,12 +61,12 @@ If the project was not found with the project name, then it will be created.
 
 ``` title="HTTP Status: 201 (Created)"
 HTTP/1.1 201
-Location: {schema}://{hostname}:{port}/api/projects/{projectId}
+Location: /projects/{projectId}
 ```
 
 ### Update
 
-**Endpoint:** `POST {schema}://{hostname}:{port}/api/public/projects/{projectId}`
+**Endpoint:** `POST /projects/{projectId}`
 
 **Description:** Update a project.
 
@@ -89,7 +103,7 @@ HTTP/1.1 200
 
 ### Create
 
-**Endpoint:** `POST {schema}://{hostname}:{port}//api/public/projects/{projectId}/deployments`
+**Endpoint:** `POST /projects/{projectId}/deployments`
 
 **Description:** Creates a deployment for a specific project.
 
@@ -115,5 +129,5 @@ HTTP/1.1 200
 
 ``` title="HTTP Status: 201 (Created)"
 HTTP/1.1 201
-Location: {schema}://{hostname}:{port}/api/projects/{projectId}/deployments/{index}
+Location: /{projectId}/deployments/{index}
 ```
