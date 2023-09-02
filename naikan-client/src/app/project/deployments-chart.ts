@@ -43,7 +43,7 @@ export class DeploymentsChart implements OnDestroy, OnInit {
   @Input()
   set deployments(deployments: Deployment[]) {
     this._deployments = deployments;
-    this.initDeploymentsChart();
+    this.initChart();
   }
 
   @Input() months: number = 0;
@@ -80,12 +80,12 @@ export class DeploymentsChart implements OnDestroy, OnInit {
 
   constructor(private readonly layoutService: LayoutService) {
     this.subscription = this.layoutService.configUpdate$.subscribe(() => {
-      this.initDeploymentsChart();
+      this.initChart();
     });
   }
 
   ngOnInit(): void {
-    this.initDeploymentsChart()
+    this.initChart()
   }
 
   ngOnDestroy(): void {
@@ -94,7 +94,7 @@ export class DeploymentsChart implements OnDestroy, OnInit {
     }
   }
 
-  private initDeploymentsChart(): void {
+  private initChart(): void {
     if (!this._deployments) {
       return;
     }
