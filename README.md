@@ -27,7 +27,7 @@ Tired of scattered spreadsheets and scattered information? Our user-friendly int
 
 * **License management**: Naikan lets you keep track of licenses for each project and ensure compliance, preventing any potential legal issues.
 
-* **Git Integration**: The Naikan Maven Plugin will collect Git repository information and statistics from our project and push it to Naikan as well.
+* **Git Integration**: The Naikan Maven Plugin will collect Git repository information and statistics from your project and push it to Naikan as well.
 
 ## Installation
 
