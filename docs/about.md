@@ -1,4 +1,5 @@
-Welcome to *Naikan*, the ultimate inventory management tool for developer teams designed to streamline your software
+Welcome to *Naikan*, the ultimate inventory management tool for developer teams designed to
+streamline your software
 projects. With *Naikan*, organizations can effortlessly stay on top of critical project information,
 ensuring seamless project management and improved efficiency.
 
@@ -54,6 +55,12 @@ See all projects at a glance, filter, sort and search them.
 
 <img src="../assets/screenshots/projects-overview.png" alt="Projects overview" width="1024"/>
 
+### Projects insights
+
+See all projects statisics at a glance, filter, sort and search them.
+
+<img src="../assets/screenshots/projects-insights.png" alt="Projects insights" width="1024"/>
+
 ### Project details
 
 See detail information about your projects.
@@ -76,7 +83,7 @@ See detail information about your projects.
 
 <br>
 
-<img src="../assets/screenshots/project-detail-deployments.png" alt="Project details" width="1024"/>
+<img src="../assets/screenshots/project-detail-deployments.png" alt="Project details deployment" width="1024"/>
 
 ### Overview statistics
 
