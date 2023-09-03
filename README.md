@@ -13,6 +13,13 @@
 
 Tired of scattered spreadsheets and scattered information? Our user-friendly interface simplifies project inventory tool for your dev teams, ensuring seamless access to all information about your projects, whenever they need it. It enables users to manage their projects' essential details, including project name, organization, team, contacts, developers, integrations, licenses, deployments, environments, and technologies used. The tool can be integrated into CI/CD pipelines to automatically push data for new projects and updates.
 
+<br/>
+
+<div style="display: flex; justify-content: center">
+    <img src="https://github.com/enofex/naikan/blob/main/docs/assets/screenshots/projects-overview.png" width="49%">
+    <img src="https://github.com/enofex/naikan/blob/main/docs/assets/screenshots/project-detail-deployments.png" width="49%">
+</div>
+
 ## Features
 
 * **Automated updates**: You can automatically push new projects or update existing ones with relevant details from your CI/CD pipeline. This helps to ensure that your software project inventory is always up-to-date.
@@ -36,7 +43,7 @@ curl -LO https://naikan.io/docker-compose.yml
 docker-compose up -d
 ```
 
-Visit the [Naikan](https://naikan.io) for configuration documentation.
+Visit the [Naikan](https://naikan.io) for configuration documentation and more information.
 
 ## Modules
 The Naikan Project is a software that consists of four modules: naikan-test, naikan-model, naikan-maven-plugin and naikan. 
