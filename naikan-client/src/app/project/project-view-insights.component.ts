@@ -211,6 +211,93 @@ export class TechnologiesChart extends AbstractInsightChart {
   }
 }
 
+
+@Component({
+  selector: 'naikan-project-view-insights-deployments-summarization-chart',
+  template: `
+    <p-chart type="bar" height="100%" width="100%"
+             #chartDeploymentsSummarizationRef
+             [data]="chartDeploymentsSummarization.data"
+             [options]="chartDeploymentsSummarization.options">
+    </p-chart>
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
+  standalone: true,
+  imports: [
+    NgSwitch,
+    NgSwitchCase,
+    NgSwitchDefault,
+    ChartModule,
+  ],
+})
+export class DeploymentsSummarizationChart extends AbstractInsightChart {
+
+  @ViewChild('chartDeploymentsSummarizationRef') chartDeploymentsSummarizationRef: UIChart;
+
+  chartDeploymentsSummarization = {
+    options: {
+      plugins: {
+        legend: {
+          display: true
+        },
+        title: {
+          text: '',
+          display: true
+        }
+      },
+      indexAxis: 'y',
+      scales: {
+        x: {
+          stacked: true,
+        },
+        y: {
+          stacked: true
+        }
+      }
+    },
+    data: {} as any
+  };
+
+  constructor(override readonly layoutService: LayoutService) {
+    super(layoutService);
+  }
+
+  override initChart(): void {
+    if (!this.allBoms()) {
+      return;
+    }
+
+    const months = 24;
+    const dataProperties = [
+      {label: "Unique environments", prop: "environment"},
+      {label: "Unique locations", prop: "location"},
+      {label: "Unique versions", prop: "version"},
+    ];
+
+    const currentDate = new Date();
+    const twentyFourMonthsAgo = new Date();
+    twentyFourMonthsAgo.setMonth(currentDate.getMonth() - months);
+
+    this.chartDeploymentsSummarization.options.plugins.title.text = `Last ${months} months`;
+    this.chartDeploymentsSummarization.data.labels = this.allBoms().map(bom => bom.project.name);
+    this.chartDeploymentsSummarization.data.datasets = dataProperties.map(propData => ({
+      label: propData.label,
+      data: this.allBoms().map((bom) => {
+        const filteredDeployments = bom.deployments.filter(deployment => {
+          const deploymentTimestamp = new Date(deployment.timestamp);
+          return deploymentTimestamp >= twentyFourMonthsAgo && deploymentTimestamp <= currentDate;
+        });
+        return new Set(filteredDeployments.map(deployment => deployment[propData.prop])).size;
+      })
+    }));
+
+    if (this.chartDeploymentsSummarizationRef?.chart) {
+      this.chartDeploymentsSummarizationRef.chart.update();
+    }
+  }
+}
+
 @Component({
   selector: '.naikan-project-view-insights-header',
   template: `
@@ -237,6 +324,11 @@ export class TechnologiesChart extends AbstractInsightChart {
               [deployments]="allDeployments()">
           </naikan-deployments-chart>
         </div>
+
+        <div class="chart-panel mt-8">
+          <naikan-project-view-insights-deployments-summarization-chart [boms]="allBoms()">
+          </naikan-project-view-insights-deployments-summarization-chart>
+        </div>
       </p-tabPanel>
     </p-tabView>
   `,
@@ -259,7 +351,8 @@ export class TechnologiesChart extends AbstractInsightChart {
     TabViewModule,
     DeploymentsChart,
     SummarizationChart,
-    TechnologiesChart
+    TechnologiesChart,
+    DeploymentsSummarizationChart
   ],
 })
 export class ProjectViewInsightsHeader extends AbstractProjectView {
