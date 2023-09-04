@@ -2,6 +2,8 @@
 
 ## Prerequisites
 
+Before you can begin with the installation, make sure you have the following prerequisites installed on your system:
+
 * Git
 * Java
 * Docker
@@ -27,13 +29,11 @@ Use npm to start the Naikan server by running the following command:
 
 `ng serve`
 
-## Starting all dependencies as docker compose automatically
+## Automatically Starting Dependencies with Docker Compose
 
-When you start the `NaikanApplication`, with the profile `dev` then the application will start
-docker compose
-`development/docker/compose.yml` automatically. 
+When you launch the `NaikanApplication` with the `dev` profile, it will automatically start Docker Compose using the configuration found in `development/docker/compose.yml`. 
 
-These will start MongoDB and OpenLdap and init both with sample data from:
+These will initialize MongoDB and OpenLdap with sample data from:
 
 *  `development/docker/boms.json`
 *  `development/docker/tokens.json`
@@ -41,10 +41,16 @@ These will start MongoDB and OpenLdap and init both with sample data from:
 
 ## OpenLDAP Users
 
-The `LDIF` file that we will use, `development/docker/users.ldif`. Basically, it has two
-users (`Admin`, `John Rambo`). With this you are able to log in to Naikan.
+The `users.ldif` file located in `development/docker` contains two pre-configured users, `Admin` and `John Rambo`. You can use the following credentials to log in to Naikan:
 
 ```
-Admin > username: admin, password: 123, role: admin
-John Rambo > username: jnrambo, password: 123, role: user
+Admin:
+  Username: admin
+  Password: 123
+  Role: admin
+
+John Rambo:
+  Username: jnrambo
+  Password: 123
+  Role: user
 ```
