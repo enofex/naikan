@@ -7,7 +7,7 @@ Before you can begin with the installation, make sure you have the following pre
 * Git
 * Java
 * Maven
-* Docker
+* Docker Desktop
 * Node.js
 * Angular CLI
 
@@ -33,6 +33,10 @@ Use npm to start the Naikan server by running the following command:
 ## Start the backend
 
 When you launch the `NaikanApplication` with the `dev` profile, it will automatically start Docker Compose using the configuration found in `development/docker/compose.yml`. 
+
+The profile can be set in our IDE or passed via a JVM system parameter:
+
+`-Dspring.profiles.active=dev`
 
 These will initialize MongoDB and OpenLdap with sample data from:
 
