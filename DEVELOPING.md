@@ -6,6 +6,7 @@ Before you can begin with the installation, make sure you have the following pre
 
 * Git
 * Java
+* Maven
 * Docker
 * Node.js
 * Angular CLI
