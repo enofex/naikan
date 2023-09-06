@@ -24,12 +24,6 @@ Use npm to install the required dependencies for Naikan by running the following
 1. Switch to the `naikan/naikan-client` directory
 2. `npm install`
 
-## Start the frontend
-
-Use npm to start the Naikan server by running the following command:
-
-`ng serve`
-
 ## Start the backend
 
 When you launch the `NaikanApplication` with the `dev` profile, it will automatically start Docker Compose using the configuration found in `development/docker/compose.yml`. 
@@ -43,6 +37,14 @@ These will initialize MongoDB and OpenLdap with sample data from:
 *  `development/docker/boms.json`
 *  `development/docker/tokens.json`
 *  `development/docker/users.ldif`
+
+## Start the frontend
+
+Use npm to start the Naikan server by running the following command:
+
+`ng serve`
+
+Go to the URL `http://localhost:4200/`.
 
 ## OpenLDAP Users
 
