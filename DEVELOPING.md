@@ -21,16 +21,16 @@ Use git to clone the Naikan repository by running the following command:
 
 Use npm to install the required dependencies for Naikan by running the following command:
 
-1. Switch to the `naikan-client` directory
+1. Switch to the `naikan/naikan-client` directory
 2. `npm install`
 
-## Start the server
+## Start the frontend
 
 Use npm to start the Naikan server by running the following command:
 
 `ng serve`
 
-## Automatically Starting Dependencies with Docker Compose
+## Start the backend
 
 When you launch the `NaikanApplication` with the `dev` profile, it will automatically start Docker Compose using the configuration found in `development/docker/compose.yml`. 
 
