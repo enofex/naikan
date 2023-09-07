@@ -103,8 +103,8 @@ markdown_extensions:
 # Page tree
 nav:
   - Home: index.md
+  - About: about.md
   - Getting started:
-      - About: about.md
       - Installation: getting-started.md
       - Administration: administration.md
       - Rest API: rest-api.md
