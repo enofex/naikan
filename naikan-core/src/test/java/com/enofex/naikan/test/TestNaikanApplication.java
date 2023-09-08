@@ -20,7 +20,7 @@ class TestNaikanApplication {
     @Bean
     @ServiceConnection
     MongoDBContainer mongoDBContainer() {
-      return new MongoDBContainer("mongo:6");
+      return new MongoDBContainer("mongo:5");
     }
   }
 }
