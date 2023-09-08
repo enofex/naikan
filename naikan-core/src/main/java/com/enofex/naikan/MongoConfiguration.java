@@ -1,6 +1,13 @@
 package com.enofex.naikan;
 
 import com.enofex.naikan.model.AbstractContainer;
+import com.enofex.naikan.model.Branches;
+import com.enofex.naikan.model.Commit;
+import com.enofex.naikan.model.CommitAuthor;
+import com.enofex.naikan.model.CommitChanges;
+import com.enofex.naikan.model.CommitFilesChanges;
+import com.enofex.naikan.model.CommitLinesChanges;
+import com.enofex.naikan.model.Commits;
 import com.enofex.naikan.model.Contact;
 import com.enofex.naikan.model.Contacts;
 import com.enofex.naikan.model.Deployment;
@@ -15,6 +22,8 @@ import com.enofex.naikan.model.Integration;
 import com.enofex.naikan.model.Integrations;
 import com.enofex.naikan.model.License;
 import com.enofex.naikan.model.Licenses;
+import com.enofex.naikan.model.RepositoryTag;
+import com.enofex.naikan.model.RepositoryTags;
 import com.enofex.naikan.model.Roles;
 import com.enofex.naikan.model.Tags;
 import com.enofex.naikan.model.Team;
@@ -35,7 +44,6 @@ import org.springframework.data.mongodb.MongoDatabaseFactory;
 import org.springframework.data.mongodb.MongoTransactionManager;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.convert.DefaultMongoTypeMapper;
-
 import org.springframework.data.mongodb.core.convert.MappingMongoConverter;
 import org.springframework.data.mongodb.core.convert.MongoCustomConversions;
 
@@ -69,7 +77,11 @@ public class MongoConfiguration {
         ToIntegrationsReadingConverter.INSTANCE,
         ToTagsReadingConverter.INSTANCE,
         ToRolesReadingConverter.INSTANCE,
-        ToDeploymentsReadingConverter.INSTANCE));
+        ToDeploymentsReadingConverter.INSTANCE,
+        ToBranchesReadingConverter.INSTANCE,
+        ToRepositoryTagsReadingConverter.INSTANCE,
+        ToCommitsReadingConverter.INSTANCE
+    ));
   }
 
   @WritingConverter
@@ -347,6 +359,83 @@ public class MongoConfiguration {
     @Override
     public Roles convert(List<String> source) {
       return new Roles(source);
+    }
+  }
+
+  @ReadingConverter
+  private enum ToBranchesReadingConverter implements Converter<List<String>, Branches> {
+
+    INSTANCE;
+
+    @Override
+    public Branches convert(List<String> source) {
+      return new Branches(source);
+    }
+  }
+
+  @ReadingConverter
+  private enum ToRepositoryTagsReadingConverter implements
+      Converter<List<Document>, RepositoryTags> {
+
+    INSTANCE;
+
+    @Override
+    public RepositoryTags convert(List<Document> source) {
+      if (source == null) {
+        return null;
+      }
+
+      List<RepositoryTag> tags = new ArrayList<>(source.size());
+
+      for (Document element : source) {
+        tags.add(new RepositoryTag(
+            element.getString("name"),
+            DateToLocalDateTimeConverter.INSTANCE.convert(element.getDate("timestamp"))
+        ));
+      }
+
+      return new RepositoryTags(tags);
+    }
+  }
+
+  @ReadingConverter
+  private enum ToCommitsReadingConverter implements Converter<List<Document>, Commits> {
+
+    INSTANCE;
+
+    @Override
+    public Commits convert(List<Document> source) {
+      if (source == null) {
+        return null;
+      }
+
+      List<Commit> commits = new ArrayList<>(source.size());
+
+      for (Document element : source) {
+        commits.add(new Commit(
+            element.getString("id"),
+            DateToLocalDateTimeConverter.INSTANCE.convert(element.getDate("timestamp")),
+            element.getString("shortMessage"),
+            new CommitAuthor(
+                element.get("author", Document.class).getString("name"),
+                element.get("author", Document.class).getString("email")),
+            new CommitChanges(
+                new CommitLinesChanges(
+                    commitChanges(element, "lines", "added"),
+                    commitChanges(element, "lines", "deleted")),
+                new CommitFilesChanges(
+                    commitChanges(element, "files", "added"),
+                    commitChanges(element, "files", "deleted"),
+                    commitChanges(element, "files", "changed")
+                )
+            )));
+      }
+
+      return new Commits(commits);
+    }
+
+    private int commitChanges(Document document, String group, String key) {
+      return document.get("changes", Document.class).get(group, Document.class).getInteger(key);
     }
   }
 }
