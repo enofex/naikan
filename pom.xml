@@ -28,7 +28,7 @@
     <archunit.version>1.1.0</archunit.version>
     <maven-enforcer-plugin.version>3.4.0</maven-enforcer-plugin.version>
     <exec-maven-plugin.version>3.1.0</exec-maven-plugin.version>
-    <naikan-maven-plugin.version>0.2.1</naikan-maven-plugin.version>
+    <naikan-maven-plugin.version>0.2.2</naikan-maven-plugin.version>
   </properties>
 
   <modules>
