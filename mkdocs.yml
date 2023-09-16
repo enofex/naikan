@@ -107,7 +107,9 @@ nav:
   - Getting started:
       - Installation: getting-started.md
       - Administration: administration.md
+      - Integration: integration.md
       - Rest API: rest-api.md
+  - Naikan Schema:
       - Schema: schema.md
       - Examples: examples.md
   - Contributing: contributing.md
