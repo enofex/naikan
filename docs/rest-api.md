@@ -6,6 +6,12 @@ To ensure secure access to all endpoints within your application, the use of a b
 
 Contact your project administrator and refer to the project-specific documentation to obtain a valid bearer token.
 
+## OpenAPI definition
+
+The OpenAPI description is available at the following url:
+
+`{schema}://{hostname}:{port}/api/public/v3/api-docs`
+
 ## Base URL
 
 The base URL is the root endpoint where all API requests originate:
