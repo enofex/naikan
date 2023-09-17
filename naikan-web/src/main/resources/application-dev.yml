@@ -22,6 +22,14 @@ logging:
             core:
               MongoTemplate: DEBUG
 
+springdoc:
+  paths-to-match: /api/public/**
+  swagger-ui:
+    enabled: false
+  api-docs:
+    enabled: true
+    path: /api/public/schema
+
 naikan:
   security:
     cors:
