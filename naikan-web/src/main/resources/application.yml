@@ -41,6 +41,14 @@ logging:
   file:
     name: naikan.log
 
+springdoc:
+  paths-to-match: /api/public/**
+  swagger-ui:
+    enabled: false
+  api-docs:
+    enabled: true
+    path: /api/public/v3/api-docs
+
 naikan:
   mongodb:
     transaction:

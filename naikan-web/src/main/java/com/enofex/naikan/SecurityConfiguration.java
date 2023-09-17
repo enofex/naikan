@@ -92,7 +92,7 @@ class SecurityConfiguration {
               .requestMatchers(RESOURCES).permitAll()
               .requestMatchers(AUTHENTICATE_URL).permitAll()
               .requestMatchers(ADMINISTRATION_URLS)
-                .hasAuthority(AuthorityType.ROLE_ADMIN.getAuthority())
+              .hasAuthority(AuthorityType.ROLE_ADMIN.getAuthority())
               .requestMatchers("/api/**").authenticated()
           )
           .formLogin(login -> login
@@ -170,6 +170,33 @@ class SecurityConfiguration {
     }
   }
 
+
+  @EnableWebSecurity
+  @Configuration
+  static class OpenApiSecurityConfiguration {
+
+    private static final String OPENAPI_URL = "/api/public/v3/api-docs";
+
+    @Bean
+    @Order(1)
+    SecurityFilterChain openApiSecurityFilterChain(HttpSecurity http) throws Exception {
+      http
+          .securityMatchers(matchers -> matchers.requestMatchers(
+              new AntPathRequestMatcher(API_URLS))
+          )
+          .csrf(AbstractHttpConfigurer::disable)
+          .cors(AbstractHttpConfigurer::disable)
+          .anonymous(AbstractHttpConfigurer::disable)
+          .sessionManagement(session -> session
+              .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+          .authorizeHttpRequests(authorizeRequests -> authorizeRequests
+              .requestMatchers(OPENAPI_URL).permitAll()
+          );
+
+      return http.build();
+    }
+  }
+
   @EnableWebSecurity
   @Configuration
   static class ApiSecurityConfiguration {
@@ -181,7 +208,7 @@ class SecurityConfiguration {
     }
 
     @Bean
-    @Order(1)
+    @Order(2)
     SecurityFilterChain apiSecurityFilterChain(HttpSecurity http) throws Exception {
       http
           .securityMatchers(matchers -> matchers.requestMatchers(
