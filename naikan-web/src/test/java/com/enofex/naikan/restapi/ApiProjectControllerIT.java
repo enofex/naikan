@@ -1,4 +1,4 @@
-package com.enofex.naikan.project;
+package com.enofex.naikan.restapi;
 
 import static com.enofex.naikan.test.model.Boms.validBom0asInputStream;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -44,7 +44,7 @@ class ApiProjectControllerIT {
                 .content(validBom0asInputStream().readAllBytes()))
         .andExpect(handler().methodName("upsertByProjectName"))
         .andExpect(status().isCreated())
-        .andExpect(redirectedUrlPattern("http://localhost/api/projects/*"));
+        .andExpect(redirectedUrlPattern("http://localhost/api/public/projects/*"));
   }
 
   @Test
@@ -56,7 +56,7 @@ class ApiProjectControllerIT {
                 .content(validBom0asInputStream().readAllBytes()))
         .andExpect(handler().methodName("upsertByProjectName"))
         .andExpect(status().isCreated())
-        .andExpect(redirectedUrlPattern("http://localhost/api/projects/*"));
+        .andExpect(redirectedUrlPattern("http://localhost/api/public/projects/*"));
 
     this.mvc.perform(
             post("/api/public/projects")

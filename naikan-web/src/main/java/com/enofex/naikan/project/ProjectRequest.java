@@ -6,6 +6,4 @@ public final class ProjectRequest {
   }
 
   public static final String PATH = "/api/projects";
-
-  public static final String PATH_WITH_ID = PATH + "/{id}";
 }

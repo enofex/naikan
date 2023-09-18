@@ -1,4 +1,4 @@
-package com.enofex.naikan.project.deployment;
+package com.enofex.naikan.restapi.deployment;
 
 import static com.enofex.naikan.test.model.Boms.validBom0asInputStream;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -52,7 +52,7 @@ class ApiDeploymentsControllerIT {
         .andExpect(handler().methodName("save"))
         .andExpect(status().isCreated())
         .andExpect(
-            redirectedUrl("http://localhost/api/projects/" + savedBom.id() + "/deployments/2"));
+            redirectedUrl("http://localhost/api/public/projects/" + savedBom.id() + "/deployments/2"));
   }
 
   @Test

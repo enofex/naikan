@@ -1,12 +1,12 @@
-package com.enofex.naikan.project.deployment;
+package com.enofex.naikan.restapi.project.deployment;
 
-import static com.enofex.naikan.project.deployment.ApiDeploymentController.REQUEST_PATH;
+import static com.enofex.naikan.restapi.project.deployment.ApiDeploymentController.REQUEST_PATH;
 
 import com.enofex.naikan.ProjectId;
+import com.enofex.naikan.restapi.ApiProjectRequest;
 import com.enofex.naikan.model.Bom;
 import com.enofex.naikan.model.Deployment;
-import com.enofex.naikan.project.ApiProjectRequest;
-import com.enofex.naikan.project.ProjectRequest;
+import com.enofex.naikan.project.deployment.DeploymentService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.headers.Header;
@@ -54,7 +54,7 @@ class ApiDeploymentController {
 
     if (newBom != null) {
       URI location = ServletUriComponentsBuilder
-          .fromCurrentRequest().replacePath(ProjectRequest.PATH_WITH_ID + "/deployments/{index}")
+          .fromCurrentRequest().replacePath(ApiProjectRequest.PATH_WITH_ID + "/deployments/{index}")
           .buildAndExpand(newBom.id(), newBom.deployments().lastIndex())
           .toUri();
 

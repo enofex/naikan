@@ -1,4 +1,4 @@
-package com.enofex.naikan.project;
+package com.enofex.naikan.restapi;
 
 public final class ApiProjectRequest {
 

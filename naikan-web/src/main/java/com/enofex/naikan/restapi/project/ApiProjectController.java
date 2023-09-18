@@ -1,8 +1,10 @@
-package com.enofex.naikan.project;
+package com.enofex.naikan.restapi.project;
 
 import com.enofex.naikan.ProjectId;
+import com.enofex.naikan.restapi.ApiProjectRequest;
 import com.enofex.naikan.model.Bom;
 import com.enofex.naikan.model.validator.DefaultValidator;
+import com.enofex.naikan.project.ProjectService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.headers.Header;
@@ -78,7 +80,7 @@ class ApiProjectController {
 
       URI location = ServletUriComponentsBuilder
           .fromCurrentRequest()
-          .replacePath(ProjectRequest.PATH_WITH_ID)
+          .replacePath(ApiProjectRequest.PATH_WITH_ID)
           .buildAndExpand(newBom.id())
           .toUri();
 
