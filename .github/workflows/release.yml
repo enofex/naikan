@@ -50,7 +50,7 @@ jobs:
         run: ./mvnw --no-transfer-progress --batch-mode clean package
 
       - name: Docker build and push
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v5
         with:
           context: .
           file: ./Dockerfile
