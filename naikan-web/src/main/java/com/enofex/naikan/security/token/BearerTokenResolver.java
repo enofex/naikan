@@ -40,7 +40,7 @@ final class BearerTokenResolver {
     while (headers.hasMoreElements()) {
       String value = headers.nextElement();
 
-      if ((value.toLowerCase().startsWith(BEARER_TYPE.toLowerCase()))) {
+      if (value.toLowerCase().startsWith(BEARER_TYPE.toLowerCase())) {
         String authHeaderValue = value.substring(BEARER_TYPE.length()).trim();
 
         int commaIndex = authHeaderValue.indexOf(',');
