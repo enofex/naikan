@@ -182,7 +182,7 @@ class SecurityConfiguration {
     SecurityFilterChain openApiSecurityFilterChain(HttpSecurity http) throws Exception {
       http
           .securityMatchers(matchers -> matchers.requestMatchers(
-              new AntPathRequestMatcher(API_URLS))
+              new AntPathRequestMatcher(OPENAPI_URL))
           )
           .csrf(AbstractHttpConfigurer::disable)
           .cors(AbstractHttpConfigurer::disable)
@@ -190,7 +190,7 @@ class SecurityConfiguration {
           .sessionManagement(session -> session
               .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
           .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-              .requestMatchers(OPENAPI_URL).permitAll()
+              .anyRequest().permitAll()
           );
 
       return http.build();
