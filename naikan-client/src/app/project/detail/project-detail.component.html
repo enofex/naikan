@@ -1,27 +1,27 @@
-<naikan-breadcrumb [items]="items" *ngIf="bom">
+<naikan-breadcrumb [items]="items" *ngIf="bomDetail">
   <ng-template #rightTemplate>
-    <span *ngIf="bom.timestamp"
+    <span *ngIf="bomDetail.timestamp"
           class="hidden md:inline-block font-normal text-500 text-sm mt-2 ml-2"> last updated
-      <span class="text-700"> {{ bom.timestamp | naikanDateTime }}</span>
+      <span class="text-700"> {{ bomDetail.timestamp | naikanDateTime }}</span>
     </span>
 
     <p-splitButton label="Export"
                    icon="pi pi-download"
                    [model]="this.exportItems"
-                   (onClick)="exportXsxl()"
+                   (onClick)="exportXlsx()"
                    appendTo="body"
                    styleClass="p-button-sm p-button-outlined ml-4">
     </p-splitButton>
   </ng-template>
 </naikan-breadcrumb>
 
-<div class="card card-border-none" *ngIf="bom">
+<div class="card card-border-none" *ngIf="bomDetail">
 
   <div class="grid">
     <p-tabView orientation="left" class="w-full">
 
       <p-tabPanel header="Overview" class="line-height-3 m-0">
-        <div class="grid" *ngIf="bom.organization">
+        <div class="grid" *ngIf="bomDetail.organization">
           <div class="col-12 mt-4 surface-50">
             <div class="text-xl font-bold text-900">
               <h5>Organization</h5>
@@ -30,28 +30,28 @@
             <div class="field grid">
               <label class="col-12 mb-2 md:col-2 md:mb-0">Name</label>
               <div class="col-12 md:col-10">
-                {{ bom.organization?.name}}
+                {{ bomDetail.organization?.name}}
               </div>
             </div>
 
             <div class="field grid">
               <label class="col-12 mb-2 md:col-2 md:mb-0">URL</label>
               <div class="col-12 md:col-10">
-                <naikan-url [url]="bom.organization?.url"></naikan-url>
+                <naikan-url [url]="bomDetail.organization?.url"></naikan-url>
               </div>
             </div>
 
             <div class="field grid">
               <label class="col-12 mb-2 md:col-2 md:mb-0">Department</label>
               <div class="col-12 md:col-10">
-                {{ bom.organization?.department}}
+                {{ bomDetail.organization?.department}}
               </div>
             </div>
 
             <div class="field grid">
               <label class="col-12 mb-2 md:col-2 md:mb-0">Description</label>
               <div class="col-12 md:col-10">
-                {{ bom.organization?.description}}
+                {{ bomDetail.organization?.description}}
               </div>
             </div>
           </div>
@@ -67,7 +67,7 @@
                 </div>
               </div>
               <div class="col-4 text-right">
-                <naikan-project-version [project]="bom.project">
+                <naikan-project-version [project]="bomDetail.project">
                 </naikan-project-version>
               </div>
             </div>
@@ -75,75 +75,75 @@
             <div class="field grid">
               <label class="col-12 mb-2 md:col-2 md:mb-0">Name</label>
               <div class="col-12 md:col-10">
-                {{ bom.project?.name}}
+                {{ bomDetail.project?.name}}
               </div>
             </div>
 
             <div class="field grid">
               <label class="col-12 mb-2 md:col-2 md:mb-0">Inception Year</label>
               <div class="col-12 md:col-10">
-                {{ bom.project?.inceptionYear}}
+                {{ bomDetail.project?.inceptionYear}}
               </div>
             </div>
 
             <div class="field grid">
               <label class="col-12 mb-2 md:col-2 md:mb-0">URL</label>
               <div class="col-12 md:col-10">
-                <naikan-url [url]="bom.project?.url"></naikan-url>
+                <naikan-url [url]="bomDetail.project?.url"></naikan-url>
               </div>
             </div>
 
             <div class="field grid">
               <label class="col-12 mb-2 md:col-2 md:mb-0">Repository</label>
               <div class="col-12 md:col-10">
-                <naikan-url [url]="bom.project?.repository"></naikan-url>
+                <naikan-url [url]="bomDetail.project?.repository"></naikan-url>
               </div>
             </div>
 
             <div class="field grid">
               <label class="col-12 mb-2 md:col-2 md:mb-0">Packaging</label>
               <div class="col-12 md:col-10">
-                {{ bom.project?.packaging}}
+                {{ bomDetail.project?.packaging}}
               </div>
             </div>
 
-            <div class="field grid" *ngIf="bom.project?.groupId">
+            <div class="field grid" *ngIf="bomDetail.project?.groupId">
               <label class="col-12 mb-2 md:col-2 md:mb-0">Group</label>
               <div class="col-12 md:col-10">
-                {{ bom.project?.groupId}}
+                {{ bomDetail.project?.groupId}}
               </div>
             </div>
 
-            <div class="field grid" *ngIf="bom.project?.artifactId">
+            <div class="field grid" *ngIf="bomDetail.project?.artifactId">
               <label class="col-12 mb-2 md:col-2 md:mb-0">Artifact</label>
               <div class="col-12 md:col-10">
-                {{ bom.project?.artifactId}}
+                {{ bomDetail.project?.artifactId}}
               </div>
             </div>
 
             <div class="field grid">
               <label class="col-12 mb-2 md:col-2 md:mb-0">Description</label>
               <div class="col-12 md:col-10">
-                {{ bom.project?.description}}
+                {{ bomDetail.project?.description}}
               </div>
             </div>
 
             <div class="field grid">
               <label class="col-12 mb-2 md:col-2 md:mb-0">Notes</label>
               <div class="col-12 md:col-10">
-                {{ bom.project?.notes}}
+                {{ bomDetail.project?.notes}}
               </div>
             </div>
 
             <div class="field grid">
               <label class="col-12 mb-2 md:col-2 md:mb-0">Tags</label>
               <div class="col-12 md:col-10">
-                <naikan-tags [tags]="bom.tags"></naikan-tags>
+                <naikan-tags [tags]="bomDetail.tags"></naikan-tags>
               </div>
             </div>
 
             <div class="mt-6"
-                 *ngIf="bom.project?.groupId && bom.project?.artifactId && bom.project?.version">
+                 *ngIf="bomDetail.project?.groupId && bomDetail.project?.artifactId && bomDetail.project?.version">
               <p-tabView orientation="left" class="w-full">
                 <p-tabPanel header="Maven" class="line-height-3 m-0">
                   <div class="relative">
@@ -159,9 +159,9 @@
 
                     <pre class="surface-50 p-3 mt-3" #maven>
 &lt;dependency&gt;
-  &lt;groupId&gt;{{ bom.project?.groupId}}&lt;/groupId&gt;
-  &lt;artifactId&gt;{{ bom.project?.artifactId}}&lt;/artifactId&gt;
-  &lt;version&gt;{{ bom.project?.version}}&lt;/versiond&gt;
+  &lt;groupId&gt;{{ bomDetail.project?.groupId}}&lt;/groupId&gt;
+  &lt;artifactId&gt;{{ bomDetail.project?.artifactId}}&lt;/artifactId&gt;
+  &lt;version&gt;{{ bomDetail.project?.version}}&lt;/versiond&gt;
 &lt;/dependency&gt;
 </pre>
                   </div>
@@ -179,7 +179,7 @@
                       </p-button>
                     </div>
                     <pre class="surface-50 p-3 mt-3" #gradle>
-implementation "{{ bom.project?.groupId}}:{{ bom.project?.artifactId}}:{{ bom.project?.version}}"
+implementation "{{ bomDetail.project?.groupId}}:{{ bomDetail.project?.artifactId}}:{{ bomDetail.project?.version}}"
 </pre>
                   </div>
                 </p-tabPanel>
@@ -189,9 +189,7 @@ implementation "{{ bom.project?.groupId}}:{{ bom.project?.artifactId}}:{{ bom.pr
         </div>
       </p-tabPanel>
 
-      <p-tabPanel header="Environments"
-                  class="line-height-3 m-0"
-                  [disabled]="bom.environments && bom.environments.length === 0">
+      <p-tabPanel header="Environments" class="line-height-3 m-0">
         <p-table
             #tableEnvironments
             styleClass="p-datatable-striped"
@@ -200,7 +198,7 @@ implementation "{{ bom.project?.groupId}}:{{ bom.project?.artifactId}}:{{ bom.pr
             [sortOrder]="1"
             sortField="name"
             sortMode="multiple"
-            [value]="bom.environments"
+            [value]="bomDetail.environments"
             [paginator]="true"
             [alwaysShowPaginator]="false"
             [rows]="25"
@@ -248,12 +246,10 @@ implementation "{{ bom.project?.groupId}}:{{ bom.project?.artifactId}}:{{ bom.pr
         </p-table>
       </p-tabPanel>
 
-      <p-tabPanel header="Teams"
-                  class="line-height-3 m-0"
-                  [disabled]="bom.teams && bom.teams.length === 0">
+      <p-tabPanel header="Teams" class="line-height-3 m-0">
         <p-table
             #tableTeams
-            [value]="bom.teams"
+            [value]="bomDetail.teams"
             [paginator]="true"
             [rows]="25"
             styleClass="p-datatable-striped"
@@ -297,9 +293,7 @@ implementation "{{ bom.project?.groupId}}:{{ bom.project?.artifactId}}:{{ bom.pr
         </p-table>
       </p-tabPanel>
 
-      <p-tabPanel header="Developers"
-                  class="line-height-3 m-0"
-                  [disabled]="bom.developers && bom.developers.length === 0">
+      <p-tabPanel header="Developers" class="line-height-3 m-0">
         <p-table
             #tableDevelopers
             styleClass="p-datatable-striped"
@@ -308,7 +302,7 @@ implementation "{{ bom.project?.groupId}}:{{ bom.project?.artifactId}}:{{ bom.pr
             [sortOrder]="1"
             sortField="name"
             sortMode="multiple"
-            [value]="bom.developers"
+            [value]="bomDetail.developers"
             [paginator]="true"
             [alwaysShowPaginator]="false"
             [rows]="25"
@@ -386,9 +380,7 @@ implementation "{{ bom.project?.groupId}}:{{ bom.project?.artifactId}}:{{ bom.pr
         </p-table>
       </p-tabPanel>
 
-      <p-tabPanel header="Contacts"
-                  class="line-height-3 m-0"
-                  [disabled]="bom.contacts && bom.contacts.length === 0">
+      <p-tabPanel header="Contacts" class="line-height-3 m-0">
         <p-table
             #tableContacts
             styleClass="p-datatable-striped"
@@ -397,7 +389,7 @@ implementation "{{ bom.project?.groupId}}:{{ bom.project?.artifactId}}:{{ bom.pr
             [sortOrder]="1"
             sortField="name"
             sortMode="multiple"
-            [value]="bom.contacts"
+            [value]="bomDetail.contacts"
             [paginator]="true"
             [rows]="25"
             [alwaysShowPaginator]="false"
@@ -453,9 +445,7 @@ implementation "{{ bom.project?.groupId}}:{{ bom.project?.artifactId}}:{{ bom.pr
         </p-table>
       </p-tabPanel>
 
-      <p-tabPanel header="Documentations"
-                  class="line-height-3 m-0"
-                  [disabled]="bom.documentations && bom.documentations.length === 0">
+      <p-tabPanel header="Documentations" class="line-height-3 m-0">
         <p-table
             #tableDocumentations
             styleClass="p-datatable-striped"
@@ -464,7 +454,7 @@ implementation "{{ bom.project?.groupId}}:{{ bom.project?.artifactId}}:{{ bom.pr
             [sortOrder]="1"
             sortField="name"
             sortMode="multiple"
-            [value]="bom.documentations"
+            [value]="bomDetail.documentations"
             [paginator]="true"
             [alwaysShowPaginator]="false"
             [rows]="25"
@@ -511,9 +501,7 @@ implementation "{{ bom.project?.groupId}}:{{ bom.project?.artifactId}}:{{ bom.pr
         </p-table>
       </p-tabPanel>
 
-      <p-tabPanel header="Integrations"
-                  class="line-height-3 m-0"
-                  [disabled]="bom.integrations && bom.integrations.length === 0">
+      <p-tabPanel header="Integrations" class="line-height-3 m-0">
         <p-table
             #tableIntegrations
             styleClass="p-datatable-striped"
@@ -522,7 +510,7 @@ implementation "{{ bom.project?.groupId}}:{{ bom.project?.artifactId}}:{{ bom.pr
             [sortOrder]="1"
             sortField="name"
             sortMode="multiple"
-            [value]="bom.integrations"
+            [value]="bomDetail.integrations"
             [paginator]="true"
             [alwaysShowPaginator]="false"
             [rows]="25"
@@ -570,9 +558,7 @@ implementation "{{ bom.project?.groupId}}:{{ bom.project?.artifactId}}:{{ bom.pr
         </p-table>
       </p-tabPanel>
 
-      <p-tabPanel header="Technologies"
-                  class="line-height-3 m-0"
-                  [disabled]="bom.technologies && bom.technologies.length === 0">
+      <p-tabPanel header="Technologies" class="line-height-3 m-0">
         <p-table
             #tableTechnologies
             styleClass="p-datatable-striped"
@@ -581,7 +567,7 @@ implementation "{{ bom.project?.groupId}}:{{ bom.project?.artifactId}}:{{ bom.pr
             [sortOrder]="1"
             sortField="name"
             sortMode="multiple"
-            [value]="bom.technologies"
+            [value]="bomDetail.technologies"
             [paginator]="true"
             [alwaysShowPaginator]="false"
             [rows]="25"
@@ -628,15 +614,16 @@ implementation "{{ bom.project?.groupId}}:{{ bom.project?.artifactId}}:{{ bom.pr
         </p-table>
       </p-tabPanel>
 
-      <p-tabPanel header="Deployments"
-                  class="line-height-3 m-0"
-                  [disabled]="bom.deployments && bom.deployments.length === 0">
+      <p-tabPanel header="Deployments" class="line-height-3 m-0">
 
-        <div class="card border-none px-0" *ngIf="bom.deployments?.length > 0">
-          <naikan-deployments-chart
-              height="300px"
-              [deployments]="bom.deployments">
-          </naikan-deployments-chart>
+        <div class="card border-none px-0"
+             *ngIf="deploymentsPerMonth && deploymentsPerMonth.months.length > 0">
+          <p-chart
+                   type="line"
+                   height="300px"
+                   [data]="chartDeployments.data"
+                   [options]="chartDeployments.options">
+          </p-chart>
         </div>
 
         <p-table
@@ -644,13 +631,18 @@ implementation "{{ bom.project?.groupId}}:{{ bom.project?.artifactId}}:{{ bom.pr
             styleClass="p-datatable-striped"
             [rowHover]="true"
             sortMode="multiple"
-            [value]="bom.deployments"
+            sortField="timestamp"
+            [sortOrder]="-1"
+            [lazy]="true"
+            (onLazyLoad)="loadDeployments($event)"
+            [value]="deploymentsPage?.content"
             [paginator]="true"
             [alwaysShowPaginator]="false"
+            [expandedRowKeys]="expandedVersionRows"
             [rows]="25"
             [rowsPerPageOptions]="[10, 25, 50, 100, 200]"
-            [globalFilterFields]="['environment', 'location', 'timestamp','version']"
-        >
+            [totalRecords]="deploymentsPage?.totalElements">
+
           <ng-template pTemplate="caption">
             <div class="flex justify-content-between flex-wrap">
               <div class="flex align-items-center justify-content-center">
@@ -720,11 +712,9 @@ implementation "{{ bom.project?.groupId}}:{{ bom.project?.artifactId}}:{{ bom.pr
 
       </p-tabPanel>
 
-      <p-tabPanel header="Versions"
-                  class="line-height-3 m-0"
-                  [disabled]="bom.deployments && bom.deployments.length === 0">
+      <p-tabPanel header="Versions" class="line-height-3 m-0">
 
-        <div class="card surface-50 border-none">
+        <div class="card surface-50 border-none" *ngIf="latestVersionPerEnvironment?.length > 0">
           <div class="flex justify-content-between align-items-center mb-3">
             <h5>Deployed versions</h5>
           </div>
@@ -757,14 +747,16 @@ implementation "{{ bom.project?.groupId}}:{{ bom.project?.artifactId}}:{{ bom.pr
             styleClass="p-datatable-striped"
             [rowHover]="true"
             sortMode="multiple"
-            [value]="groupedDeploymentsPerVersion"
+            [lazy]="true"
+            (onLazyLoad)="loadGroupedDeploymentsPerVersion($event)"
+            [value]="versionsPage?.content"
             [paginator]="true"
             [alwaysShowPaginator]="false"
             [expandedRowKeys]="expandedVersionRows"
             [rows]="25"
             [rowsPerPageOptions]="[10, 25, 50, 100, 200]"
-            [globalFilterFields]="['version']"
-        >
+            [totalRecords]="versionsPage?.totalElements">
+
           <ng-template pTemplate="caption">
             <div class="flex justify-content-start flex-column sm:flex-row mb-2">
               <naikan-search [table]="tableVersions"></naikan-search>
@@ -785,8 +777,8 @@ implementation "{{ bom.project?.groupId}}:{{ bom.project?.artifactId}}:{{ bom.pr
               <th pSortableColumn="version">Version
                 <p-sortIcon field="version"></p-sortIcon>
               </th>
-              <th class="w-12rem" pSortableColumn="deploymentsCount">Deployments
-                <p-sortIcon field="deploymentsCount"></p-sortIcon>
+              <th class="w-12rem" pSortableColumn="count">Deployments
+                <p-sortIcon field="count"></p-sortIcon>
               </th>
             </tr>
           </ng-template>
@@ -805,7 +797,7 @@ implementation "{{ bom.project?.groupId}}:{{ bom.project?.artifactId}}:{{ bom.pr
               </td>
               <td>
                 <p-tag severity="primary"
-                       value="{{ versionGroup.deploymentsCount }}"
+                       value="{{ versionGroup.count }}"
                        [rounded]="true"></p-tag>
               </td>
             </tr>
@@ -851,9 +843,7 @@ implementation "{{ bom.project?.groupId}}:{{ bom.project?.artifactId}}:{{ bom.pr
         </p-table>
       </p-tabPanel>
 
-      <p-tabPanel header="Licenses"
-                  class="line-height-3 m-0"
-                  [disabled]="bom.licenses && bom.licenses.length === 0">
+      <p-tabPanel header="Licenses" class="line-height-3 m-0">
         <p-table
             #tableLicenses
             styleClass="p-datatable-striped"
@@ -862,7 +852,7 @@ implementation "{{ bom.project?.groupId}}:{{ bom.project?.artifactId}}:{{ bom.pr
             [sortOrder]="1"
             sortField="name"
             sortMode="multiple"
-            [value]="bom.licenses"
+            [value]="bomDetail.licenses"
             [paginator]="true"
             [alwaysShowPaginator]="false"
             [rows]="25"

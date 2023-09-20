@@ -6,12 +6,17 @@ import static com.enofex.naikan.test.model.Boms.validBom1asInputStream;
 import static com.enofex.naikan.test.model.Boms.validBom2asInputStream;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.enofex.naikan.Filterable;
 import com.enofex.naikan.ProjectId;
 import com.enofex.naikan.model.Bom;
 import com.enofex.naikan.model.Deployment;
 import com.enofex.naikan.model.Deployments;
+import com.enofex.naikan.project.DeploymentsPerMonth;
+import com.enofex.naikan.project.GroupedDeploymentsPerVersion;
+import com.enofex.naikan.project.LatestVersionPerEnvironment;
 import com.enofex.naikan.project.ProjectFilter;
 import com.enofex.naikan.project.ProjectRepository;
 import com.enofex.naikan.test.IntegrationTest;
@@ -43,13 +48,13 @@ class ProjectMongoRepositoryIT {
     this.repository.upsertByProjectName(newJsonDeserializer().of(validBom1asInputStream()));
     this.repository.upsertByProjectName(newJsonDeserializer().of(validBom2asInputStream()));
 
-    assertEquals(3, this.repository.findAll(Filterable.emptySearch(),
+    assertEquals(3L, this.repository.findAll(Filterable.emptySearch(),
         Pageable.ofSize(10)).getTotalElements());
 
-    assertEquals(0, this.repository.findAll(Filterable.of("do_not_exists"),
+    assertEquals(0L, this.repository.findAll(Filterable.of("do_not_exists"),
         Pageable.ofSize(10)).getTotalElements());
 
-    assertEquals(1, this.repository.findAll(Filterable.of("Naikan III"),
+    assertEquals(1L, this.repository.findAll(Filterable.of("Naikan III"),
         Pageable.ofSize(10)).getTotalElements());
   }
 
@@ -61,7 +66,7 @@ class ProjectMongoRepositoryIT {
     this.repository.update(ProjectId.of(savedBom.id()),
         newJsonDeserializer().of(validBom0asInputStream()));
 
-    assertEquals(1, this.template.count(new Query(), "projects"));
+    assertEquals(1L, this.template.count(new Query(), "projects"));
   }
 
   @Test
@@ -69,7 +74,7 @@ class ProjectMongoRepositoryIT {
     this.repository.update(ProjectId.of("do_not_exits"),
         newJsonDeserializer().of(validBom0asInputStream()));
 
-    assertEquals(0, this.template.count(new Query(), "projects"));
+    assertEquals(0L, this.template.count(new Query(), "projects"));
   }
 
   @Test
@@ -77,7 +82,7 @@ class ProjectMongoRepositoryIT {
     this.repository.upsertByProjectName(newJsonDeserializer().of(validBom0asInputStream()));
     this.repository.upsertByProjectName(newJsonDeserializer().of(validBom0asInputStream()));
 
-    assertEquals(1, this.template.count(new Query(), "projects"));
+    assertEquals(1L, this.template.count(new Query(), "projects"));
   }
 
   @Test
@@ -85,7 +90,7 @@ class ProjectMongoRepositoryIT {
     this.repository.upsertByProjectName(newJsonDeserializer().of(validBom0asInputStream()));
     this.repository.upsertByProjectName(newJsonDeserializer().of(validBom1asInputStream()));
 
-    assertEquals(2, this.template.count(new Query(), "projects"));
+    assertEquals(2L, this.template.count(new Query(), "projects"));
   }
 
   @Test
@@ -104,7 +109,7 @@ class ProjectMongoRepositoryIT {
     Bom savedBom = this.repository.upsertByProjectName(modifiedBom);
 
     assertEquals(1, savedBom.deployments().all().size());
-    assertEquals(1, this.template.count(new Query(), "projects"));
+    assertEquals(1L, this.template.count(new Query(), "projects"));
   }
 
   @Test
@@ -113,6 +118,106 @@ class ProjectMongoRepositoryIT {
     Bom savedBom = this.repository.upsertByProjectName(bom);
 
     assertEquals(savedBom.id(), this.repository.findById(ProjectId.of(savedBom.id())).get().id());
+  }
+
+  @Test
+  void shouldFindBomDetailById() {
+    Bom bom = newJsonDeserializer().of(validBom1asInputStream());
+    Bom savedBom = this.repository.upsertByProjectName(bom);
+
+    assertEquals(savedBom.id(),
+        this.repository.findBomDetailById(ProjectId.of(savedBom.id())).get().id());
+  }
+
+  @Test
+  void shouldFindDeployments() {
+    Bom bom = newJsonDeserializer().of(validBom1asInputStream());
+    Bom savedBom = this.repository.upsertByProjectName(bom);
+
+    List<Deployment> deployments = this.repository.findDeployments(
+        ProjectId.of(savedBom.id()),
+        Filterable.emptySearch(),
+        Pageable.ofSize(10)).getContent();
+
+    assertAll(
+        () -> assertEquals(2, deployments.size()),
+        () -> assertEquals("2.0.0", deployments.get(0).version()),
+        () -> assertEquals("staging.naikan.io", deployments.get(0).location()),
+        () -> assertEquals("Staging", deployments.get(0).environment())
+    );
+  }
+
+
+  @Test
+  void shouldFindGroupedDeploymentsPerVersion() {
+    Bom bom = newJsonDeserializer().of(validBom1asInputStream());
+    Bom savedBom = this.repository.upsertByProjectName(bom);
+
+    List<GroupedDeploymentsPerVersion> deployments = this.repository.findGroupedDeploymentsPerVersion(
+        ProjectId.of(savedBom.id()),
+        Filterable.emptySearch(),
+        Pageable.ofSize(10)).getContent();
+
+    assertAll(
+        () -> assertEquals(2, deployments.size()),
+        () -> assertEquals("2.0.1", deployments.get(0).version()),
+        () -> assertEquals(1, deployments.get(0).count()),
+        () -> assertEquals(1, deployments.get(0).deployments().size()),
+        () -> assertEquals("2.0.1", deployments.get(0).deployments().get(0).version()),
+        () -> assertEquals("naikan.io", deployments.get(0).deployments().get(0).location()),
+        () -> assertEquals("Production", deployments.get(0).deployments().get(0).environment())
+    );
+  }
+
+  @Test
+  void shouldFindLatestVersionPerEnvironment() {
+    Bom bom = newJsonDeserializer().of(validBom1asInputStream());
+    Bom savedBom = this.repository.upsertByProjectName(bom);
+
+    List<LatestVersionPerEnvironment> deployments = this.repository.findLatestVersionPerEnvironment(
+        ProjectId.of(savedBom.id()));
+
+    assertAll(
+        () -> assertEquals(2, deployments.size()),
+        () -> assertEquals("Production", deployments.get(0).environment()),
+        () -> assertEquals("2.0.1", deployments.get(0).deployment().version()),
+        () -> assertEquals("naikan.io", deployments.get(0).deployment().location()),
+        () -> assertEquals("Production", deployments.get(0).deployment().environment())
+    );
+  }
+
+  @Test
+  void shouldFindDeploymentsPerMonth() {
+    Bom bom = newJsonDeserializer().of(validBom1asInputStream());
+    Bom savedBom = this.repository.upsertByProjectName(bom);
+
+    DeploymentsPerMonth deploymentsPerMonth = this.repository.findDeploymentsPerMonth(
+        ProjectId.of(savedBom.id()));
+
+    assertAll(
+        () -> assertEquals(10, deploymentsPerMonth.months().size()),
+        () -> assertEquals(10, deploymentsPerMonth.counts().size()),
+        () -> assertEquals(
+            List.of("2022-12", "2023-01", "2023-02", "2023-03", "2023-04", "2023-05", "2023-06",
+                "2023-07", "2023-08", "2023-09"), deploymentsPerMonth.months()),
+        () -> assertEquals(
+            List.of(1, 0, 0, 0, 0, 0, 0, 0, 0, 1), deploymentsPerMonth.counts())
+    );
+  }
+
+  @Test
+  void shouldExistsByProjectName() {
+    Bom bom = newJsonDeserializer().of(validBom1asInputStream());
+    Bom savedBom = this.repository.upsertByProjectName(bom);
+
+    assertTrue(this.repository.existsByProjectName(savedBom.project().name()));
+  }
+
+  @Test
+  void shouldNotExistsByProjectName() {
+    Bom bom = newJsonDeserializer().of(validBom1asInputStream());
+
+    assertFalse(this.repository.existsByProjectName(bom.project().name()));
   }
 
   @Test

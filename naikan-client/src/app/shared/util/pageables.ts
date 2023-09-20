@@ -14,9 +14,12 @@ export class Pageables {
 
   public static toPageRequestHttpParams(event: TableLazyLoadEvent): HttpParams {
     if (event) {
-      let params = new HttpParams()
-      .set('page', event.first === 0 ? 0 : (event.first / event.rows))
-      .set('size', `${event.rows}`);
+      let params = new HttpParams();
+
+      if (event.first !== undefined) {
+        params = params.append('page', event.first === 0 ? 0 : (event.first / event.rows))
+        params = params.append('size', `${event.rows}`);
+      }
 
       if (event.globalFilter && !Array.isArray(event.globalFilter) && event.globalFilter.length > 0) {
         params = params.append('search', event.globalFilter);

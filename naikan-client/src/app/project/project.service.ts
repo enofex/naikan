@@ -1,12 +1,18 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {BlockUIService, Bom, Page, Pageables, Principal, User} from "@naikan/shared";
+import {BlockUIService, Bom, Deployment, Page, Pageables, Principal, User} from "@naikan/shared";
 import {finalize, Observable} from 'rxjs';
 import {FilterMatchMode} from 'primeng/api';
 import {ProjectFilter} from "./project-filter";
 import {FilterMetadata} from "primeng/api/filtermetadata";
 import {TableLazyLoadEvent} from "primeng/table";
 import {saveAs} from 'file-saver';
+import {
+  DeploymentsPerMonth,
+  GroupedDeploymentsPerVersion,
+  LatestVersionPerEnvironment
+} from "./detail/project-detail.component";
+import {BomDetail} from "./detail/bom-detail";
 
 const endpoint = 'projects';
 
@@ -40,8 +46,8 @@ export class ProjectService {
     });
   }
 
-  getBom(id: string): Observable<Bom> {
-    return this.http.get<Bom>(`/${endpoint}/${id}`);
+  getBomDetail(id: string): Observable<BomDetail> {
+    return this.http.get<BomDetail>(`/${endpoint}/${id}`);
   }
 
   getProjectFilter(): Observable<ProjectFilter> {
@@ -52,7 +58,23 @@ export class ProjectService {
     return this.http.patch(`/${endpoint}/favorites`, favorites);
   }
 
-  exportXsxl(id: string) {
+  getProjectDeployments(id: string, event?: TableLazyLoadEvent): Observable<Page<Deployment>> {
+    return this.http.get<Page<Deployment>>(`/${endpoint}/${id}/deployments`, {params: Pageables.toPageRequestHttpParams(event)});
+  }
+
+  getDeploymentsPerMonth(id: string): Observable<DeploymentsPerMonth> {
+    return this.http.get<DeploymentsPerMonth>(`/${endpoint}/${id}/deployments/months`);
+  }
+
+  getGroupedDeploymentsPerVersion(id: string, event?: TableLazyLoadEvent): Observable<Page<GroupedDeploymentsPerVersion>> {
+    return this.http.get<Page<GroupedDeploymentsPerVersion>>(`/${endpoint}/${id}/versions/grouped`, {params: Pageables.toPageRequestHttpParams(event)});
+  }
+
+  getLatestVersionPerEnvironment(id: string): Observable<LatestVersionPerEnvironment[]> {
+    return this.http.get<LatestVersionPerEnvironment[]>(`/${endpoint}/${id}/versions/environments`);
+  }
+
+  exportXlsx(id: string) {
     return this.http.get(`/${endpoint}/${id}?xlsx`, {
       responseType: 'blob'
     })

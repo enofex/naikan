@@ -3,9 +3,15 @@ package com.enofex.naikan.project.support;
 import com.enofex.naikan.Filterable;
 import com.enofex.naikan.ProjectId;
 import com.enofex.naikan.model.Bom;
+import com.enofex.naikan.model.Deployment;
+import com.enofex.naikan.project.BomDetail;
+import com.enofex.naikan.project.DeploymentsPerMonth;
+import com.enofex.naikan.project.GroupedDeploymentsPerVersion;
+import com.enofex.naikan.project.LatestVersionPerEnvironment;
 import com.enofex.naikan.project.ProjectFilter;
 import com.enofex.naikan.project.ProjectRepository;
 import com.enofex.naikan.project.ProjectService;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -35,6 +41,32 @@ class ProjectServiceHandler implements ProjectService {
   @Override
   public Optional<Bom> findById(ProjectId id) {
     return this.projectRepository.findById(id);
+  }
+
+  @Override
+  public Optional<BomDetail> findBomDetailById(ProjectId id) {
+    return this.projectRepository.findBomDetailById(id);
+  }
+
+  @Override
+  public Page<Deployment> findDeployments(ProjectId id, Filterable filterable, Pageable pageable) {
+    return this.projectRepository.findDeployments(id, filterable, pageable);
+  }
+
+  @Override
+  public Page<GroupedDeploymentsPerVersion> findGroupedDeploymentsPerVersion(ProjectId id,
+      Filterable filterable, Pageable pageable) {
+    return this.projectRepository.findGroupedDeploymentsPerVersion(id, filterable, pageable);
+  }
+
+  @Override
+  public DeploymentsPerMonth findDeploymentsPerMonth(ProjectId id) {
+    return this.projectRepository.findDeploymentsPerMonth(id);
+  }
+
+  @Override
+  public List<LatestVersionPerEnvironment> findLatestVersionPerEnvironment(ProjectId id) {
+    return this.projectRepository.findLatestVersionPerEnvironment(id);
   }
 
   @Override

@@ -41,25 +41,77 @@ class ProjectControllerIT {
   }
 
   @Test
-  void shouldFindById() throws Exception {
+  void shouldFindBomDetailById() throws Exception {
     Bom savedBom = this.template.save(
         DeserializerFactory.newJsonDeserializer().of(validBom0asInputStream()),
         "projects");
 
     this.mvc.perform(
             get("/api/projects/" + savedBom.id()))
-        .andExpect(handler().methodName("findById"))
+        .andExpect(handler().methodName("findBomDetailById"))
         .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
         .andExpect(jsonPath("$.id").value(savedBom.id()));
   }
 
   @Test
-  void shouldNotFindById() throws Exception {
+  void shouldNotFindBomDetailById() throws Exception {
     this.mvc.perform(
             get("/api/projects/1234"))
-        .andExpect(handler().methodName("findById"))
+        .andExpect(handler().methodName("findBomDetailById"))
         .andExpect(status().isNotFound());
+  }
+
+  @Test
+  void shouldFindDeployments() throws Exception {
+    Bom savedBom = this.template.save(
+        DeserializerFactory.newJsonDeserializer().of(validBom0asInputStream()),
+        "projects");
+
+    this.mvc.perform(
+            get("/api/projects/%s/deployments".formatted(savedBom.id())))
+        .andExpect(handler().methodName("findDeployments"))
+        .andExpect(status().isOk())
+        .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+  }
+
+  @Test
+  void shouldFindDeploymentsPerMonth() throws Exception {
+    Bom savedBom = this.template.save(
+        DeserializerFactory.newJsonDeserializer().of(validBom0asInputStream()),
+        "projects");
+
+    this.mvc.perform(
+            get("/api/projects/%s/deployments/months".formatted(savedBom.id())))
+        .andExpect(handler().methodName("findDeploymentsPerMonth"))
+        .andExpect(status().isOk())
+        .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+  }
+
+  @Test
+  void shouldFindGroupedDeploymentsPerVersion() throws Exception {
+    Bom savedBom = this.template.save(
+        DeserializerFactory.newJsonDeserializer().of(validBom0asInputStream()),
+        "projects");
+
+    this.mvc.perform(
+            get("/api/projects/%s/versions/grouped".formatted(savedBom.id())))
+        .andExpect(handler().methodName("findGroupedDeploymentsPerVersion"))
+        .andExpect(status().isOk())
+        .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+  }
+
+  @Test
+  void shouldFindLatestVersionPerEnvironment() throws Exception {
+    Bom savedBom = this.template.save(
+        DeserializerFactory.newJsonDeserializer().of(validBom0asInputStream()),
+        "projects");
+
+    this.mvc.perform(
+            get("/api/projects/%s/versions/environments".formatted(savedBom.id())))
+        .andExpect(handler().methodName("findLatestVersionPerEnvironment"))
+        .andExpect(status().isOk())
+        .andExpect(content().contentType(MediaType.APPLICATION_JSON));
   }
 
   @Test

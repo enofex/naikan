@@ -5,6 +5,7 @@ import com.enofex.naikan.ProjectId;
 import com.enofex.naikan.administration.user.AdministrationUserService;
 import com.enofex.naikan.administration.user.User;
 import com.enofex.naikan.model.Bom;
+import com.enofex.naikan.model.Deployment;
 import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -37,26 +38,6 @@ class ProjectController {
     return ResponseEntity.ok(this.projectService.findAll(filterable, pageable));
   }
 
-  @GetMapping(params = "xlsx")
-  public ModelAndView xlsxAll(Filterable filterable, Pageable pageable) {
-    List<Bom> boms = this.projectService.findAll(filterable, pageable).getContent();
-    return new ModelAndView(new ProjectAllXlsxView(boms));
-  }
-
-  @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<Bom> findById(@PathVariable ProjectId id) {
-    return this.projectService.findById(id)
-        .map(ResponseEntity::ok)
-        .orElseGet(() -> ResponseEntity.notFound().build());
-  }
-
-  @GetMapping(params = "xlsx", value = "/{id}")
-  public ModelAndView xlsx(@PathVariable ProjectId id) {
-    return this.projectService.findById(id)
-        .map(bom -> new ModelAndView(new ProjectXlsxView(bom)))
-        .orElseGet(ModelAndView::new);
-  }
-
   @GetMapping(value = "/filter", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<ProjectFilter> findFilter() {
     return ResponseEntity.ok(this.projectService.findFilter());
@@ -75,4 +56,49 @@ class ProjectController {
 
     return ResponseEntity.noContent().build();
   }
+
+  @GetMapping(params = "xlsx")
+  public ModelAndView xlsxAll(Filterable filterable, Pageable pageable) {
+    List<Bom> boms = this.projectService.findAll(filterable, pageable).getContent();
+    return new ModelAndView(new ProjectAllXlsxView(boms));
+  }
+
+  @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<BomDetail> findBomDetailById(@PathVariable ProjectId id) {
+    return this.projectService.findBomDetailById(id)
+        .map(ResponseEntity::ok)
+        .orElseGet(() -> ResponseEntity.notFound().build());
+  }
+
+  @GetMapping(value = "/{id}/deployments", produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<Page<Deployment>> findDeployments(@PathVariable ProjectId id,
+      Filterable filterable, Pageable pageable) {
+    return ResponseEntity.ok(this.projectService.findDeployments(id, filterable, pageable));
+  }
+
+  @GetMapping(value = "/{id}/deployments/months", produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<DeploymentsPerMonth> findDeploymentsPerMonth(@PathVariable ProjectId id) {
+    return ResponseEntity.ok(this.projectService.findDeploymentsPerMonth(id));
+  }
+
+  @GetMapping(value = "/{id}/versions/grouped", produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<Page<GroupedDeploymentsPerVersion>> findGroupedDeploymentsPerVersion(
+      @PathVariable ProjectId id, Filterable filterable, Pageable pageable) {
+    return ResponseEntity.ok(
+        this.projectService.findGroupedDeploymentsPerVersion(id, filterable, pageable));
+  }
+
+  @GetMapping(value = "/{id}/versions/environments", produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<List<LatestVersionPerEnvironment>> findLatestVersionPerEnvironment(
+      @PathVariable ProjectId id) {
+    return ResponseEntity.ok(this.projectService.findLatestVersionPerEnvironment(id));
+  }
+
+  @GetMapping(params = "xlsx", value = "/{id}")
+  public ModelAndView xlsx(@PathVariable ProjectId id) {
+    return this.projectService.findById(id)
+        .map(bom -> new ModelAndView(new ProjectXlsxView(bom)))
+        .orElseGet(ModelAndView::new);
+  }
+
 }
