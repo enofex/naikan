@@ -6,8 +6,6 @@ import static com.enofex.naikan.test.model.Boms.validBom1asInputStream;
 import static com.enofex.naikan.test.model.Boms.validBom2asInputStream;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.enofex.naikan.Filterable;
 import com.enofex.naikan.ProjectId;
@@ -44,9 +42,9 @@ class ProjectMongoRepositoryIT {
 
   @Test
   void shouldFindAll() {
-    this.repository.upsertByProjectName(newJsonDeserializer().of(validBom0asInputStream()));
-    this.repository.upsertByProjectName(newJsonDeserializer().of(validBom1asInputStream()));
-    this.repository.upsertByProjectName(newJsonDeserializer().of(validBom2asInputStream()));
+    this.template.save(newJsonDeserializer().of(validBom0asInputStream()), "projects");
+    this.template.save(newJsonDeserializer().of(validBom1asInputStream()), "projects");
+    this.template.save(newJsonDeserializer().of(validBom2asInputStream()), "projects");
 
     assertEquals(3L, this.repository.findAll(Filterable.emptySearch(),
         Pageable.ofSize(10)).getTotalElements());
@@ -59,36 +57,9 @@ class ProjectMongoRepositoryIT {
   }
 
   @Test
-  void shouldUpdateByProjectIdBom() {
-    Bom bom = newJsonDeserializer().of(validBom1asInputStream());
-    Bom savedBom = this.repository.upsertByProjectName(bom);
-
-    this.repository.update(ProjectId.of(savedBom.id()),
-        newJsonDeserializer().of(validBom0asInputStream()));
-
-    assertEquals(1L, this.template.count(new Query(), "projects"));
-  }
-
-  @Test
-  void shouldNotUpdateByProjectIdBom() {
-    this.repository.update(ProjectId.of("do_not_exits"),
-        newJsonDeserializer().of(validBom0asInputStream()));
-
-    assertEquals(0L, this.template.count(new Query(), "projects"));
-  }
-
-  @Test
-  void shouldUpdateBom() {
-    this.repository.upsertByProjectName(newJsonDeserializer().of(validBom0asInputStream()));
-    this.repository.upsertByProjectName(newJsonDeserializer().of(validBom0asInputStream()));
-
-    assertEquals(1L, this.template.count(new Query(), "projects"));
-  }
-
-  @Test
   void shouldSaveBom() {
-    this.repository.upsertByProjectName(newJsonDeserializer().of(validBom0asInputStream()));
-    this.repository.upsertByProjectName(newJsonDeserializer().of(validBom1asInputStream()));
+    this.template.save(newJsonDeserializer().of(validBom0asInputStream()), "projects");
+    this.template.save(newJsonDeserializer().of(validBom1asInputStream()), "projects");
 
     assertEquals(2L, this.template.count(new Query(), "projects"));
   }
@@ -106,7 +77,7 @@ class ProjectMongoRepositoryIT {
             LocalDateTime.now()))))
         .build();
 
-    Bom savedBom = this.repository.upsertByProjectName(modifiedBom);
+    Bom savedBom = this.template.save(modifiedBom, "projects");
 
     assertEquals(1, savedBom.deployments().all().size());
     assertEquals(1L, this.template.count(new Query(), "projects"));
@@ -115,7 +86,7 @@ class ProjectMongoRepositoryIT {
   @Test
   void shouldFindById() {
     Bom bom = newJsonDeserializer().of(validBom1asInputStream());
-    Bom savedBom = this.repository.upsertByProjectName(bom);
+    Bom savedBom = this.template.save(bom, "projects");
 
     assertEquals(savedBom.id(), this.repository.findById(ProjectId.of(savedBom.id())).get().id());
   }
@@ -123,7 +94,7 @@ class ProjectMongoRepositoryIT {
   @Test
   void shouldFindBomDetailById() {
     Bom bom = newJsonDeserializer().of(validBom1asInputStream());
-    Bom savedBom = this.repository.upsertByProjectName(bom);
+    Bom savedBom = this.template.save(bom, "projects");
 
     assertEquals(savedBom.id(),
         this.repository.findBomDetailById(ProjectId.of(savedBom.id())).get().id());
@@ -132,7 +103,7 @@ class ProjectMongoRepositoryIT {
   @Test
   void shouldFindDeployments() {
     Bom bom = newJsonDeserializer().of(validBom1asInputStream());
-    Bom savedBom = this.repository.upsertByProjectName(bom);
+    Bom savedBom = this.template.save(bom, "projects");
 
     List<Deployment> deployments = this.repository.findDeployments(
         ProjectId.of(savedBom.id()),
@@ -151,7 +122,7 @@ class ProjectMongoRepositoryIT {
   @Test
   void shouldFindGroupedDeploymentsPerVersion() {
     Bom bom = newJsonDeserializer().of(validBom1asInputStream());
-    Bom savedBom = this.repository.upsertByProjectName(bom);
+    Bom savedBom = this.template.save(bom, "projects");
 
     List<GroupedDeploymentsPerVersion> deployments = this.repository.findGroupedDeploymentsPerVersion(
         ProjectId.of(savedBom.id()),
@@ -172,7 +143,7 @@ class ProjectMongoRepositoryIT {
   @Test
   void shouldFindLatestVersionPerEnvironment() {
     Bom bom = newJsonDeserializer().of(validBom1asInputStream());
-    Bom savedBom = this.repository.upsertByProjectName(bom);
+    Bom savedBom = this.template.save(bom, "projects");
 
     List<LatestVersionPerEnvironment> deployments = this.repository.findLatestVersionPerEnvironment(
         ProjectId.of(savedBom.id()));
@@ -189,7 +160,7 @@ class ProjectMongoRepositoryIT {
   @Test
   void shouldFindDeploymentsPerMonth() {
     Bom bom = newJsonDeserializer().of(validBom1asInputStream());
-    Bom savedBom = this.repository.upsertByProjectName(bom);
+    Bom savedBom = this.template.save(bom, "projects");
 
     DeploymentsPerMonth deploymentsPerMonth = this.repository.findDeploymentsPerMonth(
         ProjectId.of(savedBom.id()));
@@ -206,25 +177,10 @@ class ProjectMongoRepositoryIT {
   }
 
   @Test
-  void shouldExistsByProjectName() {
-    Bom bom = newJsonDeserializer().of(validBom1asInputStream());
-    Bom savedBom = this.repository.upsertByProjectName(bom);
-
-    assertTrue(this.repository.existsByProjectName(savedBom.project().name()));
-  }
-
-  @Test
-  void shouldNotExistsByProjectName() {
-    Bom bom = newJsonDeserializer().of(validBom1asInputStream());
-
-    assertFalse(this.repository.existsByProjectName(bom.project().name()));
-  }
-
-  @Test
   void shouldFindFilterCriteria() {
-    this.repository.upsertByProjectName(newJsonDeserializer().of(validBom0asInputStream()));
-    this.repository.upsertByProjectName(newJsonDeserializer().of(validBom1asInputStream()));
-    this.repository.upsertByProjectName(newJsonDeserializer().of(validBom2asInputStream()));
+    this.template.save(newJsonDeserializer().of(validBom0asInputStream()), "projects");
+    this.template.save(newJsonDeserializer().of(validBom1asInputStream()), "projects");
+    this.template.save(newJsonDeserializer().of(validBom2asInputStream()), "projects");
 
     ProjectFilter filter = this.repository.findFilter();
 

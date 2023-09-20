@@ -7,7 +7,6 @@ import static org.springframework.data.mongodb.core.aggregation.Aggregation.proj
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.sort;
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.unwind;
 import static org.springframework.data.mongodb.core.aggregation.ConditionalOperators.IfNull.ifNull;
-import static org.springframework.data.mongodb.core.query.Criteria.where;
 
 import com.enofex.naikan.AbstractRepository;
 import com.enofex.naikan.Filterable;
@@ -27,19 +26,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import org.bson.Document;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
-import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
 import org.springframework.data.mongodb.core.aggregation.ArrayOperators;
 import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -188,10 +183,7 @@ class ProjectMongoRepository extends AbstractRepository implements ProjectReposi
         .getMappedResults();
   }
 
-  @Override
-  public Optional<Bom> findById(ProjectId id) {
-    return Optional.ofNullable(template().findById(id.id(), Bom.class, collectionName()));
-  }
+
 
   @Override
   public Optional<BomDetail> findBomDetailById(ProjectId id) {
@@ -313,41 +305,6 @@ class ProjectMongoRepository extends AbstractRepository implements ProjectReposi
     );
     return template().aggregate(aggregation, collectionName(),
         LatestVersionPerEnvironment.class).getMappedResults();
-  }
-
-  @Override
-  public boolean existsByProjectName(String projectName) {
-    Query query = new Query(where("project.name").is(projectName));
-    return template().exists(query, Bom.class, collectionName());
-  }
-
-  @Override
-  public Bom update(ProjectId id, Bom bom) {
-    Query query = new Query(where("id").is(id.id()));
-    return findAndModify(query, false, bom);
-  }
-
-  @Override
-  public Bom upsertByProjectName(Bom bom) {
-    Query query = new Query(where("project.name").is(bom.project().name()));
-    return findAndModify(query, true, bom);
-  }
-
-  private Bom findAndModify(Query query, boolean upsert, Bom bom) {
-    Update update = Update.fromDocument(toDocument(bom), "deployments")
-        .addToSet("deployments")
-        .each(bom.deployments().all());
-
-    FindAndModifyOptions options = new FindAndModifyOptions().returnNew(true).upsert(upsert);
-
-    return template().findAndModify(query, update, options, Bom.class, collectionName());
-  }
-
-  private Document toDocument(Bom bom) {
-    Document document = new Document();
-    template().getConverter().write(bom, document);
-
-    return document;
   }
 }
 

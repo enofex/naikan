@@ -5,17 +5,17 @@ import static org.springframework.data.mongodb.core.aggregation.Aggregation.limi
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.skip;
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.sort;
 
+import com.enofex.naikan.model.Bom;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import org.bson.Document;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.support.PageableExecutionUtils;
 
 public abstract class AbstractRepository {
@@ -42,6 +42,10 @@ public abstract class AbstractRepository {
     return this.collectionName;
   }
 
+  public Optional<Bom> findById(ProjectId id) {
+    return Optional.ofNullable(template().findById(id.id(), Bom.class, collectionName()));
+  }
+
   public <S> Page<S> findAll(Class<S> clazz, List<AggregationOperation> operations,
       Pageable pageable) {
     List<AggregationOperation> totalOperations = new ArrayList<>(operations);
@@ -65,18 +69,5 @@ public abstract class AbstractRepository {
             .aggregate(Aggregation.newAggregation(totalOperations), collectionName(),
                 Document.class)
             .getMappedResults().get(0).get("total").toString()));
-  }
-
-  public <S> Page<S> findAll(Class<S> clazz, Criteria criteria, Pageable pageable) {
-    Query query = new Query().with(pageable);
-
-    if (criteria != null) {
-      query.addCriteria(criteria);
-    }
-
-    List<S> result = this.template.find(query, clazz, this.collectionName);
-
-    return PageableExecutionUtils.getPage(result, pageable,
-        () -> this.template.count(Query.of(query).limit(-1).skip(-1), clazz, this.collectionName));
   }
 }

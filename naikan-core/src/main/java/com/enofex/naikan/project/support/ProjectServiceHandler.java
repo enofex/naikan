@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
 class ProjectServiceHandler implements ProjectService {
 
   private final ProjectRepository projectRepository;
@@ -68,20 +68,4 @@ class ProjectServiceHandler implements ProjectService {
   public List<LatestVersionPerEnvironment> findLatestVersionPerEnvironment(ProjectId id) {
     return this.projectRepository.findLatestVersionPerEnvironment(id);
   }
-
-  @Override
-  public boolean existsByProjectName(String projectName) {
-    return this.projectRepository.existsByProjectName(projectName);
-  }
-
-  @Override
-  public Bom update(ProjectId id, Bom bom) {
-    return this.projectRepository.update(id, bom);
-  }
-
-  @Override
-  public Bom upsertByProjectName(Bom bom) {
-    return this.projectRepository.upsertByProjectName(bom);
-  }
-
 }

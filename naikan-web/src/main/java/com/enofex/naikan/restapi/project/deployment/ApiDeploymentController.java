@@ -6,7 +6,6 @@ import com.enofex.naikan.ProjectId;
 import com.enofex.naikan.restapi.ApiProjectRequest;
 import com.enofex.naikan.model.Bom;
 import com.enofex.naikan.model.Deployment;
-import com.enofex.naikan.project.deployment.DeploymentService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.headers.Header;
@@ -29,10 +28,10 @@ class ApiDeploymentController {
 
   static final String REQUEST_PATH = ApiProjectRequest.PATH_WITH_ID + "/deployments";
 
-  private final DeploymentService deploymentService;
+  private final ApiDeploymentService apiDeploymentService;
 
-  ApiDeploymentController(DeploymentService deploymentService) {
-    this.deploymentService = deploymentService;
+  ApiDeploymentController(ApiDeploymentService apiDeploymentService) {
+    this.apiDeploymentService = apiDeploymentService;
   }
 
   @Operation(summary = "Save new deployment in the given project")
@@ -50,7 +49,7 @@ class ApiDeploymentController {
           content = @Content(schema = @Schema(implementation = Deployment.class))
       ) @RequestBody Deployment deployment
   ) {
-    Bom newBom = this.deploymentService.save(id, deployment);
+    Bom newBom = this.apiDeploymentService.save(id, deployment);
 
     if (newBom != null) {
       URI location = ServletUriComponentsBuilder

@@ -1,4 +1,4 @@
-package com.enofex.naikan.project.deployment.support;
+package com.enofex.naikan.restapi.project.deployment.support;
 
 import static org.springframework.data.mongodb.core.query.Criteria.where;
 
@@ -6,7 +6,7 @@ import com.enofex.naikan.AbstractRepository;
 import com.enofex.naikan.ProjectId;
 import com.enofex.naikan.model.Bom;
 import com.enofex.naikan.model.Deployment;
-import com.enofex.naikan.project.deployment.DeploymentRepository;
+import com.enofex.naikan.restapi.project.deployment.ApiDeploymentRepository;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
@@ -14,9 +14,9 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 @Repository
-class DeploymentMongoRepository extends AbstractRepository implements DeploymentRepository {
+class ApiDeploymentMongoRepository extends AbstractRepository implements ApiDeploymentRepository {
 
-  DeploymentMongoRepository(MongoTemplate template) {
+  ApiDeploymentMongoRepository(MongoTemplate template) {
     super(template);
   }
 

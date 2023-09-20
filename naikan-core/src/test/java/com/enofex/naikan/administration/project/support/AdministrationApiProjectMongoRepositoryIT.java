@@ -18,7 +18,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
 @IntegrationTest
-class AdministrationProjectMongoRepositoryIT {
+class AdministrationApiProjectMongoRepositoryIT {
 
   @Autowired
   private MongoTemplate template;

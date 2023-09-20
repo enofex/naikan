@@ -1,6 +1,5 @@
 package com.enofex.naikan.test;
 
-import com.enofex.naikan.ContainersConfiguration;
 import com.enofex.naikan.NaikanApplication;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

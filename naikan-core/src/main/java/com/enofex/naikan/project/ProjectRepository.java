@@ -26,11 +26,5 @@ public interface ProjectRepository {
 
   List<LatestVersionPerEnvironment> findLatestVersionPerEnvironment(ProjectId id);
 
-  Bom update(ProjectId id, Bom bom);
-
-  Bom upsertByProjectName(Bom bom);
-
-  boolean existsByProjectName(String projectName);
-
   ProjectFilter findFilter();
 }

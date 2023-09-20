@@ -4,7 +4,6 @@ import com.enofex.naikan.ProjectId;
 import com.enofex.naikan.restapi.ApiProjectRequest;
 import com.enofex.naikan.model.Bom;
 import com.enofex.naikan.model.validator.DefaultValidator;
-import com.enofex.naikan.project.ProjectService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.headers.Header;
@@ -26,10 +25,10 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 @RequestMapping(ApiProjectRequest.PATH)
 class ApiProjectController {
 
-  private final ProjectService projectService;
+  private final ApiProjectService apiProjectService;
 
-  ApiProjectController(ProjectService projectService) {
-    this.projectService = projectService;
+  ApiProjectController(ApiProjectService apiProjectService) {
+    this.apiProjectService = apiProjectService;
   }
 
   @Operation(summary = "Update project")
@@ -46,8 +45,8 @@ class ApiProjectController {
           content = @Content(schema = @Schema(implementation = Bom.class))
       ) @RequestBody Bom bom
   ) {
-    if (this.projectService.findById(id).isPresent()) {
-      this.projectService.update(id, bom);
+    if (this.apiProjectService.findById(id).isPresent()) {
+      this.apiProjectService.update(id, bom);
 
       return ResponseEntity.ok().build();
     }
@@ -71,8 +70,8 @@ class ApiProjectController {
       ) @RequestBody Bom bom
   ) {
     if (new DefaultValidator().isValid(bom)) {
-      boolean existsAlready = this.projectService.existsByProjectName(bom.project().name());
-      Bom newBom = this.projectService.upsertByProjectName(bom);
+      boolean existsAlready = this.apiProjectService.existsByProjectName(bom.project().name());
+      Bom newBom = this.apiProjectService.upsertByProjectName(bom);
 
       if (existsAlready) {
         return ResponseEntity.ok().build();
