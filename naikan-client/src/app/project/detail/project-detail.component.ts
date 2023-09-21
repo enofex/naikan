@@ -176,7 +176,7 @@ export class ProjectDetailComponent implements OnInit {
           data: this.deploymentsPerMonth.counts,
           borderWidth: 1,
           fill: true,
-          pointStyle: false,
+          pointStyle: true,
           borderColor: Charts.documentStyle(),
           backgroundColor: Charts.documentStyleWithDefaultOpacity(),
         }];

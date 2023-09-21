@@ -73,8 +73,8 @@ import {SharedModule} from "primeng/api";
             <div class="flex justify-content-center">
               <span class="text-900 font-medium text-lg"
                     tooltipPosition="top"
-                    pTooltip="{{ tooltipNames(bomOverview.environments) }}">
-                {{ bomOverview.environments ? bomOverview.environments.length : 0}}
+                    pTooltip="{{ tooltipNames(bomOverview.environmentNames) }}">
+                {{ bomOverview.environmentNames ? bomOverview.environmentNames.length : 0}}
               </span>
             </div>
           </div>
@@ -88,8 +88,8 @@ import {SharedModule} from "primeng/api";
             <div class="flex justify-content-center">
               <span class="text-900 font-medium text-lg"
                     tooltipPosition="top"
-                    pTooltip="{{ tooltipNames(bomOverview.teams) }}">
-                {{ bomOverview.teams ? bomOverview.teams.length : 0}}
+                    pTooltip="{{ tooltipNames(bomOverview.teamNames) }}">
+                {{ bomOverview.teamNames ? bomOverview.teamNames.length : 0}}
               </span>
             </div>
           </div>
@@ -103,8 +103,8 @@ import {SharedModule} from "primeng/api";
             <div class="flex justify-content-center">
               <span class="text-900 font-medium text-lg"
                     tooltipPosition="top"
-                    pTooltip="{{ tooltipNames(bomOverview.developers) }}">
-                {{ bomOverview.developers ? bomOverview.developers.length : 0 }}
+                    pTooltip="{{ tooltipNames(bomOverview.developerNames) }}">
+                {{ bomOverview.developerNames ? bomOverview.developerNames.length : 0 }}
               </span>
             </div>
           </div>
@@ -118,8 +118,8 @@ import {SharedModule} from "primeng/api";
             <div class="flex justify-content-center">
               <span class="text-900 font-medium text-lg"
                     tooltipPosition="top"
-                    pTooltip="{{ tooltipNames(bomOverview.contacts) }}">
-                {{ bomOverview.contacts ? bomOverview.contacts.length : 0 }}
+                    pTooltip="{{ tooltipNames(bomOverview.contactNames) }}">
+                {{ bomOverview.contactNames ? bomOverview.contactNames.length : 0 }}
               </span>
             </div>
           </div>
@@ -133,8 +133,8 @@ import {SharedModule} from "primeng/api";
             <div class="flex justify-content-center">
               <span class="text-900 font-medium text-lg"
                     tooltipPosition="top"
-                    pTooltip="{{ tooltipNames(bomOverview.integrations) }}">
-                {{ bomOverview.integrations ? bomOverview.integrations.length : 0 }}
+                    pTooltip="{{ tooltipNames(bomOverview.integrationNames) }}">
+                {{ bomOverview.integrationNames ? bomOverview.integrationNames.length : 0 }}
               </span>
             </div>
           </div>
@@ -148,8 +148,8 @@ import {SharedModule} from "primeng/api";
             <div class="flex justify-content-center">
               <span class="text-900 font-medium text-lg"
                     tooltipPosition="top"
-                    pTooltip="{{ tooltipNames(bomOverview.technologies) }}">
-                {{ bomOverview.technologies ? bomOverview.technologies.length : 0 }}
+                    pTooltip="{{ tooltipNames(bomOverview.technologyNames) }}">
+                {{ bomOverview.technologyNames ? bomOverview.technologyNames.length : 0 }}
               </span>
             </div>
           </div>

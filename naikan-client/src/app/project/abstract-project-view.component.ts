@@ -61,7 +61,7 @@ export abstract class AbstractProjectView implements OnInit {
       let found = 0;
 
       for (let i = 0; i < objects.length; i++) {
-        const name = objects[i]['name'];
+        const name = objects[i];
 
         if (name) {
           found++;

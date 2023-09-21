@@ -91,9 +91,18 @@ class ProjectMongoRepository extends AbstractRepository implements ProjectReposi
         .and("contacts").as("contacts")
         .and("technologies").as("technologies")
         .and("documentations").as("documentations")
-        .and("deployments").as("deployments")
         .and("licenses").as("licenses")
+        .and("deployments").as("deployments")
         .and("tags").as("tags")
+
+        .and("environments.name").as("environmentNames")
+        .and("integrations.name").as("integrationNames")
+        .and("developers.name").as("developerNames")
+        .and("teams.name").as("teamNames")
+        .and("contacts.name").as("contactNames")
+        .and("technologies.name").as("technologyNames")
+        .and("documentations.name").as("documentationNames")
+        .and("licenses.name").as("licenseNames")
     );
 
     operations.add(AddFieldsOperation.builder()

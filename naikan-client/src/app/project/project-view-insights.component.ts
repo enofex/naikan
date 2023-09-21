@@ -120,12 +120,12 @@ export class SummarizationChart extends AbstractInsightChart {
     }
 
     const dataProperties = [
-      {label: "Environments", prop: "environments"},
-      {label: "Teams", prop: "teams"},
-      {label: "Developers", prop: "developers"},
-      {label: "Contacts", prop: "contacts"},
-      {label: "Integrations", prop: "integrations"},
-      {label: "Technologies", prop: "technologies"},
+      {label: "Environments", prop: "environmentNames"},
+      {label: "Teams", prop: "teamNames"},
+      {label: "Developers", prop: "developerNames"},
+      {label: "Contacts", prop: "contactNames"},
+      {label: "Integrations", prop: "integrationNames"},
+      {label: "Technologies", prop: "technologyNames"},
       {label: "Deployments", prop: "deploymentsCount"},
       {label: "Tags", prop: "tags"}
     ];
@@ -199,10 +199,9 @@ export class TechnologiesChart extends AbstractInsightChart {
 
     const technologyCounts = new Map<string, number>();
 
-    this.allOverviewBoms().forEach(bom => bom.technologies.forEach((tech) => {
-      const name = tech.name + (tech.version ? " " + tech.version : "");
-      const count = technologyCounts.get(name) || 0;
-      technologyCounts.set(name, count + 1);
+    this.allOverviewBoms().forEach(bom => bom.technologyNames.forEach((tech) => {
+      const count = technologyCounts.get(tech) || 0;
+      technologyCounts.set(tech, count + 1);
     }));
 
     const sortedTechnologies = Array.from(
@@ -303,7 +302,7 @@ export class DeploymentsChart extends AbstractInsightChart {
           data: this.deploymentsPerMonth.counts,
           borderWidth: 1,
           fill: true,
-          pointStyle: false,
+          pointStyle: true,
           borderColor: Charts.documentStyle(),
           backgroundColor: Charts.documentStyleWithDefaultOpacity(),
         }];

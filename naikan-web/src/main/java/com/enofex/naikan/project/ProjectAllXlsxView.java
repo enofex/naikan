@@ -32,16 +32,19 @@ final class ProjectAllXlsxView extends AbstractXlsxStreamingView {
     put("Notes", bom -> bom.project().notes());
     put("Organization Name", bom -> bom.organization() != null ? bom.organization().name() : "");
     put("Organization URL", bom -> bom.organization() != null ? bom.organization().url() : "");
-    put("Organization Department", bom -> bom.organization() != null ? bom.organization().department(): "");
-    put("Organization Description", bom -> bom.organization() != null ? bom.organization().description(): "");
-    put("Environments", bom -> String.valueOf(bom.environments().all().size()));
-    put("Teams", bom -> String.valueOf(bom.teams().all().size()));
-    put("Developers", bom -> String.valueOf(bom.developers().all().size()));
-    put("Contacts", bom -> String.valueOf(bom.contacts().all().size()));
-    put("Documentations", bom -> String.valueOf(bom.documentations().all().size()));
-    put("Integrations", bom -> String.valueOf(bom.integrations().all().size()));
-    put("Technologies", bom -> String.valueOf(bom.technologies().all().size()));
-    put("Licenses", bom -> String.valueOf(bom.licenses().all().size()));
+    put("Organization Department",
+        bom -> bom.organization() != null ? bom.organization().department() : "");
+    put("Organization Description",
+        bom -> bom.organization() != null ? bom.organization().description() : "");
+    put("Environments", bom -> String.valueOf(bom.environmentNames().size()));
+    put("Teams", bom -> String.valueOf(bom.teamNames().size()));
+    put("Developers", bom -> String.valueOf(bom.developerNames().size()));
+    put("Contacts", bom -> String.valueOf(bom.contactNames().size()));
+    put("Documentations", bom -> String.valueOf(bom.documentationNames().size()));
+    put("Integrations", bom -> String.valueOf(bom.integrationNames().size()));
+    put("Technologies", bom -> String.valueOf(bom.environmentNames().size()));
+    put("Deployments", bom -> String.valueOf(bom.deploymentsCount()));
+    put("Licenses", bom -> String.valueOf(bom.licenseNames().size()));
   }};
 
   private final List<BomOverview> boms;
