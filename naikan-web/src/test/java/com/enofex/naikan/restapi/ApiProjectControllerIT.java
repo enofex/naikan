@@ -88,7 +88,7 @@ class ApiProjectControllerIT {
   }
 
   @Test
-  void shouldUpdateBomByProjectId() throws Exception {
+  void shouldUpdateBomById() throws Exception {
     Bom savedBom = this.template.save(
         DeserializerFactory.newJsonDeserializer().of(validBom0asInputStream()),
         "projects");
@@ -98,18 +98,18 @@ class ApiProjectControllerIT {
                 .contentType(MediaType.APPLICATION_JSON)
                 .header("authorization", "Bearer " + this.token.token())
                 .content(validBom0asInputStream().readAllBytes()))
-        .andExpect(handler().methodName("update"))
+        .andExpect(handler().methodName("updateById"))
         .andExpect(status().isOk());
   }
 
   @Test
-  void shouldNotUpdateBomByProjectId() throws Exception {
+  void shouldNotUpdateBomById() throws Exception {
     this.mvc.perform(
             put("/api/public/projects/%s".formatted("do_not_exits"))
                 .contentType(MediaType.APPLICATION_JSON)
                 .header("authorization", "Bearer " + this.token.token())
                 .content(validBom0asInputStream().readAllBytes()))
-        .andExpect(handler().methodName("update"))
+        .andExpect(handler().methodName("updateById"))
         .andExpect(status().isNotFound());
   }
 

@@ -51,28 +51,33 @@ public record ProjectFilter(
       List<FilterItem> deployments,
       List<FilterItem> licenses
   ) {
-    this.packaging = List.copyOf(packaging);
-    this.tags = List.copyOf(tags);
-    this.groupIds = List.copyOf(groupIds);
-    this.organizations = List.copyOf(organizations);
-    this.organizationDepartments = List.copyOf(organizationDepartments);
-    this.environments = List.copyOf(environments);
-    this.environmentLocations = List.copyOf(environmentLocations);
-    this.environmentTags = List.copyOf(environmentTags);
-    this.teams = List.copyOf(teams);
-    this.developers = List.copyOf(developers);
-    this.developerOrganizations = List.copyOf(developerOrganizations);
-    this.developerDepartments = List.copyOf(developerDepartments);
-    this.developerRoles = List.copyOf(developerRoles);
-    this.contacts = List.copyOf(contacts);
-    this.contactRoles = List.copyOf(contactRoles);
-    this.integrations = List.copyOf(integrations);
-    this.integrationTags = List.copyOf(integrationTags);
-    this.technologies = List.copyOf(technologies);
-    this.technologyVersions = List.copyOf(technologyVersions);
-    this.technologyTags = List.copyOf(technologyTags);
-    this.deployments = List.copyOf(deployments);
-    this.licenses = List.copyOf(licenses);
+    this.packaging = packaging != null ? List.copyOf(packaging) : List.of();
+    this.tags = tags != null ? List.copyOf(tags) : List.of();
+    this.groupIds = groupIds != null ? List.copyOf(groupIds) : List.of();
+    this.organizations = organizations != null ? List.copyOf(organizations) : List.of();
+    this.organizationDepartments =
+        organizationDepartments != null ? List.copyOf(organizationDepartments) : List.of();
+    this.environments = environments != null ? List.copyOf(environments) : List.of();
+    this.environmentLocations =
+        environmentLocations != null ? List.copyOf(environmentLocations) : List.of();
+    this.environmentTags = environmentTags != null ? List.copyOf(environmentTags) : List.of();
+    this.teams = teams != null ? List.copyOf(teams) : List.of();
+    this.developers = developers != null ? List.copyOf(developers) : List.of();
+    this.developerOrganizations =
+        developerOrganizations != null ? List.copyOf(developerOrganizations) : List.of();
+    this.developerDepartments =
+        developerDepartments != null ? List.copyOf(developerDepartments) : List.of();
+    this.developerRoles = developerRoles != null ? List.copyOf(developerRoles) : List.of();
+    this.contacts = contacts != null ? List.copyOf(contacts) : List.of();
+    this.contactRoles = contactRoles != null ? List.copyOf(contactRoles) : List.of();
+    this.integrations = integrations != null ? List.copyOf(integrations) : List.of();
+    this.integrationTags = integrationTags != null ? List.copyOf(integrationTags) : List.of();
+    this.technologies = technologies != null ? List.copyOf(technologies) : List.of();
+    this.technologyVersions =
+        technologyVersions != null ? List.copyOf(technologyVersions) : List.of();
+    this.technologyTags = technologyTags != null ? List.copyOf(technologyTags) : List.of();
+    this.deployments = deployments != null ? List.copyOf(deployments) : List.of();
+    this.licenses = licenses != null ? List.copyOf(licenses) : List.of();
   }
 
   public record FilterItem(String name, long count) {

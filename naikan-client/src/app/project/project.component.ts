@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MenuItem, SelectItem, SharedModule} from 'primeng/api';
 import {ProjectService} from './project.service';
-import {Bom, Page, Principal, Search, User} from "@naikan/shared";
+import {Page, Principal, Search, User} from "@naikan/shared";
 import {ProjectViewOverviewBody} from './project-view-overview.component';
 import {
   ProjectViewCondensedBody,
@@ -19,6 +19,7 @@ import {TooltipModule} from "primeng/tooltip";
 import {ProjectFilters} from "./project-filters";
 import {BlockUIModule} from "primeng/blockui";
 import {TabMenuModule} from "primeng/tabmenu";
+import {BomOverview} from "./bom-overview";
 
 @Component({
   templateUrl: './project.component.html',
@@ -33,7 +34,7 @@ export class ProjectComponent implements OnInit {
   private readonly FAVORITES_KEY = "project-favorites";
 
   @ViewChild('projectsTable', {static: true}) projectsTable: Table;
-  page: Page<Bom>;
+  page: Page<BomOverview>;
   sortOptions: SelectItem[];
   sortField: string;
   sortOrder: number;

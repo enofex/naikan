@@ -56,7 +56,7 @@ class AdministrationUserMongoRepository extends AbstractRepository implements
   }
 
   @Override
-  public long delete(UserId id) {
+  public long deleteId(UserId id) {
     Query query = new Query(where("id").is(id.id()));
     return template()
         .remove(query, User.class, collectionName())

@@ -50,8 +50,8 @@ class AdministrationTokenServiceHandler implements AdministrationTokenService {
   }
 
   @Override
-  public long delete(TokenId id) {
-    return this.administrationTokenRepository.delete(id);
+  public long deleteById(TokenId id) {
+    return this.administrationTokenRepository.deleteById(id);
   }
 
   @Override

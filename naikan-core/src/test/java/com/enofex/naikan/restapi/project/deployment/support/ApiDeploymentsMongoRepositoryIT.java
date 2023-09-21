@@ -29,13 +29,13 @@ class ApiDeploymentsMongoRepositoryIT {
   }
 
   @Test
-  void shouldAddDeploymentToBom() {
+  void shouldAddDeploymentsById() {
     Bom bom = DeserializerFactory.newJsonDeserializer().of(validBom0asInputStream());
 
     assertEquals(2, bom.deployments().all().size());
 
     Bom savedBom = this.template.save(bom, "projects");
-    Bom updatedDeployments = this.repository.save(ProjectId.of(savedBom.id()), deployment());
+    Bom updatedDeployments = this.repository.saveById(ProjectId.of(savedBom.id()), deployment());
 
     assertEquals(3, updatedDeployments.deployments().all().size());
   }

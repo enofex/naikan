@@ -5,11 +5,9 @@ import java.util.UUID;
 
 public record OverviewGroup(String uuid, Group group, List<OverviewBom> boms, int count) {
 
-  public OverviewGroup(String uuid, Group group, List<OverviewBom> boms, int count) {
-    this.uuid = uuid != null ? uuid : UUID.randomUUID().toString();
-    this.group = group;
-    this.boms = List.copyOf(boms);
-    this.count = count;
+  public OverviewGroup {
+    uuid = uuid != null ? uuid : UUID.randomUUID().toString();
+    boms = boms != null ? List.copyOf(boms) : List.of();
   }
 
   public record Group(String name) {

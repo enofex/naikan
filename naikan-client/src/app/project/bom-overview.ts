@@ -1,18 +1,20 @@
 import {
   Contact,
+  Deployment,
   Developer,
   Documentation,
-  Environment, Integration,
+  Environment,
+  Integration,
   License,
   Organization,
-  Project, Team,
+  Project,
+  Team,
   Technology
 } from "@naikan/shared";
+import {DeploymentsPerMonth} from "./deployments-per-month";
 
-export interface BomDetail {
+export interface BomOverview {
   id: string;
-  specVersion: string;
-  bomFormat: string;
   timestamp?: Date;
   project?: Project;
   organization?: Organization;
@@ -25,4 +27,9 @@ export interface BomDetail {
   documentations?: Documentation[];
   integrations?: Integration[];
   tags?: string[];
+  deploymentsCount: number;
+  deploymentsEnvironmentsCount: number;
+  deploymentsVersionsCount: number;
+  lastDeployment: Deployment;
+  deploymentsPerMonth: DeploymentsPerMonth;
 }

@@ -50,8 +50,8 @@ class AdministrationTokenController {
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<Void> delete(@PathVariable TokenId id) {
-    return this.administrationTokenService.delete(id) > 0
+  public ResponseEntity<Void> deleteById(@PathVariable TokenId id) {
+    return this.administrationTokenService.deleteById(id) > 0
         ? ResponseEntity.ok().build()
         : ResponseEntity.notFound().build();
   }

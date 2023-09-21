@@ -21,7 +21,7 @@ class ApiDeploymentMongoRepository extends AbstractRepository implements ApiDepl
   }
 
   @Override
-  public Bom save(ProjectId id, Deployment deployment) {
+  public Bom saveById(ProjectId id, Deployment deployment) {
     Query query = new Query(where("id").is(id.id()));
     Update update = new Update().addToSet("deployments" , deployment);
 

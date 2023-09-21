@@ -45,7 +45,7 @@ class AdministrationUserControllerIT {
   }
 
   @Test
-  void shouldUpdateAuthorities() throws Exception {
+  void shouldUpdateAuthoritiesById() throws Exception {
     User saveUser = this.template.save(user(), "users");
     String authorities = this.mapper.writeValueAsString(
         new String[]{AuthorityType.ROLE_ADMIN.getAuthority()});
@@ -55,12 +55,12 @@ class AdministrationUserControllerIT {
                 .with(csrf())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(authorities))
-        .andExpect(handler().methodName("updateAuthorities"))
+        .andExpect(handler().methodName("updateAuthoritiesById"))
         .andExpect(status().isNoContent());
   }
 
   @Test
-  void shouldNotUpdateAuthorities() throws Exception {
+  void shouldNotUpdateAuthoritiesById() throws Exception {
     String authorities = this.mapper.writeValueAsString(
         new String[]{AuthorityType.ROLE_ADMIN.getAuthority()});
 
@@ -69,27 +69,27 @@ class AdministrationUserControllerIT {
                 .with(csrf())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(authorities))
-        .andExpect(handler().methodName("updateAuthorities"))
+        .andExpect(handler().methodName("updateAuthoritiesById"))
         .andExpect(status().isNotFound());
   }
 
   @Test
-  void shouldDelete() throws Exception {
+  void shouldDeleteById() throws Exception {
     User savedUser = this.template.save(user(), "users");
 
     this.mvc.perform(
             delete("/api/administration/users/" + savedUser.id())
                 .with(csrf()))
-        .andExpect(handler().methodName("delete"))
+        .andExpect(handler().methodName("deleteById"))
         .andExpect(status().isOk());
   }
 
   @Test
-  void shouldNotDelete() throws Exception {
+  void shouldNotDeleteById() throws Exception {
     this.mvc.perform(
             delete("/api/administration/users/not-exist")
                 .with(csrf()))
-        .andExpect(handler().methodName("delete"))
+        .andExpect(handler().methodName("deleteById"))
         .andExpect(status().isNotFound());
   }
 

@@ -47,14 +47,14 @@ class AdministrationApiProjectMongoRepositoryIT {
   }
 
   @Test
-  void shouldDelete() {
+  void shouldDeleteById() {
     Bom savedBom = this.template.save(newJsonDeserializer().of(validBom0asInputStream()),
         "projects");
 
     assertEquals(1, this.repository.findAll(Filterable.emptySearch(),
         Pageable.ofSize(10)).getTotalElements());
 
-    this.repository.delete(ProjectId.of(savedBom.id()));
+    this.repository.deleteById(ProjectId.of(savedBom.id()));
 
     assertEquals(0, this.repository.findAll(Filterable.emptySearch(),
         Pageable.ofSize(10)).getTotalElements());

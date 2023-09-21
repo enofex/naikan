@@ -12,9 +12,9 @@ import com.enofex.naikan.AbstractRepository;
 import com.enofex.naikan.Filterable;
 import com.enofex.naikan.FilterableCriteriaBuilder;
 import com.enofex.naikan.ProjectId;
-import com.enofex.naikan.model.Bom;
 import com.enofex.naikan.model.Deployment;
 import com.enofex.naikan.project.BomDetail;
+import com.enofex.naikan.project.BomOverview;
 import com.enofex.naikan.project.DeploymentsPerMonth;
 import com.enofex.naikan.project.GroupedDeploymentsPerVersion;
 import com.enofex.naikan.project.LatestVersionPerEnvironment;
@@ -23,14 +23,17 @@ import com.enofex.naikan.project.ProjectFilter.FilterItem;
 import com.enofex.naikan.project.ProjectRepository;
 import java.time.YearMonth;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import org.bson.Document;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.aggregation.AddFieldsOperation;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
 import org.springframework.data.mongodb.core.aggregation.ArrayOperators;
@@ -45,7 +48,7 @@ class ProjectMongoRepository extends AbstractRepository implements ProjectReposi
   }
 
   @Override
-  public Page<Bom> findAll(Filterable filterable, Pageable pageable) {
+  public Page<BomOverview> findAll(Filterable filterable, Pageable pageable) {
     FilterableCriteriaBuilder builder = new FilterableCriteriaBuilder(filterable);
     List<AggregationOperation> operations = new ArrayList<>();
 
@@ -93,6 +96,45 @@ class ProjectMongoRepository extends AbstractRepository implements ProjectReposi
         .and("tags").as("tags")
     );
 
+    operations.add(AddFieldsOperation.builder()
+        .addFieldWithValue(
+            "lastDeployment",
+            new Document(
+                "$arrayElemAt",
+                Arrays.asList("$deployments", -1)
+            )
+        )
+        .build()
+    );
+
+    operations.add(AddFieldsOperation.builder()
+        .addFieldWithValue("deploymentsEnvironmentsCount", new Document(
+            "$size",
+            new Document("$setUnion",
+                Arrays.asList(
+                    new Document("$ifNull",
+                        Arrays.asList("$deployments.environment", Collections.emptyList())),
+                    Collections.emptyList()
+                )
+            )
+        ))
+        .build()
+    );
+
+    operations.add(AddFieldsOperation.builder()
+        .addFieldWithValue("deploymentsVersionsCount", new Document(
+            "$size",
+            new Document("$setUnion",
+                Arrays.asList(
+                    new Document("$ifNull",
+                        Arrays.asList("$deployments.version", Collections.emptyList())),
+                    Collections.emptyList()
+                )
+            )
+        ))
+        .build()
+    );
+
     operations.add(match(builder.toSearch(List.of(
         "tags", "project.name", "project.username", "project.version", "project.groupId",
         "project.artifactId", "project.repository", "project.packaging", "project.notes",
@@ -103,7 +145,7 @@ class ProjectMongoRepository extends AbstractRepository implements ProjectReposi
 
     operations.add(match(builder.toFilters()));
 
-    return findAll(Bom.class, operations, pageable);
+    return findAll(BomOverview.class, operations, pageable);
   }
 
   @Override
@@ -184,14 +226,14 @@ class ProjectMongoRepository extends AbstractRepository implements ProjectReposi
   }
 
 
-
   @Override
   public Optional<BomDetail> findBomDetailById(ProjectId id) {
     return Optional.ofNullable(template().findById(id.id(), BomDetail.class, collectionName()));
   }
 
   @Override
-  public Page<Deployment> findDeployments(ProjectId id, Filterable filterable, Pageable pageable) {
+  public Page<Deployment> findDeploymentsById(ProjectId id, Filterable filterable,
+      Pageable pageable) {
     FilterableCriteriaBuilder builder = new FilterableCriteriaBuilder(filterable);
     List<AggregationOperation> operations = new ArrayList<>();
 
@@ -216,7 +258,7 @@ class ProjectMongoRepository extends AbstractRepository implements ProjectReposi
   }
 
   @Override
-  public Page<GroupedDeploymentsPerVersion> findGroupedDeploymentsPerVersion(ProjectId id,
+  public Page<GroupedDeploymentsPerVersion> findGroupedDeploymentsPerVersionById(ProjectId id,
       Filterable filterable, Pageable pageable) {
     FilterableCriteriaBuilder builder = new FilterableCriteriaBuilder(filterable);
     List<AggregationOperation> operations = new ArrayList<>();
@@ -242,7 +284,7 @@ class ProjectMongoRepository extends AbstractRepository implements ProjectReposi
   }
 
   @Override
-  public DeploymentsPerMonth findDeploymentsPerMonth(ProjectId id) {
+  public DeploymentsPerMonth findDeploymentsPerMonthById(ProjectId id) {
     Aggregation aggregation = Aggregation.newAggregation(
         match(Criteria.where("_id").is(id.id())),
         unwind("deployments"),
@@ -262,7 +304,7 @@ class ProjectMongoRepository extends AbstractRepository implements ProjectReposi
 
     if (result != null) {
       List<String> months = new ArrayList<>();
-      List<Integer> counts = new ArrayList<>();
+      List<Long> counts = new ArrayList<>();
 
       YearMonth currentMonth = YearMonth.now();
       YearMonth firstMonth = YearMonth.parse(result.months().get(0));
@@ -275,7 +317,7 @@ class ProjectMongoRepository extends AbstractRepository implements ProjectReposi
         if (index != -1) {
           counts.add(result.counts().get(index));
         } else {
-          counts.add(0);
+          counts.add(0L);
         }
 
         firstMonth = firstMonth.plusMonths(1L);
@@ -288,7 +330,7 @@ class ProjectMongoRepository extends AbstractRepository implements ProjectReposi
   }
 
   @Override
-  public List<LatestVersionPerEnvironment> findLatestVersionPerEnvironment(ProjectId id) {
+  public List<LatestVersionPerEnvironment> findLatestVersionPerEnvironmentById(ProjectId id) {
     Aggregation aggregation = Aggregation.newAggregation(
         match(Criteria.where("_id").is(id.id())),
         unwind("deployments"),

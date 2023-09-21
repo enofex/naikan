@@ -34,7 +34,7 @@ class AdministrationUserController {
   }
 
   @PatchMapping("/{id}")
-  public ResponseEntity<Void> updateAuthorities(@PathVariable UserId id,
+  public ResponseEntity<Void> updateAuthoritiesById(@PathVariable UserId id,
       @RequestBody String[] authorities) {
     User user = this.administrationUserService.findById(id);
 
@@ -48,8 +48,8 @@ class AdministrationUserController {
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<Void> delete(@PathVariable UserId id) {
-    return this.administrationUserService.delete(id) > 0
+  public ResponseEntity<Void> deleteById(@PathVariable UserId id) {
+    return this.administrationUserService.deleteById(id) > 0
         ? ResponseEntity.ok().build()
         : ResponseEntity.notFound().build();
   }

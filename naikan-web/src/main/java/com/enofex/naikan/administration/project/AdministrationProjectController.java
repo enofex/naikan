@@ -34,8 +34,8 @@ class AdministrationProjectController {
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<Void> delete(@PathVariable ProjectId id) {
-    return this.administrationProjectService.delete(id) > 0
+  public ResponseEntity<Void> deleteById(@PathVariable ProjectId id) {
+    return this.administrationProjectService.deleteById(id) > 0
         ? ResponseEntity.ok().build()
         : ResponseEntity.notFound().build();
   }

@@ -1,12 +1,13 @@
 import {Component, Input, OnInit} from "@angular/core";
-import {Bom, Principal, User} from "@naikan/shared";
+import {Principal, User} from "@naikan/shared";
 import {ProjectService} from "./project.service";
+import {BomOverview} from "./bom-overview";
 
 @Component({template: ''})
 export abstract class AbstractProjectView implements OnInit {
 
   user: User;
-  @Input() bom: Bom;
+  @Input() bomOverview: BomOverview;
 
   protected constructor(
       private readonly projectService: ProjectService,
@@ -22,31 +23,31 @@ export abstract class AbstractProjectView implements OnInit {
     });
   }
 
-  tooltipProject(bom: Bom): string {
+  tooltipProject(bomOverview: BomOverview): string {
     let tooltip = "";
 
-    if (bom) {
+    if (bomOverview) {
       let found = false;
 
-      if (bom.organization?.name) {
-        tooltip += bom.organization?.name;
+      if (bomOverview.organization?.name) {
+        tooltip += bomOverview.organization?.name;
         found = true;
       }
 
-      if (bom.organization?.department) {
+      if (bomOverview.organization?.department) {
         if (found) {
           tooltip += ", ";
         }
-        tooltip += bom.organization?.department;
+        tooltip += bomOverview.organization?.department;
         found = true;
       }
 
-      if (bom.project?.description) {
+      if (bomOverview.project?.description) {
         if (found) {
           tooltip += "<br><br>";
         }
 
-        tooltip += bom.project?.description;
+        tooltip += bomOverview.project?.description;
       }
     }
 

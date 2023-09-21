@@ -6,6 +6,6 @@ import com.enofex.naikan.model.Deployment;
 
 public interface ApiDeploymentService {
 
-  Bom save(ProjectId id, Deployment deployment);
+  Bom saveById(ProjectId id, Deployment deployment);
 
 }

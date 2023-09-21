@@ -1,6 +1,5 @@
 package com.enofex.naikan.project;
 
-import com.enofex.naikan.model.Bom;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.time.format.DateTimeFormatter;
@@ -17,9 +16,10 @@ import org.springframework.web.servlet.view.document.AbstractXlsxStreamingView;
 
 final class ProjectAllXlsxView extends AbstractXlsxStreamingView {
 
-  private static final Map<String, Function<Bom, String>> COLUMNS = new LinkedHashMap<>() {{
-    put("Id", Bom::id);
-    put("Timestamp", bom -> bom.timestamp() != null ? bom.timestamp().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME) :"");
+  private static final Map<String, Function<BomOverview, String>> COLUMNS = new LinkedHashMap<>() {{
+    put("Id", BomOverview::id);
+    put("Timestamp", bom -> bom.timestamp() != null ? bom.timestamp()
+        .format(DateTimeFormatter.ISO_LOCAL_DATE_TIME) : "");
     put("Name", bom -> bom.project().name());
     put("URL", bom -> bom.project().url());
     put("Inception Year", bom -> bom.project().inceptionYear());
@@ -30,7 +30,7 @@ final class ProjectAllXlsxView extends AbstractXlsxStreamingView {
     put("Version", bom -> bom.project().version());
     put("Description", bom -> bom.project().description());
     put("Notes", bom -> bom.project().notes());
-    put("Organization Name", bom -> bom.organization() != null ? bom.organization().name(): "");
+    put("Organization Name", bom -> bom.organization() != null ? bom.organization().name() : "");
     put("Organization URL", bom -> bom.organization() != null ? bom.organization().url() : "");
     put("Organization Department", bom -> bom.organization() != null ? bom.organization().department(): "");
     put("Organization Description", bom -> bom.organization() != null ? bom.organization().description(): "");
@@ -41,13 +41,12 @@ final class ProjectAllXlsxView extends AbstractXlsxStreamingView {
     put("Documentations", bom -> String.valueOf(bom.documentations().all().size()));
     put("Integrations", bom -> String.valueOf(bom.integrations().all().size()));
     put("Technologies", bom -> String.valueOf(bom.technologies().all().size()));
-    put("Deployments", bom -> String.valueOf(bom.deployments().all().size()));
     put("Licenses", bom -> String.valueOf(bom.licenses().all().size()));
   }};
 
-  private final List<Bom> boms;
+  private final List<BomOverview> boms;
 
-  ProjectAllXlsxView(List<Bom> boms) {
+  ProjectAllXlsxView(List<BomOverview> boms) {
     this.boms = boms;
   }
 
@@ -71,10 +70,10 @@ final class ProjectAllXlsxView extends AbstractXlsxStreamingView {
   private void writeRows(Sheet sheet) {
     if (CollectionUtils.isNotEmpty(this.boms)) {
       for (int r = 0, size = this.boms.size(); r < size; r++) {
-        Bom bom = this.boms.get(r);
+        BomOverview bom = this.boms.get(r);
         Row row = sheet.createRow(r + 1);
 
-        for (Entry<String, Function<Bom, String>> entry : COLUMNS.entrySet()) {
+        for (Entry<String, Function<BomOverview, String>> entry : COLUMNS.entrySet()) {
           row.createCell(lastCellNum(row.getLastCellNum()))
               .setCellValue(entry.getValue().apply(bom));
         }

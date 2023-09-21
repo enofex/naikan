@@ -98,18 +98,18 @@
       </ng-container>
 
       <ng-container *ngIf="viewMenuActiveItem.id === '2'">
-        <div class="naikan-project-view-insights-header" [boms]="page?.content"></div>
+        <div class="naikan-project-view-insights-header" [bomOverviews]="page?.content" [table]="projectsTable"></div>
       </ng-container>
     </ng-template>
 
     <ng-template let-bom pTemplate="body">
       <div *ngIf="viewMenuActiveItem.id === '0'"
            class="naikan-project-view-overview-body"
-           [bom]="bom"></div>
+           [bomOverview]="bom"></div>
 
       <tr *ngIf="viewMenuActiveItem.id === '1'"
           class="naikan-project-view-condensed-body"
-          [bom]="bom"></tr>
+          [bomOverview]="bom"></tr>
     </ng-template>
 
   </p-table>

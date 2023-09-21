@@ -39,7 +39,7 @@ class ApiDeploymentsControllerIT {
   }
 
   @Test
-  void shouldSaveBom() throws Exception {
+  void shouldSaveBomById() throws Exception {
     Bom savedBom = this.template.save(
         DeserializerFactory.newJsonDeserializer().of(validBom0asInputStream()),
         "projects");
@@ -49,20 +49,20 @@ class ApiDeploymentsControllerIT {
                 .header("authorization", "Bearer " + this.token.token())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(this.mapper.writeValueAsString(deployment())))
-        .andExpect(handler().methodName("save"))
+        .andExpect(handler().methodName("saveById"))
         .andExpect(status().isCreated())
         .andExpect(
             redirectedUrl("http://localhost/api/public/projects/" + savedBom.id() + "/deployments/2"));
   }
 
   @Test
-  void shouldNotSaveBom() throws Exception {
+  void shouldNotSaveBomById() throws Exception {
     this.mvc.perform(
             post("/api/public/projects/1/deployments")
                 .header("authorization", "Bearer " + this.token.token())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(Boms.invalidBom0asInputStream().readAllBytes()))
-        .andExpect(handler().methodName("save"))
+        .andExpect(handler().methodName("saveById"))
         .andExpect(status().isNotFound());
   }
 

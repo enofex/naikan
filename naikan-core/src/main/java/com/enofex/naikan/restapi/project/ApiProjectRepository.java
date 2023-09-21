@@ -8,7 +8,7 @@ public interface ApiProjectRepository {
 
   Optional<Bom> findById(ProjectId id);
 
-  Bom update(ProjectId id, Bom bom);
+  Bom updateById(ProjectId id, Bom bom);
 
   Bom upsertByProjectName(Bom bom);
 

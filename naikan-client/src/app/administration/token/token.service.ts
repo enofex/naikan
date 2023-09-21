@@ -21,7 +21,7 @@ export class AdministrationTokenService {
     return this.http.post(`/${endpoint}`, description);
   }
 
-  deleteToken(id: string): Observable<any> {
+  deleteTokenById(id: string): Observable<any> {
     return this.http.delete(`/${endpoint}/${id}`);
   }
 }

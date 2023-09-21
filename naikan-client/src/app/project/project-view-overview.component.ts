@@ -10,7 +10,6 @@ import {TooltipModule} from 'primeng/tooltip';
 import {
   Charts,
   DateTimePipe,
-  Deployment,
   NaikanTags,
   Principal,
   ProjectUrlIcon,
@@ -33,31 +32,31 @@ import {SharedModule} from "primeng/api";
 
         <div class="flex flex-column align-items-start">
           <div class="text-xl font-bold text-900">
-            <i (click)="onFavoriteToggle(bom.id)" [ngClass]="isFavorite(bom.id) 
+            <i (click)="onFavoriteToggle(bomOverview.id)" [ngClass]="isFavorite(bomOverview.id) 
             ? 'pi pi-star-fill mt-2 mr-2 text-primary-400'
             : 'pi pi-star mt-2 mr-2 text-primary-400'"></i>
             <span tooltipPosition="top"
                   [escape]="false"
-                  pTooltip="{{tooltipProject(bom)}}">
-              <a routerLink="./{{bom.id}}">{{ bom.project?.name }}</a>
+                  pTooltip="{{tooltipProject(bomOverview)}}">
+              <a routerLink="./{{bomOverview.id}}">{{ bomOverview.project?.name }}</a>
             </span>
-            <naikan-project-url-icon [url]="bom.project?.url"></naikan-project-url-icon>
+            <naikan-project-url-icon [url]="bomOverview.project?.url"></naikan-project-url-icon>
           </div>
 
-          <span class="text-500" *ngIf="bom.tags && bom.tags.length > 0">
+          <span class="text-500" *ngIf="bomOverview.tags && bomOverview.tags.length > 0">
             <i class="pi pi-tag mt-2 mr-2"></i>
-            <naikan-tags [tags]="bom.tags"></naikan-tags>
+            <naikan-tags [tags]="bomOverview.tags"></naikan-tags>
           </span>
         </div>
 
         <div class="flex flex-column align-items-end sm:align-items-start">
-          <naikan-project-version [project]="bom.project"
+          <naikan-project-version [project]="bomOverview.project"
                                   class="flex sm:align-self-end align-self-start">
           </naikan-project-version>
 
-          <div *ngIf="bom.timestamp" class="align-self-start sm:align-self-end mt-2">
+          <div *ngIf="bomOverview.timestamp" class="align-self-start sm:align-self-end mt-2">
             <span class="font-normal text-500 text-sm"> last updated
-              <span class="text-700">{{ bom.timestamp | naikanDateTime }}</span>
+              <span class="text-700">{{ bomOverview.timestamp | naikanDateTime }}</span>
             </span>
           </div>
         </div>
@@ -74,8 +73,8 @@ import {SharedModule} from "primeng/api";
             <div class="flex justify-content-center">
               <span class="text-900 font-medium text-lg"
                     tooltipPosition="top"
-                    pTooltip="{{ tooltipNames(bom.environments) }}">
-                {{ bom.environments ? bom.environments.length : 0}}
+                    pTooltip="{{ tooltipNames(bomOverview.environments) }}">
+                {{ bomOverview.environments ? bomOverview.environments.length : 0}}
               </span>
             </div>
           </div>
@@ -89,8 +88,8 @@ import {SharedModule} from "primeng/api";
             <div class="flex justify-content-center">
               <span class="text-900 font-medium text-lg"
                     tooltipPosition="top"
-                    pTooltip="{{ tooltipNames(bom.teams) }}">
-                {{ bom.teams ? bom.teams.length : 0}}
+                    pTooltip="{{ tooltipNames(bomOverview.teams) }}">
+                {{ bomOverview.teams ? bomOverview.teams.length : 0}}
               </span>
             </div>
           </div>
@@ -104,8 +103,8 @@ import {SharedModule} from "primeng/api";
             <div class="flex justify-content-center">
               <span class="text-900 font-medium text-lg"
                     tooltipPosition="top"
-                    pTooltip="{{ tooltipNames(bom.developers) }}">
-                {{ bom.developers ? bom.developers.length : 0 }}
+                    pTooltip="{{ tooltipNames(bomOverview.developers) }}">
+                {{ bomOverview.developers ? bomOverview.developers.length : 0 }}
               </span>
             </div>
           </div>
@@ -119,8 +118,8 @@ import {SharedModule} from "primeng/api";
             <div class="flex justify-content-center">
               <span class="text-900 font-medium text-lg"
                     tooltipPosition="top"
-                    pTooltip="{{ tooltipNames(bom.contacts) }}">
-                {{ bom.contacts ? bom.contacts.length : 0 }}
+                    pTooltip="{{ tooltipNames(bomOverview.contacts) }}">
+                {{ bomOverview.contacts ? bomOverview.contacts.length : 0 }}
               </span>
             </div>
           </div>
@@ -134,8 +133,8 @@ import {SharedModule} from "primeng/api";
             <div class="flex justify-content-center">
               <span class="text-900 font-medium text-lg"
                     tooltipPosition="top"
-                    pTooltip="{{ tooltipNames(bom.integrations) }}">
-                {{ bom.integrations ? bom.integrations.length : 0 }}
+                    pTooltip="{{ tooltipNames(bomOverview.integrations) }}">
+                {{ bomOverview.integrations ? bomOverview.integrations.length : 0 }}
               </span>
             </div>
           </div>
@@ -149,8 +148,8 @@ import {SharedModule} from "primeng/api";
             <div class="flex justify-content-center">
               <span class="text-900 font-medium text-lg"
                     tooltipPosition="top"
-                    pTooltip="{{ tooltipNames(bom.technologies) }}">
-                {{ bom.technologies ? bom.technologies.length : 0 }}
+                    pTooltip="{{ tooltipNames(bomOverview.technologies) }}">
+                {{ bomOverview.technologies ? bomOverview.technologies.length : 0 }}
               </span>
             </div>
           </div>
@@ -163,7 +162,7 @@ import {SharedModule} from "primeng/api";
             </span>
             <div class="flex justify-content-center">
               <span class="text-900 font-medium text-lg"> 
-                {{ bom.deployments ? bom.deployments.length : 0 }} 
+                {{ bomOverview.deploymentsCount }} 
               </span>
             </div>
           </div>
@@ -171,7 +170,7 @@ import {SharedModule} from "primeng/api";
       </div>
 
       <div class="flex flex-column sm:flex-row sm:align-items-start pt-4"
-           *ngIf="hasDeployments(bom.deployments)">
+           *ngIf="this.bomOverview.deploymentsCount > 0">
         <div
             class="flex flex-column sm:flex-row justify-content-between align-items-center sm:align-items-start flex-1">
 
@@ -180,25 +179,25 @@ import {SharedModule} from "primeng/api";
               <span class="text-500 text-sm text-overflow-ellipsis mt-2">
                 Found deployments on 
                 <span class="text-700">
-                  {{ distinctEnvironmentsCount(bom.deployments) }}
+                  {{ bomOverview.deploymentsEnvironmentsCount}}
                 </span> environments and
                 <span class="text-700">
-                  {{ distinctVersionsCount(bom.deployments) }}
+                  {{ bomOverview.deploymentsVersionsCount}}
                 </span> versions.
               </span>
             </span>
 
-            <span class="flex text-500">
+            <span class="flex text-500" *ngIf="bomOverview.lastDeployment">
               <span class="text-500 text-sm text-overflow-ellipsis mt-2">
                 Last deployment on
                 <span class="text-700">
-                  {{ latestEnvironment(bom.deployments) }}
+                  {{ bomOverview.lastDeployment.environment }}
                 </span> with version
                 <span class="text-700">
-                  {{ latestVersion(bom.deployments) }}
+                  {{ bomOverview.lastDeployment.version }}
                 </span> on
                 <span class="text-700">
-                  {{ latestTimestamp(bom.deployments) | naikanDateTime }}
+                  {{ bomOverview.lastDeployment.timestamp | naikanDateTime }}
                 </span>
               </span>
             </span>
@@ -206,7 +205,7 @@ import {SharedModule} from "primeng/api";
 
           <div class="flex flex-column align-items-end">
             <p-chart type="line" height="50px"
-                     [data]="projectDeploymentsChart(bom.deployments)"
+                     [data]="projectDeploymentsChart()"
                      [options]="chartOptions">
             </p-chart>
           </div>
@@ -258,96 +257,20 @@ export class ProjectViewOverviewBody extends AbstractProjectView implements OnIn
     }
   }
 
-  projectDeploymentsChart(deployments: Deployment[]): any {
-    if (this.hasDeployments(deployments)) {
-      const deploymentCounts = new Map<string, number>();
-      const today = new Date();
-      const since = new Date(deployments[0].timestamp);
-      const to = new Date(today.getFullYear(), today.getMonth() + 1, 1);
-
-      for (let yearMonth = new Date(since); yearMonth <= to; yearMonth.setMonth(yearMonth.getMonth() + 1)) {
-        deploymentCounts.set(yearMonth.toISOString().substring(0, 7), 0);
-      }
-
-      deployments.forEach(deployment => {
-        if (deployment.timestamp) {
-          const yearMonth = new Date(deployment.timestamp).toISOString().substring(0, 7)
-          const count = deploymentCounts.get(yearMonth) || 0;
-          deploymentCounts.set(yearMonth, count + 1);
+  projectDeploymentsChart(): any {
+    return {
+      labels: this.bomOverview.deploymentsPerMonth?.months,
+      datasets: [
+        {
+          data: this.bomOverview.deploymentsPerMonth?.counts,
+          fill: true,
+          backgroundColor: Charts.documentStyleWithDefaultOpacity(),
+          borderColor: Charts.documentStyle(),
+          borderWidth: 1,
+          pointStyle: false
         }
-      });
-
-      const sortedDeployments = Array.from(
-          deploymentCounts,
-          ([monthYear, count]) => ({
-            monthYear,
-            count
-          })).sort((a, b) => {
-        return new Date(a.monthYear).getTime() - new Date(b.monthYear).getTime();
-      });
-
-      return {
-        labels: sortedDeployments.map(deployment => deployment.monthYear),
-        datasets: [
-          {
-            data: sortedDeployments.map(deployment => deployment.count),
-            fill: true,
-            backgroundColor: Charts.documentStyleWithDefaultOpacity(),
-            borderColor: Charts.documentStyle(),
-            borderWidth: 1,
-            pointStyle: false
-          }
-        ]
-      };
-    }
-
-    return {};
-  }
-
-  latestEnvironment(deployments: Deployment[]): string {
-    if (this.hasDeployments(deployments)) {
-      const environment = deployments[deployments.length - 1].environment;
-      return environment ? environment : 'unknown';
-    }
-
-    return 'unknown';
-  }
-
-  latestVersion(deployments: Deployment[]): string {
-    if (this.hasDeployments(deployments)) {
-      const version = deployments[deployments.length - 1].version;
-      return version ? version : 'unknown';
-    }
-
-    return 'unknown';
-  }
-
-  latestTimestamp(deployments: Deployment[]): Date {
-    if (this.hasDeployments(deployments)) {
-      return deployments[deployments.length - 1].timestamp;
-    }
-
-    return undefined;
-  }
-
-  distinctVersionsCount(deployments: Deployment[]): number {
-    if (this.hasDeployments(deployments)) {
-      return new Set(deployments.map(deployment => deployment.version)).size;
-    }
-
-    return 0;
-  }
-
-  distinctEnvironmentsCount(deployments: Deployment[]): number {
-    if (this.hasDeployments(deployments)) {
-      return new Set(deployments.map(deployment => deployment.environment)).size;
-    }
-
-    return 0;
-  }
-
-  hasDeployments(deployments: Deployment[]): boolean {
-    return deployments && deployments.length > 0;
+      ]
+    };
   }
 
   private initChart(): void {

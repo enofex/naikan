@@ -41,7 +41,7 @@ class ApiDeploymentController {
       @ApiResponse(responseCode = "404", description = "Project not found")
   })
   @PostMapping
-  public ResponseEntity<String> save(
+  public ResponseEntity<String> saveById(
       @Parameter(required = true, description = "Project ID") @PathVariable ProjectId id,
       @io.swagger.v3.oas.annotations.parameters.RequestBody(
           required = true,
@@ -49,7 +49,7 @@ class ApiDeploymentController {
           content = @Content(schema = @Schema(implementation = Deployment.class))
       ) @RequestBody Deployment deployment
   ) {
-    Bom newBom = this.apiDeploymentService.save(id, deployment);
+    Bom newBom = this.apiDeploymentService.saveById(id, deployment);
 
     if (newBom != null) {
       URI location = ServletUriComponentsBuilder

@@ -11,20 +11,21 @@ import org.springframework.data.domain.Pageable;
 
 public interface ProjectRepository {
 
-  Page<Bom> findAll(Filterable filterable, Pageable pageable);
+  Page<BomOverview> findAll(Filterable filterable, Pageable pageable);
+
+  ProjectFilter findFilter();
 
   Optional<Bom> findById(ProjectId id);
 
   Optional<BomDetail> findBomDetailById(ProjectId id);
 
-  Page<Deployment> findDeployments(ProjectId id, Filterable filterable, Pageable pageable);
+  Page<Deployment> findDeploymentsById(ProjectId id, Filterable filterable, Pageable pageable);
 
-  Page<GroupedDeploymentsPerVersion> findGroupedDeploymentsPerVersion(ProjectId id,
+  Page<GroupedDeploymentsPerVersion> findGroupedDeploymentsPerVersionById(ProjectId id,
       Filterable filterable, Pageable pageable);
 
-  DeploymentsPerMonth findDeploymentsPerMonth(ProjectId id);
+  DeploymentsPerMonth findDeploymentsPerMonthById(ProjectId id);
 
-  List<LatestVersionPerEnvironment> findLatestVersionPerEnvironment(ProjectId id);
+  List<LatestVersionPerEnvironment> findLatestVersionPerEnvironmentById(ProjectId id);
 
-  ProjectFilter findFilter();
 }

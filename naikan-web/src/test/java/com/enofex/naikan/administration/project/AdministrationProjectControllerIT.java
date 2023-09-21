@@ -44,7 +44,7 @@ class AdministrationProjectControllerIT {
   }
 
   @Test
-  void shouldDelete() throws Exception {
+  void shouldDeleteById() throws Exception {
     Bom savedBom = this.template.save(
         DeserializerFactory.newJsonDeserializer().of(validBom0asInputStream()),
         "projects");
@@ -52,16 +52,16 @@ class AdministrationProjectControllerIT {
     this.mvc.perform(
             delete("/api/administration/projects/" + savedBom.id())
                 .with(csrf()))
-        .andExpect(handler().methodName("delete"))
+        .andExpect(handler().methodName("deleteById"))
         .andExpect(status().isOk());
   }
 
   @Test
-  void shouldNotDelete() throws Exception {
+  void shouldNotDeleteById() throws Exception {
     this.mvc.perform(
             delete("/api/administration/projects/not-exist")
                 .with(csrf()))
-        .andExpect(handler().methodName("delete"))
+        .andExpect(handler().methodName("deleteById"))
         .andExpect(status().isNotFound());
   }
 }

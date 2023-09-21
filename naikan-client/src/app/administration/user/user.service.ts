@@ -17,11 +17,11 @@ export class AdministrationUserService {
     return this.http.get<Page<User>>(`/${endpoint}`, {params: Pageables.toPageRequestHttpParams(event)});
   }
 
-  updateUserAuthorities(id: string, authorities: string[]): Observable<any> {
+  updateUserAuthoritiesById(id: string, authorities: string[]): Observable<any> {
     return this.http.patch(`/${endpoint}/${id}`, authorities);
   }
 
-  deleteUser(id: string): Observable<any> {
+  deleteUserById(id: string): Observable<any> {
     return this.http.delete(`/${endpoint}/${id}`);
   }
 }

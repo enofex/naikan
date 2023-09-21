@@ -53,7 +53,7 @@ class AdministrationTokenMongoRepository extends AbstractRepository implements
   }
 
   @Override
-  public long delete(TokenId id) {
+  public long deleteById(TokenId id) {
     return template()
         .remove(new Query(where("id").is(id.id())), Token.class, collectionName())
         .getDeletedCount();

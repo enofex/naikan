@@ -47,7 +47,7 @@ class AdministrationProjectMongoRepository extends AbstractRepository implements
   }
 
   @Override
-  public long delete(ProjectId id) {
+  public long deleteById(ProjectId id) {
     return template()
         .remove(new Query(where("id").is(id.id())), Bom.class, collectionName())
         .getDeletedCount();

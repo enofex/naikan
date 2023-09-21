@@ -105,7 +105,7 @@ class ProjectMongoRepositoryIT {
     Bom bom = newJsonDeserializer().of(validBom1asInputStream());
     Bom savedBom = this.template.save(bom, "projects");
 
-    List<Deployment> deployments = this.repository.findDeployments(
+    List<Deployment> deployments = this.repository.findDeploymentsById(
         ProjectId.of(savedBom.id()),
         Filterable.emptySearch(),
         Pageable.ofSize(10)).getContent();
@@ -124,7 +124,7 @@ class ProjectMongoRepositoryIT {
     Bom bom = newJsonDeserializer().of(validBom1asInputStream());
     Bom savedBom = this.template.save(bom, "projects");
 
-    List<GroupedDeploymentsPerVersion> deployments = this.repository.findGroupedDeploymentsPerVersion(
+    List<GroupedDeploymentsPerVersion> deployments = this.repository.findGroupedDeploymentsPerVersionById(
         ProjectId.of(savedBom.id()),
         Filterable.emptySearch(),
         Pageable.ofSize(10)).getContent();
@@ -145,7 +145,7 @@ class ProjectMongoRepositoryIT {
     Bom bom = newJsonDeserializer().of(validBom1asInputStream());
     Bom savedBom = this.template.save(bom, "projects");
 
-    List<LatestVersionPerEnvironment> deployments = this.repository.findLatestVersionPerEnvironment(
+    List<LatestVersionPerEnvironment> deployments = this.repository.findLatestVersionPerEnvironmentById(
         ProjectId.of(savedBom.id()));
 
     assertAll(
@@ -162,7 +162,7 @@ class ProjectMongoRepositoryIT {
     Bom bom = newJsonDeserializer().of(validBom1asInputStream());
     Bom savedBom = this.template.save(bom, "projects");
 
-    DeploymentsPerMonth deploymentsPerMonth = this.repository.findDeploymentsPerMonth(
+    DeploymentsPerMonth deploymentsPerMonth = this.repository.findDeploymentsPerMonthById(
         ProjectId.of(savedBom.id()));
 
     assertAll(
@@ -172,7 +172,7 @@ class ProjectMongoRepositoryIT {
             List.of("2022-12", "2023-01", "2023-02", "2023-03", "2023-04", "2023-05", "2023-06",
                 "2023-07", "2023-08", "2023-09"), deploymentsPerMonth.months()),
         () -> assertEquals(
-            List.of(1, 0, 0, 0, 0, 0, 0, 0, 0, 1), deploymentsPerMonth.counts())
+            List.of(1L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 1L), deploymentsPerMonth.counts())
     );
   }
 

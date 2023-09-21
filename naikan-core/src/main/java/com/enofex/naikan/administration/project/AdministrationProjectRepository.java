@@ -9,5 +9,5 @@ public interface AdministrationProjectRepository {
 
   Page<Project> findAll(Filterable filterable, Pageable pageable);
 
-  long delete(ProjectId id);
+  long deleteById(ProjectId id);
 }

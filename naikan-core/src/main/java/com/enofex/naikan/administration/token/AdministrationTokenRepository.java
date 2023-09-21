@@ -12,7 +12,7 @@ public interface AdministrationTokenRepository {
 
   long updateLastUsed(String token);
 
-  long delete(TokenId id);
+  long deleteById(TokenId id);
 
   boolean exists(String token);
 

@@ -17,7 +17,7 @@ export class AdministrationProjectService {
     return this.http.get<Page<Project>>(`/${endpoint}`, {params: Pageables.toPageRequestHttpParams(event)});
   }
 
-  deleteProject(id: string): Observable<any> {
+  deleteById(id: string): Observable<any> {
     return this.http.delete(`/${endpoint}/${id}`);
   }
 }

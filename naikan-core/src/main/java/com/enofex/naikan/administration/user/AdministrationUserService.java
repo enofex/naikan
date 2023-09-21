@@ -14,7 +14,7 @@ public interface AdministrationUserService {
 
   User save(User user);
 
-  long delete(UserId id);
+  long deleteById(UserId id);
 
   long count();
 }

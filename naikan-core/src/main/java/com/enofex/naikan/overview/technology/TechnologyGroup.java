@@ -9,7 +9,7 @@ public record TechnologyGroup(String uuid, Group group, List<OverviewBom> boms, 
   public TechnologyGroup(String uuid, Group group, List<OverviewBom> boms, int count) {
     this.uuid = uuid != null ? uuid : UUID.randomUUID().toString();
     this.group = group;
-    this.boms = List.copyOf(boms);
+    this.boms = boms != null ? List.copyOf(boms) : List.of();
     this.count = count;
   }
 

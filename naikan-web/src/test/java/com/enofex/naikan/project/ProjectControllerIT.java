@@ -63,53 +63,77 @@ class ProjectControllerIT {
   }
 
   @Test
-  void shouldFindDeployments() throws Exception {
+  void shouldFindDeploymentsById() throws Exception {
     Bom savedBom = this.template.save(
         DeserializerFactory.newJsonDeserializer().of(validBom0asInputStream()),
         "projects");
 
     this.mvc.perform(
             get("/api/projects/%s/deployments".formatted(savedBom.id())))
-        .andExpect(handler().methodName("findDeployments"))
+        .andExpect(handler().methodName("findDeploymentsById"))
         .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON));
   }
 
   @Test
-  void shouldFindDeploymentsPerMonth() throws Exception {
+  void shouldFindDeploymentsPerMonthById() throws Exception {
     Bom savedBom = this.template.save(
         DeserializerFactory.newJsonDeserializer().of(validBom0asInputStream()),
         "projects");
 
     this.mvc.perform(
             get("/api/projects/%s/deployments/months".formatted(savedBom.id())))
+        .andExpect(handler().methodName("findDeploymentsPerMonthById"))
+        .andExpect(status().isOk())
+        .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+  }
+
+  @Test
+  void shouldFindDeploymentsPerMonth() throws Exception {
+    this.template.save(DeserializerFactory.newJsonDeserializer().of(validBom0asInputStream()),
+        "projects");
+
+    this.mvc.perform(
+            get("/api/projects/deployments/months".formatted()))
         .andExpect(handler().methodName("findDeploymentsPerMonth"))
         .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON));
   }
 
   @Test
-  void shouldFindGroupedDeploymentsPerVersion() throws Exception {
+  void shouldFindDeploymentsPerProject() throws Exception {
+    this.template.save(DeserializerFactory.newJsonDeserializer().of(validBom0asInputStream()),
+        "projects");
+
+    this.mvc.perform(
+            get("/api/projects/deployments/projects".formatted()))
+        .andExpect(handler().methodName("findDeploymentsPerProject"))
+        .andExpect(status().isOk())
+        .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+  }
+
+  @Test
+  void shouldFindGroupedDeploymentsPerVersionById() throws Exception {
     Bom savedBom = this.template.save(
         DeserializerFactory.newJsonDeserializer().of(validBom0asInputStream()),
         "projects");
 
     this.mvc.perform(
             get("/api/projects/%s/versions/grouped".formatted(savedBom.id())))
-        .andExpect(handler().methodName("findGroupedDeploymentsPerVersion"))
+        .andExpect(handler().methodName("findGroupedDeploymentsPerVersionById"))
         .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON));
   }
 
   @Test
-  void shouldFindLatestVersionPerEnvironment() throws Exception {
+  void shouldFindLatestVersionPerEnvironmentById() throws Exception {
     Bom savedBom = this.template.save(
         DeserializerFactory.newJsonDeserializer().of(validBom0asInputStream()),
         "projects");
 
     this.mvc.perform(
             get("/api/projects/%s/versions/environments".formatted(savedBom.id())))
-        .andExpect(handler().methodName("findLatestVersionPerEnvironment"))
+        .andExpect(handler().methodName("findLatestVersionPerEnvironmentById"))
         .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON));
   }
@@ -139,7 +163,7 @@ class ProjectControllerIT {
   }
 
   @Test
-  void shouldExportToXlsx() throws Exception {
+  void shouldExportToXlsxById() throws Exception {
     Bom savedBom = this.template.save(
         DeserializerFactory.newJsonDeserializer().of(validBom0asInputStream()),
         "projects");
@@ -148,7 +172,7 @@ class ProjectControllerIT {
             get("/api/projects/%s?xlsx".formatted(savedBom.id()))
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(csrf()))
-        .andExpect(handler().methodName("xlsx"))
+        .andExpect(handler().methodName("xlsxById"))
         .andExpect(status().isOk());
   }
 }

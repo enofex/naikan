@@ -41,8 +41,8 @@ class AdministrationUserServiceHandler implements AdministrationUserService {
   }
 
   @Override
-  public long delete(UserId id) {
-    return this.administrationUserRepository.delete(id);
+  public long deleteById(UserId id) {
+    return this.administrationUserRepository.deleteId(id);
   }
 
   @Override

@@ -46,7 +46,7 @@ export class ProjectComponent {
         this.messageService.clear();
 
         this.administrationProjectService
-        .deleteProject(id)
+        .deleteById(id)
         .subscribe({
           next: () => {
             this.loadProjects(this.tableAdministrationProjects.createLazyLoadMetadata());

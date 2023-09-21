@@ -9,9 +9,8 @@ import {
 import {NgClass, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault} from '@angular/common';
 import {TooltipModule} from 'primeng/tooltip';
 import {
-  Bom,
+  Charts,
   DateTimePipe,
-  Deployment,
   NaikanTags,
   Principal,
   ProjectUrlIcon,
@@ -24,19 +23,23 @@ import {ProjectService} from "./project.service";
 import {AbstractProjectView} from "./abstract-project-view.component";
 import {SharedModule} from "primeng/api";
 import {TabViewModule} from "primeng/tabview";
-import {Subscription} from "rxjs";
+import {finalize, Subscription} from "rxjs";
 import {LayoutService} from "@naikan/layout/app.layout.service";
-import {DeploymentsChart} from "./deployments-chart";
+import {BomOverview} from "./bom-overview";
+import {DeploymentsPerMonth} from "./deployments-per-month";
+import {Table} from "primeng/table";
+import {DeploymentsPerProject} from "./deployments-per-project";
 
 @Component({template: ''})
 export abstract class AbstractInsightChart implements OnDestroy {
 
-  private _boms: Bom[];
+  private _bomOverviews: BomOverview[];
   subscription!: Subscription;
+  @Input() table!: Table;
 
   @Input()
-  set boms(boms: Bom[]) {
-    this._boms = boms;
+  set bomOverviews(bomOverviews: BomOverview[]) {
+    this._bomOverviews = bomOverviews;
     this.initChart();
   }
 
@@ -52,8 +55,8 @@ export abstract class AbstractInsightChart implements OnDestroy {
     }
   }
 
-  allBoms(): Bom[] {
-    return this._boms;
+  allOverviewBoms(): BomOverview[] {
+    return this._bomOverviews;
   }
 
   abstract initChart(): void;
@@ -62,7 +65,9 @@ export abstract class AbstractInsightChart implements OnDestroy {
 @Component({
   selector: 'naikan-project-view-insights-summarization-chart',
   template: `
-    <p-chart type="bar" height="100%" width="100%"
+    <p-chart type="bar"
+             height="100%"
+             width="100%"
              #chartSummarizationRef
              [data]="chartSummarization.data"
              [options]="chartSummarization.options">
@@ -110,7 +115,7 @@ export class SummarizationChart extends AbstractInsightChart {
   }
 
   override initChart(): void {
-    if (!this.allBoms()) {
+    if (!this.allOverviewBoms()) {
       return;
     }
 
@@ -121,14 +126,20 @@ export class SummarizationChart extends AbstractInsightChart {
       {label: "Contacts", prop: "contacts"},
       {label: "Integrations", prop: "integrations"},
       {label: "Technologies", prop: "technologies"},
-      {label: "Deployments", prop: "deployments"},
+      {label: "Deployments", prop: "deploymentsCount"},
       {label: "Tags", prop: "tags"}
     ];
 
-    this.chartSummarization.data.labels = this.allBoms().map(bom => bom.project.name);
+    this.chartSummarization.data.labels = this.allOverviewBoms().map(overviewBom => overviewBom.project.name);
     this.chartSummarization.data.datasets = dataProperties.map(propData => ({
       label: propData.label,
-      data: this.allBoms().map(bom => bom[propData.prop] ? bom[propData.prop].length : 0)
+      data: this.allOverviewBoms().map(overviewBom => {
+        if (Array.isArray(overviewBom[propData.prop])) {
+          return overviewBom[propData.prop] ? overviewBom[propData.prop].length : 0;
+        } else {
+          return overviewBom[propData.prop];
+        }
+      })
     }));
 
     if (this.chartSummarizationRef?.chart) {
@@ -140,7 +151,9 @@ export class SummarizationChart extends AbstractInsightChart {
 @Component({
   selector: 'naikan-project-view-insights-technologies-chart',
   template: `
-    <p-chart type="bar" height="100%" width="100%"
+    <p-chart type="bar"
+             height="100%"
+             width="100%"
              #chartTechnologiesRef
              [data]="chartTechnologies.data"
              [options]="chartTechnologies.options">
@@ -180,13 +193,13 @@ export class TechnologiesChart extends AbstractInsightChart {
   }
 
   override initChart(): void {
-    if (!this.allBoms()) {
+    if (!this.allOverviewBoms()) {
       return;
     }
 
     const technologyCounts = new Map<string, number>();
 
-    this.allBoms().forEach(bom => bom.technologies.forEach((tech) => {
+    this.allOverviewBoms().forEach(bom => bom.technologies.forEach((tech) => {
       const name = tech.name + (tech.version ? " " + tech.version : "");
       const count = technologyCounts.get(name) || 0;
       technologyCounts.set(name, count + 1);
@@ -211,11 +224,104 @@ export class TechnologiesChart extends AbstractInsightChart {
   }
 }
 
+@Component({
+  selector: 'naikan-project-view-insights-deployments-chart',
+  template: `
+    <p-chart #chartDeploymentsRef
+             type="line"
+             height="100%"
+             width="100%"
+             [data]="chartDeployments.data"
+             [options]="chartDeployments.options">
+    </p-chart>
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
+  standalone: true,
+  imports: [
+    NgSwitch,
+    NgSwitchCase,
+    NgSwitchDefault,
+    ChartModule,
+  ],
+})
+export class DeploymentsChart extends AbstractInsightChart {
+
+  @ViewChild('chartDeploymentsRef') chartDeploymentsRef: UIChart;
+  deploymentsPerMonth: DeploymentsPerMonth;
+
+  chartDeployments = {
+    options: {
+      y: {
+        display: true,
+        ticks: {
+          display: false
+        }
+      },
+      scale: {
+        ticks: {
+          precision: 0
+        }
+      },
+      plugins: {
+        legend: {
+          display: true
+        },
+        title: {
+          display: false,
+          text: ''
+        }
+      }
+    },
+    data: {} as any
+  };
+
+  constructor(override readonly layoutService: LayoutService, private readonly projectService: ProjectService) {
+    super(layoutService);
+  }
+
+  override initChart(): void {
+    this.projectService
+    .getDeploymentsPerMonth(this.table.createLazyLoadMetadata())
+    .pipe(finalize(() => {
+      const sum = this.deploymentsPerMonth.counts.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+      const average = sum / this.deploymentsPerMonth.counts.length;
+
+      this.chartDeployments.data.labels = this.deploymentsPerMonth.months;
+      this.chartDeployments.data.datasets = [
+        {
+          label: 'Average deployments',
+          data: Array(this.deploymentsPerMonth.months.length).fill(average),
+          borderWidth: 1,
+          fill: false,
+          pointStyle: false,
+          borderColor: Charts.documentStyle(),
+          borderDash: [5, 5]
+        },
+        {
+          label: 'Deployments',
+          data: this.deploymentsPerMonth.counts,
+          borderWidth: 1,
+          fill: true,
+          pointStyle: false,
+          borderColor: Charts.documentStyle(),
+          backgroundColor: Charts.documentStyleWithDefaultOpacity(),
+        }];
+
+      if (this.chartDeploymentsRef?.chart) {
+        this.chartDeploymentsRef.chart.update();
+      }
+    }))
+    .subscribe(data => this.deploymentsPerMonth = data);
+  }
+}
 
 @Component({
   selector: 'naikan-project-view-insights-deployments-summarization-chart',
   template: `
-    <p-chart type="bar" height="100%" width="100%"
+    <p-chart type="bar"
+             height="100%"
+             width="100%"
              #chartDeploymentsSummarizationRef
              [data]="chartDeploymentsSummarization.data"
              [options]="chartDeploymentsSummarization.options">
@@ -234,6 +340,7 @@ export class TechnologiesChart extends AbstractInsightChart {
 export class DeploymentsSummarizationChart extends AbstractInsightChart {
 
   @ViewChild('chartDeploymentsSummarizationRef') chartDeploymentsSummarizationRef: UIChart;
+  deploymentsPerProject: DeploymentsPerProject;
 
   chartDeploymentsSummarization = {
     options: {
@@ -259,42 +366,32 @@ export class DeploymentsSummarizationChart extends AbstractInsightChart {
     data: {} as any
   };
 
-  constructor(override readonly layoutService: LayoutService) {
+  constructor(override readonly layoutService: LayoutService, private readonly projectService: ProjectService) {
     super(layoutService);
   }
 
   override initChart(): void {
-    if (!this.allBoms()) {
-      return;
-    }
+    this.projectService
+    .getDeploymentsPerProject(this.table.createLazyLoadMetadata())
+    .pipe(finalize(() => {
+      this.chartDeploymentsSummarization.data.labels = this.deploymentsPerProject.projects;
+      this.chartDeploymentsSummarization.data.datasets = [
+        {
+          label: 'Deployments',
+          data: this.deploymentsPerProject.counts,
+          fill: true,
+          pointStyle: false,
+          borderColor: Charts.documentStyle(),
+          backgroundColor: Charts.documentStyle(),
+        }];
 
-    const months = 24;
-    const dataProperties = [
-      {label: "Unique environments", prop: "environment"},
-      {label: "Unique locations", prop: "location"},
-      {label: "Unique versions", prop: "version"},
-    ];
 
-    const currentDate = new Date();
-    const twentyFourMonthsAgo = new Date();
-    twentyFourMonthsAgo.setMonth(currentDate.getMonth() - months);
+      if (this.chartDeploymentsSummarizationRef?.chart) {
+        this.chartDeploymentsSummarizationRef.chart.update();
+      }
+    }))
+    .subscribe(data => this.deploymentsPerProject = data);
 
-    this.chartDeploymentsSummarization.options.plugins.title.text = `Last ${months} months`;
-    this.chartDeploymentsSummarization.data.labels = this.allBoms().map(bom => bom.project.name);
-    this.chartDeploymentsSummarization.data.datasets = dataProperties.map(propData => ({
-      label: propData.label,
-      data: this.allBoms().map((bom) => {
-        const filteredDeployments = bom.deployments.filter(deployment => {
-          const deploymentTimestamp = new Date(deployment.timestamp);
-          return deploymentTimestamp >= twentyFourMonthsAgo && deploymentTimestamp <= currentDate;
-        });
-        return new Set(filteredDeployments.map(deployment => deployment[propData.prop])).size;
-      })
-    }));
-
-    if (this.chartDeploymentsSummarizationRef?.chart) {
-      this.chartDeploymentsSummarizationRef.chart.update();
-    }
   }
 }
 
@@ -305,28 +402,30 @@ export class DeploymentsSummarizationChart extends AbstractInsightChart {
 
       <p-tabPanel header="Summarization">
         <div class="chart-panel">
-          <naikan-project-view-insights-summarization-chart [boms]="allBoms()">
+          <naikan-project-view-insights-summarization-chart [table]="table"
+                                                            [bomOverviews]="allBomOverviews()">
           </naikan-project-view-insights-summarization-chart>
         </div>
       </p-tabPanel>
 
       <p-tabPanel header="Technologies">
         <div class="chart-panel">
-          <naikan-project-view-insights-technologies-chart [boms]="allBoms()">
+          <naikan-project-view-insights-technologies-chart [table]="table"
+                                                           [bomOverviews]="allBomOverviews()">
           </naikan-project-view-insights-technologies-chart>
         </div>
       </p-tabPanel>
 
       <p-tabPanel header="Deployments">
         <div class="chart-panel">
-          <naikan-deployments-chart
-              [months]="24"
-              [deployments]="allDeployments()">
-          </naikan-deployments-chart>
+          <naikan-project-view-insights-deployments-chart [table]="table"
+                                                          [bomOverviews]="allBomOverviews()">
+          </naikan-project-view-insights-deployments-chart>
         </div>
 
         <div class="chart-panel mt-8">
-          <naikan-project-view-insights-deployments-summarization-chart [boms]="allBoms()">
+          <naikan-project-view-insights-deployments-summarization-chart [table]="table"
+                                                                        [bomOverviews]="allBomOverviews()">
           </naikan-project-view-insights-deployments-summarization-chart>
         </div>
       </p-tabPanel>
@@ -357,32 +456,23 @@ export class DeploymentsSummarizationChart extends AbstractInsightChart {
 })
 export class ProjectViewInsightsHeader extends AbstractProjectView {
 
-  private _boms: Bom[];
+  @Input() table!: Table;
+  private _bomOverviews: BomOverview[];
 
   @Input()
-  set boms(boms: Bom[]) {
-    this._boms = boms;
+  set bomOverviews(bomOverviews: BomOverview[]) {
+    this._bomOverviews = bomOverviews;
   }
 
   constructor(projectService: ProjectService, principal: Principal) {
     super(projectService, principal)
   }
 
-  allBoms(): Bom[] {
-    if (!this._boms) {
+  allBomOverviews(): BomOverview[] {
+    if (!this._bomOverviews) {
       return [];
     }
 
-    return this._boms;
-  }
-
-  allDeployments(): Deployment[] {
-    if (!this._boms) {
-      return [];
-    }
-
-    return this._boms.flatMap((bom) =>
-        bom.deployments.map((deployment) => deployment)
-    );
+    return this._bomOverviews;
   }
 }

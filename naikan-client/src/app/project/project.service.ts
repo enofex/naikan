@@ -1,6 +1,6 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {BlockUIService, Bom, Deployment, Page, Pageables, Principal, User} from "@naikan/shared";
+import {BlockUIService, Deployment, Page, Pageables, Principal, User} from "@naikan/shared";
 import {finalize, Observable} from 'rxjs';
 import {FilterMatchMode} from 'primeng/api';
 import {ProjectFilter} from "./project-filter";
@@ -8,11 +8,13 @@ import {FilterMetadata} from "primeng/api/filtermetadata";
 import {TableLazyLoadEvent} from "primeng/table";
 import {saveAs} from 'file-saver';
 import {
-  DeploymentsPerMonth,
   GroupedDeploymentsPerVersion,
   LatestVersionPerEnvironment
 } from "./detail/project-detail.component";
-import {BomDetail} from "./detail/bom-detail";
+import {BomDetail} from "./bom-detail";
+import {BomOverview} from "./bom-overview";
+import {DeploymentsPerMonth} from "./deployments-per-month";
+import {DeploymentsPerProject} from "./deployments-per-project";
 
 const endpoint = 'projects';
 
@@ -26,7 +28,7 @@ export class ProjectService {
               private readonly blockUIService: BlockUIService) {
   }
 
-  getBoms(event?: TableLazyLoadEvent, favorites: boolean = false): Observable<Page<Bom>> {
+  getBoms(event?: TableLazyLoadEvent, favorites: boolean = false): Observable<Page<BomOverview>> {
     if (event) {
       (<FilterMetadata[]>event.filters['_id']) = [];
     }
@@ -41,12 +43,12 @@ export class ProjectService {
       });
     }
 
-    return this.http.get<Page<Bom>>(`/${endpoint}`, {
+    return this.http.get<Page<BomOverview>>(`/${endpoint}`, {
       params: Pageables.toPageRequestHttpParams(event)
     });
   }
 
-  getBomDetail(id: string): Observable<BomDetail> {
+  getBomDetailById(id: string): Observable<BomDetail> {
     return this.http.get<BomDetail>(`/${endpoint}/${id}`);
   }
 
@@ -58,23 +60,31 @@ export class ProjectService {
     return this.http.patch(`/${endpoint}/favorites`, favorites);
   }
 
-  getProjectDeployments(id: string, event?: TableLazyLoadEvent): Observable<Page<Deployment>> {
+  getProjectDeploymentsById(id: string, event?: TableLazyLoadEvent): Observable<Page<Deployment>> {
     return this.http.get<Page<Deployment>>(`/${endpoint}/${id}/deployments`, {params: Pageables.toPageRequestHttpParams(event)});
   }
 
-  getDeploymentsPerMonth(id: string): Observable<DeploymentsPerMonth> {
+  getDeploymentsPerMonthById(id: string): Observable<DeploymentsPerMonth> {
     return this.http.get<DeploymentsPerMonth>(`/${endpoint}/${id}/deployments/months`);
   }
 
-  getGroupedDeploymentsPerVersion(id: string, event?: TableLazyLoadEvent): Observable<Page<GroupedDeploymentsPerVersion>> {
+  getDeploymentsPerMonth(event?: TableLazyLoadEvent): Observable<DeploymentsPerMonth> {
+    return this.http.get<DeploymentsPerMonth>(`/${endpoint}/deployments/months`, {params: Pageables.toPageRequestHttpParams(event)});
+  }
+
+  getDeploymentsPerProject(event?: TableLazyLoadEvent): Observable<DeploymentsPerProject> {
+    return this.http.get<DeploymentsPerProject>(`/${endpoint}/deployments/projects`, {params: Pageables.toPageRequestHttpParams(event)});
+  }
+
+  getGroupedDeploymentsPerVersionById(id: string, event?: TableLazyLoadEvent): Observable<Page<GroupedDeploymentsPerVersion>> {
     return this.http.get<Page<GroupedDeploymentsPerVersion>>(`/${endpoint}/${id}/versions/grouped`, {params: Pageables.toPageRequestHttpParams(event)});
   }
 
-  getLatestVersionPerEnvironment(id: string): Observable<LatestVersionPerEnvironment[]> {
+  getLatestVersionPerEnvironmentById(id: string): Observable<LatestVersionPerEnvironment[]> {
     return this.http.get<LatestVersionPerEnvironment[]>(`/${endpoint}/${id}/versions/environments`);
   }
 
-  exportXlsx(id: string) {
+  exportXlsxById(id: string) {
     return this.http.get(`/${endpoint}/${id}?xlsx`, {
       responseType: 'blob'
     })
@@ -82,7 +92,7 @@ export class ProjectService {
     .subscribe(res => saveAs(res, `${id}.xlsx`, {autoBom: false}));
   }
 
-  exportJson(id: string) {
+  exportJsonById(id: string) {
     return this.http.get(`/${endpoint}/${id}`, {
       responseType: 'blob'
     })

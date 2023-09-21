@@ -23,7 +23,8 @@ import {ButtonModule} from 'primeng/button';
 import {TabViewModule} from 'primeng/tabview';
 import {DatePipe, NgFor, NgIf} from '@angular/common';
 import {SplitButtonModule} from "primeng/splitbutton";
-import {BomDetail} from "./bom-detail";
+import {BomDetail} from "../bom-detail";
+import {DeploymentsPerMonth} from "../deployments-per-month";
 
 export interface GroupedDeploymentsPerVersion {
   version: string;
@@ -34,11 +35,6 @@ export interface GroupedDeploymentsPerVersion {
 export interface LatestVersionPerEnvironment {
   environment: string;
   deployment: Deployment;
-}
-
-export interface DeploymentsPerMonth {
-  months: string[];
-  counts: number[];
 }
 
 @Component({
@@ -114,13 +110,13 @@ export class ProjectDetailComponent implements OnInit {
 
   loadDeployments(event?: TableLazyLoadEvent): void {
     this.projectService
-    .getProjectDeployments(this.id, event)
+    .getProjectDeploymentsById(this.id, event)
     .subscribe(data => this.deploymentsPage = data);
   }
 
   loadGroupedDeploymentsPerVersion(event?: TableLazyLoadEvent): void {
     this.projectService
-    .getGroupedDeploymentsPerVersion(this.id, event)
+    .getGroupedDeploymentsPerVersionById(this.id, event)
     .subscribe(data => this.versionsPage = data);
   }
 
@@ -140,15 +136,15 @@ export class ProjectDetailComponent implements OnInit {
   }
 
   exportXlsx(): void {
-    this.projectService.exportXlsx(this.id);
+    this.projectService.exportXlsxById(this.id);
   }
 
   exportJson(): void {
-    this.projectService.exportJson(this.id);
+    this.projectService.exportJsonById(this.id);
   }
 
   private loadBomDetail(id: string): void {
-    this.projectService.getBomDetail(id)
+    this.projectService.getBomDetailById(id)
     .pipe(finalize(() => {
       this.items = [{label: this.bomDetail.project.name}];
     }))
@@ -159,7 +155,7 @@ export class ProjectDetailComponent implements OnInit {
 
   private loadDeploymentsPerMonth(): void {
     this.projectService
-    .getDeploymentsPerMonth(this.id)
+    .getDeploymentsPerMonthById(this.id)
     .pipe(finalize(() => {
       const sum = this.deploymentsPerMonth.counts.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
       const average = sum / this.deploymentsPerMonth.counts.length;
@@ -190,7 +186,7 @@ export class ProjectDetailComponent implements OnInit {
 
   private loadLatestVersionPerEnvironment(): void {
     this.projectService
-    .getLatestVersionPerEnvironment(this.id)
+    .getLatestVersionPerEnvironmentById(this.id)
     .subscribe(data => this.latestVersionPerEnvironment = data);
   }
 }

@@ -37,7 +37,7 @@ class ApiProjectController {
       @ApiResponse(responseCode = "404", description = "Project not found")
   })
   @PutMapping("/{id}")
-  public ResponseEntity<Void> update(
+  public ResponseEntity<Void> updateById(
       @Parameter(required = true, description = "Project ID") @PathVariable ProjectId id,
       @io.swagger.v3.oas.annotations.parameters.RequestBody(
           required = true,
@@ -46,7 +46,7 @@ class ApiProjectController {
       ) @RequestBody Bom bom
   ) {
     if (this.apiProjectService.findById(id).isPresent()) {
-      this.apiProjectService.update(id, bom);
+      this.apiProjectService.updateById(id, bom);
 
       return ResponseEntity.ok().build();
     }

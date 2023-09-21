@@ -25,8 +25,8 @@ class ApiProjectServiceHandler implements ApiProjectService {
   }
 
   @Override
-  public Bom update(ProjectId id, Bom bom) {
-    return this.apiProjectRepository.update(id, bom);
+  public Bom updateById(ProjectId id, Bom bom) {
+    return this.apiProjectRepository.updateById(id, bom);
   }
 
   @Override

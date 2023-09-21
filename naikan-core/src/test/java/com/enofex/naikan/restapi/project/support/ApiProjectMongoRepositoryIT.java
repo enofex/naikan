@@ -39,7 +39,7 @@ class ApiProjectMongoRepositoryIT {
     Bom bom = newJsonDeserializer().of(validBom1asInputStream());
     Bom savedBom = this.repository.upsertByProjectName(bom);
 
-    this.repository.update(ProjectId.of(savedBom.id()),
+    this.repository.updateById(ProjectId.of(savedBom.id()),
         newJsonDeserializer().of(validBom0asInputStream()));
 
     assertEquals(1L, this.template.count(new Query(), "projects"));
@@ -47,7 +47,7 @@ class ApiProjectMongoRepositoryIT {
 
   @Test
   void shouldNotUpdateByProjectIdBom() {
-    this.repository.update(ProjectId.of("do_not_exits"),
+    this.repository.updateById(ProjectId.of("do_not_exits"),
         newJsonDeserializer().of(validBom0asInputStream()));
 
     assertEquals(0L, this.template.count(new Query(), "projects"));

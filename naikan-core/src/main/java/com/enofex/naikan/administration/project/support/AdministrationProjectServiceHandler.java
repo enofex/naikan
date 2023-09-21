@@ -26,7 +26,7 @@ class AdministrationProjectServiceHandler implements AdministrationProjectServic
   }
 
   @Override
-  public long delete(ProjectId id) {
-    return this.administrationRepository.delete(id);
+  public long deleteById(ProjectId id) {
+    return this.administrationRepository.deleteById(id);
   }
 }

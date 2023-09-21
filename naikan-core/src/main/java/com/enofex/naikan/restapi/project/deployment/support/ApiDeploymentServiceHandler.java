@@ -19,7 +19,7 @@ class ApiDeploymentServiceHandler implements ApiDeploymentService {
   }
 
   @Override
-  public Bom save(ProjectId id, Deployment deployment) {
-    return this.apiDeploymentRepository.save(id, deployment);
+  public Bom saveById(ProjectId id, Deployment deployment) {
+    return this.apiDeploymentRepository.saveById(id, deployment);
   }
 }

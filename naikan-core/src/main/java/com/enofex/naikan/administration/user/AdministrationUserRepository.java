@@ -14,7 +14,7 @@ public interface AdministrationUserRepository {
 
   User save(User user);
 
-  long delete(UserId id);
+  long deleteId(UserId id);
 
   long count();
 

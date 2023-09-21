@@ -27,7 +27,7 @@ class ApiProjectMongoRepository extends AbstractRepository implements ApiProject
   }
 
   @Override
-  public Bom update(ProjectId id, Bom bom) {
+  public Bom updateById(ProjectId id, Bom bom) {
     Query query = new Query(where("id").is(id.id()));
     return findAndModify(query, false, bom);
   }

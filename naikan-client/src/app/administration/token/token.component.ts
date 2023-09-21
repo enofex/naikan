@@ -58,7 +58,7 @@ export class TokenComponent {
         this.messageService.clear();
 
         this.administrationTokenService
-        .deleteToken(id)
+        .deleteTokenById(id)
         .subscribe({
           next: () => {
             this.loadTokens(this.tableAdministrationTokens.createLazyLoadMetadata());

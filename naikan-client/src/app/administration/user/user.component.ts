@@ -55,7 +55,7 @@ export class UserComponent {
         this.messageService.clear();
 
         this.administrationUserService
-        .deleteUser(id)
+        .deleteUserById(id)
         .subscribe({
           next: () => {
             this.loadUsers(this.tableAdministrationUsers.createLazyLoadMetadata());
@@ -78,7 +78,7 @@ export class UserComponent {
 
   onAuthoritiesChange(id: string, event: any): void {
     this.administrationUserService
-    .updateUserAuthorities(id, event.value)
+    .updateUserAuthoritiesById(id, event.value)
     .subscribe();
   }
 }

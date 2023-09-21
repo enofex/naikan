@@ -46,22 +46,22 @@ class AdministrationTokenControllerIT {
   }
 
   @Test
-  void shouldDelete() throws Exception {
+  void shouldDeleteById() throws Exception {
     Token savedToken = this.template.save(token(), "tokens");
 
     this.mvc.perform(
             delete("/api/administration/tokens/" + savedToken.id())
                 .with(csrf()))
-        .andExpect(handler().methodName("delete"))
+        .andExpect(handler().methodName("deleteById"))
         .andExpect(status().isOk());
   }
 
   @Test
-  void shouldNotDelete() throws Exception {
+  void shouldNotDeleteById() throws Exception {
     this.mvc.perform(
             delete("/api/administration/tokens/not-exist")
                 .with(csrf()))
-        .andExpect(handler().methodName("delete"))
+        .andExpect(handler().methodName("deleteById"))
         .andExpect(status().isNotFound());
   }
 
