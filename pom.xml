@@ -13,7 +13,7 @@
 
   <groupId>com.enofex</groupId>
   <artifactId>naikan-parent</artifactId>
-  <version>0.6.2-SNAPSHOT</version>
+  <version>0.7.0</version>
   <packaging>pom</packaging>
 
   <name>Naikan</name>
