@@ -23,7 +23,7 @@
     <java.version>20</java.version>
 
     <naikan-model.version>0.2.2</naikan-model.version>
-    <naikan-test.version>0.0.9</naikan-test.version>
+    <naikan-test.version>0.0.10</naikan-test.version>
     <apache.poi.version>5.2.3</apache.poi.version>
     <archunit.version>1.1.0</archunit.version>
     <springdoc-openapi-starter-webmvc-ui.version>2.2.0</springdoc-openapi-starter-webmvc-ui.version>
