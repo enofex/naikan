@@ -45,6 +45,7 @@ final class ProjectAllXlsxView extends AbstractXlsxStreamingView {
     put("Technologies", bom -> String.valueOf(bom.environmentNames().size()));
     put("Deployments", bom -> String.valueOf(bom.deploymentsCount()));
     put("Licenses", bom -> String.valueOf(bom.licenseNames().size()));
+    put("Commits", bom -> String.valueOf(bom.commitsCount()));
   }};
 
   private final List<BomOverview> boms;

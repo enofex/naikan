@@ -1,6 +1,7 @@
 package com.enofex.naikan;
 
 import com.enofex.naikan.model.AbstractContainer;
+import com.enofex.naikan.model.Branch;
 import com.enofex.naikan.model.Branches;
 import com.enofex.naikan.model.Commit;
 import com.enofex.naikan.model.CommitAuthor;
@@ -363,13 +364,23 @@ public class MongoConfiguration {
   }
 
   @ReadingConverter
-  private enum ToBranchesReadingConverter implements Converter<List<String>, Branches> {
+  private enum ToBranchesReadingConverter implements Converter<List<Document>, Branches> {
 
     INSTANCE;
 
     @Override
-    public Branches convert(List<String> source) {
-      return new Branches(source);
+    public Branches convert(List<Document> source) {
+      if (source == null) {
+        return null;
+      }
+
+      List<Branch> branches = new ArrayList<>(source.size());
+
+      for (Document element : source) {
+        branches.add(new Branch(element.getString("name")));
+      }
+
+      return new Branches(branches);
     }
   }
 

@@ -297,7 +297,1093 @@
           "$date": "2022-01-28T08:29:10Z"
         }
       }
-    ]
+    ],
+    "repository": {
+      "name": "naikan",
+      "url": "git@github.com:enofex/naikan.git",
+      "firstCommit": {
+        "commitId": "d0ba83f35750563b1b79268a1feb6e7a8425d42e",
+        "timestamp": {
+          "$date": "2023-04-22T21:44:42Z"
+        },
+        "shortMessage": "Initial commit",
+        "author": {
+          "name": "trevky",
+          "email": "tcooksey1@geocities.jp"
+        },
+        "changes": {
+          "lines": {
+            "added": 3743,
+            "deleted": 0
+          },
+          "files": {
+            "added": 78,
+            "deleted": 0,
+            "changed": 0
+          }
+        }
+      },
+      "totalCommits": 47,
+      "defaultBranch": "main",
+      "branches": [
+        {
+          "name": "refs/remotes/origin/HEAD"
+        },
+        {
+          "name": "refs/remotes/origin/main"
+        }
+      ],
+      "tags": [
+        {
+          "name": "refs/tags/v0.0.2",
+          "timestamp": {
+            "$date": "2023-04-22T21:44:42Z"
+          }
+        },
+        {
+          "name": "refs/tags/v0.0.3",
+          "timestamp": {
+            "$date": "2023-05-08T18:45:01Z"
+          }
+        }
+      ],
+      "commits": [
+        {
+          "commitId": "d0ba83f35750563b1b79268a1feb6e7a8425d42e",
+          "timestamp": {
+            "$date": "2023-04-22T21:44:42Z"
+          },
+          "shortMessage": "Initial commit",
+          "author": {
+            "name": "trevky",
+            "email": "tcooksey1@geocities.jp"
+          },
+          "changes": {
+            "lines": {
+              "added": 3743,
+              "deleted": 0
+            },
+            "files": {
+              "added": 78,
+              "deleted": 0,
+              "changed": 0
+            }
+          }
+        },
+        {
+          "commitId": "3c69c048fa4bdcd9a22b379629850c351ed125a9",
+          "timestamp": {
+            "$date": "2023-04-22T21:46:09Z"
+          },
+          "shortMessage": "Perform release",
+          "author": {
+            "name": "github-actions[bot]",
+            "email": "github-actions[bot]@users.noreply.github.com"
+          },
+          "changes": {
+            "lines": {
+              "added": 222,
+              "deleted": 1
+            },
+            "files": {
+              "added": 1,
+              "deleted": 0,
+              "changed": 1
+            }
+          }
+        },
+        {
+          "commitId": "f40374e186ff49102db097024f9ac28c76f253c4",
+          "timestamp": {
+            "$date": "2023-04-22T21:47:22Z"
+          },
+          "shortMessage": "Prepare for next release",
+          "author": {
+            "name": "github-actions[bot]",
+            "email": "github-actions[bot]@users.noreply.github.com"
+          },
+          "changes": {
+            "lines": {
+              "added": 1,
+              "deleted": 222
+            },
+            "files": {
+              "added": 0,
+              "deleted": 1,
+              "changed": 1
+            }
+          }
+        },
+        {
+          "commitId": "fc06c4b5152180741019161c0685ee9b623ca930",
+          "timestamp": {
+            "$date": "2023-04-23T05:17:37Z"
+          },
+          "shortMessage": "Delete maven.yml",
+          "author": {
+            "name": "Trev Cooksey",
+            "email": "tcooksey1@geocities.jp"
+          },
+          "changes": {
+            "lines": {
+              "added": 0,
+              "deleted": 35
+            },
+            "files": {
+              "added": 0,
+              "deleted": 1,
+              "changed": 0
+            }
+          }
+        },
+        {
+          "commitId": "3f4411d9413930c7e96282cdc73c72a3b195aa76",
+          "timestamp": {
+            "$date": "2023-04-23T05:18:32Z"
+          },
+          "shortMessage": "Create maven.yml",
+          "author": {
+            "name": "Trev Cooksey",
+            "email": "tcooksey1@geocities.jp"
+          },
+          "changes": {
+            "lines": {
+              "added": 35,
+              "deleted": 0
+            },
+            "files": {
+              "added": 1,
+              "deleted": 0,
+              "changed": 0
+            }
+          }
+        },
+        {
+          "commitId": "734fae807cea865bfdc3d03343913e21869aacab",
+          "timestamp": {
+            "$date": "2023-04-24T18:04:31Z"
+          },
+          "shortMessage": "Bump jackson-datatype-jsr310 from 2.14.2 to 2.15.0",
+          "author": {
+            "name": "dependabot[bot]",
+            "email": "49699333+dependabot[bot]@users.noreply.github.com"
+          },
+          "changes": {
+            "lines": {
+              "added": 1,
+              "deleted": 1
+            },
+            "files": {
+              "added": 0,
+              "deleted": 0,
+              "changed": 1
+            }
+          }
+        },
+        {
+          "commitId": "f441c6647adce948b56dc46e56de22af01a45026",
+          "timestamp": {
+            "$date": "2023-04-27T16:53:56Z"
+          },
+          "shortMessage": "Rename dependabot.yml to dependabot-versions.yml",
+          "author": {
+            "name": "Trev Cooksey",
+            "email": "tcooksey1@geocities.jp"
+          },
+          "changes": {
+            "lines": {
+              "added": 11,
+              "deleted": 11
+            },
+            "files": {
+              "added": 1,
+              "deleted": 1,
+              "changed": 0
+            }
+          }
+        },
+        {
+          "commitId": "9a4e37d937815eee1c30fa3030694b899e0033c0",
+          "timestamp": {
+            "$date": "2023-05-02T16:30:05Z"
+          },
+          "shortMessage": "Update JUnit to 5.9.3",
+          "author": {
+            "name": "trevky",
+            "email": "tcooksey1@geocities.jp"
+          },
+          "changes": {
+            "lines": {
+              "added": 1,
+              "deleted": 1
+            },
+            "files": {
+              "added": 0,
+              "deleted": 0,
+              "changed": 1
+            }
+          }
+        },
+        {
+          "commitId": "6d97b1c3dfc283a6eedd7bb99995e596b1874dc6",
+          "timestamp": {
+            "$date": "2023-05-02T16:31:01Z"
+          },
+          "shortMessage": "Update schema validator to 1.0.81",
+          "author": {
+            "name": "trevky",
+            "email": "tcooksey1@geocities.jp"
+          },
+          "changes": {
+            "lines": {
+              "added": 1,
+              "deleted": 1
+            },
+            "files": {
+              "added": 0,
+              "deleted": 0,
+              "changed": 1
+            }
+          }
+        },
+        {
+          "commitId": "36f4cca5b23b673cdb5cd3b6a590eb29e40ec2b5",
+          "timestamp": {
+            "$date": "2023-05-02T16:34:32Z"
+          },
+          "shortMessage": "Define maven 3.8.6 requirement",
+          "author": {
+            "name": "trevky",
+            "email": "tcooksey1@geocities.jp"
+          },
+          "changes": {
+            "lines": {
+              "added": 4,
+              "deleted": 0
+            },
+            "files": {
+              "added": 0,
+              "deleted": 0,
+              "changed": 1
+            }
+          }
+        },
+        {
+          "commitId": "2d1dc20962ccd1c536dd283e3439882b4229aa89",
+          "timestamp": {
+            "$date": "2023-05-02T16:35:40Z"
+          },
+          "shortMessage": "Update jreleaser to 1.6.0",
+          "author": {
+            "name": "trevky",
+            "email": "tcooksey1@geocities.jp"
+          },
+          "changes": {
+            "lines": {
+              "added": 1,
+              "deleted": 1
+            },
+            "files": {
+              "added": 0,
+              "deleted": 0,
+              "changed": 1
+            }
+          }
+        },
+        {
+          "commitId": "9ddd62e4b7f16b244618571680062eeeeea9ab18",
+          "timestamp": {
+            "$date": "2023-05-02T16:52:33Z"
+          },
+          "shortMessage": "Update maven plugins",
+          "author": {
+            "name": "trevky",
+            "email": "tcooksey1@geocities.jp"
+          },
+          "changes": {
+            "lines": {
+              "added": 31,
+              "deleted": 0
+            },
+            "files": {
+              "added": 0,
+              "deleted": 0,
+              "changed": 1
+            }
+          }
+        },
+        {
+          "commitId": "fd48a5c4e9192e0709314b2aa61c7b2e94c9dab4",
+          "timestamp": {
+            "$date": "2023-05-02T18:26:46Z"
+          },
+          "shortMessage": "Update pom.xml",
+          "author": {
+            "name": "Trev Cooksey",
+            "email": "tcooksey1@geocities.jp"
+          },
+          "changes": {
+            "lines": {
+              "added": 13,
+              "deleted": 0
+            },
+            "files": {
+              "added": 0,
+              "deleted": 0,
+              "changed": 1
+            }
+          }
+        },
+        {
+          "commitId": "180eec757b5bbc47a6e7b8960472ee8dad76a204",
+          "timestamp": {
+            "$date": "2023-05-02T18:27:18Z"
+          },
+          "shortMessage": "Update pom.xml",
+          "author": {
+            "name": "Trev Cooksey",
+            "email": "tcooksey1@geocities.jp"
+          },
+          "changes": {
+            "lines": {
+              "added": 1,
+              "deleted": 1
+            },
+            "files": {
+              "added": 0,
+              "deleted": 0,
+              "changed": 1
+            }
+          }
+        },
+        {
+          "commitId": "e8b694dd005c793b606452252da075c21f31e127",
+          "timestamp": {
+            "$date": "2023-05-08T18:45:01Z"
+          },
+          "shortMessage": "Add username to developer model",
+          "author": {
+            "name": "trevky",
+            "email": "tcooksey1@geocities.jp"
+          },
+          "changes": {
+            "lines": {
+              "added": 14,
+              "deleted": 6
+            },
+            "files": {
+              "added": 0,
+              "deleted": 0,
+              "changed": 3
+            }
+          }
+        },
+        {
+          "commitId": "0541facb3558e696bc279e84fc330bda31e7a033",
+          "timestamp": {
+            "$date": "2023-05-08T18:46:28Z"
+          },
+          "shortMessage": "Perform release",
+          "author": {
+            "name": "github-actions[bot]",
+            "email": "github-actions[bot]@users.noreply.github.com"
+          },
+          "changes": {
+            "lines": {
+              "added": 270,
+              "deleted": 1
+            },
+            "files": {
+              "added": 1,
+              "deleted": 0,
+              "changed": 1
+            }
+          }
+        },
+        {
+          "commitId": "891711aedd3dc6cb8435ebae72edc814bea9f7c6",
+          "timestamp": {
+            "$date": "2023-05-08T18:47:39Z"
+          },
+          "shortMessage": "Prepare for next release",
+          "author": {
+            "name": "github-actions[bot]",
+            "email": "github-actions[bot]@users.noreply.github.com"
+          },
+          "changes": {
+            "lines": {
+              "added": 1,
+              "deleted": 270
+            },
+            "files": {
+              "added": 0,
+              "deleted": 1,
+              "changed": 1
+            }
+          }
+        },
+        {
+          "commitId": "18cb31114c0a9073fa5447b0a31c13dab7f1d0c0",
+          "timestamp": {
+            "$date": "2023-07-04T13:48:06Z"
+          },
+          "shortMessage": "Update LICENSE",
+          "author": {
+            "name": "Trev Cooksey",
+            "email": "tcooksey1@geocities.jp"
+          },
+          "changes": {
+            "lines": {
+              "added": 1,
+              "deleted": 1
+            },
+            "files": {
+              "added": 0,
+              "deleted": 0,
+              "changed": 1
+            }
+          }
+        },
+        {
+          "commitId": "822ff9ef91ad2a1f0de7f4adf39607709e5897b3",
+          "timestamp": {
+            "$date": "2023-07-04T15:22:35Z"
+          },
+          "shortMessage": "Create FUNDING.yml",
+          "author": {
+            "name": "Trev Cooksey",
+            "email": "tcooksey1@geocities.jp"
+          },
+          "changes": {
+            "lines": {
+              "added": 3,
+              "deleted": 0
+            },
+            "files": {
+              "added": 1,
+              "deleted": 0,
+              "changed": 0
+            }
+          }
+        },
+        {
+          "commitId": "515fbff3ed2276f7bd680255a56f8912616060b2",
+          "timestamp": {
+            "$date": "2023-07-09T07:38:39Z"
+          },
+          "shortMessage": "Use Maven Wrapper",
+          "author": {
+            "name": "Trev Cooksey",
+            "email": "tcooksey1@geocities.jp"
+          },
+          "changes": {
+            "lines": {
+              "added": 1,
+              "deleted": 1
+            },
+            "files": {
+              "added": 0,
+              "deleted": 0,
+              "changed": 1
+            }
+          }
+        },
+        {
+          "commitId": "082ff2fc94076e2a22ae0e8d6e8befee1e5ce2cc",
+          "timestamp": {
+            "$date": "2023-07-09T07:43:40Z"
+          },
+          "shortMessage": "Upgrade to Maven 3.9.3",
+          "author": {
+            "name": "trevky",
+            "email": "tcooksey1@geocities.jp"
+          },
+          "changes": {
+            "lines": {
+              "added": 133,
+              "deleted": 126
+            },
+            "files": {
+              "added": 0,
+              "deleted": 2,
+              "changed": 5
+            }
+          }
+        },
+        {
+          "commitId": "1ef5dfcffee04496e7caa281acbd17db044e6b99",
+          "timestamp": {
+            "$date": "2023-07-13T19:08:05Z"
+          },
+          "shortMessage": "Update README.md",
+          "author": {
+            "name": "Trev Cooksey",
+            "email": "tcooksey1@geocities.jp"
+          },
+          "changes": {
+            "lines": {
+              "added": 1,
+              "deleted": 1
+            },
+            "files": {
+              "added": 0,
+              "deleted": 0,
+              "changed": 1
+            }
+          }
+        },
+        {
+          "commitId": "39be4cd413bb55f0a3cd5df353dfd30ad0df3092",
+          "timestamp": {
+            "$date": "2023-07-15T13:42:48Z"
+          },
+          "shortMessage": "Create CODE_OF_CONDUCT.md",
+          "author": {
+            "name": "Trev Cooksey",
+            "email": "tcooksey1@geocities.jp"
+          },
+          "changes": {
+            "lines": {
+              "added": 128,
+              "deleted": 0
+            },
+            "files": {
+              "added": 1,
+              "deleted": 0,
+              "changed": 0
+            }
+          }
+        },
+        {
+          "commitId": "c29dd3809c35355f3808266239aee8aa7d91f9e9",
+          "timestamp": {
+            "$date": "2023-07-17T15:51:16Z"
+          },
+          "shortMessage": "Update README.md",
+          "author": {
+            "name": "trevky",
+            "email": "tcooksey1@geocities.jp"
+          },
+          "changes": {
+            "lines": {
+              "added": 3,
+              "deleted": 0
+            },
+            "files": {
+              "added": 0,
+              "deleted": 0,
+              "changed": 1
+            }
+          }
+        },
+        {
+          "commitId": "3613572b2a1cd24ec582765f009d16ed1f1e168d",
+          "timestamp": {
+            "$date": "2023-07-17T17:28:15Z"
+          },
+          "shortMessage": "Update README.md",
+          "author": {
+            "name": "Trev Cooksey",
+            "email": "tcooksey1@geocities.jp"
+          },
+          "changes": {
+            "lines": {
+              "added": 1,
+              "deleted": 1
+            },
+            "files": {
+              "added": 0,
+              "deleted": 0,
+              "changed": 1
+            }
+          }
+        },
+        {
+          "commitId": "3192fb3878ec2a6d38c3ecd4ec936ec7a527f0d1",
+          "timestamp": {
+            "$date": "2023-07-17T18:02:07Z"
+          },
+          "shortMessage": "Create dependabot.yml",
+          "author": {
+            "name": "Trev Cooksey",
+            "email": "tcooksey1@geocities.jp"
+          },
+          "changes": {
+            "lines": {
+              "added": 11,
+              "deleted": 0
+            },
+            "files": {
+              "added": 1,
+              "deleted": 0,
+              "changed": 0
+            }
+          }
+        },
+        {
+          "commitId": "5be86ff2f8bec61be8f8b078c3a56d18325705f8",
+          "timestamp": {
+            "$date": "2023-07-17T18:02:35Z"
+          },
+          "shortMessage": "Bump maven-failsafe-plugin from 3.0.0 to 3.1.2",
+          "author": {
+            "name": "dependabot[bot]",
+            "email": "49699333+dependabot[bot]@users.noreply.github.com"
+          },
+          "changes": {
+            "lines": {
+              "added": 1,
+              "deleted": 1
+            },
+            "files": {
+              "added": 0,
+              "deleted": 0,
+              "changed": 1
+            }
+          }
+        },
+        {
+          "commitId": "cc9c5c056ebd652ca45779485967f377b9335414",
+          "timestamp": {
+            "$date": "2023-07-17T18:02:39Z"
+          },
+          "shortMessage": "Bump maven-source-plugin from 3.2.1 to 3.3.0",
+          "author": {
+            "name": "dependabot[bot]",
+            "email": "49699333+dependabot[bot]@users.noreply.github.com"
+          },
+          "changes": {
+            "lines": {
+              "added": 1,
+              "deleted": 1
+            },
+            "files": {
+              "added": 0,
+              "deleted": 0,
+              "changed": 1
+            }
+          }
+        },
+        {
+          "commitId": "9df3621228fb80daf864bbf115d39203bed9876c",
+          "timestamp": {
+            "$date": "2023-07-17T18:02:43Z"
+          },
+          "shortMessage": "Bump jackson-datatype-jsr310 from 2.15.0 to 2.15.2",
+          "author": {
+            "name": "dependabot[bot]",
+            "email": "49699333+dependabot[bot]@users.noreply.github.com"
+          },
+          "changes": {
+            "lines": {
+              "added": 1,
+              "deleted": 1
+            },
+            "files": {
+              "added": 0,
+              "deleted": 0,
+              "changed": 1
+            }
+          }
+        },
+        {
+          "commitId": "c0c0c03076a18ec7ffe81b421a90e59f03fe0693",
+          "timestamp": {
+            "$date": "2023-07-17T18:07:56Z"
+          },
+          "shortMessage": "Bump commons-io from 2.11.0 to 2.13.0",
+          "author": {
+            "name": "dependabot[bot]",
+            "email": "49699333+dependabot[bot]@users.noreply.github.com"
+          },
+          "changes": {
+            "lines": {
+              "added": 1,
+              "deleted": 1
+            },
+            "files": {
+              "added": 0,
+              "deleted": 0,
+              "changed": 1
+            }
+          }
+        },
+        {
+          "commitId": "d40f6cb26f2bd7e57146c19788802c0e548f4c68",
+          "timestamp": {
+            "$date": "2023-07-17T18:08:07Z"
+          },
+          "shortMessage": "Bump json-schema-validator from 1.0.81 to 1.0.86",
+          "author": {
+            "name": "dependabot[bot]",
+            "email": "49699333+dependabot[bot]@users.noreply.github.com"
+          },
+          "changes": {
+            "lines": {
+              "added": 1,
+              "deleted": 1
+            },
+            "files": {
+              "added": 0,
+              "deleted": 0,
+              "changed": 1
+            }
+          }
+        },
+        {
+          "commitId": "f49a2345ceda77b67aa5be1ea9e9c13946b6b9ba",
+          "timestamp": {
+            "$date": "2023-07-17T18:31:12Z"
+          },
+          "shortMessage": "Update maven.yml",
+          "author": {
+            "name": "Trev Cooksey",
+            "email": "tcooksey1@geocities.jp"
+          },
+          "changes": {
+            "lines": {
+              "added": 1,
+              "deleted": 1
+            },
+            "files": {
+              "added": 0,
+              "deleted": 0,
+              "changed": 1
+            }
+          }
+        },
+        {
+          "commitId": "7f073c96e7ace685c941f76578f2588c9c2bbe55",
+          "timestamp": {
+            "$date": "2023-07-17T19:32:19Z"
+          },
+          "shortMessage": "Update dependabot.yml",
+          "author": {
+            "name": "trevky",
+            "email": "tcooksey1@geocities.jp"
+          },
+          "changes": {
+            "lines": {
+              "added": 7,
+              "deleted": 14
+            },
+            "files": {
+              "added": 0,
+              "deleted": 1,
+              "changed": 1
+            }
+          }
+        },
+        {
+          "commitId": "fa44c5f9befbf7c48447540a3c6923902a4ae37f",
+          "timestamp": {
+            "$date": "2023-07-17T19:32:59Z"
+          },
+          "shortMessage": "Bump jreleaser-maven-plugin from 1.6.0 to 1.7.0",
+          "author": {
+            "name": "dependabot[bot]",
+            "email": "49699333+dependabot[bot]@users.noreply.github.com"
+          },
+          "changes": {
+            "lines": {
+              "added": 1,
+              "deleted": 1
+            },
+            "files": {
+              "added": 0,
+              "deleted": 0,
+              "changed": 1
+            }
+          }
+        },
+        {
+          "commitId": "5e3e5e641f2ca986d8d73a5034a9d5b58adfa6c6",
+          "timestamp": {
+            "$date": "2023-07-17T19:33:02Z"
+          },
+          "shortMessage": "Bump advanced-security/maven-dependency-submission-action",
+          "author": {
+            "name": "dependabot[bot]",
+            "email": "49699333+dependabot[bot]@users.noreply.github.com"
+          },
+          "changes": {
+            "lines": {
+              "added": 1,
+              "deleted": 1
+            },
+            "files": {
+              "added": 0,
+              "deleted": 0,
+              "changed": 1
+            }
+          }
+        },
+        {
+          "commitId": "331d43951a6608c4122e66735fdf47a48446ca72",
+          "timestamp": {
+            "$date": "2023-07-17T19:43:43Z"
+          },
+          "shortMessage": "Update README.md",
+          "author": {
+            "name": "Trev Cooksey",
+            "email": "tcooksey1@geocities.jp"
+          },
+          "changes": {
+            "lines": {
+              "added": 3,
+              "deleted": 3
+            },
+            "files": {
+              "added": 0,
+              "deleted": 0,
+              "changed": 1
+            }
+          }
+        },
+        {
+          "commitId": "1b0800a8e1ca46b14f49f090f42ae93a1b7eb19c",
+          "timestamp": {
+            "$date": "2023-07-22T14:01:13Z"
+          },
+          "shortMessage": "Fix parameter name",
+          "author": {
+            "name": "trevky",
+            "email": "tcooksey1@geocities.jp"
+          },
+          "changes": {
+            "lines": {
+              "added": 2,
+              "deleted": 2
+            },
+            "files": {
+              "added": 0,
+              "deleted": 0,
+              "changed": 1
+            }
+          }
+        },
+        {
+          "commitId": "c0754cf76f4980c8e19aae73db2ceadb305f3d6d",
+          "timestamp": {
+            "$date": "2023-07-22T19:26:51Z"
+          },
+          "shortMessage": "BOM timestamp should take now if null",
+          "author": {
+            "name": "trevky",
+            "email": "tcooksey1@geocities.jp"
+          },
+          "changes": {
+            "lines": {
+              "added": 1,
+              "deleted": 0
+            },
+            "files": {
+              "added": 0,
+              "deleted": 0,
+              "changed": 1
+            }
+          }
+        },
+        {
+          "commitId": "8739cd6699cf553733c66443556d9ca693740d9d",
+          "timestamp": {
+            "$date": "2023-07-22T19:29:32Z"
+          },
+          "shortMessage": "Perform release",
+          "author": {
+            "name": "github-actions[bot]",
+            "email": "github-actions[bot]@users.noreply.github.com"
+          },
+          "changes": {
+            "lines": {
+              "added": 270,
+              "deleted": 1
+            },
+            "files": {
+              "added": 1,
+              "deleted": 0,
+              "changed": 1
+            }
+          }
+        },
+        {
+          "commitId": "6407b85c465b172c4c9b6225a648efcf3f872641",
+          "timestamp": {
+            "$date": "2023-07-22T19:32:51Z"
+          },
+          "shortMessage": "Update release.yml",
+          "author": {
+            "name": "Trev Cooksey",
+            "email": "tcooksey1@geocities.jp"
+          },
+          "changes": {
+            "lines": {
+              "added": 1,
+              "deleted": 4
+            },
+            "files": {
+              "added": 0,
+              "deleted": 0,
+              "changed": 1
+            }
+          }
+        },
+        {
+          "commitId": "9c29810c5e910a8477d2f9c817e193823dadb33e",
+          "timestamp": {
+            "$date": "2023-07-22T19:34:45Z"
+          },
+          "shortMessage": "Perform release",
+          "author": {
+            "name": "github-actions[bot]",
+            "email": "github-actions[bot]@users.noreply.github.com"
+          },
+          "changes": {
+            "lines": {
+              "added": 1,
+              "deleted": 1
+            },
+            "files": {
+              "added": 0,
+              "deleted": 0,
+              "changed": 1
+            }
+          }
+        },
+        {
+          "commitId": "de3bee64f0a2513fa11d2d7ad3e0ab7e8cf5f710",
+          "timestamp": {
+            "$date": "2023-07-22T19:36:43Z"
+          },
+          "shortMessage": "Prepare for next release",
+          "author": {
+            "name": "github-actions[bot]",
+            "email": "github-actions[bot]@users.noreply.github.com"
+          },
+          "changes": {
+            "lines": {
+              "added": 1,
+              "deleted": 270
+            },
+            "files": {
+              "added": 0,
+              "deleted": 1,
+              "changed": 1
+            }
+          }
+        },
+        {
+          "commitId": "7c05ef27c8da9b2f8f68f7ca6448b51de4ab4777",
+          "timestamp": {
+            "$date": "2023-07-23T10:14:59Z"
+          },
+          "shortMessage": "Update README.md",
+          "author": {
+            "name": "Trev Cooksey",
+            "email": "tcooksey1@geocities.jp"
+          },
+          "changes": {
+            "lines": {
+              "added": 1,
+              "deleted": 1
+            },
+            "files": {
+              "added": 0,
+              "deleted": 0,
+              "changed": 1
+            }
+          }
+        },
+        {
+          "commitId": "1e3893f4bad9cde58cdd6351a085fe726e9cdef8",
+          "timestamp": {
+            "$date": "2023-07-24T05:50:00Z"
+          },
+          "shortMessage": "Update dependabot.yml",
+          "author": {
+            "name": "Trev Cooksey",
+            "email": "tcooksey1@geocities.jp"
+          },
+          "changes": {
+            "lines": {
+              "added": 1,
+              "deleted": 1
+            },
+            "files": {
+              "added": 0,
+              "deleted": 0,
+              "changed": 1
+            }
+          }
+        },
+        {
+          "commitId": "523a3c8dbd2cb5c8e87ee4eed2455f8008d08edd",
+          "timestamp": {
+            "$date": "2023-07-24T05:50:21Z"
+          },
+          "shortMessage": "Bump junit-jupiter.version from 5.9.3 to 5.10.0",
+          "author": {
+            "name": "dependabot[bot]",
+            "email": "49699333+dependabot[bot]@users.noreply.github.com"
+          },
+          "changes": {
+            "lines": {
+              "added": 1,
+              "deleted": 1
+            },
+            "files": {
+              "added": 0,
+              "deleted": 0,
+              "changed": 1
+            }
+          }
+        },
+        {
+          "commitId": "1372047fa033d5bfcfa3c40e70ba240b0eeed041",
+          "timestamp": {
+            "$date": "2023-07-24T05:51:47Z"
+          },
+          "shortMessage": "Update dependabot.yml",
+          "author": {
+            "name": "Trev Cooksey",
+            "email": "tcooksey1@geocities.jp"
+          },
+          "changes": {
+            "lines": {
+              "added": 2,
+              "deleted": 2
+            },
+            "files": {
+              "added": 0,
+              "deleted": 0,
+              "changed": 1
+            }
+          }
+        },
+        {
+          "commitId": "6a0191e8055295e916127819bc90ca07f49658ac",
+          "timestamp": {
+            "$date": "2023-07-24T14:00:44Z"
+          },
+          "shortMessage": "Update naikan-test to 0.0.4",
+          "author": {
+            "name": "trevky",
+            "email": "tcooksey1@geocities.jp"
+          },
+          "changes": {
+            "lines": {
+              "added": 3,
+              "deleted": 4
+            },
+            "files": {
+              "added": 0,
+              "deleted": 0,
+              "changed": 2
+            }
+          }
+        }
+      ]
+    }
   },
   {
     "specVersion": "1.0",

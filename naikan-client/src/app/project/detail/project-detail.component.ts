@@ -3,13 +3,17 @@ import {ActivatedRoute} from '@angular/router';
 import {Clipboard} from '@angular/cdk/clipboard';
 import {finalize} from 'rxjs';
 import {
+  Branch,
   Breadcrumb,
   Charts,
+  Commit,
+  CommitId,
   DateTimePipe,
   Deployment,
   NaikanTags,
   Page,
   ProjectVersion,
+  RepositoryTag,
   Search,
   Url
 } from '@naikan/shared';
@@ -24,7 +28,8 @@ import {TabViewModule} from 'primeng/tabview';
 import {DatePipe, NgFor, NgIf} from '@angular/common';
 import {SplitButtonModule} from "primeng/splitbutton";
 import {BomDetail} from "../bom-detail";
-import {DeploymentsPerMonth} from "../deployments-per-month";
+import {CountsPerItems} from "../counts-per-items";
+import {MessagesModule} from "primeng/messages";
 
 export interface GroupedDeploymentsPerVersion {
   version: string;
@@ -40,8 +45,9 @@ export interface LatestVersionPerEnvironment {
 @Component({
   templateUrl: './project-detail.component.html',
   standalone: true,
-  imports: [NgIf, Breadcrumb, TabViewModule, Url, ProjectVersion, NaikanTags, ButtonModule, TooltipModule, TableModule, SharedModule, Search, NgFor, TagModule, ChartModule, DatePipe, DateTimePipe, SplitButtonModule],
-  providers: [ProjectService, DatePipe]
+  imports: [NgIf, Breadcrumb, TabViewModule, Url, ProjectVersion, NaikanTags, ButtonModule, TooltipModule, TableModule, SharedModule, Search, NgFor, TagModule, ChartModule, DatePipe, DateTimePipe, SplitButtonModule, CommitId, MessagesModule],
+  providers: [ProjectService, DatePipe],
+  styleUrls: ['.//project-detail.component.scss']
 })
 export class ProjectDetailComponent implements OnInit {
 
@@ -50,10 +56,14 @@ export class ProjectDetailComponent implements OnInit {
   id: string;
   bomDetail: BomDetail;
   deploymentsPage: Page<Deployment>;
-  deploymentsPerMonth: DeploymentsPerMonth;
+  deploymentsPerMonth: CountsPerItems;
   versionsPage: Page<GroupedDeploymentsPerVersion>;
   latestVersionPerEnvironment: LatestVersionPerEnvironment[];
   expandedVersionRows = {};
+  commitsPage: Page<Commit>;
+  commitsPerMonth: CountsPerItems;
+  branchesPage: Page<Branch>;
+  repositoryTagsPage: Page<RepositoryTag>;
   items: MenuItem[];
   exportItems: MenuItem[] = [
     {
@@ -89,7 +99,32 @@ export class ProjectDetailComponent implements OnInit {
         },
         title: {
           display: false,
-          text: ''
+        }
+      }
+    },
+    data: {} as any
+  };
+
+  chartCommits = {
+    options: {
+      y: {
+        display: true,
+        ticks: {
+          display: false
+        }
+      },
+      scale: {
+        ticks: {
+          precision: 0
+        }
+      },
+      plugins: {
+        legend: {
+          display: true
+        },
+        title: {
+          display: true,
+          text: 'Contributions to default branch, excluding merge commits'
         }
       }
     },
@@ -106,6 +141,7 @@ export class ProjectDetailComponent implements OnInit {
     this.loadBomDetail(this.id);
     this.loadDeploymentsPerMonth();
     this.loadLatestVersionPerEnvironment();
+    this.loadCommitsPerMonth();
   }
 
   loadDeployments(event?: TableLazyLoadEvent): void {
@@ -118,6 +154,24 @@ export class ProjectDetailComponent implements OnInit {
     this.projectService
     .getGroupedDeploymentsPerVersionById(this.id, event)
     .subscribe(data => this.versionsPage = data);
+  }
+
+  loadCommits(event?: TableLazyLoadEvent): void {
+    this.projectService
+    .getProjectCommitsById(this.id, event)
+    .subscribe(data => this.commitsPage = data);
+  }
+
+  loadRepositoryTags(event?: TableLazyLoadEvent): void {
+    this.projectService
+    .getProjectRepositoryTagsById(this.id, event)
+    .subscribe(data => this.repositoryTagsPage = data);
+  }
+
+  loadRepositoryBranches(event?: TableLazyLoadEvent): void {
+    this.projectService
+    .getProjectRepositoryBranchesById(this.id, event)
+    .subscribe(data => this.branchesPage = data);
   }
 
   copyToClipboard(value: HTMLElement): void {
@@ -160,15 +214,15 @@ export class ProjectDetailComponent implements OnInit {
       const sum = this.deploymentsPerMonth.counts.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
       const average = sum / this.deploymentsPerMonth.counts.length;
 
-      this.chartDeployments.data.labels = this.deploymentsPerMonth.months;
+      this.chartDeployments.data.labels = this.deploymentsPerMonth.names;
       this.chartDeployments.data.datasets = [
         {
           label: 'Average deployments',
-          data: Array(this.deploymentsPerMonth.months.length).fill(average),
+          data: Array(this.deploymentsPerMonth.names.length).fill(average),
           borderWidth: 1,
           fill: false,
           pointStyle: false,
-          borderColor: Charts.documentStyle(),
+          borderColor: Charts.documentPrimaryStyle(),
           borderDash: [5, 5]
         },
         {
@@ -177,8 +231,8 @@ export class ProjectDetailComponent implements OnInit {
           borderWidth: 1,
           fill: true,
           pointStyle: true,
-          borderColor: Charts.documentStyle(),
-          backgroundColor: Charts.documentStyleWithDefaultOpacity(),
+          borderColor: Charts.documentPrimaryStyle(),
+          backgroundColor: Charts.documentPrimaryStyleWithDefaultOpacity(),
         }];
     }))
     .subscribe(data => this.deploymentsPerMonth = data);
@@ -188,5 +242,36 @@ export class ProjectDetailComponent implements OnInit {
     this.projectService
     .getLatestVersionPerEnvironmentById(this.id)
     .subscribe(data => this.latestVersionPerEnvironment = data);
+  }
+
+  private loadCommitsPerMonth(): void {
+    this.projectService
+    .getCommitsPerMonthById(this.id)
+    .pipe(finalize(() => {
+      const sum = this.commitsPerMonth.counts.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+      const average = sum / this.commitsPerMonth.counts.length;
+
+      this.chartCommits.data.labels = this.commitsPerMonth.names;
+      this.chartCommits.data.datasets = [
+        {
+          label: 'Average commits',
+          data: Array(this.commitsPerMonth.names.length).fill(average),
+          borderWidth: 1,
+          fill: false,
+          pointStyle: false,
+          borderColor: Charts.documentPrimaryStyle(),
+          borderDash: [5, 5]
+        },
+        {
+          label: 'Commits',
+          data: this.commitsPerMonth.counts,
+          borderWidth: 1,
+          fill: true,
+          pointStyle: true,
+          borderColor: Charts.documentPrimaryStyle(),
+          backgroundColor: Charts.documentPrimaryStyleWithDefaultOpacity(),
+        }];
+    }))
+    .subscribe(data => this.commitsPerMonth = data);
   }
 }

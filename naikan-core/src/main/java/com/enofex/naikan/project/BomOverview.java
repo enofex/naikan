@@ -1,9 +1,9 @@
 package com.enofex.naikan.project;
 
+import com.enofex.naikan.model.Commit;
 import com.enofex.naikan.model.Deployment;
 import com.enofex.naikan.model.Organization;
 import com.enofex.naikan.model.Project;
-import com.enofex.naikan.model.Repository;
 import com.enofex.naikan.model.Tags;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -11,24 +11,14 @@ import java.util.List;
 public record BomOverview(String id, LocalDateTime timestamp, Project project,
                           Organization organization, List<String> environmentNames,
                           List<String> teamNames, List<String> developerNames,
-                          List<String> contactNames,
-                          List<String> technologyNames, List<String> licenseNames,
-                          List<String> documentationNames, List<String> integrationNames, Tags tags,
-                          Repository repository, long deploymentsCount,
+                          List<String> contactNames, List<String> technologyNames,
+                          List<String> licenseNames, List<String> documentationNames,
+                          List<String> integrationNames, Tags tags, long deploymentsCount,
                           long deploymentsEnvironmentsCount, long deploymentsVersionsCount,
-                          Deployment lastDeployment, DeploymentsPerMonth deploymentsPerMonth) {
+                          Deployment lastDeployment, CountsPerItems deploymentsPerMonth,
+                          long commitsCount, CountsPerItems commitsPerMonth,
+                          Repository repository) {
 
-  public BomOverview(String id, LocalDateTime timestamp, Project project,
-      Organization organization, List<String> environments,
-      List<String> teams, List<String> developers, List<String> contacts,
-      List<String> technologies, List<String> licenses,
-      List<String> documentations, List<String> integrations, Tags tags,
-      Repository repository, int deploymentsCount, int deploymentsEnvironmentsCount,
-      int deploymentsVersionsCount, Deployment lastDeployment) {
-    this(id, timestamp, project, organization, environments, teams, developers, contacts,
-        technologies, licenses, documentations, integrations, tags, repository, deploymentsCount,
-        deploymentsEnvironmentsCount, deploymentsVersionsCount, lastDeployment, null);
-  }
 
   public BomOverview {
     environmentNames = environmentNames != null ? environmentNames : List.of();
@@ -42,7 +32,8 @@ public record BomOverview(String id, LocalDateTime timestamp, Project project,
     tags = tags != null ? tags : Tags.empty();
   }
 
-  public static BomOverview of(BomOverview bom, DeploymentsPerMonth deploymentsPerMonth) {
+  public static BomOverview of(BomOverview bom, CountsPerItems deploymentsPerMonth,
+      CountsPerItems commitsPerMonth) {
     return new BomOverview(
         bom.id(),
         bom.timestamp(),
@@ -57,12 +48,19 @@ public record BomOverview(String id, LocalDateTime timestamp, Project project,
         bom.documentationNames(),
         bom.integrationNames(),
         bom.tags(),
-        bom.repository(),
         bom.deploymentsCount(),
         bom.deploymentsEnvironmentsCount(),
         bom.deploymentsVersionsCount(),
         bom.lastDeployment(),
-        deploymentsPerMonth
+        deploymentsPerMonth,
+        bom.commitsCount(),
+        commitsPerMonth,
+        bom.repository()
     );
+  }
+
+  public record Repository(String name, String url, Commit firstCommit, int totalCommits,
+                           String defaultBranch) {
+
   }
 }

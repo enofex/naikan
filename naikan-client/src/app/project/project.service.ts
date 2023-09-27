@@ -1,6 +1,15 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {BlockUIService, Deployment, Page, Pageables, Principal, User} from "@naikan/shared";
+import {
+  BlockUIService, Branch,
+  Commit,
+  Deployment,
+  Page,
+  Pageables,
+  Principal,
+  RepositoryTag,
+  User
+} from "@naikan/shared";
 import {finalize, Observable} from 'rxjs';
 import {FilterMatchMode} from 'primeng/api';
 import {ProjectFilter} from "./project-filter";
@@ -13,8 +22,7 @@ import {
 } from "./detail/project-detail.component";
 import {BomDetail} from "./bom-detail";
 import {BomOverview} from "./bom-overview";
-import {DeploymentsPerMonth} from "./deployments-per-month";
-import {DeploymentsPerProject} from "./deployments-per-project";
+import {CountsPerItems} from "./counts-per-items";
 
 const endpoint = 'projects';
 
@@ -64,16 +72,16 @@ export class ProjectService {
     return this.http.get<Page<Deployment>>(`/${endpoint}/${id}/deployments`, {params: Pageables.toPageRequestHttpParams(event)});
   }
 
-  getDeploymentsPerMonthById(id: string): Observable<DeploymentsPerMonth> {
-    return this.http.get<DeploymentsPerMonth>(`/${endpoint}/${id}/deployments/months`);
+  getDeploymentsPerMonthById(id: string): Observable<CountsPerItems> {
+    return this.http.get<CountsPerItems>(`/${endpoint}/${id}/deployments/months`);
   }
 
-  getDeploymentsPerMonth(event?: TableLazyLoadEvent): Observable<DeploymentsPerMonth> {
-    return this.http.get<DeploymentsPerMonth>(`/${endpoint}/deployments/months`, {params: Pageables.toPageRequestHttpParams(event)});
+  getDeploymentsPerMonth(event?: TableLazyLoadEvent): Observable<CountsPerItems> {
+    return this.http.get<CountsPerItems>(`/${endpoint}/deployments/months`, {params: Pageables.toPageRequestHttpParams(event)});
   }
 
-  getDeploymentsPerProject(event?: TableLazyLoadEvent): Observable<DeploymentsPerProject> {
-    return this.http.get<DeploymentsPerProject>(`/${endpoint}/deployments/projects`, {params: Pageables.toPageRequestHttpParams(event)});
+  getDeploymentsPerProject(event?: TableLazyLoadEvent): Observable<CountsPerItems> {
+    return this.http.get<CountsPerItems>(`/${endpoint}/deployments/projects`, {params: Pageables.toPageRequestHttpParams(event)});
   }
 
   getGroupedDeploymentsPerVersionById(id: string, event?: TableLazyLoadEvent): Observable<Page<GroupedDeploymentsPerVersion>> {
@@ -82,6 +90,31 @@ export class ProjectService {
 
   getLatestVersionPerEnvironmentById(id: string): Observable<LatestVersionPerEnvironment[]> {
     return this.http.get<LatestVersionPerEnvironment[]>(`/${endpoint}/${id}/versions/environments`);
+  }
+
+
+  getProjectCommitsById(id: string, event?: TableLazyLoadEvent): Observable<Page<Commit>> {
+    return this.http.get<Page<Commit>>(`/${endpoint}/${id}/commits`, {params: Pageables.toPageRequestHttpParams(event)});
+  }
+
+  getCommitsPerMonth(event?: TableLazyLoadEvent): Observable<CountsPerItems> {
+    return this.http.get<CountsPerItems>(`/${endpoint}/commits/months`, {params: Pageables.toPageRequestHttpParams(event)});
+  }
+
+  getCommitsPerMonthById(id: string): Observable<CountsPerItems> {
+    return this.http.get<CountsPerItems>(`/${endpoint}/${id}/commits/months`);
+  }
+
+  getCommitsPerProject(event?: TableLazyLoadEvent): Observable<CountsPerItems> {
+    return this.http.get<CountsPerItems>(`/${endpoint}/commits/projects`, {params: Pageables.toPageRequestHttpParams(event)});
+  }
+
+  getProjectRepositoryTagsById(id: string, event?: TableLazyLoadEvent): Observable<Page<RepositoryTag>> {
+    return this.http.get<Page<RepositoryTag>>(`/${endpoint}/${id}/repository/tags`, {params: Pageables.toPageRequestHttpParams(event)});
+  }
+
+  getProjectRepositoryBranchesById(id: string, event?: TableLazyLoadEvent): Observable<Page<Branch>> {
+    return this.http.get<Page<Branch>>(`/${endpoint}/${id}/repository/branches`, {params: Pageables.toPageRequestHttpParams(event)});
   }
 
   exportXlsxById(id: string) {

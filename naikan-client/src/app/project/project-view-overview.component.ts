@@ -8,7 +8,7 @@ import {
 import {NgClass, NgIf} from '@angular/common';
 import {TooltipModule} from 'primeng/tooltip';
 import {
-  Charts,
+  Charts, CommitId,
   DateTimePipe,
   NaikanTags,
   Principal,
@@ -22,6 +22,7 @@ import {LayoutService} from "@naikan/layout/app.layout.service";
 import {Subscription} from "rxjs";
 import {AbstractProjectView} from "./abstract-project-view.component";
 import {SharedModule} from "primeng/api";
+import {TagModule} from "primeng/tag";
 
 @Component({
   selector: '.naikan-project-view-overview-body',
@@ -50,10 +51,15 @@ import {SharedModule} from "primeng/api";
         </div>
 
         <div class="flex flex-column align-items-end sm:align-items-start">
-          <naikan-project-version [project]="bomOverview.project"
-                                  class="flex sm:align-self-end align-self-start">
-          </naikan-project-version>
-
+          <div class="flex sm:align-self-end align-self-start align-items-center">
+            <p-tag *ngIf="bomOverview.repository" tooltipPosition="top"
+                   pTooltip="{{ bomOverview.repository.url }}"
+                   class="mr-1">{{ bomOverview.repository.name }}
+            </p-tag>
+            <naikan-project-version [project]="bomOverview.project"
+                                    class="flex">
+            </naikan-project-version>
+          </div>
           <div *ngIf="bomOverview.timestamp" class="align-self-start sm:align-self-end mt-2">
             <span class="font-normal text-500 text-sm"> last updated
               <span class="text-700">{{ bomOverview.timestamp | naikanDateTime }}</span>
@@ -155,7 +161,7 @@ import {SharedModule} from "primeng/api";
           </div>
         </div>
         <div
-            class="sm:flex-row flex-1 flex align-items-center justify-content-center m-1 px-3 py-3">
+            class="sm:flex-row flex-1 flex align-items-center justify-content-center m-1 px-3 py-3 sm:border-right-1 border-gray-300">
           <div>
             <span class="block text-900 font-medium mb-3">
               <i class="pi pi-cloud-upload m-1"></i>  Deployments
@@ -163,6 +169,21 @@ import {SharedModule} from "primeng/api";
             <div class="flex justify-content-center">
               <span class="text-900 font-medium text-lg"> 
                 {{ bomOverview.deploymentsCount }} 
+              </span>
+            </div>
+          </div>
+        </div>
+        <div
+            class="sm:flex-row flex-1 flex align-items-center justify-content-center m-1 px-3 py-3">
+          <div>
+            <span class="block text-900 font-medium mb-3">
+              <i class="pi pi-clock m-1"></i>  Commits
+            </span>
+            <div class="flex justify-content-center">
+              <span class="text-900 font-medium text-lg"
+                    tooltipPosition="top" 
+                    pTooltip="Contributions to default branch, excluding merge commits"> 
+                {{ bomOverview.commitsCount }} 
               </span>
             </div>
           </div>
@@ -175,7 +196,20 @@ import {SharedModule} from "primeng/api";
             class="flex flex-column sm:flex-row justify-content-between align-items-center sm:align-items-start flex-1">
 
           <div class="flex flex-column align-items-start">
-            <span class="flex text-500">
+            <span class="flex text-500 pb-3" *ngIf="bomOverview.repository">
+              <span class="text-500 text-sm text-overflow-ellipsis mt-2">
+                <p-tag severity="success">First commit</p-tag>
+                <naikan-commit-id commitId=" {{ bomOverview.repository?.firstCommit?.commitId }}"></naikan-commit-id>
+                on
+                <span class="text-700"
+                      tooltipPosition="top"
+                      pTooltip="{{ bomOverview.repository?.firstCommit?.author.name }}">
+                  {{ bomOverview.repository?.firstCommit?.timestamp | naikanDateTime }}
+                </span>
+              </span>
+            </span>
+          
+            <span class="flex text-500" *ngIf="this.bomOverview.deploymentsCount > 0">
               <span class="text-500 text-sm text-overflow-ellipsis mt-2">
                 Found deployments on 
                 <span class="text-700">
@@ -203,8 +237,10 @@ import {SharedModule} from "primeng/api";
             </span>
           </div>
 
-          <div class="flex flex-column align-items-end">
-            <p-chart type="line" height="50px"
+          <div class="flex flex-column align-items-end"
+               *ngIf="this.bomOverview.deploymentsPerMonth.counts.length >0 
+               || this.bomOverview.commitsPerMonth.counts.length > 0">
+            <p-chart type="line" height="80px" width="400px"
                      [data]="projectDeploymentsChart()"
                      [options]="chartOptions">
             </p-chart>
@@ -227,6 +263,8 @@ import {SharedModule} from "primeng/api";
     DateTimePipe,
     NgClass,
     SharedModule,
+    TagModule,
+    CommitId,
   ],
 })
 export class ProjectViewOverviewBody extends AbstractProjectView implements OnInit, OnDestroy {
@@ -259,13 +297,28 @@ export class ProjectViewOverviewBody extends AbstractProjectView implements OnIn
 
   projectDeploymentsChart(): any {
     return {
-      labels: this.bomOverview.deploymentsPerMonth?.months,
       datasets: [
         {
-          data: this.bomOverview.deploymentsPerMonth?.counts,
+          label: "Deployments",
+          data: this.bomOverview.deploymentsPerMonth.names.map((name, index) => ({
+            x: name,
+            y: this.bomOverview.deploymentsPerMonth.counts[index],
+          })),
           fill: true,
-          backgroundColor: Charts.documentStyleWithDefaultOpacity(),
-          borderColor: Charts.documentStyle(),
+          backgroundColor: Charts.documentPrimaryStyleWithDefaultOpacity(),
+          borderColor: Charts.documentPrimaryStyle(),
+          borderWidth: 1,
+          pointStyle: false
+        },
+        {
+          label: "Commits",
+          data: this.bomOverview.commitsPerMonth.names.map((name, index) => ({
+            x: name,
+            y: this.bomOverview.commitsPerMonth.counts[index],
+          })),
+          fill: true,
+          backgroundColor: Charts.documentGreenStyleWithDefaultOpacity(),
+          borderColor: Charts.documentGreenStyle(),
           borderWidth: 1,
           pointStyle: false
         }

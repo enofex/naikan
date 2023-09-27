@@ -1,6 +1,8 @@
 package com.enofex.naikan.project;
 
 import com.enofex.naikan.model.Bom;
+import com.enofex.naikan.model.Branch;
+import com.enofex.naikan.model.Commit;
 import com.enofex.naikan.model.Contact;
 import com.enofex.naikan.model.Deployment;
 import com.enofex.naikan.model.Developer;
@@ -8,6 +10,7 @@ import com.enofex.naikan.model.Documentation;
 import com.enofex.naikan.model.Environment;
 import com.enofex.naikan.model.Integration;
 import com.enofex.naikan.model.License;
+import com.enofex.naikan.model.RepositoryTag;
 import com.enofex.naikan.model.Team;
 import com.enofex.naikan.model.Technology;
 import jakarta.servlet.http.HttpServletRequest;
@@ -45,6 +48,8 @@ final class ProjectXlsxView extends AbstractXlsxStreamingView {
     technologies(workbook);
     deployments(workbook);
     licenses(workbook);
+    repository(workbook);
+    commits(workbook);
   }
 
   private void overview(Workbook workbook) {
@@ -194,6 +199,93 @@ final class ProjectXlsxView extends AbstractXlsxStreamingView {
     writeRows(sheet, columns, this.bom.licenses().all());
   }
 
+  private void repository(Workbook workbook) {
+    Sheet sheet = workbook.createSheet("Repository");
+
+    if (this.bom.repository() != null) {
+      Row row = sheet.createRow(0);
+      row.createCell(0).setCellValue("Name");
+      row.createCell(1).setCellValue(this.bom.repository().name());
+      row = sheet.createRow(sheet.getLastRowNum() + 1);
+      row.createCell(0).setCellValue("URL");
+      row.createCell(1).setCellValue(this.bom.repository().url());
+      row = sheet.createRow(sheet.getLastRowNum() + 1);
+      row.createCell(0).setCellValue("Default branch");
+      row.createCell(1).setCellValue(this.bom.repository().defaultBranch());
+      row = sheet.createRow(sheet.getLastRowNum() + 1);
+
+      if (this.bom.repository().firstCommit() != null) {
+        row.createCell(0).setCellValue("First commit");
+        row.createCell(1).setCellValue("%s on %s by %s %s".formatted(
+                this.bom.repository().firstCommit().commitId(),
+                this.bom.repository().firstCommit().timestamp()
+                    .format(DateTimeFormatter.ISO_LOCAL_DATE_TIME),
+                this.bom.repository().firstCommit().author().name(),
+                this.bom.repository().firstCommit().author().email()
+            )
+        );
+      }
+
+      if (this.bom.repository().branches() != null &&
+          CollectionUtils.isNotEmpty(this.bom.repository().branches().all())) {
+        branches(sheet);
+      }
+
+      if (this.bom.repository().tags() != null &&
+          CollectionUtils.isNotEmpty(this.bom.repository().tags().all())) {
+        tags(sheet);
+      }
+    }
+  }
+
+  private void branches(Sheet sheet) {
+    sheet.createRow(sheet.getLastRowNum() + 1);
+    Row header = sheet.createRow(sheet.getLastRowNum() + 1);
+    header.createCell(0).setCellValue("Branches");
+    Map<String, Function<Branch, String>> columns = new LinkedHashMap<>() {{
+      put("Name", branch -> branch.name());
+    }};
+
+    writeRows(sheet, columns,
+        this.bom.repository() != null ? this.bom.repository().branches().all() : List.of());
+  }
+
+  private void tags(Sheet sheet) {
+    sheet.createRow(sheet.getLastRowNum() + 1);
+    Row header = sheet.createRow(sheet.getLastRowNum() + 1);
+    header.createCell(0).setCellValue("Tags");
+    Map<String, Function<RepositoryTag, String>> columns = new LinkedHashMap<>() {{
+      put("Name", tag -> tag.name());
+      put("Timestamp", tag -> tag.timestamp() != null ? tag.timestamp()
+          .format(DateTimeFormatter.ISO_LOCAL_DATE_TIME) : "");
+    }};
+
+    writeRows(sheet, columns,
+        this.bom.repository() != null ? this.bom.repository().tags().all() : List.of());
+  }
+
+  private void commits(Workbook workbook) {
+    Sheet sheet = workbook.createSheet("Commits");
+
+    if (this.bom.repository() != null) {
+      Map<String, Function<Commit, String>> columns = new LinkedHashMap<>() {{
+        put("Author name", commit -> commit.author().name());
+        put("Author email", commit -> commit.author().email());
+        put("Commit", Commit::commitId);
+        put("Timestamp", commit -> commit.timestamp() != null ? commit.timestamp()
+            .format(DateTimeFormatter.ISO_LOCAL_DATE_TIME) : "");
+        put("Message", Commit::shortMessage);
+        put("Line added", commit -> String.valueOf(commit.changes().lines().added()));
+        put("Line deleted", commit -> String.valueOf(commit.changes().lines().deleted()));
+        put("File added", commit -> String.valueOf(commit.changes().files().added()));
+        put("File deleted", commit -> String.valueOf(commit.changes().files().deleted()));
+        put("File changed", commit -> String.valueOf(commit.changes().files().changed()));
+      }};
+
+      writeRows(sheet, columns,
+          this.bom.repository() != null ? this.bom.repository().commits().all() : List.of());
+    }
+  }
 
   private void emptyRow(Sheet sheet) {
     sheet.createRow(sheet.getLastRowNum() + 1);
@@ -216,9 +308,8 @@ final class ProjectXlsxView extends AbstractXlsxStreamingView {
     writeHeader(sheet, columns);
 
     if (CollectionUtils.isNotEmpty(elements)) {
-      for (int r = 0, size = elements.size(); r < size; r++) {
-        T element = elements.get(r);
-        Row row = sheet.createRow(r + 1);
+      for (T element : elements) {
+        Row row = sheet.createRow(sheet.getLastRowNum() + 1);
 
         for (Entry<String, Function<T, String>> entry : columns.entrySet()) {
           row.createCell(lastCellNum(row.getLastCellNum()))
@@ -229,7 +320,7 @@ final class ProjectXlsxView extends AbstractXlsxStreamingView {
   }
 
   private <T> void writeHeader(Sheet sheet, Map<String, Function<T, String>> columns) {
-    Row header = sheet.createRow(0);
+    Row header = sheet.createRow(sheet.getLastRowNum() == -1 ? 0 : sheet.getLastRowNum() + 1);
 
     columns.keySet().forEach(name ->
         header.createCell(lastCellNum(header.getLastCellNum())).setCellValue(name)

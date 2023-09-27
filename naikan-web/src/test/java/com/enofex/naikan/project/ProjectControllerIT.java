@@ -175,4 +175,83 @@ class ProjectControllerIT {
         .andExpect(handler().methodName("xlsxById"))
         .andExpect(status().isOk());
   }
+
+  @Test
+  void shouldFindCommitsById() throws Exception {
+    Bom savedBom = this.template.save(
+        DeserializerFactory.newJsonDeserializer().of(validBom0asInputStream()),
+        "projects");
+
+    this.mvc.perform(
+            get("/api/projects/%s/commits".formatted(savedBom.id())))
+        .andExpect(handler().methodName("findCommitsById"))
+        .andExpect(status().isOk())
+        .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+  }
+
+  @Test
+  void shouldFindCommitsPerMonthById() throws Exception {
+    Bom savedBom = this.template.save(
+        DeserializerFactory.newJsonDeserializer().of(validBom0asInputStream()),
+        "projects");
+
+    this.mvc.perform(
+            get("/api/projects/%s/commits/months".formatted(savedBom.id())))
+        .andExpect(handler().methodName("findCommitsPerMonthById"))
+        .andExpect(status().isOk())
+        .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+  }
+
+  @Test
+  void shouldFindCommitsPerMonth() throws Exception {
+    this.template.save(DeserializerFactory.newJsonDeserializer().of(validBom0asInputStream()),
+        "projects");
+
+    this.mvc.perform(
+            get("/api/projects/commits/months"))
+        .andExpect(handler().methodName("findCommitsPerMonth"))
+        .andExpect(status().isOk())
+        .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+  }
+
+
+  @Test
+  void shouldFindCommitsPerProject() throws Exception {
+    this.template.save(
+        DeserializerFactory.newJsonDeserializer().of(validBom0asInputStream()),
+        "projects");
+
+    this.mvc.perform(
+            get("/api/projects/commits/projects"))
+        .andExpect(handler().methodName("findCommitsPerProject"))
+        .andExpect(status().isOk())
+        .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+  }
+
+
+  @Test
+  void shouldFindRepositoryTagsById() throws Exception {
+    Bom savedBom = this.template.save(
+        DeserializerFactory.newJsonDeserializer().of(validBom0asInputStream()),
+        "projects");
+
+    this.mvc.perform(
+            get("/api/projects/%s/repository/tags".formatted(savedBom.id())))
+        .andExpect(handler().methodName("findRepositoryTagsById"))
+        .andExpect(status().isOk())
+        .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+  }
+
+  @Test
+  void shouldFindRepositoryBranchesById() throws Exception {
+    Bom savedBom = this.template.save(
+        DeserializerFactory.newJsonDeserializer().of(validBom0asInputStream()),
+        "projects");
+
+    this.mvc.perform(
+            get("/api/projects/%s/repository/branches".formatted(savedBom.id())))
+        .andExpect(handler().methodName("findRepositoryBranchesById"))
+        .andExpect(status().isOk())
+        .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+  }
 }

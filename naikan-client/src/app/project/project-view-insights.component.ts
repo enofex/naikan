@@ -26,9 +26,8 @@ import {TabViewModule} from "primeng/tabview";
 import {finalize, Subscription} from "rxjs";
 import {LayoutService} from "@naikan/layout/app.layout.service";
 import {BomOverview} from "./bom-overview";
-import {DeploymentsPerMonth} from "./deployments-per-month";
 import {Table} from "primeng/table";
-import {DeploymentsPerProject} from "./deployments-per-project";
+import {CountsPerItems} from "./counts-per-items";
 
 @Component({template: ''})
 export abstract class AbstractInsightChart implements OnDestroy {
@@ -127,7 +126,8 @@ export class SummarizationChart extends AbstractInsightChart {
       {label: "Integrations", prop: "integrationNames"},
       {label: "Technologies", prop: "technologyNames"},
       {label: "Deployments", prop: "deploymentsCount"},
-      {label: "Tags", prop: "tags"}
+      {label: "Tags", prop: "tags"},
+      {label: "Commits", prop: "commitsCount"}
     ];
 
     this.chartSummarization.data.labels = this.allOverviewBoms().map(overviewBom => overviewBom.project.name);
@@ -247,7 +247,7 @@ export class TechnologiesChart extends AbstractInsightChart {
 export class DeploymentsChart extends AbstractInsightChart {
 
   @ViewChild('chartDeploymentsRef') chartDeploymentsRef: UIChart;
-  deploymentsPerMonth: DeploymentsPerMonth;
+  deploymentsPerMonth: CountsPerItems;
 
   chartDeployments = {
     options: {
@@ -286,15 +286,15 @@ export class DeploymentsChart extends AbstractInsightChart {
       const sum = this.deploymentsPerMonth.counts.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
       const average = sum / this.deploymentsPerMonth.counts.length;
 
-      this.chartDeployments.data.labels = this.deploymentsPerMonth.months;
+      this.chartDeployments.data.labels = this.deploymentsPerMonth.names;
       this.chartDeployments.data.datasets = [
         {
           label: 'Average deployments',
-          data: Array(this.deploymentsPerMonth.months.length).fill(average),
+          data: Array(this.deploymentsPerMonth.names.length).fill(average),
           borderWidth: 1,
           fill: false,
           pointStyle: false,
-          borderColor: Charts.documentStyle(),
+          borderColor: Charts.documentPrimaryStyle(),
           borderDash: [5, 5]
         },
         {
@@ -303,8 +303,8 @@ export class DeploymentsChart extends AbstractInsightChart {
           borderWidth: 1,
           fill: true,
           pointStyle: true,
-          borderColor: Charts.documentStyle(),
-          backgroundColor: Charts.documentStyleWithDefaultOpacity(),
+          borderColor: Charts.documentPrimaryStyle(),
+          backgroundColor: Charts.documentPrimaryStyleWithDefaultOpacity(),
         }];
 
       if (this.chartDeploymentsRef?.chart) {
@@ -339,7 +339,7 @@ export class DeploymentsChart extends AbstractInsightChart {
 export class DeploymentsSummarizationChart extends AbstractInsightChart {
 
   @ViewChild('chartDeploymentsSummarizationRef') chartDeploymentsSummarizationRef: UIChart;
-  deploymentsPerProject: DeploymentsPerProject;
+  deploymentsPerProject: CountsPerItems;
 
   chartDeploymentsSummarization = {
     options: {
@@ -373,15 +373,15 @@ export class DeploymentsSummarizationChart extends AbstractInsightChart {
     this.projectService
     .getDeploymentsPerProject(this.table.createLazyLoadMetadata())
     .pipe(finalize(() => {
-      this.chartDeploymentsSummarization.data.labels = this.deploymentsPerProject.projects;
+      this.chartDeploymentsSummarization.data.labels = this.deploymentsPerProject.names;
       this.chartDeploymentsSummarization.data.datasets = [
         {
           label: 'Deployments',
           data: this.deploymentsPerProject.counts,
           fill: true,
           pointStyle: false,
-          borderColor: Charts.documentStyle(),
-          backgroundColor: Charts.documentStyle(),
+          borderColor: Charts.documentPrimaryStyle(),
+          backgroundColor: Charts.documentPrimaryStyle(),
         }];
 
 
@@ -393,6 +393,178 @@ export class DeploymentsSummarizationChart extends AbstractInsightChart {
 
   }
 }
+
+
+@Component({
+  selector: 'naikan-project-view-insights-commits-chart',
+  template: `
+    <p-chart #chartCommitsRef
+             type="line"
+             height="100%"
+             width="100%"
+             [data]="chartCommits.data"
+             [options]="chartCommits.options">
+    </p-chart>
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
+  standalone: true,
+  imports: [
+    NgSwitch,
+    NgSwitchCase,
+    NgSwitchDefault,
+    ChartModule,
+  ],
+})
+export class CommitsChart extends AbstractInsightChart {
+
+  @ViewChild('chartCommitsRef') chartCommitsRef: UIChart;
+  commitsPerMonth: CountsPerItems;
+
+  chartCommits = {
+    options: {
+      y: {
+        display: true,
+        ticks: {
+          display: false
+        }
+      },
+      scale: {
+        ticks: {
+          precision: 0
+        }
+      },
+      plugins: {
+        legend: {
+          display: true
+        },
+        title: {
+          display: true,
+          text: 'Contributions to default branch, excluding merge commits'
+        }
+      }
+    },
+    data: {} as any
+  };
+
+  constructor(override readonly layoutService: LayoutService, private readonly projectService: ProjectService) {
+    super(layoutService);
+  }
+
+  override initChart(): void {
+    this.projectService
+    .getCommitsPerMonth(this.table.createLazyLoadMetadata())
+    .pipe(finalize(() => {
+      const sum = this.commitsPerMonth.counts.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+      const average = sum / this.commitsPerMonth.counts.length;
+
+      this.chartCommits.data.labels = this.commitsPerMonth.names;
+      this.chartCommits.data.datasets = [
+        {
+          label: 'Average commits',
+          data: Array(this.commitsPerMonth.names.length).fill(average),
+          borderWidth: 1,
+          fill: false,
+          pointStyle: false,
+          borderColor: Charts.documentPrimaryStyle(),
+          borderDash: [5, 5]
+        },
+        {
+          label: 'Commits',
+          data: this.commitsPerMonth.counts,
+          borderWidth: 1,
+          fill: true,
+          pointStyle: true,
+          borderColor: Charts.documentPrimaryStyle(),
+          backgroundColor: Charts.documentPrimaryStyleWithDefaultOpacity(),
+        }];
+
+      if (this.chartCommitsRef?.chart) {
+        this.chartCommitsRef.chart.update();
+      }
+    }))
+    .subscribe(data => this.commitsPerMonth = data);
+  }
+}
+
+@Component({
+  selector: 'naikan-project-view-insights-commits-summarization-chart',
+  template: `
+    <p-chart type="bar"
+             height="100%"
+             width="100%"
+             #chartCommitsSummarizationRef
+             [data]="chartCommitsSummarization.data"
+             [options]="chartCommitsSummarization.options">
+    </p-chart>
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
+  standalone: true,
+  imports: [
+    NgSwitch,
+    NgSwitchCase,
+    NgSwitchDefault,
+    ChartModule,
+  ],
+})
+export class CommitsSummarizationChart extends AbstractInsightChart {
+
+  @ViewChild('chartCommitsSummarizationRef') chartCommitsSummarizationRef: UIChart;
+  commitsPerProject: CountsPerItems;
+
+  chartCommitsSummarization = {
+    options: {
+      plugins: {
+        legend: {
+          display: true
+        },
+        title: {
+          display: true,
+          text: 'Contributions to default branch, excluding merge commits'
+        }
+      },
+      indexAxis: 'y',
+      scales: {
+        x: {
+          stacked: true,
+        },
+        y: {
+          stacked: true
+        }
+      }
+    },
+    data: {} as any
+  };
+
+  constructor(override readonly layoutService: LayoutService, private readonly projectService: ProjectService) {
+    super(layoutService);
+  }
+
+  override initChart(): void {
+    this.projectService
+    .getCommitsPerProject(this.table.createLazyLoadMetadata())
+    .pipe(finalize(() => {
+      this.chartCommitsSummarization.data.labels = this.commitsPerProject.names;
+      this.chartCommitsSummarization.data.datasets = [
+        {
+          label: 'Commits',
+          data: this.commitsPerProject.counts,
+          fill: true,
+          pointStyle: false,
+          borderColor: Charts.documentPrimaryStyle(),
+          backgroundColor: Charts.documentPrimaryStyle(),
+        }];
+
+
+      if (this.chartCommitsSummarizationRef?.chart) {
+        this.chartCommitsSummarizationRef.chart.update();
+      }
+    }))
+    .subscribe(data => this.commitsPerProject = data);
+  }
+}
+
 
 @Component({
   selector: '.naikan-project-view-insights-header',
@@ -428,6 +600,20 @@ export class DeploymentsSummarizationChart extends AbstractInsightChart {
           </naikan-project-view-insights-deployments-summarization-chart>
         </div>
       </p-tabPanel>
+
+      <p-tabPanel header="Commits">
+        <div class="chart-panel">
+          <naikan-project-view-insights-commits-chart [table]="table"
+                                                      [bomOverviews]="allBomOverviews()">
+          </naikan-project-view-insights-commits-chart>
+        </div>
+
+        <div class="chart-panel mt-8">
+          <naikan-project-view-insights-commits-summarization-chart [table]="table"
+                                                                    [bomOverviews]="allBomOverviews()">
+          </naikan-project-view-insights-commits-summarization-chart>
+        </div>
+      </p-tabPanel>
     </p-tabView>
   `,
   styles: ['.chart-panel {height: 50vh; position: relative; overflow-y: auto; overflow-x: auto; margin-top: 20px;}'],
@@ -448,9 +634,11 @@ export class DeploymentsSummarizationChart extends AbstractInsightChart {
     SharedModule,
     TabViewModule,
     DeploymentsChart,
+    DeploymentsSummarizationChart,
+    CommitsChart,
+    CommitsSummarizationChart,
     SummarizationChart,
     TechnologiesChart,
-    DeploymentsSummarizationChart
   ],
 })
 export class ProjectViewInsightsHeader extends AbstractProjectView {

@@ -6,7 +6,7 @@ Content-Type: application/json
   "specVersion": "1.0",
   "bomFormat": "Naikan",
   "project": {
-    "name": "Naikan Core",
+    "name": "dddddddd",
     "url": "https://naikan.io",
     "repository": "https://github.com/enofex/naikan",
     "groupId": "io.naikan",

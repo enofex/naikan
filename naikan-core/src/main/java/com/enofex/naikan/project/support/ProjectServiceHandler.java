@@ -3,11 +3,13 @@ package com.enofex.naikan.project.support;
 import com.enofex.naikan.Filterable;
 import com.enofex.naikan.ProjectId;
 import com.enofex.naikan.model.Bom;
+import com.enofex.naikan.model.Branch;
+import com.enofex.naikan.model.Commit;
 import com.enofex.naikan.model.Deployment;
+import com.enofex.naikan.model.RepositoryTag;
 import com.enofex.naikan.project.BomDetail;
 import com.enofex.naikan.project.BomOverview;
-import com.enofex.naikan.project.DeploymentsPerMonth;
-import com.enofex.naikan.project.DeploymentsPerProject;
+import com.enofex.naikan.project.CountsPerItems;
 import com.enofex.naikan.project.GroupedDeploymentsPerVersion;
 import com.enofex.naikan.project.LatestVersionPerEnvironment;
 import com.enofex.naikan.project.ProjectFilter;
@@ -19,6 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -42,8 +45,10 @@ class ProjectServiceHandler implements ProjectService {
     return new PageImpl<>(
         all.getContent()
             .stream()
-            .map(bomOverview -> BomOverview.of(bomOverview,
-                this.findDeploymentsPerMonthById(ProjectId.of(bomOverview.id()))))
+            .map(bomOverview -> BomOverview.of(
+                bomOverview,
+                this.findDeploymentsPerMonthById(ProjectId.of(bomOverview.id())),
+                this.findCommitsPerMonthById(ProjectId.of(bomOverview.id()))))
             .toList(),
         pageable,
         all.getTotalElements());
@@ -77,17 +82,82 @@ class ProjectServiceHandler implements ProjectService {
   }
 
   @Override
-  public DeploymentsPerMonth findDeploymentsPerMonthById(ProjectId id) {
+  public CountsPerItems findDeploymentsPerMonthById(ProjectId id) {
     return this.projectRepository.findDeploymentsPerMonthById(id);
   }
 
   @Override
-  public DeploymentsPerMonth findDeploymentsPerMonth(Filterable filterable, Pageable pageable) {
+  public CountsPerItems findDeploymentsPerMonth(Filterable filterable, Pageable pageable) {
+    return countsPerMonth(filterable, pageable, BomOverview::deploymentsPerMonth);
+  }
+
+  @Override
+  public CountsPerItems findDeploymentsPerProject(Filterable filterable,
+      Pageable pageable) {
     Page<BomOverview> all = this.findAll(filterable, pageable);
+
+    return new CountsPerItems(
+        all.getContent().stream().map(bomOverview -> bomOverview.project().name()).toList(),
+        all.getContent().stream().map(BomOverview::deploymentsCount).toList()
+    );
+  }
+
+  @Override
+  public List<LatestVersionPerEnvironment> findLatestVersionPerEnvironmentById(ProjectId id) {
+    return this.projectRepository.findLatestVersionPerEnvironmentById(id);
+  }
+
+  @Override
+  public Page<Commit> findCommitsById(ProjectId id, Filterable filterable,
+      Pageable pageable) {
+    return this.projectRepository.findCommitsById(id, filterable, pageable);
+  }
+
+  @Override
+  public CountsPerItems findCommitsPerMonthById(ProjectId id) {
+    return this.projectRepository.findCommitsPerMonthById(id);
+  }
+
+  @Override
+  public CountsPerItems findCommitsPerMonth(Filterable filterable, Pageable pageable) {
+    return countsPerMonth(
+        filterable,
+        pageable,
+        BomOverview::commitsPerMonth);
+  }
+
+  @Override
+  public CountsPerItems findCommitsPerProject(Filterable filterable, Pageable pageable) {
+    Page<BomOverview> all = this.findAll(filterable, pageable);
+
+    return new CountsPerItems(
+        all.getContent().stream().map(bomOverview -> bomOverview.project().name()).toList(),
+        all.getContent().stream().map(BomOverview::commitsCount).toList()
+    );
+  }
+
+  @Override
+  public Page<RepositoryTag> findRepositoryTagsById(ProjectId id, Filterable filterable,
+      Pageable pageable) {
+    return this.projectRepository.findRepositoryTagsById(id, filterable, pageable);
+  }
+
+  @Override
+  public Page<Branch> findRepositoryBranchesById(ProjectId id, Filterable filterable,
+      Pageable pageable) {
+    return this.projectRepository.findRepositoryBranchesById(id, filterable, pageable);
+  }
+
+  private CountsPerItems countsPerMonth(Filterable filterable, Pageable pageable,
+      Function<BomOverview, CountsPerItems> function) {
+    Page<BomOverview> all = this.findAll(filterable, pageable);
+    if (all.getContent().isEmpty()) {
+      return CountsPerItems.EMPTY;
+    }
 
     List<String> months = all.getContent()
         .stream()
-        .flatMap(bomOverview -> bomOverview.deploymentsPerMonth().months().stream())
+        .flatMap(bomOverview -> function.apply(bomOverview).names().stream())
         .distinct()
         .sorted(Comparator.comparing(YearMonth::parse))
         .toList();
@@ -95,8 +165,8 @@ class ProjectServiceHandler implements ProjectService {
     Map<String, Long> monthCounts = new HashMap<>();
 
     all.getContent().forEach(bomOverview -> {
-      List<String> bomMonths = bomOverview.deploymentsPerMonth().months();
-      List<Long> bomCounts = bomOverview.deploymentsPerMonth().counts();
+      List<String> bomMonths = function.apply(bomOverview).names();
+      List<Long> bomCounts = function.apply(bomOverview).counts();
 
       for (int i = 0; i < bomMonths.size(); i++) {
         String month = bomMonths.get(i);
@@ -109,23 +179,6 @@ class ProjectServiceHandler implements ProjectService {
         .map(monthCounts::get)
         .toList();
 
-    return new DeploymentsPerMonth(months, counts);
-  }
-
-
-  @Override
-  public DeploymentsPerProject findDeploymentsPerProject(Filterable filterable,
-      Pageable pageable) {
-    Page<BomOverview> all = this.findAll(filterable, pageable);
-
-    return new DeploymentsPerProject(
-        all.getContent().stream().map(bomOverview -> bomOverview.project().name()).toList(),
-        all.getContent().stream().map(BomOverview::deploymentsCount).toList()
-    );
-  }
-
-  @Override
-  public List<LatestVersionPerEnvironment> findLatestVersionPerEnvironmentById(ProjectId id) {
-    return this.projectRepository.findLatestVersionPerEnvironmentById(id);
+    return new CountsPerItems(months, counts);
   }
 }

@@ -3251,6 +3251,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   border: 1px solid #e4e4e4;
   border-width: 0 0 1px 0;
   padding: 1rem 1rem;
+  white-space: nowrap;
 }
 
 .p-datatable .p-datatable-tbody > tr > td .p-row-toggler,

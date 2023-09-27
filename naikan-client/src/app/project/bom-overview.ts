@@ -1,5 +1,5 @@
-import {Deployment, Organization, Project} from "@naikan/shared";
-import {DeploymentsPerMonth} from "./deployments-per-month";
+import {Commit, Deployment, Organization, Project} from "@naikan/shared";
+import {CountsPerItems} from "./counts-per-items";
 
 export interface BomOverview {
   id: string;
@@ -19,5 +19,16 @@ export interface BomOverview {
   deploymentsEnvironmentsCount: number;
   deploymentsVersionsCount: number;
   lastDeployment: Deployment;
-  deploymentsPerMonth: DeploymentsPerMonth;
+  deploymentsPerMonth: CountsPerItems;
+  commitsCount: number
+  commitsPerMonth: CountsPerItems;
+  repository: Repository;
+}
+
+export interface Repository {
+  name?: string;
+  url?: string;
+  firstCommit?: Commit;
+  totalCommits?: number;
+  defaultBranch?: string;
 }
