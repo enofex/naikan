@@ -13,5 +13,5 @@ or the last one below.
      The **project name**, **specVersion** and **bomFormat** are required. All others are optional.
 
 ``` json title="bom-1.0.schema.json"
---8<-- "/docs/schema/bom-1.0.schema.json"
+--8<-- "./docs/schema/bom-1.0.schema.json"
 ```
