@@ -23,7 +23,6 @@ jobs:
             mkdocs-material-
       - run: pip install mkdocs-material
       - run: pip install mkdocs-minify-plugin
-      - run: cp ./docker-compose.yml ./docs
       - run: mkdir ./docs/schema
       - run: curl https://raw.githubusercontent.com/enofex/naikan-model/main/src/main/resources/bom-1.0.schema.json --output ./docs/schema/bom-1.0.schema.json
       - run: mkdocs gh-deploy --force
