@@ -102,7 +102,8 @@ export class ProjectComponent implements OnInit {
       {label: 'Contacts', value: 'contactsCount'},
       {label: 'Integrations', value: 'integrationsCount'},
       {label: 'Technologies', value: 'technologiesCount'},
-      {label: 'Deployments', value: 'deploymentsCount'}
+      {label: 'Deployments', value: 'deploymentsCount'},
+      {label: 'Commits', value: 'commitsCount'}
     ];
     this.sortField = this.sortOptions[0].value;
     this.sortOrder = 1;
