@@ -13,8 +13,9 @@ export interface Bom {
   licenses?: License[];
   documentations?: Documentation[];
   integrations?: Integration[];
-  deployments?: Deployment[];
   tags?: string[];
+  deployments?: Deployment[];
+  repository: Repository;
 }
 
 export interface Project {
@@ -104,4 +105,53 @@ export interface Deployment {
   location?: string;
   version?: string;
   timestamp?: Date;
+}
+
+export interface Repository {
+  name?: string;
+  url?: string;
+  firstCommit?: Commit;
+  totalCommits?: number;
+  defaultBranch?: string;
+  branches?: Branch[];
+  tags?: RepositoryTag[];
+  commits?: Commit[];
+}
+
+export interface Commit {
+  commitId?: string;
+  timestamp?: Date;
+  shortMessage?: string;
+  author?: CommitAuthor;
+  changes?: CommitChanges;
+}
+
+export interface CommitAuthor {
+  name?: string;
+  email?: string;
+}
+
+export interface CommitChanges {
+  lines?: CommitLinesChanges;
+  files?: CommitFilesChanges;
+}
+
+export interface CommitLinesChanges {
+  added?: number;
+  deleted?: number;
+}
+
+export interface CommitFilesChanges {
+  added?: number;
+  deleted?: number;
+  changed?: number;
+}
+
+export interface RepositoryTag {
+  name?: string;
+  timestamp?: Date;
+}
+
+export interface Branch {
+  name?: string;
 }

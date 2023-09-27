@@ -157,7 +157,7 @@
                       </p-button>
                     </div>
 
-                    <pre class="surface-50 p-3 mt-3" #maven>
+<pre class="surface-50 p-3 mt-3" #maven>
 &lt;dependency&gt;
   &lt;groupId&gt;{{ bomDetail.project?.groupId}}&lt;/groupId&gt;
   &lt;artifactId&gt;{{ bomDetail.project?.artifactId}}&lt;/artifactId&gt;
@@ -178,7 +178,7 @@
                                 (click)="copyToClipboard(gradle)">
                       </p-button>
                     </div>
-                    <pre class="surface-50 p-3 mt-3" #gradle>
+ <pre class="surface-50 p-3 mt-3" #gradle>
 implementation "{{ bomDetail.project?.groupId}}:{{ bomDetail.project?.artifactId}}:{{ bomDetail.project?.version}}"
 </pre>
                   </div>
@@ -187,6 +187,25 @@ implementation "{{ bomDetail.project?.groupId}}:{{ bomDetail.project?.artifactId
             </div>
           </div>
         </div>
+
+        <h5 *ngIf="bomDetail.licenses.length > 0">Licenses</h5>
+        <p-table
+            *ngIf="bomDetail.licenses.length > 0"
+            [value]="bomDetail.licenses">
+          <ng-template pTemplate="body" let-license>
+            <tr>
+              <td class="pl-0">{{ license.name }}</td>
+              <td>
+                <naikan-url [url]="license.url"></naikan-url>
+              </td>
+              <td class="width-limited-column"
+                  tooltipPosition="top"
+                  pTooltip="{{ license.description }}">
+                {{ license.description }}
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
       </p-tabPanel>
 
       <p-tabPanel header="Environments" class="line-height-3 m-0">
@@ -617,12 +636,12 @@ implementation "{{ bomDetail.project?.groupId}}:{{ bomDetail.project?.artifactId
       <p-tabPanel header="Deployments" class="line-height-3 m-0">
 
         <div class="card border-none px-0"
-             *ngIf="deploymentsPerMonth && deploymentsPerMonth.months.length > 0">
+             *ngIf="deploymentsPerMonth && deploymentsPerMonth.names.length > 0">
           <p-chart
-                   type="line"
-                   height="300px"
-                   [data]="chartDeployments.data"
-                   [options]="chartDeployments.options">
+              type="line"
+              height="300px"
+              [data]="chartDeployments.data"
+              [options]="chartDeployments.options">
           </p-chart>
         </div>
 
@@ -638,7 +657,6 @@ implementation "{{ bomDetail.project?.groupId}}:{{ bomDetail.project?.artifactId
             [value]="deploymentsPage?.content"
             [paginator]="true"
             [alwaysShowPaginator]="false"
-            [expandedRowKeys]="expandedVersionRows"
             [rows]="25"
             [rowsPerPageOptions]="[10, 25, 50, 100, 200]"
             [totalRecords]="deploymentsPage?.totalElements">
@@ -843,57 +861,257 @@ implementation "{{ bomDetail.project?.groupId}}:{{ bomDetail.project?.artifactId
         </p-table>
       </p-tabPanel>
 
-      <p-tabPanel header="Licenses" class="line-height-3 m-0">
-        <p-table
-            #tableLicenses
-            styleClass="p-datatable-striped"
-            [rowHover]="true"
-            [defaultSortOrder]="1"
-            [sortOrder]="1"
-            sortField="name"
-            sortMode="multiple"
-            [value]="bomDetail.licenses"
-            [paginator]="true"
-            [alwaysShowPaginator]="false"
-            [rows]="25"
-            [rowsPerPageOptions]="[10, 25, 50, 100, 200]"
-            [globalFilterFields]="['name', 'url', 'description']"
-        >
+      <p-tabPanel header="Crime Scene" class="line-height-3 m-0" *ngIf="bomDetail.repository">
 
-          <ng-template pTemplate="caption">
-            <div class="flex justify-content-start flex-column sm:flex-row mb-2">
-              <naikan-search [table]="tableLicenses"></naikan-search>
+        <div class="card surface-50 border-none">
+          <div class="grid" style="margin-bottom: -12px;">
+            <div class="col-6 text-left">
+              <p-tag severity="success" class="mr-2" *ngIf="bomDetail.repository.defaultBranch">
+                <i class="pi pi-share-alt m-2"></i>
+                <span class="mr-3">{{ bomDetail.repository.defaultBranch }}</span>
+              </p-tag>
+
+              <span class="text-900 font-medium ml-2"
+                    tooltipPosition="top"
+                    pTooltip="Contributions to default branch, excluding merge commits">
+                <i class="pi pi-clock mr-2"></i>{{ bomDetail.repository.totalCommits }}
+              </span> Commits
+              <span class="text-900 font-medium ml-2">
+                <i class="pi pi-share-alt mr-2"></i>{{ bomDetail.repository.branchesCount }}
+              </span> Branches
+              <span class="text-900 font-medium ml-2">
+                <i class="pi pi-tags mr-2"></i>{{ bomDetail.repository.tagsCount }}
+              </span> Tags
             </div>
-          </ng-template>
 
-          <ng-template pTemplate="header">
-            <tr>
-              <th pSortableColumn="name">Name
-                <p-sortIcon field="name"></p-sortIcon>
-              </th>
-              <th pSortableColumn="url">URL
-                <p-sortIcon field="url"></p-sortIcon>
-              </th>
-              <th pSortableColumn="description">Description
-                <p-sortIcon field="description"></p-sortIcon>
-              </th>
-            </tr>
-          </ng-template>
+            <div class="col-6 text-right">
+              <span *ngIf="bomDetail.repository.firstCommit">
+                First commit
+                <naikan-commit-id
+                    commitId=" {{ bomDetail.repository.firstCommit?.commitId }}"></naikan-commit-id>
+                on
+                <span class="text-700 mr-2" >
+                  {{ bomDetail.repository.firstCommit?.timestamp | naikanDateTime }}
+                </span>
+              </span>
+            </div>
+          </div>
+        </div>
 
-          <ng-template pTemplate="body" let-license>
-            <tr>
-              <td>{{ license.name }}</td>
-              <td>
-                <naikan-url [url]="license.url"></naikan-url>
-              </td>
-              <td class="width-limited-column"
-                  tooltipPosition="top"
-                  pTooltip="{{ license.description }}">
-                {{ license.description }}
-              </td>
-            </tr>
-          </ng-template>
-        </p-table>
+        <p-tabView id="crime-scene-tabview">
+          <p-tabPanel header="Repository">
+            <div class="grid">
+              <div class="col-12 mt-4 surface-50">
+                <div class="text-xl font-bold text-900">
+                  <h5>General</h5>
+                </div>
+
+                <div class="field grid">
+                  <label class="col-12 mb-2 md:col-2 md:mb-0">Name</label>
+                  <div class="col-12 md:col-10">
+                    {{ bomDetail.repository.name}}
+                  </div>
+                </div>
+
+                <div class="field grid">
+                  <label class="col-12 mb-2 md:col-2 md:mb-0">URL</label>
+                  <div class="col-12 md:col-10">
+                    {{ bomDetail.repository.url}}
+                  </div>
+                </div>
+
+                <div class="field grid">
+                  <label class="col-12 mb-2 md:col-2 md:mb-0">Default branch</label>
+                  <div class="col-12 md:col-10">
+                    {{ bomDetail.repository.defaultBranch}}
+                  </div>
+                </div>
+
+                <div class="field grid">
+                  <label class="col-12 mb-2 md:col-2 md:mb-0">First commit</label>
+                  <div class="col-12 md:col-10" *ngIf="bomDetail.repository.firstCommit">
+                    <naikan-commit-id
+                        commitId=" {{ bomDetail.repository.firstCommit?.commitId }}">
+                    </naikan-commit-id> on
+                    <span class="text-700">
+                      {{ bomDetail.repository.firstCommit?.timestamp | naikanDateTime }}
+                    </span>by
+                    {{ bomDetail.repository.firstCommit?.author.name }}
+                    <p-tag severity="info">{{ bomDetail.repository.firstCommit?.author.email }}</p-tag>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <h5 *ngIf="bomDetail.repository.branchesCount > 0"><i class="pi pi-share-alt mr-2"></i>Branches</h5>
+            <p-table
+                *ngIf="bomDetail.repository.branchesCount > 0"
+                styleClass="p-datatable-striped"
+                [rowHover]="true"
+                [lazy]="true"
+                (onLazyLoad)="loadRepositoryBranches($event)"
+                [value]="branchesPage?.content"
+                [paginator]="true"
+                [alwaysShowPaginator]="false"
+                [rows]="10"
+                [rowsPerPageOptions]="[10, 25, 50]"
+                [totalRecords]="branchesPage?.totalElements"
+              >
+              <ng-template pTemplate="body" let-branch>
+                <tr>
+                  <td>{{ branch.name }}</td>
+                </tr>
+              </ng-template>
+            </p-table>
+
+            <h5  *ngIf="bomDetail.repository.tagsCount > 0"><i class="pi pi-tags mr-2"></i>Tags</h5>
+            <p-table
+                *ngIf="bomDetail.repository.tagsCount > 0"
+                styleClass="p-datatable-striped"
+                [rowHover]="true"
+                [lazy]="true"
+                (onLazyLoad)="loadRepositoryTags($event)"
+                [value]="repositoryTagsPage?.content"
+                [paginator]="true"
+                [alwaysShowPaginator]="false"
+                [rows]="10"
+                [rowsPerPageOptions]="[10, 25, 50]"
+                [totalRecords]="repositoryTagsPage?.totalElements"
+            >
+              <ng-template pTemplate="body" let-tag>
+                <tr>
+                  <td>{{ tag.name }}</td>
+                  <td>
+                    {{ tag.timestamp | naikanDateTime }}
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </p-tabPanel>
+
+          <p-tabPanel header="Commits">
+            <div class="card border-none px-0"
+                 *ngIf="commitsPerMonth && commitsPerMonth.names.length > 0">
+
+              <p-chart
+                  type="line"
+                  height="300px"
+                  [data]="chartCommits.data"
+                  [options]="chartCommits.options">
+              </p-chart>
+            </div>
+
+            <p-table
+                #tableCommits
+                styleClass="p-datatable-striped"
+                [rowHover]="true"
+                sortMode="multiple"
+                sortField="timestamp"
+                [sortOrder]="-1"
+                [lazy]="true"
+                (onLazyLoad)="loadCommits($event)"
+                [value]="commitsPage?.content"
+                [paginator]="true"
+                [alwaysShowPaginator]="false"
+                [rows]="25"
+                [rowsPerPageOptions]="[10, 25, 50, 100, 200]"
+                [totalRecords]="commitsPage?.totalElements">
+
+              <ng-template pTemplate="caption">
+                <div class="flex justify-content-between flex-wrap">
+                  <div class="flex align-items-center justify-content-center">
+                    <naikan-search #searchCommits [table]="tableCommits"></naikan-search>
+                  </div>
+                  <div class="flex align-items-center justify-content-center">
+                    <button pButton label="Clear" class="p-button-outlined"
+                            icon="pi pi-filter-slash"
+                            (click)="tableCommits.reset(); searchCommits.clear()"></button>
+                  </div>
+                </div>
+              </ng-template>
+
+              <ng-template pTemplate="header">
+                <tr>
+                  <th class="w-12rem" pSortableColumn="author.name">
+                    <div class="flex align-items-center">
+                      <span class="mr-2">Author</span>
+                      <p-columnFilter field="author.name" display="menu"
+                                      placeholder="author">
+                      </p-columnFilter>
+                      <p-sortIcon field="author.name"></p-sortIcon>
+                    </div>
+                  </th>
+                  <th pSortableColumn="commitId">
+                    <div class="flex align-items-center">
+                      <span class="mr-2">Commit</span>
+                      <p-columnFilter field="commitId" display="menu"
+                                      placeholder="commitId">
+                      </p-columnFilter>
+                      <p-sortIcon field="commitId"></p-sortIcon>
+                    </div>
+                  </th>
+                  <th pSortableColumn="timestamp">
+                    <div class="flex align-items-center">
+                      <span class="mr-2">Timestamp</span>
+                      <p-columnFilter type="date" field="timestamp" display="menu"
+                                      placeholder="Timestamp">
+                      </p-columnFilter>
+                      <p-sortIcon field="timestamp"></p-sortIcon>
+                    </div>
+                  </th>
+                  <th pSortableColumn="shortMessage">
+                    <div class="flex align-items-center">
+                      <span class="mr-2">Message</span>
+                      <p-columnFilter field="shortMessage" display="menu"
+                                      placeholder="shortMessage">
+                      </p-columnFilter>
+                      <p-sortIcon field="shortMessage"></p-sortIcon>
+                    </div>
+                  </th>
+                  <th>Lines</th>
+                  <th>Files</th>
+                </tr>
+              </ng-template>
+
+              <ng-template pTemplate="body" let-commit>
+                <tr>
+                  <td>{{ commit.author.name }}</td>
+                  <td>
+                    <naikan-commit-id commitId="{{ commit.commitId }}"></naikan-commit-id>
+                  </td>
+                  <td>{{ commit.timestamp | naikanDateTime }}</td>
+                  <td class="width-limited-column"
+                      tooltipPosition="top"
+                      pTooltip="{{ commit.shortMessage }}">
+                    {{ commit.shortMessage }}
+                  </td>
+                  <td>
+                    <span tooltipPosition="top"
+                          pTooltip="Added" class="text-green-500 mr-2">
+                      {{ commit.changes.lines.added }} ++</span>
+                    <span tooltipPosition="top"
+                          pTooltip="Deleted" class="text-red-500">
+                      {{ commit.changes.lines.deleted}} --</span>
+                  </td>
+                  <td>
+                    <span tooltipPosition="top"
+                          pTooltip="Added"
+                          class="text-green-500 mr-2">
+                      {{ commit.changes.files.added }} ++</span>
+                    <span tooltipPosition="top"
+                          pTooltip="Deleted"
+                          class="text-red-500 mr-2">
+                      {{ commit.changes.files.deleted}} --</span>
+                    <span tooltipPosition="top"
+                          pTooltip="Changed">
+                      {{ commit.changes.files.changed}}</span>
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </p-tabPanel>
+
+        </p-tabView>
       </p-tabPanel>
 
     </p-tabView>

@@ -1,5 +1,6 @@
 package com.enofex.naikan.project;
 
+import com.enofex.naikan.model.Commit;
 import com.enofex.naikan.model.Contacts;
 import com.enofex.naikan.model.Developers;
 import com.enofex.naikan.model.Documentations;
@@ -8,7 +9,6 @@ import com.enofex.naikan.model.Integrations;
 import com.enofex.naikan.model.Licenses;
 import com.enofex.naikan.model.Organization;
 import com.enofex.naikan.model.Project;
-import com.enofex.naikan.model.Repository;
 import com.enofex.naikan.model.Tags;
 import com.enofex.naikan.model.Teams;
 import com.enofex.naikan.model.Technologies;
@@ -31,5 +31,10 @@ public record BomDetail(String id, LocalDateTime timestamp,
     documentations = documentations != null ? documentations : Documentations.empty();
     integrations = integrations != null ? integrations : Integrations.empty();
     tags = tags != null ? tags : Tags.empty();
+  }
+
+  public record Repository(String name, String url, Commit firstCommit, int totalCommits,
+                           String defaultBranch, int branchesCount, int tagsCount) {
+
   }
 }

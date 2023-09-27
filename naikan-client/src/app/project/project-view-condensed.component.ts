@@ -26,6 +26,7 @@ import {SharedModule} from "primeng/api";
     <th>Integrations</th>
     <th>Technologies</th>
     <th>Deployments</th>
+    <th>Commits</th>
     <th>Last updated</th>
     <th>Version</th>
   `,
@@ -102,6 +103,12 @@ export class ProjectViewCondensedHeader {
     <td>
       <span class="text-900 font-medium text-lg"> 
         {{ bomOverview.deploymentsCount }} 
+      </span>
+    </td>
+
+    <td>
+      <span class="text-900 font-medium text-lg"> 
+        {{ bomOverview.commitsCount }} 
       </span>
     </td>
 

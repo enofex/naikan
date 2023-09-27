@@ -1,11 +1,14 @@
 import {
+  Commit,
   Contact,
   Developer,
   Documentation,
-  Environment, Integration,
+  Environment,
+  Integration,
   License,
   Organization,
-  Project, Team,
+  Project,
+  Team,
   Technology
 } from "@naikan/shared";
 
@@ -23,4 +26,15 @@ export interface BomDetail {
   documentations?: Documentation[];
   integrations?: Integration[];
   tags?: string[];
+  repository: Repository;
+}
+
+export interface Repository {
+  name?: string;
+  url?: string;
+  firstCommit?: Commit;
+  totalCommits?: number;
+  defaultBranch?: string;
+  branchesCount?: number;
+  tagsCount?: number;
 }

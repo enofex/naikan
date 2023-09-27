@@ -12,7 +12,7 @@ import com.enofex.naikan.ProjectId;
 import com.enofex.naikan.model.Bom;
 import com.enofex.naikan.model.Deployment;
 import com.enofex.naikan.model.Deployments;
-import com.enofex.naikan.project.DeploymentsPerMonth;
+import com.enofex.naikan.project.CountsPerItems;
 import com.enofex.naikan.project.GroupedDeploymentsPerVersion;
 import com.enofex.naikan.project.LatestVersionPerEnvironment;
 import com.enofex.naikan.project.ProjectFilter;
@@ -101,7 +101,7 @@ class ProjectMongoRepositoryIT {
   }
 
   @Test
-  void shouldFindDeployments() {
+  void shouldFindDeploymentsById() {
     Bom bom = newJsonDeserializer().of(validBom1asInputStream());
     Bom savedBom = this.template.save(bom, "projects");
 
@@ -145,15 +145,15 @@ class ProjectMongoRepositoryIT {
     Bom bom = newJsonDeserializer().of(validBom1asInputStream());
     Bom savedBom = this.template.save(bom, "projects");
 
-    List<LatestVersionPerEnvironment> deployments = this.repository.findLatestVersionPerEnvironmentById(
+    List<LatestVersionPerEnvironment> versions = this.repository.findLatestVersionPerEnvironmentById(
         ProjectId.of(savedBom.id()));
 
     assertAll(
-        () -> assertEquals(2, deployments.size()),
-        () -> assertEquals("Production", deployments.get(0).environment()),
-        () -> assertEquals("2.0.1", deployments.get(0).deployment().version()),
-        () -> assertEquals("naikan.io", deployments.get(0).deployment().location()),
-        () -> assertEquals("Production", deployments.get(0).deployment().environment())
+        () -> assertEquals(2, versions.size()),
+        () -> assertEquals("Production", versions.get(0).environment()),
+        () -> assertEquals("2.0.1", versions.get(0).deployment().version()),
+        () -> assertEquals("naikan.io", versions.get(0).deployment().location()),
+        () -> assertEquals("Production", versions.get(0).deployment().environment())
     );
   }
 
@@ -162,17 +162,17 @@ class ProjectMongoRepositoryIT {
     Bom bom = newJsonDeserializer().of(validBom1asInputStream());
     Bom savedBom = this.template.save(bom, "projects");
 
-    DeploymentsPerMonth deploymentsPerMonth = this.repository.findDeploymentsPerMonthById(
+    CountsPerItems deployments = this.repository.findDeploymentsPerMonthById(
         ProjectId.of(savedBom.id()));
 
     assertAll(
-        () -> assertEquals(10, deploymentsPerMonth.months().size()),
-        () -> assertEquals(10, deploymentsPerMonth.counts().size()),
+        () -> assertEquals(10, deployments.names().size()),
+        () -> assertEquals(10, deployments.counts().size()),
         () -> assertEquals(
             List.of("2022-12", "2023-01", "2023-02", "2023-03", "2023-04", "2023-05", "2023-06",
-                "2023-07", "2023-08", "2023-09"), deploymentsPerMonth.months()),
+                "2023-07", "2023-08", "2023-09"), deployments.names()),
         () -> assertEquals(
-            List.of(1L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 1L), deploymentsPerMonth.counts())
+            List.of(1L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 1L), deployments.counts())
     );
   }
 

@@ -3,7 +3,10 @@ package com.enofex.naikan.project;
 import com.enofex.naikan.Filterable;
 import com.enofex.naikan.ProjectId;
 import com.enofex.naikan.model.Bom;
+import com.enofex.naikan.model.Branch;
+import com.enofex.naikan.model.Commit;
 import com.enofex.naikan.model.Deployment;
+import com.enofex.naikan.model.RepositoryTag;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
@@ -24,12 +27,23 @@ public interface ProjectService {
   Page<GroupedDeploymentsPerVersion> findGroupedDeploymentsPerVersionById(ProjectId id,
       Filterable filterable, Pageable pageable);
 
-  DeploymentsPerMonth findDeploymentsPerMonthById(ProjectId id);
+  CountsPerItems findDeploymentsPerMonthById(ProjectId id);
 
-  DeploymentsPerMonth findDeploymentsPerMonth(Filterable filterable, Pageable pageable);
+  CountsPerItems findDeploymentsPerMonth(Filterable filterable, Pageable pageable);
 
-  DeploymentsPerProject findDeploymentsPerProject(Filterable filterable, Pageable pageable);
+  CountsPerItems findDeploymentsPerProject(Filterable filterable, Pageable pageable);
 
   List<LatestVersionPerEnvironment> findLatestVersionPerEnvironmentById(ProjectId id);
 
+  Page<Commit> findCommitsById(ProjectId id, Filterable filterable, Pageable pageable);
+
+  CountsPerItems findCommitsPerMonthById(ProjectId id);
+
+  CountsPerItems findCommitsPerMonth(Filterable filterable, Pageable pageable);
+
+  CountsPerItems findCommitsPerProject(Filterable filterable, Pageable pageable);
+
+  Page<RepositoryTag> findRepositoryTagsById(ProjectId id, Filterable filterable, Pageable pageable);
+
+  Page<Branch> findRepositoryBranchesById(ProjectId id, Filterable filterable, Pageable pageable);
 }

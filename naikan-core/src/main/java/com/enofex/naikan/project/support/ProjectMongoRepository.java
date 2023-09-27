@@ -7,15 +7,19 @@ import static org.springframework.data.mongodb.core.aggregation.Aggregation.proj
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.sort;
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.unwind;
 import static org.springframework.data.mongodb.core.aggregation.ConditionalOperators.IfNull.ifNull;
+import static org.springframework.data.mongodb.core.query.Criteria.where;
 
 import com.enofex.naikan.AbstractRepository;
 import com.enofex.naikan.Filterable;
 import com.enofex.naikan.FilterableCriteriaBuilder;
 import com.enofex.naikan.ProjectId;
+import com.enofex.naikan.model.Branch;
+import com.enofex.naikan.model.Commit;
 import com.enofex.naikan.model.Deployment;
+import com.enofex.naikan.model.RepositoryTag;
 import com.enofex.naikan.project.BomDetail;
 import com.enofex.naikan.project.BomOverview;
-import com.enofex.naikan.project.DeploymentsPerMonth;
+import com.enofex.naikan.project.CountsPerItems;
 import com.enofex.naikan.project.GroupedDeploymentsPerVersion;
 import com.enofex.naikan.project.LatestVersionPerEnvironment;
 import com.enofex.naikan.project.ProjectFilter;
@@ -37,7 +41,6 @@ import org.springframework.data.mongodb.core.aggregation.AddFieldsOperation;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
 import org.springframework.data.mongodb.core.aggregation.ArrayOperators;
-import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -94,6 +97,7 @@ class ProjectMongoRepository extends AbstractRepository implements ProjectReposi
         .and("licenses").as("licenses")
         .and("deployments").as("deployments")
         .and("tags").as("tags")
+        .and("repository").as("repository")
 
         .and("environments.name").as("environmentNames")
         .and("integrations.name").as("integrationNames")
@@ -103,6 +107,16 @@ class ProjectMongoRepository extends AbstractRepository implements ProjectReposi
         .and("technologies.name").as("technologyNames")
         .and("documentations.name").as("documentationNames")
         .and("licenses.name").as("licenseNames")
+    );
+
+    operations.add(AddFieldsOperation.builder()
+        .addFieldWithValue("deploymentsPerMonth", null)
+        .build()
+    );
+
+    operations.add(AddFieldsOperation.builder()
+        .addFieldWithValue("commitsPerMonth", null)
+        .build()
     );
 
     operations.add(AddFieldsOperation.builder()
@@ -140,6 +154,18 @@ class ProjectMongoRepository extends AbstractRepository implements ProjectReposi
                     Collections.emptyList()
                 )
             )
+        ))
+        .build()
+    );
+
+    operations.add(AddFieldsOperation.builder()
+        .addFieldWithValue("commitsCount", new Document(
+            "$cond", Arrays.asList(
+            new Document("$ifNull",
+                Arrays.asList("$repository.totalCommits", null)),
+            "$repository.totalCommits",
+            0
+        )
         ))
         .build()
     );
@@ -237,7 +263,46 @@ class ProjectMongoRepository extends AbstractRepository implements ProjectReposi
 
   @Override
   public Optional<BomDetail> findBomDetailById(ProjectId id) {
-    return Optional.ofNullable(template().findById(id.id(), BomDetail.class, collectionName()));
+    List<AggregationOperation> operations = new ArrayList<>();
+
+    operations.add(match(where("_id").is(id.id())));
+    operations.add(AddFieldsOperation.builder()
+        .addFieldWithValue("repository.totalCommits",
+            new Document("$ifNull", Arrays.asList("$repository.totalCommits", 0))
+        )
+        .build()
+    );
+    operations.add(AddFieldsOperation.builder()
+        .addFieldWithValue("repository.tagsCount",
+            new Document("$size",
+                new Document("$ifNull",
+                    Arrays.asList(
+                        "$repository.tags",
+                        Collections.emptyList()
+                    )
+                )
+            )
+        )
+        .build()
+    );
+
+    operations.add(AddFieldsOperation.builder()
+        .addFieldWithValue("repository.branchesCount",
+            new Document("$size",
+                new Document("$ifNull",
+                    Arrays.asList(
+                        "$repository.branches",
+                        Collections.emptyList()
+                    )
+                )
+            )
+        )
+        .build()
+    );
+
+    return Optional.ofNullable(template()
+        .aggregate(Aggregation.newAggregation(operations), collectionName(), BomDetail.class)
+        .getUniqueMappedResult());
   }
 
   @Override
@@ -246,7 +311,7 @@ class ProjectMongoRepository extends AbstractRepository implements ProjectReposi
     FilterableCriteriaBuilder builder = new FilterableCriteriaBuilder(filterable);
     List<AggregationOperation> operations = new ArrayList<>();
 
-    operations.add(match(Criteria.where("_id").is(id.id())));
+    operations.add(match(where("_id").is(id.id())));
     operations.add(unwind("deployments"));
     operations.add(project()
         .and("deployments.environment").as("environment")
@@ -272,7 +337,7 @@ class ProjectMongoRepository extends AbstractRepository implements ProjectReposi
     FilterableCriteriaBuilder builder = new FilterableCriteriaBuilder(filterable);
     List<AggregationOperation> operations = new ArrayList<>();
 
-    operations.add(match(Criteria.where("_id").is(id.id())));
+    operations.add(match(where("_id").is(id.id())));
     operations.add(unwind("deployments"));
     operations.add(group("deployments.version")
         .first("deployments.version").as("version")
@@ -293,9 +358,9 @@ class ProjectMongoRepository extends AbstractRepository implements ProjectReposi
   }
 
   @Override
-  public DeploymentsPerMonth findDeploymentsPerMonthById(ProjectId id) {
+  public CountsPerItems findDeploymentsPerMonthById(ProjectId id) {
     Aggregation aggregation = Aggregation.newAggregation(
-        match(Criteria.where("_id").is(id.id())),
+        match(where("_id").is(id.id())),
         unwind("deployments"),
         project()
             .andExpression("dateToString('%Y-%m', deployments.timestamp)").as("month"),
@@ -304,44 +369,17 @@ class ProjectMongoRepository extends AbstractRepository implements ProjectReposi
         project("count").and("month").previousOperation(),
         sort(Sort.Direction.ASC, previousOperation(), "month"),
         group()
-            .push("month").as("months")
+            .push("month").as("names")
             .push("count").as("counts")
     );
 
-    DeploymentsPerMonth result = template().aggregate(
-        aggregation, collectionName(), DeploymentsPerMonth.class).getUniqueMappedResult();
-
-    if (result != null) {
-      List<String> months = new ArrayList<>();
-      List<Long> counts = new ArrayList<>();
-
-      YearMonth currentMonth = YearMonth.now();
-      YearMonth firstMonth = YearMonth.parse(result.months().get(0));
-
-      while (!firstMonth.isAfter(currentMonth)) {
-        String formattedMonth = firstMonth.toString();
-        months.add(formattedMonth);
-
-        int index = result.months().indexOf(formattedMonth);
-        if (index != -1) {
-          counts.add(result.counts().get(index));
-        } else {
-          counts.add(0L);
-        }
-
-        firstMonth = firstMonth.plusMonths(1L);
-      }
-
-      return new DeploymentsPerMonth(months, counts);
-    }
-
-    return new DeploymentsPerMonth(Collections.emptyList(), Collections.emptyList());
+    return countsPerMonth(aggregation);
   }
 
   @Override
   public List<LatestVersionPerEnvironment> findLatestVersionPerEnvironmentById(ProjectId id) {
     Aggregation aggregation = Aggregation.newAggregation(
-        match(Criteria.where("_id").is(id.id())),
+        match(where("_id").is(id.id())),
         unwind("deployments"),
         sort(Sort.by(
             Sort.Order.asc("deployments.environment"),
@@ -357,5 +395,126 @@ class ProjectMongoRepository extends AbstractRepository implements ProjectReposi
     return template().aggregate(aggregation, collectionName(),
         LatestVersionPerEnvironment.class).getMappedResults();
   }
+
+  @Override
+  public Page<Commit> findCommitsById(ProjectId id, Filterable filterable,
+      Pageable pageable) {
+    FilterableCriteriaBuilder builder = new FilterableCriteriaBuilder(filterable);
+    List<AggregationOperation> operations = new ArrayList<>();
+
+    operations.add(match(where("_id").is(id.id())));
+    operations.add(unwind("repository.commits"));
+    operations.add(project()
+        .and("repository.commits.commitId").as("commitId")
+        .and("repository.commits.timestamp").as("timestamp")
+        .and("repository.commits.shortMessage").as("shortMessage")
+        .and("repository.commits.author").as("author")
+        .and("repository.commits.changes").as("changes"));
+
+    operations.add(match(builder.toSearch(List.of(
+        "commitId",
+        "shortMessage",
+        "timestamp",
+        "author.name",
+        "author.email")))
+    );
+
+    operations.add(match(builder.toFilters()));
+
+    return findAll(Commit.class, operations, pageable);
+  }
+
+  @Override
+  public CountsPerItems findCommitsPerMonthById(ProjectId id) {
+    Aggregation aggregation = Aggregation.newAggregation(
+        match(where("_id").is(id.id())),
+        unwind("repository.commits"),
+        project()
+            .andExpression("dateToString('%Y-%m', repository.commits.timestamp)").as("month"),
+        group("month").count().as("count"),
+        sort(Sort.Direction.ASC, previousOperation(), "month"),
+        project("count").and("month").previousOperation(),
+        sort(Sort.Direction.ASC, previousOperation(), "month"),
+        group()
+            .push("month").as("names")
+            .push("count").as("counts")
+    );
+
+    return countsPerMonth(aggregation);
+  }
+
+  @Override
+  public Page<RepositoryTag> findRepositoryTagsById(ProjectId id, Filterable filterable,
+      Pageable pageable) {
+    FilterableCriteriaBuilder builder = new FilterableCriteriaBuilder(filterable);
+    List<AggregationOperation> operations = new ArrayList<>();
+
+    operations.add(match(where("_id").is(id.id())));
+    operations.add(unwind("repository.tags"));
+    operations.add(project()
+        .and("repository.tags.name").as("name")
+        .and("repository.tags.timestamp").as("timestamp"));
+
+    operations.add(match(builder.toSearch(List.of(
+        "name",
+        "timestamp")))
+    );
+
+    operations.add(match(builder.toFilters()));
+
+    return findAll(RepositoryTag.class, operations, pageable);
+  }
+
+  @Override
+  public Page<Branch> findRepositoryBranchesById(ProjectId id, Filterable filterable,
+      Pageable pageable) {
+    FilterableCriteriaBuilder builder = new FilterableCriteriaBuilder(filterable);
+    List<AggregationOperation> operations = new ArrayList<>();
+
+    operations.add(match(where("_id").is(id.id())));
+    operations.add(unwind("repository.branches"));
+    operations.add(project()
+        .and("repository.branches.name").as("name"));
+
+    operations.add(match(builder.toSearch(List.of(
+        "name")))
+    );
+
+    operations.add(match(builder.toFilters()));
+
+    return findAll(Branch.class, operations, pageable);
+  }
+
+  private CountsPerItems countsPerMonth(Aggregation aggregation) {
+    CountsPerItems result = template().aggregate(
+        aggregation, collectionName(), CountsPerItems.class).getUniqueMappedResult();
+
+    if (result != null) {
+      List<String> months = new ArrayList<>();
+      List<Long> counts = new ArrayList<>();
+
+      YearMonth currentMonth = YearMonth.now();
+      YearMonth firstMonth = YearMonth.parse(result.names().get(0));
+
+      while (!firstMonth.isAfter(currentMonth)) {
+        String formattedMonth = firstMonth.toString();
+        months.add(formattedMonth);
+
+        int index = result.names().indexOf(formattedMonth);
+        if (index != -1) {
+          counts.add(result.counts().get(index));
+        } else {
+          counts.add(0L);
+        }
+
+        firstMonth = firstMonth.plusMonths(1L);
+      }
+
+      return new CountsPerItems(months, counts);
+    }
+
+    return CountsPerItems.EMPTY;
+  }
+
 }
 
