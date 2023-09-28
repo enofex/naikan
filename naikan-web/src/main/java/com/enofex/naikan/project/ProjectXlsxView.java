@@ -282,8 +282,7 @@ final class ProjectXlsxView extends AbstractXlsxStreamingView {
         put("File changed", commit -> String.valueOf(commit.changes().files().changed()));
       }};
 
-      writeRows(sheet, columns,
-          this.bom.repository() != null ? this.bom.repository().commits().all() : List.of());
+      writeRows(sheet, columns, this.bom.repository().commits().all());
     }
   }
 

@@ -57,7 +57,7 @@ See all projects at a glance, filter, sort and search them.
 
 ### Projects insights
 
-See all projects statisics at a glance, filter, sort and search them.
+See all projects statistics at a glance, filter, sort and search them.
 
 <img src="../assets/screenshots/projects-insights.png" alt="Projects insights" width="1024"/>
 

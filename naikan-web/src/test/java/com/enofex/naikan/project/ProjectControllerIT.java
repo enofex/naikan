@@ -3,14 +3,17 @@ package com.enofex.naikan.project;
 import static com.enofex.naikan.test.model.Boms.validBom0asInputStream;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.handler;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import com.enofex.naikan.administration.user.User;
 import com.enofex.naikan.model.Bom;
 import com.enofex.naikan.model.deserializer.DeserializerFactory;
 import com.enofex.naikan.test.IntegrationTest;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -24,6 +27,8 @@ class ProjectControllerIT {
   private MockMvc mvc;
   @Autowired
   private MongoTemplate template;
+  @Autowired
+  private ObjectMapper mapper;
 
   @Test
   void shouldFindAll() throws Exception {
@@ -253,5 +258,33 @@ class ProjectControllerIT {
         .andExpect(handler().methodName("findRepositoryBranchesById"))
         .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+  }
+
+  @Test
+  void shouldNotUpdateUserFavoritesWhenUserNotFound() throws Exception {
+    this.mvc.perform(
+            patch("/api/projects/favorites")
+                .with(csrf())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(this.mapper.writeValueAsString(new String[]{"not_important"})))
+        .andExpect(handler().methodName("updateUserFavorites"))
+        .andExpect(status().isNotFound());
+  }
+
+  @Test
+  void shouldUpdateUserFavorites() throws Exception {
+    this.template.save(new User("user"), "users");
+
+    Bom savedBom = this.template.save(
+        DeserializerFactory.newJsonDeserializer().of(validBom0asInputStream()),
+        "projects");
+
+    this.mvc.perform(
+            patch("/api/projects/favorites")
+                .with(csrf())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(this.mapper.writeValueAsString(new String[]{savedBom.id()})))
+        .andExpect(handler().methodName("updateUserFavorites"))
+        .andExpect(status().isNoContent());
   }
 }

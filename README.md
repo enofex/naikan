@@ -15,7 +15,7 @@ Tired of scattered spreadsheets and scattered information? Our user-friendly int
 
 <br/>
 
-<div style="display: flex; justify-content: center">
+<div style="display: flex; justify-content: center;">
     <img src="https://github.com/enofex/naikan/blob/main/docs/assets/screenshots/projects-overview.png" width="49%">
     <img src="https://github.com/enofex/naikan/blob/main/docs/assets/screenshots/project-detail-deployments.png" width="49%">
 </div>
