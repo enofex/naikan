@@ -5107,7 +5107,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 }
 
 .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
-  background: transparent;
+  background: rgba(158, 158, 158, 0.04);
   border-color: rgba(255, 255, 255, 0.12);
   color: #9e9e9e;
 }
@@ -6659,7 +6659,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 }
 
 .p-tabmenu .p-tabmenu-nav .p-tabmenuitem.p-highlight .p-menuitem-link {
-  background: transparent;
+  background: rgba(158, 158, 158, 0.04);
   border-color: rgba(255, 255, 255, 0.12);
   color: #9e9e9e;
 }
