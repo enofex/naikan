@@ -300,9 +300,9 @@ export class ProjectViewOverviewBody extends AbstractProjectView implements OnIn
       datasets: [
         {
           label: "Deployments",
-          data: this.bomOverview.deploymentsPerMonth.names.map((name, index) => ({
+          data: this.bomOverview.deploymentsPerMonth?.names?.map((name, index) => ({
             x: name,
-            y: this.bomOverview.deploymentsPerMonth.counts[index],
+            y: this.bomOverview.deploymentsPerMonth?.counts[index],
           })),
           fill: true,
           backgroundColor: Charts.documentPrimaryStyleWithDefaultOpacity(),
@@ -312,9 +312,9 @@ export class ProjectViewOverviewBody extends AbstractProjectView implements OnIn
         },
         {
           label: "Commits",
-          data: this.bomOverview.commitsPerMonth.names.map((name, index) => ({
+          data: this.bomOverview.commitsPerMonth?.names?.map((name, index) => ({
             x: name,
-            y: this.bomOverview.commitsPerMonth.counts[index],
+            y: this.bomOverview.commitsPerMonth?.counts[index],
           })),
           fill: true,
           backgroundColor: Charts.documentGreenStyleWithDefaultOpacity(),

@@ -199,7 +199,7 @@ export class TechnologiesChart extends AbstractInsightChart {
 
     const technologyCounts = new Map<string, number>();
 
-    this.allOverviewBoms().forEach(bom => bom.technologyNames.forEach((tech) => {
+    this.allOverviewBoms().forEach(bom => bom.technologyNames?.forEach((tech) => {
       const count = technologyCounts.get(tech) || 0;
       technologyCounts.set(tech, count + 1);
     }));

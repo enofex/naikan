@@ -188,9 +188,9 @@ implementation "{{ bomDetail.project?.groupId}}:{{ bomDetail.project?.artifactId
           </div>
         </div>
 
-        <h5 *ngIf="bomDetail.licenses.length > 0">Licenses</h5>
+        <h5 *ngIf="bomDetail.licenses?.length > 0">Licenses</h5>
         <p-table
-            *ngIf="bomDetail.licenses.length > 0"
+            *ngIf="bomDetail.licenses?.length > 0"
             [value]="bomDetail.licenses">
           <ng-template pTemplate="body" let-license>
             <tr>
@@ -636,7 +636,7 @@ implementation "{{ bomDetail.project?.groupId}}:{{ bomDetail.project?.artifactId
       <p-tabPanel header="Deployments" class="line-height-3 m-0">
 
         <div class="card border-none px-0"
-             *ngIf="deploymentsPerMonth && deploymentsPerMonth.names.length > 0">
+             *ngIf="deploymentsPerMonth?.names?.length > 0">
           <p-chart
               type="line"
               height="300px"
@@ -991,7 +991,7 @@ implementation "{{ bomDetail.project?.groupId}}:{{ bomDetail.project?.artifactId
 
           <p-tabPanel header="Commits">
             <div class="card border-none px-0"
-                 *ngIf="commitsPerMonth && commitsPerMonth.names.length > 0">
+                 *ngIf="commitsPerMonth?.names?.length > 0">
 
               <p-chart
                   type="line"
