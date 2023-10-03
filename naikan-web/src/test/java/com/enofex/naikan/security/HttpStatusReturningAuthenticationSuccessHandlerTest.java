@@ -42,7 +42,7 @@ class HttpStatusReturningAuthenticationSuccessHandlerTest {
   }
 
   @Test
-  void shouldnAuthenticateIfUserNotFound() {
+  void shouldAuthenticateIfUserNotFound() {
     HttpServletRequest request = mock(HttpServletRequest.class);
     HttpServletResponse response = mock(HttpServletResponse.class);
     Authentication authentication = mock(Authentication.class);
@@ -58,7 +58,7 @@ class HttpStatusReturningAuthenticationSuccessHandlerTest {
   }
 
   @Test
-  void shouldnAuthenticateIfUserAlreadyExists() {
+  void shouldAuthenticateIfUserAlreadyExists() {
     HttpServletRequest request = mock(HttpServletRequest.class);
     HttpServletResponse response = mock(HttpServletResponse.class);
     Authentication authentication = mock(Authentication.class);
