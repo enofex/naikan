@@ -157,7 +157,7 @@
                       </p-button>
                     </div>
 
-<pre class="surface-50 p-3 mt-3" #maven>
+                    <pre class="surface-50 p-3 mt-3" #maven>
 &lt;dependency&gt;
   &lt;groupId&gt;{{ bomDetail.project?.groupId}}&lt;/groupId&gt;
   &lt;artifactId&gt;{{ bomDetail.project?.artifactId}}&lt;/artifactId&gt;
@@ -178,7 +178,7 @@
                                 (click)="copyToClipboard(gradle)">
                       </p-button>
                     </div>
- <pre class="surface-50 p-3 mt-3" #gradle>
+                    <pre class="surface-50 p-3 mt-3" #gradle>
 implementation "{{ bomDetail.project?.groupId}}:{{ bomDetail.project?.artifactId}}:{{ bomDetail.project?.version}}"
 </pre>
                   </div>
@@ -862,13 +862,21 @@ implementation "{{ bomDetail.project?.groupId}}:{{ bomDetail.project?.artifactId
       </p-tabPanel>
 
       <p-tabPanel header="Crime Scene" class="line-height-3 m-0" *ngIf="bomDetail.repository">
-
         <div class="card surface-50 border-none">
           <div class="grid" style="margin-bottom: -12px;">
             <div class="col-6 text-left">
-              <p-tag severity="success" class="mr-2" *ngIf="bomDetail.repository.defaultBranch">
+              <p-tag severity="success" class="mr-2" *ngIf="bomDetail.repository.name">
+                <i class="pi pi-code m-2"></i>
+                <span tooltipPosition="top"
+                      pTooltip="Repository name"
+                      class="mr-3">{{ bomDetail.repository.name }}</span>
+              </p-tag>
+
+              <p-tag severity="info" class="mr-2" *ngIf="bomDetail.repository.defaultBranch">
                 <i class="pi pi-share-alt m-2"></i>
-                <span class="mr-3">{{ bomDetail.repository.defaultBranch }}</span>
+                <span tooltipPosition="top"
+                      pTooltip="Default branch"
+                      class="mr-3">{{ bomDetail.repository.defaultBranch }}</span>
               </p-tag>
 
               <span class="text-900 font-medium ml-2"
@@ -890,105 +898,20 @@ implementation "{{ bomDetail.project?.groupId}}:{{ bomDetail.project?.artifactId
                 <naikan-commit-id
                     commitId=" {{ bomDetail.repository.firstCommit?.commitId }}"></naikan-commit-id>
                 on
-                <span class="text-700 mr-2" >
+                <span
+                    tooltipPosition="top"
+                    pTooltip="by {{ bomDetail.repository.firstCommit?.author?.name}} {{ bomDetail.repository.firstCommit?.author?.email }}"
+                    class="text-700 mr-2">
                   {{ bomDetail.repository.firstCommit?.timestamp | naikanDateTime }}
                 </span>
               </span>
+              <p-tag *ngIf="bomDetail.repository.url"
+                     severity="info">{{ bomDetail.repository.url }}</p-tag>
             </div>
           </div>
         </div>
 
         <p-tabView id="crime-scene-tabview">
-          <p-tabPanel header="Repository">
-            <div class="grid">
-              <div class="col-12 mt-4 surface-50">
-                <div class="text-xl font-bold text-900">
-                  <h5>General</h5>
-                </div>
-
-                <div class="field grid">
-                  <label class="col-12 mb-2 md:col-2 md:mb-0">Name</label>
-                  <div class="col-12 md:col-10">
-                    {{ bomDetail.repository.name}}
-                  </div>
-                </div>
-
-                <div class="field grid">
-                  <label class="col-12 mb-2 md:col-2 md:mb-0">URL</label>
-                  <div class="col-12 md:col-10">
-                    {{ bomDetail.repository.url}}
-                  </div>
-                </div>
-
-                <div class="field grid">
-                  <label class="col-12 mb-2 md:col-2 md:mb-0">Default branch</label>
-                  <div class="col-12 md:col-10">
-                    {{ bomDetail.repository.defaultBranch}}
-                  </div>
-                </div>
-
-                <div class="field grid">
-                  <label class="col-12 mb-2 md:col-2 md:mb-0">First commit</label>
-                  <div class="col-12 md:col-10" *ngIf="bomDetail.repository.firstCommit">
-                    <naikan-commit-id
-                        commitId=" {{ bomDetail.repository.firstCommit?.commitId }}">
-                    </naikan-commit-id> on
-                    <span class="text-700">
-                      {{ bomDetail.repository.firstCommit?.timestamp | naikanDateTime }}
-                    </span>by
-                    {{ bomDetail.repository.firstCommit?.author.name }}
-                    <p-tag severity="info">{{ bomDetail.repository.firstCommit?.author.email }}</p-tag>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <h5 *ngIf="bomDetail.repository.branchesCount > 0"><i class="pi pi-share-alt mr-2"></i>Branches</h5>
-            <p-table
-                *ngIf="bomDetail.repository.branchesCount > 0"
-                styleClass="p-datatable-striped"
-                [rowHover]="true"
-                [lazy]="true"
-                (onLazyLoad)="loadRepositoryBranches($event)"
-                [value]="branchesPage?.content"
-                [paginator]="true"
-                [alwaysShowPaginator]="false"
-                [rows]="10"
-                [rowsPerPageOptions]="[10, 25, 50]"
-                [totalRecords]="branchesPage?.totalElements"
-              >
-              <ng-template pTemplate="body" let-branch>
-                <tr>
-                  <td>{{ branch.name }}</td>
-                </tr>
-              </ng-template>
-            </p-table>
-
-            <h5  *ngIf="bomDetail.repository.tagsCount > 0"><i class="pi pi-tags mr-2"></i>Tags</h5>
-            <p-table
-                *ngIf="bomDetail.repository.tagsCount > 0"
-                styleClass="p-datatable-striped"
-                [rowHover]="true"
-                [lazy]="true"
-                (onLazyLoad)="loadRepositoryTags($event)"
-                [value]="repositoryTagsPage?.content"
-                [paginator]="true"
-                [alwaysShowPaginator]="false"
-                [rows]="10"
-                [rowsPerPageOptions]="[10, 25, 50]"
-                [totalRecords]="repositoryTagsPage?.totalElements"
-            >
-              <ng-template pTemplate="body" let-tag>
-                <tr>
-                  <td>{{ tag.name }}</td>
-                  <td>
-                    {{ tag.timestamp | naikanDateTime }}
-                  </td>
-                </tr>
-              </ng-template>
-            </p-table>
-          </p-tabPanel>
-
           <p-tabPanel header="Commits">
             <div class="card border-none px-0"
                  *ngIf="commitsPerMonth?.names?.length > 0">
@@ -1111,6 +1034,117 @@ implementation "{{ bomDetail.project?.groupId}}:{{ bomDetail.project?.artifactId
             </p-table>
           </p-tabPanel>
 
+          <p-tabPanel header="Branches">
+            <p-table
+                #tableBranches
+                styleClass="p-datatable-striped"
+                [rowHover]="true"
+                [lazy]="true"
+                (onLazyLoad)="loadRepositoryBranches($event)"
+                [value]="branchesPage?.content"
+                [paginator]="true"
+                [alwaysShowPaginator]="false"
+                [rows]="10"
+                [rowsPerPageOptions]="[10, 25, 50]"
+                [totalRecords]="branchesPage?.totalElements"
+            >
+
+              <ng-template pTemplate="caption">
+                <div class="flex justify-content-between flex-wrap">
+                  <div class="flex align-items-center justify-content-center">
+                    <naikan-search #searchBranches [table]="tableBranches"></naikan-search>
+                  </div>
+                  <div class="flex align-items-center justify-content-center">
+                    <button pButton label="Clear" class="p-button-outlined"
+                            icon="pi pi-filter-slash"
+                            (click)="tableBranches.reset(); searchBranches.clear()"></button>
+                  </div>
+                </div>
+              </ng-template>
+
+              <ng-template pTemplate="header">
+                <tr>
+                  <th class="w-12rem" pSortableColumn="name">
+                    <div class="flex align-items-center">
+                      <span class="mr-2">Name</span>
+                      <p-columnFilter field="name" display="menu"
+                                      placeholder="name">
+                      </p-columnFilter>
+                      <p-sortIcon field="name"></p-sortIcon>
+                    </div>
+                  </th>
+                </tr>
+              </ng-template>
+
+              <ng-template pTemplate="body" let-branch>
+                <tr>
+                  <td>{{ branch.name }}</td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </p-tabPanel>
+
+          <p-tabPanel header="Tags">
+            <p-table
+                #tableTags
+                styleClass="p-datatable-striped"
+                [rowHover]="true"
+                [lazy]="true"
+                (onLazyLoad)="loadRepositoryTags($event)"
+                [value]="repositoryTagsPage?.content"
+                [paginator]="true"
+                [alwaysShowPaginator]="false"
+                [rows]="10"
+                [rowsPerPageOptions]="[10, 25, 50]"
+                [totalRecords]="repositoryTagsPage?.totalElements"
+            >
+
+              <ng-template pTemplate="caption">
+                <div class="flex justify-content-between flex-wrap">
+                  <div class="flex align-items-center justify-content-center">
+                    <naikan-search #searchTags [table]="tableTags"></naikan-search>
+                  </div>
+                  <div class="flex align-items-center justify-content-center">
+                    <button pButton label="Clear" class="p-button-outlined"
+                            icon="pi pi-filter-slash"
+                            (click)="tableTags.reset(); searchTags.clear()"></button>
+                  </div>
+                </div>
+              </ng-template>
+
+              <ng-template pTemplate="header">
+                <tr>
+                  <th class="w-12rem" pSortableColumn="name">
+                    <div class="flex align-items-center">
+                      <span class="mr-2">Name</span>
+                      <p-columnFilter field="name" display="menu"
+                                      placeholder="name">
+                      </p-columnFilter>
+                      <p-sortIcon field="name"></p-sortIcon>
+                    </div>
+                  </th>
+                  <th pSortableColumn="timestamp">
+                    <div class="flex align-items-center">
+                      <span class="mr-2">Timestamp</span>
+                      <p-columnFilter type="date" field="timestamp" display="menu"
+                                      placeholder="Timestamp">
+                      </p-columnFilter>
+                      <p-sortIcon field="timestamp"></p-sortIcon>
+                    </div>
+                  </th>
+                </tr>
+              </ng-template>
+
+              <ng-template pTemplate="body" let-tag>
+                <tr>
+                  <td>{{ tag.name }}</td>
+                  <td>
+                    {{ tag.timestamp | naikanDateTime }}
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </p-tabPanel>
         </p-tabView>
       </p-tabPanel>
 
