@@ -243,7 +243,7 @@ final class ProjectXlsxView extends AbstractXlsxStreamingView {
     Row header = sheet.createRow(sheet.getLastRowNum() + 1);
     header.createCell(0).setCellValue("Branches");
     Map<String, Function<Branch, String>> columns = new LinkedHashMap<>() {{
-      put("Name", branch -> branch.name());
+      put("Name", Branch::name);
     }};
 
     writeRows(sheet, columns,
@@ -255,7 +255,7 @@ final class ProjectXlsxView extends AbstractXlsxStreamingView {
     Row header = sheet.createRow(sheet.getLastRowNum() + 1);
     header.createCell(0).setCellValue("Tags");
     Map<String, Function<RepositoryTag, String>> columns = new LinkedHashMap<>() {{
-      put("Name", tag -> tag.name());
+      put("Name", RepositoryTag::name);
       put("Timestamp", tag -> tag.timestamp() != null ? tag.timestamp()
           .format(DateTimeFormatter.ISO_LOCAL_DATE_TIME) : "");
     }};
