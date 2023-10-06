@@ -1,4 +1,4 @@
-Welcome to *Naikan*, the ultimate inventory management tool for developer teams designed to
+Welcome to *Naikan*, the ultimate open source inventory management tool for developer teams designed to
 streamline your software
 projects. With *Naikan*, organizations can effortlessly stay on top of critical project information,
 ensuring seamless project management and improved efficiency.
