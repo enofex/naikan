@@ -9,7 +9,7 @@
     <img height="20" src="https://sonarcloud.io/images/project_badges/sonarcloud-orange.svg">
 </p>
 
-# Naikan: A Comprehensive Software Inventory Management Tool for Dev Teams
+# Naikan: A Open Source Comprehensive Software Inventory Management Tool for Dev Teams
 
 Tired of scattered spreadsheets and scattered information? Our user-friendly interface simplifies project inventory tool for your dev teams, ensuring seamless access to all information about your projects, whenever they need it. It enables users to manage their projects' essential details, including project name, organization, team, contacts, developers, integrations, licenses, deployments, environments, and technologies used. The tool can be integrated into CI/CD pipelines to automatically push data for new projects and updates.
 
