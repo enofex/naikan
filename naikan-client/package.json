@@ -28,7 +28,6 @@
     "primeicons": "6.0.1",
     "primeng": "16.4.1",
     "rxjs": "7.8.1",
-    "sync-pom-version-to-package": "1.6.1",
     "tslib": "2.6.2",
     "zone.js": "0.13.3"
   },
@@ -36,6 +35,7 @@
     "@angular-devkit/build-angular": "16.2.5",
     "@angular/cli": "16.2.5",
     "@angular/compiler-cli": "16.2.3",
+    "sync-pom-version-to-package": "1.6.1",
     "typescript": "5.1.6"
   }
 }
