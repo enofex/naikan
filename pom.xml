@@ -20,7 +20,7 @@
   <description>Naikan the software inventory management tool.</description>
 
   <properties>
-    <java.version>20</java.version>
+    <java.version>21</java.version>
 
     <naikan-model.version>0.2.2</naikan-model.version>
     <naikan-test.version>0.0.12</naikan-test.version>
