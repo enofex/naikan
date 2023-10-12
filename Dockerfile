@@ -1,9 +1,9 @@
-FROM eclipse-temurin:20-alpine AS builder
+FROM eclipse-temurin:21-alpine AS builder
 ARG JAR_FILE=naikan-web/target/naikan-web.jar
 COPY ${JAR_FILE} application.jar
 RUN java -Djarmode=layertools -jar application.jar extract
 
-FROM eclipse-temurin:20-alpine
+FROM eclipse-temurin:21-alpine
 
 RUN set -eux; \
 	apk update; \
