@@ -83,7 +83,7 @@ Naikan is built using open source software technologies, including:
 
 ## Backers
 
-The Open Source Community and [Enofex](https://enofex.com)
+The Open Source Community
 
 <br>
 <a href="https://github.com/enofex/naikan/graphs/contributors">
