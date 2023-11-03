@@ -1,7 +1,7 @@
 <naikan-breadcrumb [items]="items" *ngIf="bomDetail">
   <ng-template #rightTemplate>
     <span *ngIf="bomDetail.timestamp"
-          class="hidden md:inline-block font-normal text-500 text-sm mt-2 ml-2"> last updated
+          class="hidden md:inline-block font-normal text-500 text-sm mt-2 ml-2 mr-4"> last updated
       <span class="text-700"> {{ bomDetail.timestamp | naikanDateTime }}</span>
     </span>
 
@@ -10,7 +10,7 @@
                    [model]="this.exportItems"
                    (onClick)="exportXlsx()"
                    appendTo="body"
-                   styleClass="p-button-sm p-button-outlined ml-4">
+                   styleClass="p-button-outlined">
     </p-splitButton>
   </ng-template>
 </naikan-breadcrumb>
