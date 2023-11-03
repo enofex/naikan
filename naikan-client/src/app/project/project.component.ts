@@ -9,7 +9,7 @@ import {
 } from './project-view-condensed.component';
 import {ProjectViewInsightsHeader} from "./project-view-insights.component";
 import {AsyncPipe, DatePipe, NgClass, NgIf} from '@angular/common';
-import {DropdownModule} from 'primeng/dropdown';
+import {DropdownChangeEvent, DropdownModule} from 'primeng/dropdown';
 import {ButtonModule} from 'primeng/button';
 import {ProjectFilter} from './project-filter';
 import {Table, TableLazyLoadEvent, TableModule} from 'primeng/table';
@@ -62,7 +62,7 @@ export class ProjectComponent implements OnInit {
     });
   }
 
-  onSortChange(event): void {
+  onSortChange(event: DropdownChangeEvent): void {
     this.sortField = event.value;
   }
 
