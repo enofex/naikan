@@ -10,7 +10,7 @@ import {MessagesModule} from "primeng/messages";
 import {AdministrationUserService} from "./user.service";
 import {User} from "./user";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
-import {MultiSelectModule} from "primeng/multiselect";
+import {MultiSelectChangeEvent, MultiSelectModule} from "primeng/multiselect";
 import {FormsModule} from "@angular/forms";
 
 interface Authority {
@@ -76,7 +76,7 @@ export class UserComponent {
     });
   }
 
-  onAuthoritiesChange(id: string, event: any): void {
+  onAuthoritiesChange(id: string, event: MultiSelectChangeEvent): void {
     this.administrationUserService
     .updateUserAuthoritiesById(id, event.value)
     .subscribe();
