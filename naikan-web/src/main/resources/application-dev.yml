@@ -1,7 +1,7 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://localhost:27071/naikan?replicaSet=rs0
+      uri: mongodb://localhost:27017/naikan?replicaSet=rs0
   ldap:
     urls: ldap://localhost:389
     base: ou=users,dc=naikan,dc=io

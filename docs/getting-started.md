@@ -38,7 +38,7 @@ The Naikan container can be configured using any of the available configuration 
 
 | Property                             | Default                                           | Description                           |
 |:-------------------------------------|:--------------------------------------------------|:--------------------------------------|
-| `NAIKAN_MONGODB_URI`                 | `mongodb://localhost:27071/naikan?replicaSet=rs0` | Mongo database URI.                   | 
+| `NAIKAN_MONGODB_URI`                 | `mongodb://localhost:27017/naikan?replicaSet=rs0` | Mongo database URI.                   | 
 | `NAIKAN_MONGODB_DATABASE`            | `naikan`                                          | Database name. Override URI database. |
 | `NAIKAN_MONGODB_TRANSACTION_ENABLED` | `true`                                            | Enable transaction.                   |
 
