@@ -38,7 +38,7 @@ services:
     # - NAIKAN_CORS_MAX_AGE=1800
     #
     # Optional environmental variables to provide more JVM arguments to the JVM, i.e. "-XX:ActiveProcessorCount=4"
-    # - EXTRA_JAVA_OPTIONS=
+    # - JAVA_TOOL_OPTIONS=
     deploy:
       resources:
         limits:
