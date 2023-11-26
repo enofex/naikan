@@ -60,7 +60,7 @@ jobs:
             enofex/naikan:latest
           labels: |
             org.opencontainers.image.title=Naikan
-            org.opencontainers.image.description=Naikan is a software inventory management tool driven by our CI/CD pipeline.
+            org.opencontainers.image.description=Naikan is a software inventory management tool for your dev teams driven by our CI/CD pipeline.
             org.opencontainers.image.vendor=Enofex
             org.opencontainers.image.version=${{ env.VERSION }}
             org.opencontainers.image.url=https://enofex.com            
