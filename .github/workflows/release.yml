@@ -34,7 +34,7 @@ jobs:
         run: VERSION=${GITHUB_REF_NAME#v}; echo "VERSION=$VERSION" >> $GITHUB_ENV
 
       - name: Set release version POMs
-        run: ./mvnw --no-transfer-progress --batch-mode versions:set -DnewVersion=${VERSION}
+        run: ./mvnw --no-transfer-progress --batch-mode --strict-checksums versions:set -DnewVersion=${VERSION}
 
       - name: Set release version package.json
         working-directory: naikan-client
@@ -47,7 +47,7 @@ jobs:
           message: Perform release  ${{ env.VERSION }}
 
       - name: Maven package
-        run: ./mvnw --no-transfer-progress --batch-mode clean package
+        run: ./mvnw --no-transfer-progress --batch-mode --strict-checksums clean package
 
       - name: Docker build and push
         uses: docker/build-push-action@v5
@@ -68,7 +68,7 @@ jobs:
             org.opencontainers.image.licenses=MIT license
 
       - name: Set next version POMs
-        run: ./mvnw --no-transfer-progress --batch-mode build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion}-SNAPSHOT versions:commit
+        run: ./mvnw --no-transfer-progress --batch-mode --strict-checksums build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion}-SNAPSHOT versions:commit
 
       - name: Set next version package.json
         working-directory: naikan-client
