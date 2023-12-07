@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {LayoutService} from './app.layout.service';
 import {FormsModule} from '@angular/forms';
 import {RadioButtonModule} from 'primeng/radiobutton';
-import {NgClass, NgFor} from '@angular/common';
+import {NgClass} from '@angular/common';
 import {ButtonModule} from 'primeng/button';
 import {SidebarModule} from 'primeng/sidebar';
 
@@ -10,7 +10,7 @@ import {SidebarModule} from 'primeng/sidebar';
     selector: 'app-config',
     templateUrl: './app.config.component.html',
     standalone: true,
-    imports: [SidebarModule, ButtonModule, NgFor, NgClass, RadioButtonModule, FormsModule]
+  imports: [SidebarModule, ButtonModule, NgClass, RadioButtonModule, FormsModule]
 })
 export class AppConfigComponent {
 

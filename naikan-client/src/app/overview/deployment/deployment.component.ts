@@ -11,14 +11,13 @@ import {TooltipModule} from 'primeng/tooltip';
 import {ButtonModule} from 'primeng/button';
 import {TableLazyLoadEvent, TableModule} from 'primeng/table';
 import {ChartModule} from 'primeng/chart';
-import {DatePipe, NgIf} from '@angular/common';
+import {DatePipe} from '@angular/common';
 
 @Component({
   templateUrl: './deployment.component.html',
   standalone: true,
   imports: [
     Breadcrumb,
-    NgIf,
     ChartModule,
     TableModule,
     SharedModule,
@@ -30,7 +29,7 @@ import {DatePipe, NgIf} from '@angular/common';
     Url,
     TagModule,
     DatePipe,
-    DateTimePipe,
+    DateTimePipe
   ],
   providers: [DeploymentService, DatePipe]
 })

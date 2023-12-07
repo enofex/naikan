@@ -1,5 +1,5 @@
 import {Component, Input, ViewEncapsulation} from '@angular/core';
-import {NgIf} from '@angular/common';
+
 import {Table, TableModule} from "primeng/table";
 import {AccordionModule} from "primeng/accordion";
 import {FilterMatchMode, FilterMetadata, SelectItem} from "primeng/api";
@@ -66,24 +66,28 @@ export class ProjectFilterHeader {
     <div class="field grid">
       <div class="col-12">
         <p-columnFilter field="{{field}}"
-                        tooltipPosition="top"
-                        pTooltip="{{label}}"
-                        matchMode="equals"
-                        [showClearButton]="true"
-                        [showMatchModes]="false"
-                        [showOperator]="false"
-                        [showMenu]="false">
+          tooltipPosition="top"
+          pTooltip="{{label}}"
+          matchMode="equals"
+          [showClearButton]="true"
+          [showMatchModes]="false"
+          [showOperator]="false"
+          [showMenu]="false">
           <ng-template pTemplate="filter" let-value let-filter="filterCallback">
             <p-multiSelect placeholder="{{label}}"
-                           [options]="filterNames"
-                           optionLabel="name"
-                           optionValue="name"
-                           [ngModel]="value"
-                           (onChange)="filter($event.value)">
+              [options]="filterNames"
+              optionLabel="name"
+              optionValue="name"
+              [ngModel]="value"
+              (onChange)="filter($event.value)">
               <ng-template let-item pTemplate="item">
                 <div class="flex align-items-center gap-2">
-                  <div *ngIf="!tag">{{item.name }}</div>
-                  <p-tag *ngIf="tag" severity="info" value="{{item.name}}" class="mr-1"></p-tag>
+                  @if (!tag) {
+                    <div>{{item.name }}</div>
+                  }
+                  @if (tag) {
+                    <p-tag severity="info" value="{{item.name}}" class="mr-1"></p-tag>
+                  }
                   <div class="text-400">({{item.count }})</div>
                 </div>
               </ng-template>
@@ -92,7 +96,7 @@ export class ProjectFilterHeader {
         </p-columnFilter>
       </div>
     </div>
-  `,
+    `,
   styleUrls: ['./project-filter.scss'],
   encapsulation: ViewEncapsulation.None,
   standalone: true,
@@ -101,8 +105,7 @@ export class ProjectFilterHeader {
     TooltipModule,
     MultiSelectModule,
     FormsModule,
-    NgIf,
-    TagModule,
+    TagModule
   ],
 })
 export class ProjectFilterMultiSelect {

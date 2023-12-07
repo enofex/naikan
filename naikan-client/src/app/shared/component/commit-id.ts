@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, Input, ViewEncapsulation} from '@angular/core';
-import {NgIf} from '@angular/common';
+
 import {TagModule} from 'primeng/tag';
 import {TooltipModule} from 'primeng/tooltip';
 
@@ -12,9 +12,8 @@ import {TooltipModule} from 'primeng/tooltip';
   encapsulation: ViewEncapsulation.None,
   standalone: true,
   imports: [
-    NgIf,
     TagModule,
-    TooltipModule,
+    TooltipModule
   ],
 })
 export class CommitId {

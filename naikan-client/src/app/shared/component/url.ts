@@ -1,27 +1,22 @@
 import {ChangeDetectionStrategy, Component, Input, ViewEncapsulation} from '@angular/core';
-import {NgSwitch, NgSwitchCase, NgSwitchDefault} from '@angular/common';
+
 import {Urls} from '../util/urls';
 
 @Component({
   selector: 'naikan-url',
   template: `
-    <ng-container [ngSwitch]="Urls.isValid(url) && 'isValid'">
-      <ng-container *ngSwitchCase="'isValid'">
-        <a href="{{url}}" target="_blank">{{ url}}</a>
-      </ng-container>
-      <ng-container *ngSwitchDefault>
-        {{url}}
-      </ng-container>
-    </ng-container>
+      @switch (Urls.isValid(url) && 'isValid') {
+          @case ('isValid') {
+              <a href="{{url}}" target="_blank">{{ url }}</a>
+          }
+          @default {
+              {{ url }}
+          }
+      }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
-  imports: [
-    NgSwitch,
-    NgSwitchCase,
-    NgSwitchDefault,
-  ],
+  standalone: true
 })
 export class Url {
   protected readonly Urls = Urls;

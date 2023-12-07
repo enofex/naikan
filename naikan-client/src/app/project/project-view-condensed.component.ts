@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {NgClass, NgIf} from '@angular/common';
+import {NgClass} from '@angular/common';
 import {TooltipModule} from 'primeng/tooltip';
 import {
   DateTimePipe,
@@ -127,7 +127,6 @@ export class ProjectViewCondensedHeader {
     TooltipModule,
     RouterLink,
     ProjectUrlIcon,
-    NgIf,
     NaikanTags,
     ProjectVersion,
     ChartModule,

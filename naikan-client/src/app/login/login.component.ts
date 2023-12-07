@@ -6,7 +6,7 @@ import {LayoutService} from "@naikan/layout/app.layout.service";
 import {ButtonModule} from 'primeng/button';
 import {PasswordModule} from 'primeng/password';
 import {InputTextModule} from 'primeng/inputtext';
-import {JsonPipe, NgIf} from "@angular/common";
+import {JsonPipe} from "@angular/common";
 import {MessagesModule} from "primeng/messages";
 import {MessageService} from "primeng/api";
 
@@ -14,7 +14,7 @@ import {MessageService} from "primeng/api";
   selector: 'login-page',
   templateUrl: './login.component.html',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, InputTextModule, PasswordModule, ButtonModule, JsonPipe, MessagesModule, NgIf],
+  imports: [FormsModule, ReactiveFormsModule, InputTextModule, PasswordModule, ButtonModule, JsonPipe, MessagesModule],
   providers: [MessageService, LoginService]
 })
 export class LoginComponent {

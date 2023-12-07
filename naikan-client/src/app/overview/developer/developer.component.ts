@@ -7,7 +7,7 @@ import {LayoutService} from "@naikan/layout/app.layout.service";
 import {OverviewProjectTable} from '../overview-project-table';
 import {TagModule} from 'primeng/tag';
 import {TooltipModule} from 'primeng/tooltip';
-import {DatePipe, NgIf} from '@angular/common';
+import {DatePipe} from '@angular/common';
 import {ButtonModule} from 'primeng/button';
 import {TableLazyLoadEvent, TableModule} from 'primeng/table';
 import {OverviewGroup} from "../overview";
@@ -21,10 +21,9 @@ import {OverviewGroup} from "../overview";
     SharedModule,
     Search,
     ButtonModule,
-    NgIf,
     TooltipModule,
     TagModule,
-    OverviewProjectTable,
+    OverviewProjectTable
   ],
   providers: [DeveloperService, DatePipe]
 })

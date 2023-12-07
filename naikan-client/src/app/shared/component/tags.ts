@@ -1,28 +1,28 @@
 import {ChangeDetectionStrategy, Component, Input, ViewEncapsulation} from '@angular/core';
-import {NgFor, NgIf} from '@angular/common';
+
 import {TagModule} from 'primeng/tag';
 import {TooltipModule} from 'primeng/tooltip';
 
 @Component({
   selector: 'naikan-tags',
   template: `
-    <span *ngIf="tags" tooltipPosition="top" pTooltip="{{ tags }}">
-      <ng-container *ngFor="let tag of tags.slice(0, tagsToShow());">
-        <p-tag severity="info" value="{{tag}}" class="mr-1"></p-tag>
-      </ng-container>
-      <ng-container *ngIf="tags.length > tagsToShow()">
-        <p-tag severity="info" value="..." class="mr-1"></p-tag>
-      </ng-container>
-    </span>
-  `,
+    @if (tags) {
+      <span tooltipPosition="top" pTooltip="{{ tags }}">
+        @for (tag of tags.slice(0, tagsToShow()); track tag) {
+          <p-tag severity="info" value="{{tag}}" class="mr-1"></p-tag>
+        }
+        @if (tags.length > tagsToShow()) {
+          <p-tag severity="info" value="..." class="mr-1"></p-tag>
+        }
+      </span>
+    }
+    `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   standalone: true,
   imports: [
-    NgIf,
     TooltipModule,
-    NgFor,
-    TagModule,
+    TagModule
   ],
 })
 export class NaikanTags {

@@ -1,19 +1,18 @@
 <naikan-breadcrumb
     [items]="[{label: 'Overviews', routerLink: '/overview'}, {label: 'Deployments', routerLink: '/overview/deployments'}]">
 </naikan-breadcrumb>
-
 <div class="card card-border-none">
   <h5> {{page?.totalElements}} Deployments
-    <ng-container *ngIf="chart.data?.datasets">
+    @if (chart.data?.datasets) {
       <i class="pi pi-angle-down" (click)="decreaseTopN()"></i>
       <i class="pi pi-angle-up" (click)="increaseTopN()"></i>
-    </ng-container>
+    }
   </h5>
-
-  <div id="overview-chart-wrapper" *ngIf="chart.data?.datasets">
-    <p-chart type="bar" [data]="chart.data" [options]="chart.options"></p-chart>
-  </div>
-
+  @if (chart.data?.datasets) {
+    <div id="overview-chart-wrapper">
+      <p-chart type="bar" [data]="chart.data" [options]="chart.options"></p-chart>
+    </div>
+  }
   <p-table
       #tableOverviewGroups
       dataKey="bom.id"
@@ -31,7 +30,6 @@
       sortMode="multiple"
       [rowsPerPageOptions]="[10, 25, 50, 100, 200]"
       [totalRecords]="page?.totalElements">
-
     <ng-template pTemplate="caption">
       <div class="flex justify-content-between flex-wrap mb-2 mt-4">
         <div class="flex align-items-center justify-content-center">
@@ -45,7 +43,6 @@
         </div>
       </div>
     </ng-template>
-
     <ng-template pTemplate="header">
       <tr>
         <th pSortableColumn="bom.project.name">
@@ -109,9 +106,9 @@
         <td>
           <span tooltipPosition="top"
                 pTooltip="{{ overviewGroup.bom.project?.description }}">
-              <a routerLink="/projects/{{overviewGroup.bom.id}}">
-                {{ overviewGroup.bom.project?.name }}
-              </a>
+            <a routerLink="/projects/{{overviewGroup.bom.id}}">
+              {{ overviewGroup.bom.project?.name }}
+            </a>
             <naikan-project-url-icon [url]="overviewGroup.bom.project?.url">
             </naikan-project-url-icon>
           </span>

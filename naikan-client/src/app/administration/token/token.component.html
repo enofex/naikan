@@ -1,14 +1,10 @@
 <naikan-breadcrumb
     [items]="[{label: 'Administration', routerLink: '/administration'}, {label: 'Tokens', routerLink: '/administration/tokens'}]">
 </naikan-breadcrumb>
-
 <p-confirmDialog [style]="{width: '40vw'}"></p-confirmDialog>
-
 <p-messages [enableService]="true" [closable]="true"></p-messages>
-
 <div class="card card-border-none">
   <h5> {{page?.totalElements}} Tokens</h5>
-
   <p-table class="w-full"
            dataKey="id"
            #tableAdministrationTokens
@@ -25,7 +21,6 @@
            sortField="created"
            [rowsPerPageOptions]="[10, 25, 50, 100, 200]"
            [totalRecords]="page?.totalElements">
-
     <ng-template pTemplate="caption">
       <div class="flex justify-content-between flex-wrap mb-2 mt-4">
         <div class="flex align-items-center justify-content-center">
@@ -41,7 +36,6 @@
         </div>
       </div>
     </ng-template>
-
     <ng-template pTemplate="header">
       <tr>
         <th pSortableColumn="token">Token
@@ -62,13 +56,14 @@
         <th class="w-4rem"></th>
       </tr>
     </ng-template>
-
     <ng-template pTemplate="body" let-item>
       <tr>
         <td>
           {{ item.token }}
-          <p-tag class="ml-1" severity="success" value="new"
-                 *ngIf="isDateWithinFiveMinutes(item.created)"></p-tag>
+          @if (isDateWithinFiveMinutes(item.created)) {
+            <p-tag class="ml-1" severity="success" value="new"
+            ></p-tag>
+          }
         </td>
         <td>{{ item.created | naikanDateTime }}</td>
         <td>
@@ -88,8 +83,6 @@
     </ng-template>
   </p-table>
 </div>
-
-
 <p-dialog [(visible)]="newTokenDialog" [style]="{ width: '450px' }" header="Add new token"
           [modal]="true" styleClass="p-fluid">
   <ng-template pTemplate="content">
@@ -99,7 +92,6 @@
                 cols="20"></textarea>
     </div>
   </ng-template>
-
   <ng-template pTemplate="footer">
     <button pButton label="Cancel" icon="pi pi-times" class="p-button-outlined"
             (click)="hide()"></button>

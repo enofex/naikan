@@ -9,27 +9,24 @@
             [disabled]="user.favorites?.length === 0"
             (onChange)="toggleFavorites($event)">
         </p-inputSwitch>
-
         <span class="ml-4">{{page?.totalElements}} Projects </span>
         <span class="text-500 text-sm ml-2">showing {{favorites ? 'favorites' : 'all'}}</span>
       </h5>
     </div>
-
-    <div class="flex align-items-center justify-content-center" *ngIf="page?.content?.length > 0">
-      <button pButton
-              label="Export"
-              class="p-button-outlined"
-              icon="pi pi-download"
-              (click)="exportAll()">
-      </button>
-    </div>
+    @if (page?.content?.length > 0) {
+      <div class="flex align-items-center justify-content-center">
+        <button pButton
+                label="Export"
+                class="p-button-outlined"
+                icon="pi pi-download"
+                (click)="exportAll()">
+        </button>
+      </div>
+    }
   </div>
-
   <p-tabMenu [model]="viewMenuItems"
              [activeItem]="viewMenuActiveItem"
              (activeItemChange)="onViewMenuActiveItemChange($event)"></p-tabMenu>
-
-
   <p-table
       #projectsTable
       dataKey="id"
@@ -45,19 +42,15 @@
       [rows]="25"
       [totalRecords]="page?.totalElements"
       styleClass="p-datatable-striped">
-
     <ng-template pTemplate="caption">
-
       <naikan-project-filter
           [table]="projectsTable"
           #naikanProjectFilter>
       </naikan-project-filter>
-
       <div class="flex flex-column md:flex-row justify-content-between mb-4 mt-4">
         <div class="flex">
           <naikan-search #search [table]="projectsTable"></naikan-search>
         </div>
-
         <div class="flex align-items-center">
           <button pButton
                   label="Clear"
@@ -65,23 +58,20 @@
                   icon="pi pi-filter-slash"
                   (click)="projectsTable.reset(); search.clear()">
           </button>
-
           <button pButton
                   type="button"
                   class="mr-3" (click)="naikanProjectFilter.show()"
                   icon="pi {{
-                    ProjectFilters.hasFilters(projectsTable.filters)
-                    ? 'pi-filter-fill'
-                    : 'pi-filter'
-                  }}">
+            ProjectFilters.hasFilters(projectsTable.filters)
+            ? 'pi-filter-fill'
+            : 'pi-filter'
+            }}">
           </button>
-
           <p-dropdown [options]="sortOptions"
                       placeholder="Sort by name"
                       (onChange)="onSortChange($event)"
                       styleClass="md:w-15rem mb-2 md:mb-0">
           </p-dropdown>
-
           <i class="pi pi-sort-alt ml-3 text-primary"
              [ngClass]="sortOrder === -1 ? 'pi-sort-amount-down-alt': 'pi-sort-amount-up-alt'"
              style="font-size: 1.4rem;"
@@ -90,29 +80,25 @@
         </div>
       </div>
     </ng-template>
-
-
     <ng-template pTemplate="header">
-      <ng-container *ngIf="viewMenuActiveItem.id === '1'">
+      @if (viewMenuActiveItem.id === '1') {
         <tr class="naikan-project-view-condensed-header"></tr>
-      </ng-container>
-
-      <ng-container *ngIf="viewMenuActiveItem.id === '2'">
+      }
+      @if (viewMenuActiveItem.id === '2') {
         <div class="naikan-project-view-insights-header" [bomOverviews]="page?.content" [table]="projectsTable"></div>
-      </ng-container>
+      }
     </ng-template>
-
     <ng-template let-bom pTemplate="body">
-      <div *ngIf="viewMenuActiveItem.id === '0'"
-           class="naikan-project-view-overview-body"
-           [bomOverview]="bom"></div>
-
-      <tr *ngIf="viewMenuActiveItem.id === '1'"
+      @if (viewMenuActiveItem.id === '0') {
+        <div
+            class="naikan-project-view-overview-body"
+            [bomOverview]="bom"></div>
+      }
+      @if (viewMenuActiveItem.id === '1') {
+        <tr
           class="naikan-project-view-condensed-body"
           [bomOverview]="bom"></tr>
+      }
     </ng-template>
-
   </p-table>
-
-
 </div>

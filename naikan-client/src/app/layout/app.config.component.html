@@ -11,8 +11,10 @@
             class="p-button-text p-button-rounded w-2rem h-2rem mr-2"
             [disabled]="scale === scales[0]"></button>
     <div class="flex gap-2 align-items-center">
-      <i class="pi pi-circle-fill text-300" *ngFor="let s of scales"
-         [ngClass]="{'text-primary-500': s === scale}"></i>
+      @for (s of scales;track s) {
+        <i class="pi pi-circle-fill text-300"
+           [ngClass]="{'text-primary-500': s === scale}"></i>
+      }
     </div>
     <button icon="pi pi-plus" type="button" pButton (click)="incrementScale()"
             class="p-button-text p-button-rounded w-2rem h-2rem ml-2"

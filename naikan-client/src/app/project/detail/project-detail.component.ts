@@ -25,7 +25,7 @@ import {TableLazyLoadEvent, TableModule} from 'primeng/table';
 import {TooltipModule} from 'primeng/tooltip';
 import {ButtonModule} from 'primeng/button';
 import {TabViewModule} from 'primeng/tabview';
-import {DatePipe, NgFor, NgIf} from '@angular/common';
+import {DatePipe} from '@angular/common';
 import {SplitButtonModule} from "primeng/splitbutton";
 import {BomDetail} from "../bom-detail";
 import {CountsPerItems} from "../counts-per-items";
@@ -45,7 +45,7 @@ export interface LatestVersionPerEnvironment {
 @Component({
   templateUrl: './project-detail.component.html',
   standalone: true,
-  imports: [NgIf, Breadcrumb, TabViewModule, Url, ProjectVersion, NaikanTags, ButtonModule, TooltipModule, TableModule, SharedModule, Search, NgFor, TagModule, ChartModule, DatePipe, DateTimePipe, SplitButtonModule, CommitId, MessagesModule],
+  imports: [Breadcrumb, TabViewModule, Url, ProjectVersion, NaikanTags, ButtonModule, TooltipModule, TableModule, SharedModule, Search, TagModule, ChartModule, DatePipe, DateTimePipe, SplitButtonModule, CommitId, MessagesModule],
   providers: [ProjectService, DatePipe],
   styleUrls: ['.//project-detail.component.scss']
 })

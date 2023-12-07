@@ -10,7 +10,7 @@ import {TooltipModule} from 'primeng/tooltip';
 import {ButtonModule} from 'primeng/button';
 import {TableLazyLoadEvent, TableModule} from 'primeng/table';
 import {ChartModule} from 'primeng/chart';
-import {DatePipe, NgIf} from '@angular/common';
+import {DatePipe} from '@angular/common';
 import {OverviewGroup} from "../overview";
 
 @Component({
@@ -18,7 +18,6 @@ import {OverviewGroup} from "../overview";
   standalone: true,
   imports: [
     Breadcrumb,
-    NgIf,
     ChartModule,
     TableModule,
     SharedModule,
@@ -27,7 +26,7 @@ import {OverviewGroup} from "../overview";
     TooltipModule,
     Url,
     TagModule,
-    OverviewProjectTable,
+    OverviewProjectTable
   ],
   providers: [EnvironmentService, DatePipe]
 })

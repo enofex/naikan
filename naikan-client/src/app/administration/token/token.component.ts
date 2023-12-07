@@ -2,7 +2,7 @@ import {Component, ViewChild} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {Table, TableLazyLoadEvent, TableModule} from "primeng/table";
 import {MenuModule} from "primeng/menu";
-import {DatePipe, NgIf} from "@angular/common";
+import {DatePipe} from "@angular/common";
 import {ConfirmationService, MessageService} from "primeng/api";
 import {Token} from "./token";
 import {AdministrationTokenService} from "./token.service";
@@ -19,7 +19,7 @@ import {finalize} from "rxjs";
 @Component({
   templateUrl: './token.component.html',
   standalone: true,
-  imports: [RouterLink, TableModule, MenuModule, DatePipe, Url, Breadcrumb, DateTimePipe, NgIf, ButtonModule, Search, ConfirmDialogModule, MessagesModule, TagModule, DialogModule, FormsModule, InputTextareaModule],
+  imports: [RouterLink, TableModule, MenuModule, DatePipe, Url, Breadcrumb, DateTimePipe, ButtonModule, Search, ConfirmDialogModule, MessagesModule, TagModule, DialogModule, FormsModule, InputTextareaModule],
   providers: [ConfirmationService, MessageService, AdministrationTokenService, DatePipe]
 })
 export class TokenComponent {

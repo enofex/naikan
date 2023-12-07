@@ -8,12 +8,12 @@ import {
   ProjectViewCondensedHeader
 } from './project-view-condensed.component';
 import {ProjectViewInsightsHeader} from "./project-view-insights.component";
-import {AsyncPipe, DatePipe, NgClass, NgIf} from '@angular/common';
+import {AsyncPipe, DatePipe, NgClass} from '@angular/common';
 import {DropdownChangeEvent, DropdownModule} from 'primeng/dropdown';
 import {ButtonModule} from 'primeng/button';
 import {ProjectFilter} from './project-filter';
 import {Table, TableLazyLoadEvent, TableModule} from 'primeng/table';
-import {InputSwitchModule, InputSwitchOnChangeEvent} from "primeng/inputswitch";
+import {InputSwitchModule, InputSwitchChangeEvent} from "primeng/inputswitch";
 import {FormsModule} from "@angular/forms";
 import {TooltipModule} from "primeng/tooltip";
 import {ProjectFilters} from "./project-filters";
@@ -24,7 +24,7 @@ import {BomOverview} from "./bom-overview";
 @Component({
   templateUrl: './project.component.html',
   standalone: true,
-  imports: [TableModule, SharedModule, ProjectFilter, Search, ButtonModule, InputSwitchModule, DropdownModule, NgClass, ProjectViewOverviewBody, ProjectViewCondensedBody, ProjectViewCondensedHeader, InputSwitchModule, FormsModule, TooltipModule, AsyncPipe, BlockUIModule, NgIf, TabMenuModule, ProjectViewInsightsHeader],
+  imports: [TableModule, SharedModule, ProjectFilter, Search, ButtonModule, InputSwitchModule, DropdownModule, NgClass, ProjectViewOverviewBody, ProjectViewCondensedBody, ProjectViewCondensedHeader, InputSwitchModule, FormsModule, TooltipModule, AsyncPipe, BlockUIModule, TabMenuModule, ProjectViewInsightsHeader],
   providers: [ProjectService, DatePipe]
 })
 export class ProjectComponent implements OnInit {
@@ -70,7 +70,7 @@ export class ProjectComponent implements OnInit {
     this.sortOrder = this.sortOrder === -1 ? 1 : -1;
   }
 
-  toggleFavorites(event: InputSwitchOnChangeEvent): void {
+  toggleFavorites(event: InputSwitchChangeEvent): void {
     localStorage.setItem(this.FAVORITES_KEY, String(event.checked));
     this.loadProjects(this.projectsTable.createLazyLoadMetadata());
   }

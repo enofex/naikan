@@ -1,37 +1,35 @@
 import {ChangeDetectionStrategy, Component, Input, ViewEncapsulation} from '@angular/core';
-import {NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault} from '@angular/common';
+
 import {TooltipModule} from 'primeng/tooltip';
 import {Urls} from "../util/urls";
 
 @Component({
   selector: 'naikan-project-url-icon',
   template: `
-    <ng-container *ngIf="url" [ngSwitch]="Urls.isValid(url) && 'isValid'">
-      <ng-container *ngSwitchCase="'isValid'">
-        <a href="{{ url }}" target="_blank">
-          <i class="pi pi-external-link text-gray-400 ml-3 text-sm"
-             tooltipPosition="top"
-             pTooltip="{{ url }}">
-          </i>
-        </a>
-      </ng-container>
-      <ng-container *ngSwitchDefault>
-        <i class="pi pi-external-link text-gray-400 ml-3 text-sm"
-           tooltipPosition="top"
-           pTooltip="{{ url }}">
-        </i>
-      </ng-container>
-    </ng-container>
+      @if (url) {
+          @switch (Urls.isValid(url) && 'isValid') {
+              @case ('isValid') {
+                  <a href="{{ url }}" target="_blank">
+                      <i class="pi pi-external-link text-gray-400 ml-3 text-sm"
+                         tooltipPosition="top"
+                         pTooltip="{{ url }}">
+                      </i>
+                  </a>
+              }
+              @default {
+                  <i class="pi pi-external-link text-gray-400 ml-3 text-sm"
+                     tooltipPosition="top"
+                     pTooltip="{{ url }}">
+                  </i>
+              }
+          }
+      }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   standalone: true,
   imports: [
-    NgIf,
-    NgSwitch,
-    NgSwitchCase,
-    TooltipModule,
-    NgSwitchDefault,
+    TooltipModule
   ],
 })
 export class ProjectUrlIcon {

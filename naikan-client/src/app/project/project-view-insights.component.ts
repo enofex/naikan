@@ -6,7 +6,7 @@ import {
   ViewChild,
   ViewEncapsulation
 } from '@angular/core';
-import {NgClass, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault} from '@angular/common';
+import {NgClass} from '@angular/common';
 import {TooltipModule} from 'primeng/tooltip';
 import {
   Charts,
@@ -76,10 +76,7 @@ export abstract class AbstractInsightChart implements OnDestroy {
   encapsulation: ViewEncapsulation.None,
   standalone: true,
   imports: [
-    NgSwitch,
-    NgSwitchCase,
-    NgSwitchDefault,
-    ChartModule,
+    ChartModule
   ],
 })
 export class SummarizationChart extends AbstractInsightChart {
@@ -163,10 +160,7 @@ export class SummarizationChart extends AbstractInsightChart {
   encapsulation: ViewEncapsulation.None,
   standalone: true,
   imports: [
-    NgSwitch,
-    NgSwitchCase,
-    NgSwitchDefault,
-    ChartModule,
+    ChartModule
   ],
 })
 export class TechnologiesChart extends AbstractInsightChart {
@@ -238,10 +232,7 @@ export class TechnologiesChart extends AbstractInsightChart {
   encapsulation: ViewEncapsulation.None,
   standalone: true,
   imports: [
-    NgSwitch,
-    NgSwitchCase,
-    NgSwitchDefault,
-    ChartModule,
+    ChartModule
   ],
 })
 export class DeploymentsChart extends AbstractInsightChart {
@@ -330,10 +321,7 @@ export class DeploymentsChart extends AbstractInsightChart {
   encapsulation: ViewEncapsulation.None,
   standalone: true,
   imports: [
-    NgSwitch,
-    NgSwitchCase,
-    NgSwitchDefault,
-    ChartModule,
+    ChartModule
   ],
 })
 export class DeploymentsSummarizationChart extends AbstractInsightChart {
@@ -410,10 +398,7 @@ export class DeploymentsSummarizationChart extends AbstractInsightChart {
   encapsulation: ViewEncapsulation.None,
   standalone: true,
   imports: [
-    NgSwitch,
-    NgSwitchCase,
-    NgSwitchDefault,
-    ChartModule,
+    ChartModule
   ],
 })
 export class CommitsChart extends AbstractInsightChart {
@@ -502,10 +487,7 @@ export class CommitsChart extends AbstractInsightChart {
   encapsulation: ViewEncapsulation.None,
   standalone: true,
   imports: [
-    NgSwitch,
-    NgSwitchCase,
-    NgSwitchDefault,
-    ChartModule,
+    ChartModule
   ],
 })
 export class CommitsSummarizationChart extends AbstractInsightChart {
@@ -624,7 +606,6 @@ export class CommitsSummarizationChart extends AbstractInsightChart {
     TooltipModule,
     RouterLink,
     ProjectUrlIcon,
-    NgIf,
     NaikanTags,
     ProjectVersion,
     ChartModule,
@@ -638,7 +619,7 @@ export class CommitsSummarizationChart extends AbstractInsightChart {
     CommitsChart,
     CommitsSummarizationChart,
     SummarizationChart,
-    TechnologiesChart,
+    TechnologiesChart
   ],
 })
 export class ProjectViewInsightsHeader extends AbstractProjectView {

@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, Input, ViewEncapsulation} from '@angular/core';
-import {NgIf} from '@angular/common';
+
 import {Project} from '../model/bom';
 import {TagModule} from 'primeng/tag';
 import {TooltipModule} from 'primeng/tooltip';
@@ -7,22 +7,23 @@ import {TooltipModule} from 'primeng/tooltip';
 @Component({
   selector: 'naikan-project-version',
   template: `
-    <p-tag *ngIf="project && project.version"
-           severity="success"
-           class="{{ class }}"
-           value="{{ project?.version }}"
-           tooltipPosition="top"
-           [escape]="false"
-           pTooltip="{{ tooltip() }}">
-    </p-tag>
-  `,
+    @if (project && project.version) {
+      <p-tag
+        severity="success"
+        class="{{ class }}"
+        value="{{ project?.version }}"
+        tooltipPosition="top"
+        [escape]="false"
+        pTooltip="{{ tooltip() }}">
+      </p-tag>
+    }
+    `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   standalone: true,
   imports: [
-    NgIf,
     TagModule,
-    TooltipModule,
+    TooltipModule
   ],
 })
 export class ProjectVersion {

@@ -2,7 +2,7 @@ import {Component, ViewChild} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {Table, TableLazyLoadEvent, TableModule} from "primeng/table";
 import {MenuModule} from "primeng/menu";
-import {NgIf} from "@angular/common";
+
 import {ConfirmationService, MessageService} from "primeng/api";
 import {Breadcrumb, Page, Search, Url} from "@naikan/shared";
 import {ButtonModule} from "primeng/button";
@@ -21,7 +21,7 @@ interface Authority {
 @Component({
   templateUrl: './user.component.html',
   standalone: true,
-  imports: [RouterLink, TableModule, MenuModule, Url, Breadcrumb, NgIf, ButtonModule, Search, ConfirmDialogModule, MessagesModule, FormsModule, MultiSelectModule],
+  imports: [RouterLink, TableModule, MenuModule, Url, Breadcrumb, ButtonModule, Search, ConfirmDialogModule, MessagesModule, FormsModule, MultiSelectModule],
   providers: [ConfirmationService, MessageService, AdministrationUserService]
 })
 export class UserComponent {

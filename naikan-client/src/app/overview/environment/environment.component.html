@@ -1,18 +1,17 @@
 <naikan-breadcrumb
     [items]="[{label: 'Overviews', routerLink: '/overview'}, {label: 'Environments', routerLink: '/overview/environments'}]"></naikan-breadcrumb>
-
 <div class="card card-border-none">
   <h5> {{page?.totalElements}} Environments
-    <ng-container *ngIf="chart.data?.datasets">
+    @if (chart.data?.datasets) {
       <i class="pi pi-angle-down" (click)="decreaseTopN()"></i>
       <i class="pi pi-angle-up" (click)="increaseTopN()"></i>
-    </ng-container>
+    }
   </h5>
-
-  <div id="overview-chart-wrapper" *ngIf="chart.data?.datasets">
-    <p-chart type="bar" [data]="chart.data" [options]="chart.options"></p-chart>
-  </div>
-
+  @if (chart.data?.datasets) {
+    <div id="overview-chart-wrapper">
+      <p-chart type="bar" [data]="chart.data" [options]="chart.options"></p-chart>
+    </div>
+  }
   <p-table
       #tableOverviewGroups
       dataKey="uuid"
@@ -31,7 +30,6 @@
       [expandedRowKeys]="expandedRows"
       [rowsPerPageOptions]="[10, 25, 50, 100, 200]"
       [totalRecords]="page?.totalElements">
-
     <ng-template pTemplate="caption">
       <div class="flex justify-content-between flex-wrap mb-2 mt-4">
         <div class="flex align-items-center justify-content-center">
@@ -43,13 +41,14 @@
         </div>
       </div>
     </ng-template>
-
     <ng-template pTemplate="header">
       <tr>
         <th class="w-3rem">
-          <p-button *ngIf="page?.totalElements > 0" styleClass="p-button-primary"
-                    icon="{{expandedRows && Object.keys(expandedRows).length ? 'pi pi-angle-down' : 'pi pi-angle-right'}}"
-                    (click)="expand()" tooltipPosition="top" pTooltip="Toggle rows"></p-button>
+          @if (page?.totalElements > 0) {
+            <p-button styleClass="p-button-primary"
+                      icon="{{expandedRows && Object.keys(expandedRows).length ? 'pi pi-angle-down' : 'pi pi-angle-right'}}"
+                      (click)="expand()" tooltipPosition="top" pTooltip="Toggle rows"></p-button>
+          }
         </th>
         <th pSortableColumn="group.name">Name
           <p-columnFilter field="group.name" display="menu"
@@ -62,7 +61,6 @@
         </th>
       </tr>
     </ng-template>
-
     <ng-template pTemplate="body" let-overviewGroup let-expanded="expanded">
       <tr>
         <td>
@@ -78,7 +76,6 @@
         </td>
       </tr>
     </ng-template>
-
     <ng-template pTemplate="rowexpansion" let-group>
       <tr>
         <td></td>
