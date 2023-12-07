@@ -1,5 +1,5 @@
 FROM eclipse-temurin:21-alpine AS builder
-ARG JAR_FILE=naikan-web/target/naikan-web.jar
+ARG JAR_FILE=naikan-server/target/naikan-server.jar
 COPY ${JAR_FILE} application.jar
 RUN java -Djarmode=layertools -jar application.jar extract
 

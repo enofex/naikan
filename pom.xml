@@ -35,8 +35,7 @@
 
   <modules>
     <module>naikan-client</module>
-    <module>naikan-core</module>
-    <module>naikan-web</module>
+    <module>naikan-server</module>
   </modules>
 
   <dependencyManagement>
@@ -48,12 +47,7 @@
       </dependency>
       <dependency>
         <groupId>com.enofex</groupId>
-        <artifactId>naikan-core</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.enofex</groupId>
-        <artifactId>naikan-web</artifactId>
+        <artifactId>naikan-server</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
