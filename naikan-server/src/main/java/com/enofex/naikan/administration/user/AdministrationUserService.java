@@ -30,6 +30,6 @@ class AdministrationUserService {
   }
 
   public long deleteById(UserId id) {
-    return this.administrationUserRepository.deleteId(id);
+    return this.administrationUserRepository.deleteById(id);
   }
 }

@@ -44,7 +44,7 @@ class AdministrationUserRepository extends AbstractRepository {
     return template().save(user, collectionName());
   }
 
-  public long deleteId(UserId id) {
+  public long deleteById(UserId id) {
     Query query = new Query(where("id").is(id.id()));
     return template()
         .remove(query, User.class, collectionName())

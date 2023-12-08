@@ -53,7 +53,7 @@ class AdministrationUserRepositoryIT {
     assertEquals(1, this.repository.findAll(Filterable.emptySearch(),
         Pageable.ofSize(10)).getTotalElements());
 
-    this.repository.deleteId(UserId.of(savedUser.id()));
+    this.repository.deleteById(UserId.of(savedUser.id()));
 
     assertEquals(0, this.repository.findAll(Filterable.emptySearch(),
         Pageable.ofSize(10)).getTotalElements());
