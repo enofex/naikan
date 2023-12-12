@@ -30,6 +30,8 @@ import {SplitButtonModule} from "primeng/splitbutton";
 import {BomDetail} from "../bom-detail";
 import {CountsPerItems} from "../counts-per-items";
 import {MessagesModule} from "primeng/messages";
+import {ProgressSpinnerModule} from "primeng/progressspinner";
+import {ProgressBarModule} from "primeng/progressbar";
 
 export interface GroupedDeploymentsPerVersion {
   version: string;
@@ -45,7 +47,7 @@ export interface LatestVersionPerEnvironment {
 @Component({
   templateUrl: './project-detail.component.html',
   standalone: true,
-  imports: [Breadcrumb, TabViewModule, Url, ProjectVersion, NaikanTags, ButtonModule, TooltipModule, TableModule, SharedModule, Search, TagModule, ChartModule, DatePipe, DateTimePipe, SplitButtonModule, CommitId, MessagesModule],
+  imports: [Breadcrumb, TabViewModule, Url, ProjectVersion, NaikanTags, ButtonModule, TooltipModule, TableModule, SharedModule, Search, TagModule, ChartModule, DatePipe, DateTimePipe, SplitButtonModule, CommitId, MessagesModule, ProgressSpinnerModule, ProgressBarModule],
   providers: [ProjectService, DatePipe],
   styleUrls: ['.//project-detail.component.scss']
 })
@@ -54,6 +56,7 @@ export class ProjectDetailComponent implements OnInit {
   protected readonly Object = Object;
 
   id: string;
+  activeView: number;
   bomDetail: BomDetail;
   deploymentsPage: Page<Deployment>;
   deploymentsPerMonth: CountsPerItems;
