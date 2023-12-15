@@ -148,13 +148,13 @@
                                     (click)="copyToClipboard(maven)">
                           </p-button>
                         </div>
-                        <pre class="surface-50 p-3 mt-3" #maven>
-                          &lt;dependency&gt;
-                          &lt;groupId&gt;{{ bomDetail.project?.groupId }}&lt;/groupId&gt;
-                          &lt;artifactId&gt;{{ bomDetail.project?.artifactId }}&lt;/artifactId&gt;
-                          &lt;version&gt;{{ bomDetail.project?.version }}&lt;/versiond&gt;
-                          &lt;/dependency&gt;
-                        </pre>
+<pre class="surface-50 p-3 mt-3" #maven>
+  &lt;dependency&gt;
+    &lt;groupId&gt;{{ bomDetail.project?.groupId }}&lt;/groupId&gt;
+    &lt;artifactId&gt;{{ bomDetail.project?.artifactId }}&lt;/artifactId&gt;
+    &lt;version&gt;{{ bomDetail.project?.version }}&lt;/versiond&gt;
+  &lt;/dependency&gt;
+</pre>
                       </div>
                     </p-tabPanel>
                     <p-tabPanel header="Gradle" class="line-height-3 m-0">
@@ -168,10 +168,9 @@
                                     (click)="copyToClipboard(gradle)">
                           </p-button>
                         </div>
-                        <pre class="surface-50 p-3 mt-3" #gradle>
-                          implementation "{{ bomDetail.project?.groupId }}
-                          :{{ bomDetail.project?.artifactId }}:{{ bomDetail.project?.version }}"
-                        </pre>
+<pre class="surface-50 p-3 mt-3" #gradle>
+  implementation "{{ bomDetail.project?.groupId }}:{{ bomDetail.project?.artifactId }}:{{ bomDetail.project?.version }}"
+</pre>
                       </div>
                     </p-tabPanel>
                   </p-tabView>
