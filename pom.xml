@@ -30,7 +30,7 @@
     <swagger.annotations.version>2.2.19</swagger.annotations.version>
     <maven-enforcer-plugin.version>3.4.1</maven-enforcer-plugin.version>
     <exec-maven-plugin.version>3.1.1</exec-maven-plugin.version>
-    <naikan-maven-plugin.version>0.2.6</naikan-maven-plugin.version>
+    <naikan-maven-plugin.version>0.2.7</naikan-maven-plugin.version>
   </properties>
 
   <modules>
