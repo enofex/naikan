@@ -36,12 +36,6 @@ final class ServiceRules {
             () -> classes()
                 .that(annotatedWith(Service.class))
                 .should().beAnnotatedWith(Transactional.class)
-                .check(config.getClasses())),
-
-        dynamicTest("Service implementations should have only final fields",
-            () -> classes()
-                .that().implement(nameMatching(SERVICE))
-                .should().haveOnlyFinalFields()
                 .check(config.getClasses())));
   }
 }

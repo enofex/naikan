@@ -44,7 +44,7 @@ final class ControllerRules {
 
         dynamicTest("Controllers should be package private",
             () -> classes()
-                .that().haveNameMatching(CONTROLLER)
+                .that().areAnnotatedWith(RestController.class)
                 .should().bePackagePrivate()
                 .check(config.getClasses())),
 
@@ -53,6 +53,13 @@ final class ControllerRules {
                 .that(areDefinedInAController())
                 .and(mappingMethods())
                 .should(ArchConditions.bePublic())
+                .check(config.getClasses())),
+
+        dynamicTest(
+            "Controller classes should not depend on each other",
+            () -> classes()
+                .that().areAnnotatedWith(RestController.class)
+                .should().dependOnClassesThat().haveNameMatching(CONTROLLER)
                 .check(config.getClasses()))
     );
   }
