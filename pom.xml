@@ -27,7 +27,7 @@
     <apache.poi.version>5.2.5</apache.poi.version>
     <archunit.version>1.2.1</archunit.version>
     <springdoc-openapi-starter-webmvc-ui.version>2.3.0</springdoc-openapi-starter-webmvc-ui.version>
-    <swagger.annotations.version>2.2.19</swagger.annotations.version>
+    <swagger.annotations.version>2.2.20</swagger.annotations.version>
     <maven-enforcer-plugin.version>3.4.1</maven-enforcer-plugin.version>
     <exec-maven-plugin.version>3.1.1</exec-maven-plugin.version>
     <naikan-maven-plugin.version>0.2.7</naikan-maven-plugin.version>
