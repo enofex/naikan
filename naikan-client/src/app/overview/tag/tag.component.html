@@ -3,8 +3,8 @@
 <div class="card card-border-none">
   <h5> {{page?.totalElements}} Tags
     @if (chart.data?.datasets) {
-      <i class="pi pi-angle-down" (click)="decreaseTopN()"></i>
-      <i class="pi pi-angle-up" (click)="increaseTopN()"></i>
+      <i class="pi pi-angle-down" (click)="decreaseTopN()" pTooltip="Decrease Top Tags"></i>
+      <i class="pi pi-angle-up" (click)="increaseTopN()" pTooltip="Increase Top Tags"></i>
     }
   </h5>
   @if (chart.data?.datasets) {
