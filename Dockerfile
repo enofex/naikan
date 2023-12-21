@@ -23,4 +23,4 @@ COPY --from=builder application/ ./
 
 EXPOSE 8080
 
-ENTRYPOINT exec java $JAVA_OPTS $JAVA_TOOL_OPTIONS -Djava.security.egd=file:/dev/./urandom org.springframework.boot.loader.JarLauncher
+ENTRYPOINT exec java $JAVA_OPTS $JAVA_TOOL_OPTIONS -Djava.security.egd=file:/dev/./urandom org.springframework.boot.loader.launch.JarLauncher
