@@ -6810,7 +6810,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 }
 
 .p-inline-message.p-inline-message-success {
-  background: #C8E6C9;
+  background: #ECF4EE;
   border: solid transparent;
   border-width: 1px;
   color: #1B5E20;
@@ -6832,7 +6832,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 }
 
 .p-inline-message.p-inline-message-error {
-  background: #FFCDD2;
+  background: #fff1f2;
   border: solid transparent;
   border-width: 1px;
   color: #B71C1C;
@@ -6898,7 +6898,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 }
 
 .p-message.p-message-success {
-  background: #C8E6C9;
+  background: #ECF4EE;
   border: solid transparent;
   border-width: 0 0 0 0;
   color: #1B5E20;
@@ -6928,7 +6928,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 }
 
 .p-message.p-message-error {
-  background: #FFCDD2;
+  background: #fff1f2;
   border: solid transparent;
   border-width: 0 0 0 0;
   color: #B71C1C;
@@ -7022,7 +7022,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 }
 
 .p-toast .p-toast-message.p-toast-message-success {
-  background: #C8E6C9;
+  background: #ECF4EE;
   border: solid transparent;
   border-width: 0 0 0 0;
   color: #1B5E20;
@@ -7046,7 +7046,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 }
 
 .p-toast .p-toast-message.p-toast-message-error {
-  background: #FFCDD2;
+  background: #fff1f2;
   border: solid transparent;
   border-width: 0 0 0 0;
   color: #B71C1C;
