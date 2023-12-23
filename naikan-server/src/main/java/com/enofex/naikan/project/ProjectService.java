@@ -1,11 +1,11 @@
 package com.enofex.naikan.project;
 
-import com.enofex.naikan.web.Filterable;
 import com.enofex.naikan.model.Bom;
 import com.enofex.naikan.model.Branch;
 import com.enofex.naikan.model.Commit;
 import com.enofex.naikan.model.Deployment;
 import com.enofex.naikan.model.RepositoryTag;
+import com.enofex.naikan.web.Filterable;
 import com.enofex.naikan.web.ProjectId;
 import java.time.YearMonth;
 import java.util.Comparator;
@@ -144,7 +144,7 @@ class ProjectService {
       List<String> bomMonths = function.apply(bomOverview).names();
       List<Long> bomCounts = function.apply(bomOverview).counts();
 
-      for (int i = 0; i < bomMonths.size(); i++) {
+      for (int i = 0, size = bomMonths.size(); i < size; i++) {
         String month = bomMonths.get(i);
         Long count = bomCounts.get(i);
         monthCounts.put(month, monthCounts.getOrDefault(month, 0L) + count);

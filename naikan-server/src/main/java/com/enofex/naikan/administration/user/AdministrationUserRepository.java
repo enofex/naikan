@@ -39,7 +39,6 @@ class AdministrationUserRepository extends AbstractRepository {
     return template().findOne(query, User.class, collectionName());
   }
 
-
   public User save(User user) {
     return template().save(user, collectionName());
   }
