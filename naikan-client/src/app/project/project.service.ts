@@ -10,7 +10,7 @@ import {
   RepositoryTag,
   User
 } from "@naikan/shared";
-import {finalize, Observable} from 'rxjs';
+import {finalize, Observable, Subscription} from 'rxjs';
 import {FilterMatchMode} from 'primeng/api';
 import {ProjectFilter} from "./project-filter";
 import {FilterMetadata} from "primeng/api/filtermetadata";
@@ -23,6 +23,9 @@ import {
 import {BomDetail} from "./bom-detail";
 import {BomOverview} from "./bom-overview";
 import {CountsPerItems} from "./counts-per-items";
+import {
+  SuppressExtractedTextChunksWebpackPlugin
+} from "@angular-devkit/build-angular/src/tools/webpack/plugins";
 
 const endpoint = 'projects';
 
@@ -133,7 +136,7 @@ export class ProjectService {
     .subscribe(res => saveAs(res, `${id}.json`, {autoBom: false}));
   }
 
-  exportAll(event?: TableLazyLoadEvent) {
+  exportAll(event?: TableLazyLoadEvent): Subscription {
     return this.http.get(`/${endpoint}?xlsx`, {
       responseType: 'blob',
       params: Pageables.toAllPagesRequestHttpParams(event)

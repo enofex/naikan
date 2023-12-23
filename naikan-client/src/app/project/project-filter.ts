@@ -115,7 +115,6 @@ export class ProjectFilterMultiSelect {
   @Input() tag: boolean;
 }
 
-
 @Component({
   selector: 'naikan-project-filter-date',
   template: `

@@ -63,7 +63,7 @@ export class AppTopBarComponent implements OnInit {
       },
       {
         label: 'Logout',
-        command: () => {
+        command: (): void => {
           this.logout();
         }
       }

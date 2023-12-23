@@ -67,7 +67,7 @@ export class Pageables {
     return new HttpParams();
   }
 
-  private static rule(rule: FilterMetadata, params: HttpParams, key: string) {
+  private static rule(rule: FilterMetadata, params: HttpParams, key: string): HttpParams {
     if (rule.value) {
       let value = rule.value;
 

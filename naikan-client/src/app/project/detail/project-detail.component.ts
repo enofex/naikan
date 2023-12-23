@@ -71,13 +71,13 @@ export class ProjectDetailComponent implements OnInit {
   exportItems: MenuItem[] = [
     {
       label: 'XLSX',
-      command: () => {
+      command: (): void => {
         this.exportXlsx();
       }
     },
     {
       label: 'JSON',
-      command: () => {
+      command: (): void => {
         this.exportJson();
       }
     }
