@@ -48,7 +48,7 @@ export class ProjectComponent {
         this.administrationProjectService
         .deleteById(id)
         .subscribe({
-          next: () => {
+          next: (): void => {
             this.loadProjects(this.tableAdministrationProjects.createLazyLoadMetadata());
 
             this.messageService.add({
@@ -56,7 +56,7 @@ export class ProjectComponent {
               detail: 'Project deleted'
             })
           },
-          error: () => {
+          error: (): void => {
             this.messageService.add({
               severity: 'error',
               detail: 'An error occurred in deleting the project.'

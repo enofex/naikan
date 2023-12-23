@@ -60,7 +60,7 @@ export class TokenComponent {
         this.administrationTokenService
         .deleteTokenById(id)
         .subscribe({
-          next: () => {
+          next: (): void => {
             this.loadTokens(this.tableAdministrationTokens.createLazyLoadMetadata());
 
             this.messageService.add({
@@ -68,7 +68,7 @@ export class TokenComponent {
               detail: 'Token deleted'
             })
           },
-          error: () => {
+          error: (): void => {
             this.messageService.add({
               severity: 'error',
               detail: 'An error occurred in deleting the token.'
@@ -79,7 +79,7 @@ export class TokenComponent {
     });
   }
 
-  openNewTokenDialog() {
+  openNewTokenDialog(): void {
     this.newTokenDialog = true;
   }
 
@@ -92,7 +92,7 @@ export class TokenComponent {
     .saveToken(this.description)
     .pipe(finalize(() => this.hide()))
     .subscribe({
-      next: () => {
+      next: (): void => {
         this.messageService.clear();
         this.loadTokens(this.tableAdministrationTokens.createLazyLoadMetadata());
 
@@ -101,7 +101,7 @@ export class TokenComponent {
           detail: 'Token added'
         })
       },
-      error: () => {
+      error: (): void => {
         this.messageService.add({
           severity: 'error',
           detail: 'An error occurred in adding a new token.'

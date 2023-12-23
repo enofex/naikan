@@ -57,7 +57,7 @@ export class UserComponent {
         this.administrationUserService
         .deleteUserById(id)
         .subscribe({
-          next: () => {
+          next: (): void => {
             this.loadUsers(this.tableAdministrationUsers.createLazyLoadMetadata());
 
             this.messageService.add({
@@ -65,7 +65,7 @@ export class UserComponent {
               detail: 'User deleted'
             })
           },
-          error: () => {
+          error: (): void => {
             this.messageService.add({
               severity: 'error',
               detail: 'An error occurred in deleting the user.'
