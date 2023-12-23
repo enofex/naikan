@@ -23,9 +23,6 @@ import {
 import {BomDetail} from "./bom-detail";
 import {BomOverview} from "./bom-overview";
 import {CountsPerItems} from "./counts-per-items";
-import {
-  SuppressExtractedTextChunksWebpackPlugin
-} from "@angular-devkit/build-angular/src/tools/webpack/plugins";
 
 const endpoint = 'projects';
 
