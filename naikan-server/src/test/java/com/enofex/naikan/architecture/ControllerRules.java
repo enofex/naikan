@@ -3,6 +3,7 @@ package com.enofex.naikan.architecture;
 import static com.tngtech.archunit.core.domain.properties.HasName.Predicates.nameMatching;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.all;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
+import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.fields;
 import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 
 import com.enofex.naikan.test.architecture.ArchUnitTestsConfig;
@@ -60,6 +61,14 @@ final class ControllerRules {
             () -> classes()
                 .that().areAnnotatedWith(RestController.class)
                 .should().dependOnClassesThat().haveNameMatching(CONTROLLER)
+                .check(config.getClasses())),
+
+        dynamicTest(
+            "Controller path constants should be package-private",
+            () -> fields()
+                .that().areDeclaredInClassesThat().areAnnotatedWith(RestController.class)
+                .and().areFinal().and().areStatic().and().haveNameMatching(".*PATH")
+                .should().bePackagePrivate()
                 .check(config.getClasses()))
     );
   }

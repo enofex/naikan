@@ -1,13 +1,14 @@
 package com.enofex.naikan.overview.environment;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.enofex.naikan.web.Filterable;
 import com.enofex.naikan.model.deserializer.DeserializerFactory;
 import com.enofex.naikan.overview.OverviewGroup;
 import com.enofex.naikan.overview.OverviewTopGroups;
 import com.enofex.naikan.test.IntegrationTest;
 import com.enofex.naikan.test.model.Boms;
+import com.enofex.naikan.web.Filterable;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +52,9 @@ class OverviewEnvironmentRepositoryIT {
   void shouldFindTopEnvironments() {
     OverviewTopGroups groups = this.repository.findTopEnvironments(5);
 
-    assertEquals(2, groups.counts().size());
-    assertEquals(2, groups.names().size());
+    assertAll(
+        () -> assertEquals(2, groups.counts().size()),
+        () -> assertEquals(2, groups.names().size())
+    );
   }
 }
