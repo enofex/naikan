@@ -1,6 +1,6 @@
 {
   "name": "naikan",
-  "version": "1.0.2",
+  "version": "1.0.3-SNAPSHOT",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --configuration development",
