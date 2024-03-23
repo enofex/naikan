@@ -1,0 +1,7 @@
+.md-grid {
+  max-width: 65rem;
+}
+
+td code {
+  white-space: nowrap;
+}
