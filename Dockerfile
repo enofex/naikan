@@ -1,11 +1,11 @@
 # Build stage
-FROM eclipse-temurin:21-alpine AS builder
+FROM eclipse-temurin:22-alpine AS builder
 ARG JAR_FILE=naikan-server/target/naikan-server.jar
 COPY ${JAR_FILE} application.jar
 RUN java -Djarmode=layertools -jar application.jar extract
 
 # Runtime stage
-FROM eclipse-temurin:21-alpine
+FROM eclipse-temurin:22-alpine
 ARG USER=naikan
 
 RUN set -eux; \
