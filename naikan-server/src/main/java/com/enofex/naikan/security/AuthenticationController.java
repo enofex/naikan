@@ -23,7 +23,7 @@ class AuthenticationController {
   }
 
   @GetMapping("/api/authenticated")
-  public ResponseEntity authenticated() {
+  public ResponseEntity<UserResource> authenticated() {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
     if (authentication != null) {
