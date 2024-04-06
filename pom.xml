@@ -22,7 +22,7 @@
   <properties>
     <java.version>22</java.version>
 
-    <naikan-model.version>0.2.7</naikan-model.version>
+    <naikan-model.version>1.0.0</naikan-model.version>
     <naikan-test.version>1.0.0</naikan-test.version>
     <apache.poi.version>5.2.5</apache.poi.version>
     <archunit.version>1.2.1</archunit.version>
