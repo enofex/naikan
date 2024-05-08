@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional
 class AdministrationUserService {
 
   private final AdministrationUserRepository administrationUserRepository;
@@ -25,10 +24,12 @@ class AdministrationUserService {
     return this.administrationUserRepository.findById(id);
   }
 
+  @Transactional
   public User save(User user) {
     return this.administrationUserRepository.save(user);
   }
 
+  @Transactional
   public long deleteById(UserId id) {
     return this.administrationUserRepository.deleteById(id);
   }

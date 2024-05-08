@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional
 class AdministrationTokenService {
 
   private final AdministrationTokenRepository administrationTokenRepository;
@@ -26,6 +25,7 @@ class AdministrationTokenService {
     return this.administrationTokenRepository.findAll(filterable, pageable);
   }
 
+  @Transactional
   public Token save(String description) {
     String name = SecurityContextHolder.getContext().getAuthentication().getName();
 
@@ -39,6 +39,7 @@ class AdministrationTokenService {
     return this.administrationTokenRepository.save(token);
   }
 
+  @Transactional
   public long deleteById(TokenId id) {
     return this.administrationTokenRepository.deleteById(id);
   }

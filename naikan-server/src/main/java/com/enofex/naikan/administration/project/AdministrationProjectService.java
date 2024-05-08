@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional
 class AdministrationProjectService {
 
   private final AdministrationProjectRepository administrationProjectRepository;
@@ -21,6 +20,7 @@ class AdministrationProjectService {
     return this.administrationProjectRepository.findAll(filterable, pageable);
   }
 
+  @Transactional
   public long deleteById(ProjectId id) {
     return this.administrationProjectRepository.deleteById(id);
   }

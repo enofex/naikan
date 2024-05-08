@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional
 class ApiProjectService {
 
   private final ApiProjectRepository apiProjectRepository;
@@ -16,20 +15,20 @@ class ApiProjectService {
     this.apiProjectRepository = apiProjectRepository;
   }
 
-  @Transactional(readOnly = true)
   public Optional<Bom> findById(ProjectId id) {
     return this.apiProjectRepository.findById(id);
   }
 
+  @Transactional
   public Bom updateById(ProjectId id, Bom bom) {
     return this.apiProjectRepository.updateById(id, bom);
   }
 
+  @Transactional
   public Bom upsertByProjectName(Bom bom) {
     return this.apiProjectRepository.upsertByProjectName(bom);
   }
-
-  @Transactional(readOnly = true)
+  @Transactional
   public boolean existsByProjectName(String projectName) {
     return this.apiProjectRepository.existsByProjectName(projectName);
   }
