@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "17.3.7",
-    "@angular/cli": "17.3.8",
+    "@angular/cli": "18.0.0",
     "@angular/compiler-cli": "17.3.2",
     "sync-pom-version-to-package": "1.6.1",
     "typescript": "5.4.5"
