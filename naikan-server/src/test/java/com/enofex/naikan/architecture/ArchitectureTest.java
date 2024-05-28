@@ -1,5 +1,6 @@
 package com.enofex.naikan.architecture;
 
+import static com.enofex.naikan.architecture.ConfigurationRules.configurationRules;
 import static com.enofex.naikan.architecture.ControllerRules.controllerRules;
 import static com.enofex.naikan.architecture.RepositoryRules.repositoryRules;
 import static com.enofex.naikan.architecture.ServiceRules.serviceRules;
@@ -20,6 +21,7 @@ class ArchitectureTest {
     config.addDynamicTests(controllerRules(config));
     config.addDynamicTests(serviceRules(config));
     config.addDynamicTests(repositoryRules(config));
+    config.addDynamicTests(configurationRules(config));
 
     return config.getDynamicTests();
   }
