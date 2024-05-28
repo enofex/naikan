@@ -1,10 +1,15 @@
 package com.enofex.naikan.architecture;
 
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
+import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.fields;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noFields;
 import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 
 import com.enofex.naikan.test.architecture.ArchUnitTestsConfig;
+import com.tngtech.archunit.core.domain.JavaField;
+import com.tngtech.archunit.lang.ArchCondition;
+import com.tngtech.archunit.lang.ConditionEvents;
+import com.tngtech.archunit.lang.SimpleConditionEvent;
 import java.util.List;
 import org.junit.jupiter.api.DynamicTest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,8 +48,23 @@ final class SpringRules {
                 .or().areAnnotatedWith(Controller.class)
                 .or().areAnnotatedWith(RestController.class)
                 .or().areAnnotatedWith(Repository.class)
-                .should().haveOnlyFinalFields()
-                .check(config.getClasses()))
+                .should().haveOnlyFinalFields().check(config.getClasses())),
+
+        dynamicTest("Classes should use constructor injection",
+            () -> fields().should(notBeAutowired()).check(config.getClasses()))
     );
+  }
+
+  private static ArchCondition<JavaField> notBeAutowired() {
+    return new ArchCondition<>("not be autowired") {
+
+      @Override
+      public void check(JavaField javaField, ConditionEvents events) {
+        if (javaField.isAnnotatedWith(Autowired.class)) {
+          events.add(SimpleConditionEvent.violated(javaField,
+              javaField.getOwner().getSimpleName() + "." + javaField.getName()));
+        }
+      }
+    };
   }
 }
