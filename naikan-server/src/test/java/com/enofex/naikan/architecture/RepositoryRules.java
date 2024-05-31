@@ -20,7 +20,7 @@ final class RepositoryRules {
 
   static List<DynamicTest> repositoryRules(ArchUnitTestsConfig config) {
     return List.of(
-        dynamicTest("Service implementations should be named *Repository",
+        dynamicTest("Repository implementations should be named *Repository",
             () -> classes()
                 .that().implement(nameMatching(REPOSITORY))
                 .should().haveNameMatching(".*Repository")
