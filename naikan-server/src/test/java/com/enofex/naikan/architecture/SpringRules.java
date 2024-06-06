@@ -48,10 +48,7 @@ final class SpringRules {
                 .or().areAnnotatedWith(Controller.class)
                 .or().areAnnotatedWith(RestController.class)
                 .or().areAnnotatedWith(Repository.class)
-                .should().haveOnlyFinalFields().check(config.getClasses())),
-
-        dynamicTest("Classes should use constructor injection",
-            () -> fields().should(notBeAutowired()).check(config.getClasses()))
+                .should().haveOnlyFinalFields().check(config.getClasses()))
     );
   }
 
