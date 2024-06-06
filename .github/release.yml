@@ -9,6 +9,7 @@ changelog:
     - title: 🎉 New Features 
       labels:
         - enhancement
+        - feature
   
     - title: 🐞 Bug Fixes
       labels:
