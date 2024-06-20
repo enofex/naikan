@@ -17,23 +17,32 @@ class ArchitectureTest {
                 .shouldBeAnnotatedWithRestController()
                 .namesShouldEndWithController()
                 .shouldNotDependOnOtherControllers()
+                .shouldNotDependOnOtherControllers()
                 .shouldBePackagePrivate())
             .services(services -> services
                 .shouldBeAnnotatedWithService()
+                .shouldNotDependOnControllers()
                 .namesShouldEndWithService())
             .repositories(repositories -> repositories
+                .shouldNotDependOnServices()
                 .namesShouldEndWithRepository()))
         .test(test -> test
             .junit5(junit5 -> junit5
                 .classesShouldNotBeAnnotatedWithDisabled()
-                .methodsShouldNotBeAnnotatedWithDisabled()))
+                .classesShouldBePackagePrivate(".*Test")
+                .classesShouldBePackagePrivate(".*IT")
+                .methodsShouldNotBeAnnotatedWithDisabled()
+                .methodsShouldMatch("should.*")
+                .methodsShouldBePackagePrivate()))
         .java(java -> java
             .imports(imports -> imports
                 .shouldHaveNoCycles()
                 .shouldNotImport("..shaded..")
+                .shouldNotImport("..internal..")
                 .shouldNotImport("..lombok..")
                 .shouldNotImport("org.junit.."))
             .naming(naming -> naming
+                .constantsShouldFollowConvention()
                 .classesShouldNotMatch(".*Impl")
                 .interfacesShouldNotHavePrefixI()))
         .build();
