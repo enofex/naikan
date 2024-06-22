@@ -42,7 +42,7 @@ class ArchitectureTest {
                 .shouldNotImport("..lombok..")
                 .shouldNotImport("org.junit.."))
             .naming(naming -> naming
-                .constantsShouldFollowConvention()
+                .constantsShouldFollowConventions()
                 .classesShouldNotMatch(".*Impl")
                 .interfacesShouldNotHavePrefixI()))
         .build();
