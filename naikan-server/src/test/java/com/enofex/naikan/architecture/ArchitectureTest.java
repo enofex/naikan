@@ -17,7 +17,6 @@ class ArchitectureTest {
                 .shouldBeAnnotatedWithRestController()
                 .namesShouldEndWithController()
                 .shouldNotDependOnOtherControllers()
-                .shouldNotDependOnOtherControllers()
                 .shouldBePackagePrivate())
             .services(services -> services
                 .shouldBeAnnotatedWithService()
