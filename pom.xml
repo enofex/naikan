@@ -30,7 +30,7 @@
     <springdoc-openapi-starter-webmvc-ui.version>2.6.0</springdoc-openapi-starter-webmvc-ui.version>
     <swagger.annotations.version>2.2.22</swagger.annotations.version>
     <maven-enforcer-plugin.version>3.5.0</maven-enforcer-plugin.version>
-    <exec-maven-plugin.version>3.3.0</exec-maven-plugin.version>
+    <exec-maven-plugin.version>3.4.0</exec-maven-plugin.version>
     <naikan-maven-plugin.version>1.0.3</naikan-maven-plugin.version>
   </properties>
 
