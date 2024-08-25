@@ -22,7 +22,8 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022",
-    "useDefineForClassFields": false,
+    "useDefineForClassFields": true,
+    "isolatedModules": true,
     "lib": [
       "ES2022",
       "dom"

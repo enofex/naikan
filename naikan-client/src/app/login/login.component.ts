@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {LoginService} from './login.service';
 import {LayoutService} from "@naikan/layout/app.layout.service";
@@ -17,12 +17,9 @@ import {MessageService} from "primeng/api";
   imports: [FormsModule, ReactiveFormsModule, InputTextModule, PasswordModule, ButtonModule, JsonPipe, MessagesModule],
   providers: [MessageService, LoginService]
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
-  loginForm = this.fb.group({
-    'username': [null, Validators.required],
-    'password': [null, Validators.required]
-  });
+  loginForm: FormGroup;
 
   constructor(
       public readonly layoutService: LayoutService,
@@ -31,6 +28,13 @@ export class LoginComponent {
       private readonly router: Router,
       private readonly fb: FormBuilder
   ) {
+  }
+
+  ngOnInit(): void {
+    this.loginForm = this.fb.group({
+      'username': [null, Validators.required],
+      'password': [null, Validators.required]
+    });
   }
 
   onLogin(): void {
