@@ -5,7 +5,7 @@
 </p>
 <p align="center">
     <img src="https://github.com/enofex/naikan/actions/workflows/maven.yml/badge.svg" />
-    <img src="https://img.shields.io/badge/Java%20Version-22-orange" />
+    <img src="https://img.shields.io/badge/Java%20Version-23-orange" />
     <img height="20" src="https://sonarcloud.io/images/project_badges/sonarcloud-orange.svg">
 </p>
 
