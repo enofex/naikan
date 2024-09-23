@@ -1,6 +1,7 @@
 package com.enofex.naikan.architecture;
 
 import com.enofex.taikai.Taikai;
+import org.apache.commons.logging.Log;
 import org.junit.jupiter.api.Test;
 
 class ArchitectureTest {
@@ -27,13 +28,20 @@ class ArchitectureTest {
                 .namesShouldEndWithRepository()))
         .test(test -> test
             .junit5(junit5 -> junit5
+                .methodsShouldContainAssertionsOrVerifications()
                 .classesShouldNotBeAnnotatedWithDisabled()
                 .classesShouldBePackagePrivate(".*Test")
                 .classesShouldBePackagePrivate(".*IT")
                 .methodsShouldNotBeAnnotatedWithDisabled()
                 .methodsShouldMatch("should.*")
                 .methodsShouldBePackagePrivate()))
+        .logging(logging -> logging
+            .loggersShouldFollowConventions(Log.class, "logger"))
         .java(java -> java
+            .utilityClassesShouldBeFinalAndHavePrivateConstructor()
+            .noUsageOfSystemOutOrErr()
+            .serialVersionUIDFieldsShouldBeStaticFinalLong()
+            .classesShouldResideInPackage("com.enofex.naikan..")
             .imports(imports -> imports
                 .shouldHaveNoCycles()
                 .shouldNotImport("..shaded..")
@@ -41,7 +49,6 @@ class ArchitectureTest {
                 .shouldNotImport("..lombok..")
                 .shouldNotImport("org.junit.."))
             .naming(naming -> naming
-                .packagesShouldMatch("com.enofex.naikan..")
                 .constantsShouldFollowConventions()
                 .classesShouldNotMatch(".*Impl")
                 .interfacesShouldNotHavePrefixI()))
