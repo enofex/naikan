@@ -1,6 +1,10 @@
 package com.enofex.naikan.architecture;
 
+import static com.tngtech.archunit.core.domain.JavaModifier.FINAL;
+import static com.tngtech.archunit.core.domain.JavaModifier.STATIC;
+
 import com.enofex.taikai.Taikai;
+import java.util.List;
 import org.apache.commons.logging.Log;
 import org.junit.jupiter.api.Test;
 
@@ -39,8 +43,10 @@ class ArchitectureTest {
             .loggersShouldFollowConventions(Log.class, "logger"))
         .java(java -> java
             .utilityClassesShouldBeFinalAndHavePrivateConstructor()
+            .classesShouldImplementHashCodeAndEquals()
             .noUsageOfSystemOutOrErr()
             .serialVersionUIDFieldsShouldBeStaticFinalLong()
+            .fieldsShouldHaveModifiers("^[A-Z][A-Z0-9_]*$", List.of(STATIC, FINAL))
             .classesShouldResideInPackage("com.enofex.naikan..")
             .imports(imports -> imports
                 .shouldHaveNoCycles()
@@ -49,6 +55,7 @@ class ArchitectureTest {
                 .shouldNotImport("..lombok..")
                 .shouldNotImport("org.junit.."))
             .naming(naming -> naming
+                .packagesShouldMatchDefault()
                 .constantsShouldFollowConventions()
                 .classesShouldNotMatch(".*Impl")
                 .interfacesShouldNotHavePrefixI()))
