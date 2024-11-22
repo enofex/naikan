@@ -5,8 +5,7 @@ import {map} from 'rxjs/operators';
 import {Principal} from "./principal.service";
 
 @Directive({
-  selector: '[naikanHasAnyAuthority]',
-  standalone: true
+  selector: '[naikanHasAnyAuthority]'
 })
 export class AuthorityDirective implements OnInit, OnDestroy {
 

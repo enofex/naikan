@@ -4,8 +4,8 @@ import {TooltipModule} from 'primeng/tooltip';
 import {Urls} from "../util/urls";
 
 @Component({
-  selector: 'naikan-project-url-icon',
-  template: `
+    selector: 'naikan-project-url-icon',
+    template: `
       @if (url) {
           @switch (Urls.isValid(url) && 'isValid') {
               @case ('isValid') {
@@ -25,12 +25,11 @@ import {Urls} from "../util/urls";
           }
       }
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  standalone: true,
-  imports: [
-    TooltipModule
-  ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    imports: [
+        TooltipModule
+    ]
 })
 export class ProjectUrlIcon {
   @Input() url: string;

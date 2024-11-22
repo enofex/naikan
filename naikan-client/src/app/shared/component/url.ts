@@ -15,8 +15,7 @@ import {Urls} from '../util/urls';
       }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  standalone: true
+  encapsulation: ViewEncapsulation.None
 })
 export class Url {
   protected readonly Urls = Urls;

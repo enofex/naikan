@@ -4,17 +4,16 @@ import {TagModule} from 'primeng/tag';
 import {TooltipModule} from 'primeng/tooltip';
 
 @Component({
-  selector: 'naikan-commit-id',
-  template: `
+    selector: 'naikan-commit-id',
+    template: `
     <span class="text-mono" tooltipPosition="top" pTooltip="{{ commitId }}">{{shortened()}}</span>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  standalone: true,
-  imports: [
-    TagModule,
-    TooltipModule
-  ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    imports: [
+        TagModule,
+        TooltipModule
+    ]
 })
 export class CommitId {
   @Input() commitId: string

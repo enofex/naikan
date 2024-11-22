@@ -3,7 +3,9 @@ import {Principal, User} from "@naikan/shared";
 import {ProjectService} from "./project.service";
 import {BomOverview} from "./bom-overview";
 
-@Component({template: ''})
+@Component({
+    template: ''
+})
 export abstract class AbstractProjectView implements OnInit {
 
   user: User;

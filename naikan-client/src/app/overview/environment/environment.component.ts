@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {EnvironmentService} from './environment.service';
-import {Breadcrumb, Search, Url} from "@naikan/shared";
+import {Breadcrumb, Search} from "@naikan/shared";
 import {SharedModule} from 'primeng/api';
 import {LayoutService} from '@naikan/layout/app.layout.service';
 import {AbstractOverviewComponent} from "../abstract-overview.component";
@@ -14,21 +14,19 @@ import {DatePipe} from '@angular/common';
 import {OverviewGroup} from "../overview";
 
 @Component({
-  templateUrl: './environment.component.html',
-  standalone: true,
-  imports: [
-    Breadcrumb,
-    ChartModule,
-    TableModule,
-    SharedModule,
-    Search,
-    ButtonModule,
-    TooltipModule,
-    Url,
-    TagModule,
-    OverviewProjectTable
-  ],
-  providers: [EnvironmentService, DatePipe]
+    templateUrl: './environment.component.html',
+    imports: [
+        Breadcrumb,
+        ChartModule,
+        TableModule,
+        SharedModule,
+        Search,
+        ButtonModule,
+        TooltipModule,
+        TagModule,
+        OverviewProjectTable
+    ],
+    providers: [EnvironmentService, DatePipe]
 })
 export class EnvironmentComponent extends AbstractOverviewComponent<OverviewGroup> {
 

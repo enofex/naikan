@@ -8,11 +8,10 @@ import {Chart} from "chart.js";
 
 
 @Component({
-  selector: 'naikan-root',
-  templateUrl: './app.component.html',
-  standalone: true,
-  imports: [RouterOutlet, BlockUIModule, AsyncPipe],
-  providers: [BlockUIService]
+    selector: 'naikan-root',
+    templateUrl: './app.component.html',
+    imports: [RouterOutlet, BlockUIModule, AsyncPipe],
+    providers: [BlockUIService]
 })
 export class AppComponent {
 

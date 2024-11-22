@@ -1,3 +1,5 @@
+@use "variables";
+
 @media (max-width: 991px) {
   .blocked-scroll {
     overflow: hidden;
@@ -36,7 +38,7 @@
 
       .layout-mask {
         display: block;
-        animation: fadein $transitionDuration;
+        animation: fadein variables.$transitionDuration;
       }
     }
   }

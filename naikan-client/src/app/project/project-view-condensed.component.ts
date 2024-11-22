@@ -3,11 +3,9 @@ import {NgClass} from '@angular/common';
 import {TooltipModule} from 'primeng/tooltip';
 import {
   DateTimePipe,
-  NaikanTags,
   Principal,
   ProjectUrlIcon,
-  ProjectVersion,
-  Url,
+  ProjectVersion
 } from "@naikan/shared";
 import {ChartModule} from "primeng/chart";
 import {RouterLink} from "@angular/router";
@@ -31,15 +29,14 @@ import {SharedModule} from "primeng/api";
     <th>Version</th>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  standalone: true,
+  encapsulation: ViewEncapsulation.None
 })
 export class ProjectViewCondensedHeader {
 }
 
 @Component({
-  selector: '.naikan-project-view-condensed-body',
-  template: `
+    selector: '.naikan-project-view-condensed-body',
+    template: `
     <td>
       <i (click)="onFavoriteToggle(bomOverview.id)" [ngClass]="isFavorite(bomOverview.id) 
             ? 'pi pi-star-fill mt-2 mr-2 text-primary-400'
@@ -120,21 +117,18 @@ export class ProjectViewCondensedHeader {
       <naikan-project-version [project]="bomOverview.project" class="ml-1"></naikan-project-version>
     </td>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  standalone: true,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
   imports: [
     TooltipModule,
-    RouterLink,
-    ProjectUrlIcon,
-    NaikanTags,
-    ProjectVersion,
     ChartModule,
     DateTimePipe,
     NgClass,
-    Url,
-    SharedModule
-  ],
+    SharedModule,
+    ProjectVersion,
+    ProjectUrlIcon,
+    RouterLink
+  ]
 })
 export class ProjectViewCondensedBody extends AbstractProjectView implements OnInit {
 

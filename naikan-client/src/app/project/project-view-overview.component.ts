@@ -25,8 +25,8 @@ import {SharedModule} from "primeng/api";
 import {TagModule} from "primeng/tag";
 
 @Component({
-  selector: '.naikan-project-view-overview-body',
-  template: `
+    selector: '.naikan-project-view-overview-body',
+    template: `
       <div class="card mb-2">
           <div class="flex flex-column justify-content-between sm:flex-row sm:align-items-start p-4">
               <div class="flex flex-column align-items-start">
@@ -255,22 +255,21 @@ import {TagModule} from "primeng/tag";
           }
       </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  standalone: true,
-  imports: [
-    TooltipModule,
-    RouterLink,
-    ProjectUrlIcon,
-    NaikanTags,
-    ProjectVersion,
-    ChartModule,
-    DateTimePipe,
-    NgClass,
-    SharedModule,
-    TagModule,
-    CommitId
-  ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    imports: [
+        TooltipModule,
+        RouterLink,
+        ProjectUrlIcon,
+        NaikanTags,
+        ProjectVersion,
+        ChartModule,
+        DateTimePipe,
+        NgClass,
+        SharedModule,
+        TagModule,
+        CommitId
+    ]
 })
 export class ProjectViewOverviewBody extends AbstractProjectView implements OnInit, OnDestroy {
 

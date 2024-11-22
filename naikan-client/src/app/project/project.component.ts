@@ -4,11 +4,10 @@ import {ProjectService} from './project.service';
 import {Page, Principal, Search, User} from "@naikan/shared";
 import {ProjectViewOverviewBody} from './project-view-overview.component';
 import {
-  ProjectViewCondensedBody,
-  ProjectViewCondensedHeader
+  ProjectViewCondensedBody
 } from './project-view-condensed.component';
 import {ProjectViewInsightsHeader} from "./project-view-insights.component";
-import {AsyncPipe, DatePipe, NgClass} from '@angular/common';
+import {DatePipe, NgClass} from '@angular/common';
 import {DropdownChangeEvent, DropdownModule} from 'primeng/dropdown';
 import {ButtonModule} from 'primeng/button';
 import {ProjectFilter} from './project-filter';
@@ -22,10 +21,9 @@ import {TabMenuModule} from "primeng/tabmenu";
 import {BomOverview} from "./bom-overview";
 
 @Component({
-  templateUrl: './project.component.html',
-  standalone: true,
-  imports: [TableModule, SharedModule, ProjectFilter, Search, ButtonModule, InputSwitchModule, DropdownModule, NgClass, ProjectViewOverviewBody, ProjectViewCondensedBody, ProjectViewCondensedHeader, InputSwitchModule, FormsModule, TooltipModule, AsyncPipe, BlockUIModule, TabMenuModule, ProjectViewInsightsHeader],
-  providers: [ProjectService, DatePipe]
+    templateUrl: './project.component.html',
+    imports: [TableModule, SharedModule, ProjectFilter, Search, ButtonModule, InputSwitchModule, DropdownModule, NgClass, ProjectViewOverviewBody, ProjectViewCondensedBody, InputSwitchModule, FormsModule, TooltipModule, BlockUIModule, TabMenuModule, ProjectViewInsightsHeader],
+    providers: [ProjectService, DatePipe]
 })
 export class ProjectComponent implements OnInit {
 

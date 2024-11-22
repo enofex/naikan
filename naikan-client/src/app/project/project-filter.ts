@@ -52,8 +52,7 @@ export interface ProjectFilter {
     </div>
   `,
   styleUrls: ['./project-filter.scss'],
-  encapsulation: ViewEncapsulation.None,
-  standalone: true,
+  encapsulation: ViewEncapsulation.None
 })
 export class ProjectFilterHeader {
   @Input() header: string;
@@ -61,8 +60,8 @@ export class ProjectFilterHeader {
 }
 
 @Component({
-  selector: 'naikan-project-filter-multiselect',
-  template: `
+    selector: 'naikan-project-filter-multiselect',
+    template: `
     <div class="field grid">
       <div class="col-12">
         <p-columnFilter field="{{field}}"
@@ -97,16 +96,15 @@ export class ProjectFilterHeader {
       </div>
     </div>
     `,
-  styleUrls: ['./project-filter.scss'],
-  encapsulation: ViewEncapsulation.None,
-  standalone: true,
-  imports: [
-    TableModule,
-    TooltipModule,
-    MultiSelectModule,
-    FormsModule,
-    TagModule
-  ],
+    styleUrls: ['./project-filter.scss'],
+    encapsulation: ViewEncapsulation.None,
+    imports: [
+        TableModule,
+        TooltipModule,
+        MultiSelectModule,
+        FormsModule,
+        TagModule
+    ]
 })
 export class ProjectFilterMultiSelect {
   @Input() label: string;
@@ -116,8 +114,8 @@ export class ProjectFilterMultiSelect {
 }
 
 @Component({
-  selector: 'naikan-project-filter-date',
-  template: `
+    selector: 'naikan-project-filter-date',
+    template: `
     <div class="field grid">
       <div class="col-12">
         <p-columnFilter type="date"
@@ -134,15 +132,14 @@ export class ProjectFilterMultiSelect {
       </div>
     </div>
   `,
-  styleUrls: ['./project-filter.scss'],
-  encapsulation: ViewEncapsulation.None,
-  standalone: true,
-  imports: [
-    TableModule,
-    TooltipModule,
-    CalendarModule,
-    FormsModule,
-  ],
+    styleUrls: ['./project-filter.scss'],
+    encapsulation: ViewEncapsulation.None,
+    imports: [
+        TableModule,
+        TooltipModule,
+        CalendarModule,
+        FormsModule,
+    ]
 })
 export class ProjectFilterDate {
   @Input() label: string;
@@ -151,8 +148,8 @@ export class ProjectFilterDate {
 
 
 @Component({
-  selector: 'naikan-project-filter-numeric',
-  template: `
+    selector: 'naikan-project-filter-numeric',
+    template: `
     <div class="field grid">
       <div class="col-12">
         <p-columnFilter type="numeric"
@@ -173,15 +170,14 @@ export class ProjectFilterDate {
       </div>
     </div>
   `,
-  styleUrls: ['./project-filter.scss'],
-  encapsulation: ViewEncapsulation.None,
-  standalone: true,
-  imports: [
-    TableModule,
-    TooltipModule,
-    InputNumberModule,
-    FormsModule,
-  ],
+    styleUrls: ['./project-filter.scss'],
+    encapsulation: ViewEncapsulation.None,
+    imports: [
+        TableModule,
+        TooltipModule,
+        InputNumberModule,
+        FormsModule,
+    ]
 })
 export class ProjectFilterNumeric {
   @Input() label: string;
@@ -217,8 +213,8 @@ export class ProjectFilterNumeric {
 
 
 @Component({
-  selector: 'naikan-project-filter',
-  template: `
+    selector: 'naikan-project-filter',
+    template: `
     <p-sidebar [(visible)]="filterVisible"
                position="right"
                styleClass="w-8 md:w-6 lg:w-4"
@@ -484,19 +480,18 @@ export class ProjectFilterNumeric {
       </ng-template>
     </p-sidebar>
   `,
-  styleUrls: ['./project-filter.scss'],
-  encapsulation: ViewEncapsulation.None,
-  standalone: true,
-  imports: [
-    SidebarModule,
-    TableModule,
-    ButtonModule,
-    AccordionModule,
-    ProjectFilterHeader,
-    ProjectFilterDate,
-    ProjectFilterMultiSelect,
-    ProjectFilterNumeric
-  ],
+    styleUrls: ['./project-filter.scss'],
+    encapsulation: ViewEncapsulation.None,
+    imports: [
+        SidebarModule,
+        TableModule,
+        ButtonModule,
+        AccordionModule,
+        ProjectFilterHeader,
+        ProjectFilterDate,
+        ProjectFilterMultiSelect,
+        ProjectFilterNumeric
+    ]
 })
 export class ProjectFilter {
   @Input() table!: Table;

@@ -12,8 +12,8 @@ import {InputTextModule} from "primeng/inputtext";
 import {Table} from "primeng/table";
 
 @Component({
-  selector: 'naikan-search',
-  template: `
+    selector: 'naikan-search',
+    template: `
     <div class="p-inputgroup md:w-30rem">
       <button type="button" pButton icon="pi pi-search" styleClass="p-button-success"></button>
 
@@ -25,14 +25,13 @@ import {Table} from "primeng/table";
               (click)="clear()"></button>
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  standalone: true,
-  imports: [
-    ButtonModule,
-    InputTextModule,
-    TooltipModule,
-  ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    imports: [
+        ButtonModule,
+        InputTextModule,
+        TooltipModule,
+    ]
 })
 export class Search {
   @ViewChild('searchInput') searchInput: ElementRef<HTMLInputElement>;

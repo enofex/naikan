@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {TagService} from './tag.service';
-import {Breadcrumb, Search, Url} from "@naikan/shared";
+import {Breadcrumb, Search} from "@naikan/shared";
 import {SharedModule} from 'primeng/api';
 import {LayoutService} from '@naikan/layout/app.layout.service';
 import {AbstractOverviewComponent} from "../abstract-overview.component";
@@ -14,21 +14,19 @@ import {DatePipe} from '@angular/common';
 import {OverviewGroup} from "../overview";
 
 @Component({
-  templateUrl: './tag.component.html',
-  standalone: true,
-  imports: [
-    Breadcrumb,
-    ChartModule,
-    TableModule,
-    SharedModule,
-    Search,
-    ButtonModule,
-    TooltipModule,
-    Url,
-    TagModule,
-    OverviewProjectTable
-  ],
-  providers: [TagService, DatePipe]
+    templateUrl: './tag.component.html',
+    imports: [
+        Breadcrumb,
+        ChartModule,
+        TableModule,
+        SharedModule,
+        Search,
+        ButtonModule,
+        TooltipModule,
+        TagModule,
+        OverviewProjectTable
+    ],
+    providers: [TagService, DatePipe]
 })
 export class TagComponent extends AbstractOverviewComponent<OverviewGroup> {
 

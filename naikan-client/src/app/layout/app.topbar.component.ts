@@ -10,10 +10,9 @@ import {RouterLink} from '@angular/router';
 import {finalize} from "rxjs";
 
 @Component({
-  selector: 'app-topbar',
-  templateUrl: './app.topbar.component.html',
-  standalone: true,
-  imports: [RouterLink, NgClass, ButtonModule, TooltipModule, MenuModule]
+    selector: 'app-topbar',
+    templateUrl: './app.topbar.component.html',
+    imports: [RouterLink, NgClass, ButtonModule, TooltipModule, MenuModule]
 })
 export class AppTopBarComponent implements OnInit {
 

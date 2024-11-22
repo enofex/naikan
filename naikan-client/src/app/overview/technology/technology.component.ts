@@ -14,20 +14,19 @@ import {DatePipe} from '@angular/common';
 import {TechnologyGroup} from "./overview";
 
 @Component({
-  templateUrl: './technology.component.html',
-  standalone: true,
-  imports: [
-    Breadcrumb,
-    ChartModule,
-    TableModule,
-    SharedModule,
-    Search,
-    ButtonModule,
-    TooltipModule,
-    TagModule,
-    OverviewProjectTable
-  ],
-  providers: [TechnologyService, DatePipe]
+    templateUrl: './technology.component.html',
+    imports: [
+        Breadcrumb,
+        ChartModule,
+        TableModule,
+        SharedModule,
+        Search,
+        ButtonModule,
+        TooltipModule,
+        TagModule,
+        OverviewProjectTable
+    ],
+    providers: [TechnologyService, DatePipe]
 })
 export class TechnologyComponent extends AbstractOverviewComponent<TechnologyGroup> {
 

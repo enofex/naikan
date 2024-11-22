@@ -14,10 +14,9 @@ import {ToastModule} from "primeng/toast";
 import {MessagesModule} from "primeng/messages";
 
 @Component({
-  templateUrl: './project.component.html',
-  standalone: true,
-  imports: [RouterLink, Breadcrumb, DatePipe, TableModule, TooltipModule, Url, ButtonModule, Search, MessageModule, ConfirmDialogModule, ToastModule, MessagesModule, DateTimePipe],
-  providers: [ConfirmationService, MessageService, AdministrationProjectService, DatePipe]
+    templateUrl: './project.component.html',
+    imports: [RouterLink, Breadcrumb, TableModule, TooltipModule, Url, ButtonModule, Search, MessageModule, ConfirmDialogModule, ToastModule, MessagesModule, DateTimePipe],
+    providers: [ConfirmationService, MessageService, AdministrationProjectService, DatePipe]
 })
 export class ProjectComponent {
 

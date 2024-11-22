@@ -7,8 +7,8 @@ import {SharedModule as SharedModule_1} from 'primeng/api';
 import {OverviewBom} from "./overview";
 
 @Component({
-  selector: 'naikan-overview-project-table',
-  template: `
+    selector: 'naikan-overview-project-table',
+    template: `
     <p-table [value]="overviewBoms" dataKey="id">
       <ng-template pTemplate="header">
         <tr>
@@ -48,19 +48,18 @@ import {OverviewBom} from "./overview";
       </ng-template>
     </p-table>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  standalone: true,
-  imports: [
-    TableModule,
-    SharedModule_1,
-    TooltipModule,
-    RouterLink,
-    ProjectUrlIcon,
-    Url,
-    ProjectVersion,
-    DateTimePipe,
-  ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    imports: [
+        TableModule,
+        SharedModule_1,
+        TooltipModule,
+        RouterLink,
+        ProjectUrlIcon,
+        Url,
+        ProjectVersion,
+        DateTimePipe,
+    ]
 })
 export class OverviewProjectTable {
   @Input() overviewBoms: OverviewBom[];

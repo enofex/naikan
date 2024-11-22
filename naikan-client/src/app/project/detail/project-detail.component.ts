@@ -45,11 +45,10 @@ export interface LatestVersionPerEnvironment {
 }
 
 @Component({
-  templateUrl: './project-detail.component.html',
-  standalone: true,
-  imports: [Breadcrumb, TabViewModule, Url, ProjectVersion, NaikanTags, ButtonModule, TooltipModule, TableModule, SharedModule, Search, TagModule, ChartModule, DatePipe, DateTimePipe, SplitButtonModule, CommitId, MessagesModule, ProgressSpinnerModule, ProgressBarModule],
-  providers: [ProjectService, DatePipe],
-  styleUrls: ['.//project-detail.component.scss']
+    templateUrl: './project-detail.component.html',
+    imports: [Breadcrumb, TabViewModule, Url, ProjectVersion, NaikanTags, ButtonModule, TooltipModule, TableModule, SharedModule, Search, TagModule, ChartModule, DateTimePipe, SplitButtonModule, CommitId, MessagesModule, ProgressSpinnerModule, ProgressBarModule],
+    providers: [ProjectService, DatePipe],
+    styleUrls: ['.//project-detail.component.scss']
 })
 export class ProjectDetailComponent implements OnInit {
 

@@ -4,7 +4,9 @@ import {Page} from "@naikan/shared";
 import {LayoutService} from "@naikan/layout/app.layout.service";
 import {OverviewTopGroups} from "./overview-top-groups";
 
-@Component({template: ''})
+@Component({
+    template: ''
+})
 export abstract class AbstractOverviewComponent<T> implements OnDestroy, OnInit {
 
   protected readonly Object = Object;

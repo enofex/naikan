@@ -14,20 +14,19 @@ import {DatePipe} from '@angular/common';
 import {OverviewGroup} from "../overview";
 
 @Component({
-  templateUrl: './team.component.html',
-  standalone: true,
-  imports: [
-    Breadcrumb,
-    ChartModule,
-    TableModule,
-    SharedModule,
-    Search,
-    ButtonModule,
-    TooltipModule,
-    TagModule,
-    OverviewProjectTable
-  ],
-  providers: [TeamService, DatePipe]
+    templateUrl: './team.component.html',
+    imports: [
+        Breadcrumb,
+        ChartModule,
+        TableModule,
+        SharedModule,
+        Search,
+        ButtonModule,
+        TooltipModule,
+        TagModule,
+        OverviewProjectTable
+    ],
+    providers: [TeamService, DatePipe]
 })
 export class TeamComponent extends AbstractOverviewComponent<OverviewGroup> {
 

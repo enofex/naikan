@@ -3,9 +3,8 @@ import {RouterLink} from '@angular/router';
 import {AuthorityDirective} from "@naikan/shared";
 
 @Component({
-  templateUrl: './administration.component.html',
-  standalone: true,
-  imports: [RouterLink, AuthorityDirective]
+    templateUrl: './administration.component.html',
+    imports: [RouterLink, AuthorityDirective]
 })
 export class AdministrationComponent {
 }

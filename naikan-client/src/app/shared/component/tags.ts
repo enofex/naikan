@@ -4,8 +4,8 @@ import {TagModule} from 'primeng/tag';
 import {TooltipModule} from 'primeng/tooltip';
 
 @Component({
-  selector: 'naikan-tags',
-  template: `
+    selector: 'naikan-tags',
+    template: `
     @if (tags) {
       <span tooltipPosition="top" pTooltip="{{ tags }}">
         @for (tag of tags.slice(0, tagsToShow()); track tag) {
@@ -17,13 +17,12 @@ import {TooltipModule} from 'primeng/tooltip';
       </span>
     }
     `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  standalone: true,
-  imports: [
-    TooltipModule,
-    TagModule
-  ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    imports: [
+        TooltipModule,
+        TagModule
+    ]
 })
 export class NaikanTags {
 

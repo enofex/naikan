@@ -1,5 +1,4 @@
 import {Component, ViewChild} from '@angular/core';
-import {RouterLink} from '@angular/router';
 import {Table, TableLazyLoadEvent, TableModule} from "primeng/table";
 import {MenuModule} from "primeng/menu";
 import {DatePipe} from "@angular/common";
@@ -17,10 +16,9 @@ import {InputTextareaModule} from "primeng/inputtextarea";
 import {finalize} from "rxjs";
 
 @Component({
-  templateUrl: './token.component.html',
-  standalone: true,
-  imports: [RouterLink, TableModule, MenuModule, DatePipe, Url, Breadcrumb, DateTimePipe, ButtonModule, Search, ConfirmDialogModule, MessagesModule, TagModule, DialogModule, FormsModule, InputTextareaModule],
-  providers: [ConfirmationService, MessageService, AdministrationTokenService, DatePipe]
+    templateUrl: './token.component.html',
+    imports: [TableModule, MenuModule, Url, Breadcrumb, DateTimePipe, ButtonModule, Search, ConfirmDialogModule, MessagesModule, TagModule, DialogModule, FormsModule, InputTextareaModule],
+    providers: [ConfirmationService, MessageService, AdministrationTokenService, DatePipe]
 })
 export class TokenComponent {
 

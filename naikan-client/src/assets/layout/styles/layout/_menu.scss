@@ -1,3 +1,6 @@
+@use "mixins";
+@use "variables";
+
 .layout-sidebar {
   position: fixed;
   height: calc(100vh - 5rem);
@@ -5,7 +8,7 @@
   overflow-y: auto;
   user-select: none;
   top: 5rem;
-  transition: transform $transitionDuration, left $transitionDuration;
+  transition: transform variables.$transitionDuration, left variables.$transitionDuration;
   background-color: var(--surface-overlay);
   border-radius: 0;
   padding: 0.5rem 1.5rem;
@@ -92,8 +95,8 @@
       color: var(--text-color);
       cursor: pointer;
       padding: .75rem 1rem;
-      border-radius: $borderRadius;
-      transition: background-color $transitionDuration, box-shadow $transitionDuration;
+      border-radius: variables.$borderRadius;
+      transition: background-color variables.$transitionDuration, box-shadow variables.$transitionDuration;
 
       .layout-menuitem-icon {
         margin-right: .5rem;
@@ -102,7 +105,7 @@
       .layout-submenu-toggler {
         font-size: 75%;
         margin-left: auto;
-        transition: transform $transitionDuration;
+        transition: transform variables.$transitionDuration;
       }
 
       &.active-route {
@@ -115,13 +118,13 @@
       }
 
       &:focus {
-        @include focused-inset();
+        @include mixins.focused-inset();
       }
     }
 
     ul {
       overflow: hidden;
-      border-radius: $borderRadius;
+      border-radius: variables.$borderRadius;
 
       li {
         a {

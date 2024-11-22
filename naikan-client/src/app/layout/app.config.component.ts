@@ -9,8 +9,7 @@ import {SidebarModule} from 'primeng/sidebar';
 @Component({
     selector: 'app-config',
     templateUrl: './app.config.component.html',
-    standalone: true,
-  imports: [SidebarModule, ButtonModule, NgClass, RadioButtonModule, FormsModule]
+    imports: [SidebarModule, ButtonModule, NgClass, RadioButtonModule, FormsModule]
 })
 export class AppConfigComponent {
 

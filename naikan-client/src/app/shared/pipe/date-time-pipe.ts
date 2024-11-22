@@ -2,8 +2,7 @@ import {DatePipe as AngularDatePipe} from '@angular/common';
 import {Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({
-  name: 'naikanDateTime',
-  standalone: true
+  name: 'naikanDateTime'
 })
 export class DateTimePipe implements PipeTransform {
 

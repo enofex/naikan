@@ -2,10 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {AppMenuitemComponent} from './app.menuitem.component';
 
 @Component({
-  selector: 'app-menu',
-  templateUrl: './app.menu.component.html',
-  standalone: true,
-  imports: [AppMenuitemComponent]
+    selector: 'app-menu',
+    templateUrl: './app.menu.component.html',
+    imports: [AppMenuitemComponent]
 })
 export class AppMenuComponent implements OnInit {
 

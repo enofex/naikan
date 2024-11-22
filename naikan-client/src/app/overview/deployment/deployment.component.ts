@@ -14,24 +14,22 @@ import {ChartModule} from 'primeng/chart';
 import {DatePipe} from '@angular/common';
 
 @Component({
-  templateUrl: './deployment.component.html',
-  standalone: true,
-  imports: [
-    Breadcrumb,
-    ChartModule,
-    TableModule,
-    SharedModule,
-    Search,
-    ButtonModule,
-    TooltipModule,
-    RouterLink,
-    ProjectUrlIcon,
-    Url,
-    TagModule,
-    DatePipe,
-    DateTimePipe
-  ],
-  providers: [DeploymentService, DatePipe]
+    templateUrl: './deployment.component.html',
+    imports: [
+        Breadcrumb,
+        ChartModule,
+        TableModule,
+        SharedModule,
+        Search,
+        ButtonModule,
+        TooltipModule,
+        RouterLink,
+        ProjectUrlIcon,
+        Url,
+        TagModule,
+        DateTimePipe
+    ],
+    providers: [DeploymentService, DatePipe]
 })
 export class DeploymentComponent extends AbstractOverviewComponent<OverviewDeployment> {
 

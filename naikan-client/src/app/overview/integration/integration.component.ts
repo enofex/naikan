@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {IntegrationService} from './integration.service';
-import {Breadcrumb, Search, Url} from "@naikan/shared";
+import {Breadcrumb, Search} from "@naikan/shared";
 import {SharedModule} from 'primeng/api';
 import {AbstractOverviewComponent} from "../abstract-overview.component";
 import {LayoutService} from "@naikan/layout/app.layout.service";
@@ -13,20 +13,18 @@ import {TableLazyLoadEvent, TableModule} from 'primeng/table';
 import {OverviewGroup} from "../overview";
 
 @Component({
-  templateUrl: './integration.component.html',
-  standalone: true,
-  imports: [
-    Breadcrumb,
-    TableModule,
-    SharedModule,
-    Search,
-    ButtonModule,
-    TooltipModule,
-    Url,
-    TagModule,
-    OverviewProjectTable
-  ],
-  providers: [IntegrationService, DatePipe]
+    templateUrl: './integration.component.html',
+    imports: [
+        Breadcrumb,
+        TableModule,
+        SharedModule,
+        Search,
+        ButtonModule,
+        TooltipModule,
+        TagModule,
+        OverviewProjectTable
+    ],
+    providers: [IntegrationService, DatePipe]
 })
 export class IntegrationComponent extends AbstractOverviewComponent<OverviewGroup> {
 

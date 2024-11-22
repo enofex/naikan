@@ -13,19 +13,18 @@ import {TableLazyLoadEvent, TableModule} from 'primeng/table';
 import {OverviewGroup} from "../overview";
 
 @Component({
-  templateUrl: './contact.component.html',
-  standalone: true,
-  imports: [
-    Breadcrumb,
-    TableModule,
-    SharedModule,
-    Search,
-    ButtonModule,
-    TooltipModule,
-    TagModule,
-    OverviewProjectTable
-  ],
-  providers: [ContactService, DatePipe]
+    templateUrl: './contact.component.html',
+    imports: [
+        Breadcrumb,
+        TableModule,
+        SharedModule,
+        Search,
+        ButtonModule,
+        TooltipModule,
+        TagModule,
+        OverviewProjectTable
+    ],
+    providers: [ContactService, DatePipe]
 })
 export class ContactComponent extends AbstractOverviewComponent<OverviewGroup> {
 

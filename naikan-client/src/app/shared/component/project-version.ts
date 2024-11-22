@@ -5,8 +5,8 @@ import {TagModule} from 'primeng/tag';
 import {TooltipModule} from 'primeng/tooltip';
 
 @Component({
-  selector: 'naikan-project-version',
-  template: `
+    selector: 'naikan-project-version',
+    template: `
     @if (project && project.version) {
       <p-tag
         severity="success"
@@ -18,13 +18,12 @@ import {TooltipModule} from 'primeng/tooltip';
       </p-tag>
     }
     `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  standalone: true,
-  imports: [
-    TagModule,
-    TooltipModule
-  ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    imports: [
+        TagModule,
+        TooltipModule
+    ]
 })
 export class ProjectVersion {
   @Input() project: Project;

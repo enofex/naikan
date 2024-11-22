@@ -6,19 +6,12 @@ import {
   ViewChild,
   ViewEncapsulation
 } from '@angular/core';
-import {NgClass} from '@angular/common';
 import {TooltipModule} from 'primeng/tooltip';
 import {
   Charts,
-  DateTimePipe,
-  NaikanTags,
-  Principal,
-  ProjectUrlIcon,
-  ProjectVersion,
-  Url,
+  Principal
 } from "@naikan/shared";
 import {ChartModule, UIChart} from "primeng/chart";
-import {RouterLink} from "@angular/router";
 import {ProjectService} from "./project.service";
 import {AbstractProjectView} from "./abstract-project-view.component";
 import {SharedModule} from "primeng/api";
@@ -29,7 +22,9 @@ import {BomOverview} from "./bom-overview";
 import {Table} from "primeng/table";
 import {CountsPerItems} from "./counts-per-items";
 
-@Component({template: ''})
+@Component({
+    template: ''
+})
 export abstract class AbstractInsightChart implements OnDestroy {
 
   private _bomOverviews: BomOverview[];
@@ -62,8 +57,8 @@ export abstract class AbstractInsightChart implements OnDestroy {
 }
 
 @Component({
-  selector: 'naikan-project-view-insights-summarization-chart',
-  template: `
+    selector: 'naikan-project-view-insights-summarization-chart',
+    template: `
     <p-chart type="bar"
              height="100%"
              width="100%"
@@ -72,12 +67,11 @@ export abstract class AbstractInsightChart implements OnDestroy {
              [options]="chartSummarization.options">
     </p-chart>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  standalone: true,
-  imports: [
-    ChartModule
-  ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    imports: [
+        ChartModule
+    ]
 })
 export class SummarizationChart extends AbstractInsightChart {
 
@@ -146,8 +140,8 @@ export class SummarizationChart extends AbstractInsightChart {
 }
 
 @Component({
-  selector: 'naikan-project-view-insights-technologies-chart',
-  template: `
+    selector: 'naikan-project-view-insights-technologies-chart',
+    template: `
     <p-chart type="bar"
              height="100%"
              width="100%"
@@ -156,12 +150,11 @@ export class SummarizationChart extends AbstractInsightChart {
              [options]="chartTechnologies.options">
     </p-chart>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  standalone: true,
-  imports: [
-    ChartModule
-  ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    imports: [
+        ChartModule
+    ]
 })
 export class TechnologiesChart extends AbstractInsightChart {
 
@@ -218,8 +211,8 @@ export class TechnologiesChart extends AbstractInsightChart {
 }
 
 @Component({
-  selector: 'naikan-project-view-insights-deployments-chart',
-  template: `
+    selector: 'naikan-project-view-insights-deployments-chart',
+    template: `
     <p-chart #chartDeploymentsRef
              type="line"
              height="100%"
@@ -228,12 +221,11 @@ export class TechnologiesChart extends AbstractInsightChart {
              [options]="chartDeployments.options">
     </p-chart>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  standalone: true,
-  imports: [
-    ChartModule
-  ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    imports: [
+        ChartModule
+    ]
 })
 export class DeploymentsChart extends AbstractInsightChart {
 
@@ -307,8 +299,8 @@ export class DeploymentsChart extends AbstractInsightChart {
 }
 
 @Component({
-  selector: 'naikan-project-view-insights-deployments-summarization-chart',
-  template: `
+    selector: 'naikan-project-view-insights-deployments-summarization-chart',
+    template: `
     <p-chart type="bar"
              height="100%"
              width="100%"
@@ -317,12 +309,11 @@ export class DeploymentsChart extends AbstractInsightChart {
              [options]="chartDeploymentsSummarization.options">
     </p-chart>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  standalone: true,
-  imports: [
-    ChartModule
-  ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    imports: [
+        ChartModule
+    ]
 })
 export class DeploymentsSummarizationChart extends AbstractInsightChart {
 
@@ -384,8 +375,8 @@ export class DeploymentsSummarizationChart extends AbstractInsightChart {
 
 
 @Component({
-  selector: 'naikan-project-view-insights-commits-chart',
-  template: `
+    selector: 'naikan-project-view-insights-commits-chart',
+    template: `
     <p-chart #chartCommitsRef
              type="line"
              height="100%"
@@ -394,12 +385,11 @@ export class DeploymentsSummarizationChart extends AbstractInsightChart {
              [options]="chartCommits.options">
     </p-chart>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  standalone: true,
-  imports: [
-    ChartModule
-  ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    imports: [
+        ChartModule
+    ]
 })
 export class CommitsChart extends AbstractInsightChart {
 
@@ -473,8 +463,8 @@ export class CommitsChart extends AbstractInsightChart {
 }
 
 @Component({
-  selector: 'naikan-project-view-insights-commits-summarization-chart',
-  template: `
+    selector: 'naikan-project-view-insights-commits-summarization-chart',
+    template: `
     <p-chart type="bar"
              height="100%"
              width="100%"
@@ -483,12 +473,11 @@ export class CommitsChart extends AbstractInsightChart {
              [options]="chartCommitsSummarization.options">
     </p-chart>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  standalone: true,
-  imports: [
-    ChartModule
-  ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    imports: [
+        ChartModule
+    ]
 })
 export class CommitsSummarizationChart extends AbstractInsightChart {
 
@@ -549,8 +538,8 @@ export class CommitsSummarizationChart extends AbstractInsightChart {
 
 
 @Component({
-  selector: '.naikan-project-view-insights-header',
-  template: `
+    selector: '.naikan-project-view-insights-header',
+    template: `
     <p-tabView styleClass="ml-2">
 
       <p-tabPanel header="Summarization">
@@ -598,29 +587,21 @@ export class CommitsSummarizationChart extends AbstractInsightChart {
       </p-tabPanel>
     </p-tabView>
   `,
-  styles: ['.chart-panel {height: 50vh; position: relative; overflow-y: auto; overflow-x: auto; margin-top: 20px;}'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  standalone: true,
+    styles: ['.chart-panel {height: 50vh; position: relative; overflow-y: auto; overflow-x: auto; margin-top: 20px;}'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
   imports: [
     TooltipModule,
-    RouterLink,
-    ProjectUrlIcon,
-    NaikanTags,
-    ProjectVersion,
     ChartModule,
-    DateTimePipe,
-    NgClass,
-    Url,
     SharedModule,
     TabViewModule,
-    DeploymentsChart,
-    DeploymentsSummarizationChart,
-    CommitsChart,
     CommitsSummarizationChart,
+    CommitsChart,
+    DeploymentsSummarizationChart,
     SummarizationChart,
-    TechnologiesChart
-  ],
+    TechnologiesChart,
+    DeploymentsChart,
+  ]
 })
 export class ProjectViewInsightsHeader extends AbstractProjectView {
 

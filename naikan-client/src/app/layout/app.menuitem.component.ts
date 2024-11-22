@@ -7,8 +7,8 @@ import {MenuService} from './app.menu.service';
 import {NgClass} from '@angular/common';
 
 @Component({
-  selector: '[app-menuitem]',
-  template: `
+    selector: '[app-menuitem]',
+    template: `
     <ng-container>
         @if (root && item.visible !== false) {
             <div
@@ -55,19 +55,18 @@ import {NgClass} from '@angular/common';
         }
     </ng-container>
   `,
-  animations: [
-    trigger('children', [
-      state('collapsed', style({
-        height: '0'
-      })),
-      state('expanded', style({
-        height: '*'
-      })),
-      transition('collapsed <=> expanded', animate('400ms cubic-bezier(0.86, 0, 0.07, 1)'))
-    ])
-  ],
-  standalone: true,
-  imports: [NgClass, RouterLinkActive, RouterLink, forwardRef(() => AppMenuitemComponent)]
+    animations: [
+        trigger('children', [
+            state('collapsed', style({
+                height: '0'
+            })),
+            state('expanded', style({
+                height: '*'
+            })),
+            transition('collapsed <=> expanded', animate('400ms cubic-bezier(0.86, 0, 0.07, 1)'))
+        ])
+    ],
+    imports: [NgClass, RouterLinkActive, RouterLink, forwardRef(() => AppMenuitemComponent)]
 })
 export class AppMenuitemComponent implements OnInit, OnDestroy {
 

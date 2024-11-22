@@ -9,10 +9,9 @@ import {AppFooterComponent} from './app.footer.component';
 import {NgClass} from '@angular/common';
 
 @Component({
-  selector: 'app-layout',
-  templateUrl: './app.layout.component.html',
-  standalone: true,
-  imports: [NgClass, AppTopBarComponent, AppSidebarComponent, RouterOutlet, AppFooterComponent, AppConfigComponent]
+    selector: 'app-layout',
+    templateUrl: './app.layout.component.html',
+    imports: [NgClass, AppTopBarComponent, AppSidebarComponent, RouterOutlet, AppFooterComponent, AppConfigComponent]
 })
 export class AppLayoutComponent implements OnDestroy {
 
