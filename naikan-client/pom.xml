@@ -31,7 +31,7 @@
               <workingDirectory>./</workingDirectory>
               <executable>npm</executable>
               <arguments>
-                <argument>ci</argument>
+                <argument>ci --force</argument>
               </arguments>
             </configuration>
           </execution>
