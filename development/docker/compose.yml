@@ -9,6 +9,7 @@ services:
       - LDAP_ORGANISATION="Naikan"
       - LDAP_DOMAIN=naikan.io
       - LDAP_ADMIN_PASSWORD=admin
+      - LDAP_TLS=false
     ports:
       - "389:389"
     volumes:
