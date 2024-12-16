@@ -22,16 +22,16 @@
            [rowsPerPageOptions]="[10, 25, 50, 100, 200]"
            [totalRecords]="page?.totalElements">
     <ng-template pTemplate="caption">
-      <div class="flex justify-content-between flex-wrap mb-2 mt-4">
-        <div class="flex align-items-center justify-content-center">
+      <div class="flex justify-between flex-wrap mb-2 mt-12">
+        <div class="flex items-center justify-center">
           <naikan-search #search [table]="tableAdministrationTokens"></naikan-search>
         </div>
-        <div class="flex align-items-center justify-content-center">
+        <div class="flex items-center justify-center">
           <button pButton label="Clear" class="p-button-outlined"
                   icon="pi pi-filter-slash"
                   (click)="tableAdministrationTokens.reset(); search.clear()">
           </button>
-          <button pButton icon="pi pi-plus" class="ml-1" tooltipPosition="top" pTooltip="Add token"
+          <button pButton icon="pi pi-plus" class="ml-4" tooltipPosition="top" pTooltip="Add token"
                   (click)="openNewTokenDialog()"></button>
         </div>
       </div>
@@ -53,7 +53,7 @@
         <th pSortableColumn="description">Description
           <p-sortIcon field="description"></p-sortIcon>
         </th>
-        <th class="w-4rem"></th>
+        <th class="w-16"></th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-item>
@@ -86,11 +86,10 @@
 <p-dialog [(visible)]="newTokenDialog" [style]="{ width: '450px' }" header="Add new token"
           [modal]="true" styleClass="p-fluid">
   <ng-template pTemplate="content">
-    <div class="field">
+    <p-iftalabel>
+      <textarea id="description" pTextarea [(ngModel)]="description" rows="3" class="w-full"></textarea>
       <label for="description">Description</label>
-      <textarea id="description" pInputTextarea [(ngModel)]="description" rows="3"
-                cols="20"></textarea>
-    </div>
+    </p-iftalabel>
   </ng-template>
   <ng-template pTemplate="footer">
     <button pButton label="Cancel" icon="pi pi-times" class="p-button-outlined"

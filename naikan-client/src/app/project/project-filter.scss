@@ -14,7 +14,7 @@
     .p-accordion-header {
       border-top: 1px solid #eee;
       border-bottom: none;
-      border-radius: 0px;
+      border-radius: 0;
 
       .p-accordion-header-link {
         padding-left: 1rem;
@@ -22,8 +22,8 @@
       }
 
       &:has(.has-filters) {
-        border-right: 6px solid var(--primary-color);
-        border-radius: 0px;
+        border-right: 6px solid var(--p-primary-color);
+        border-radius: 0;
       }
     }
 
@@ -41,14 +41,20 @@
     }
   }
 
-  .p-sidebar .p-sidebar-header {
+
+  .p-drawer-right {
+    width: 50rem;
+  }
+  .p-drawer .p-drawer-header {
     padding-bottom: 0;
   }
 
-  .p-sidebar .p-sidebar-footer {
+  .p-drawer .p-drawer-footer {
     border-top: 1px solid #eee;
   }
 }
 
-
+p-columnfilterformelement {
+  width: 100%
+}
 

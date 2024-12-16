@@ -15,7 +15,7 @@ import {ChartModule, UIChart} from "primeng/chart";
 import {ProjectService} from "./project.service";
 import {AbstractProjectView} from "./abstract-project-view.component";
 import {SharedModule} from "primeng/api";
-import {TabViewModule} from "primeng/tabview";
+import {TabsModule} from "primeng/tabs";
 import {finalize, Subscription} from "rxjs";
 import {LayoutService} from "@naikan/layout/app.layout.service";
 import {BomOverview} from "./bom-overview";
@@ -540,52 +540,57 @@ export class CommitsSummarizationChart extends AbstractInsightChart {
 @Component({
     selector: '.naikan-project-view-insights-header',
     template: `
-    <p-tabView styleClass="ml-2">
-
-      <p-tabPanel header="Summarization">
-        <div class="chart-panel">
-          <naikan-project-view-insights-summarization-chart [table]="table"
+    <p-tabs value="0" styleClass="ml-2">
+      <p-tablist>
+        <p-tab value="0">Summarization</p-tab>
+        <p-tab value="1">Technologies</p-tab>
+        <p-tab value="2">Deployments</p-tab>
+        <p-tab value="3">Commits</p-tab>
+      </p-tablist>
+      
+      <p-tabpanels>
+        <p-tabpanel value="0">
+          <div class="chart-panel">
+            <naikan-project-view-insights-summarization-chart [table]="table"
+                                                              [bomOverviews]="allBomOverviews()">
+            </naikan-project-view-insights-summarization-chart>
+          </div>
+        </p-tabpanel>
+        <p-tabpanel value="1">
+          <div class="chart-panel">
+            <naikan-project-view-insights-technologies-chart [table]="table"
+                                                             [bomOverviews]="allBomOverviews()">
+            </naikan-project-view-insights-technologies-chart>
+          </div>
+        </p-tabpanel>
+        <p-tabpanel value="2">
+          <div class="chart-panel">
+            <naikan-project-view-insights-deployments-chart [table]="table"
                                                             [bomOverviews]="allBomOverviews()">
-          </naikan-project-view-insights-summarization-chart>
-        </div>
-      </p-tabPanel>
+            </naikan-project-view-insights-deployments-chart>
+          </div>
 
-      <p-tabPanel header="Technologies">
-        <div class="chart-panel">
-          <naikan-project-view-insights-technologies-chart [table]="table"
-                                                           [bomOverviews]="allBomOverviews()">
-          </naikan-project-view-insights-technologies-chart>
-        </div>
-      </p-tabPanel>
+          <div class="chart-panel mt-20">
+            <naikan-project-view-insights-deployments-summarization-chart [table]="table"
+                                                                          [bomOverviews]="allBomOverviews()">
+            </naikan-project-view-insights-deployments-summarization-chart>
+          </div>
+        </p-tabpanel>
+        <p-tabpanel value="3">
+          <div class="chart-panel">
+            <naikan-project-view-insights-commits-chart [table]="table"
+                                                        [bomOverviews]="allBomOverviews()">
+            </naikan-project-view-insights-commits-chart>
+          </div>
 
-      <p-tabPanel header="Deployments">
-        <div class="chart-panel">
-          <naikan-project-view-insights-deployments-chart [table]="table"
-                                                          [bomOverviews]="allBomOverviews()">
-          </naikan-project-view-insights-deployments-chart>
-        </div>
-
-        <div class="chart-panel mt-8">
-          <naikan-project-view-insights-deployments-summarization-chart [table]="table"
-                                                                        [bomOverviews]="allBomOverviews()">
-          </naikan-project-view-insights-deployments-summarization-chart>
-        </div>
-      </p-tabPanel>
-
-      <p-tabPanel header="Commits">
-        <div class="chart-panel">
-          <naikan-project-view-insights-commits-chart [table]="table"
-                                                      [bomOverviews]="allBomOverviews()">
-          </naikan-project-view-insights-commits-chart>
-        </div>
-
-        <div class="chart-panel mt-8">
-          <naikan-project-view-insights-commits-summarization-chart [table]="table"
-                                                                    [bomOverviews]="allBomOverviews()">
-          </naikan-project-view-insights-commits-summarization-chart>
-        </div>
-      </p-tabPanel>
-    </p-tabView>
+          <div class="chart-panel mt-20">
+            <naikan-project-view-insights-commits-summarization-chart [table]="table"
+                                                                      [bomOverviews]="allBomOverviews()">
+            </naikan-project-view-insights-commits-summarization-chart>
+          </div>
+        </p-tabpanel>
+      </p-tabpanels>
+    </p-tabs>
   `,
     styles: ['.chart-panel {height: 50vh; position: relative; overflow-y: auto; overflow-x: auto; margin-top: 20px;}'],
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -594,7 +599,7 @@ export class CommitsSummarizationChart extends AbstractInsightChart {
     TooltipModule,
     ChartModule,
     SharedModule,
-    TabViewModule,
+    TabsModule,
     CommitsSummarizationChart,
     CommitsChart,
     DeploymentsSummarizationChart,

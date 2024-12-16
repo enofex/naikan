@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {LayoutService} from './app.layout.service';
 import {environment} from 'src/environments/environment';
 
 @Component({
@@ -9,7 +8,4 @@ import {environment} from 'src/environments/environment';
 export class AppFooterComponent {
 
   protected readonly environment = environment;
-
-  constructor(public readonly layoutService: LayoutService) {
-  }
 }

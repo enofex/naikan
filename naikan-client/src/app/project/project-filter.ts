@@ -3,10 +3,10 @@ import {Component, Input, ViewEncapsulation} from '@angular/core';
 import {Table, TableModule} from "primeng/table";
 import {AccordionModule} from "primeng/accordion";
 import {FilterMatchMode, FilterMetadata, SelectItem} from "primeng/api";
-import {SidebarModule} from "primeng/sidebar";
+import {DrawerModule} from "primeng/drawer";
 import {ButtonModule} from "primeng/button";
 import {MultiSelectModule} from "primeng/multiselect";
-import {CalendarModule} from "primeng/calendar";
+import {DatePickerModule} from "primeng/datepicker";
 import {InputNumberModule} from "primeng/inputnumber";
 import {FormsModule} from "@angular/forms";
 import {ProjectService} from "./project.service";
@@ -47,8 +47,8 @@ export interface ProjectFilter {
 @Component({
   selector: 'naikan-project-filter-header',
   template: `
-    <div class="flex align-items-center {{hasFilters ? 'has-filters' : ''}}">
-      <span class="vertical-align-middle text-900 font-medium uppercase">{{header}}</span>
+    <div class="flex items-center {{hasFilters ? 'has-filters' : ''}}">
+      <span class="align-middle text-surface-900 font-medium uppercase">{{ header }}</span>
     </div>
   `,
   styleUrls: ['./project-filter.scss'],
@@ -60,51 +60,52 @@ export class ProjectFilterHeader {
 }
 
 @Component({
-    selector: 'naikan-project-filter-multiselect',
-    template: `
-    <div class="field grid">
-      <div class="col-12">
-        <p-columnFilter field="{{field}}"
-          tooltipPosition="top"
-          pTooltip="{{label}}"
-          matchMode="equals"
-          [showClearButton]="true"
-          [showMatchModes]="false"
-          [showOperator]="false"
-          [showMenu]="false">
-          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-            <p-multiSelect placeholder="{{label}}"
-              [options]="filterNames"
-              optionLabel="name"
-              optionValue="name"
-              [ngModel]="value"
-              (onChange)="filter($event.value)">
-              <ng-template let-item pTemplate="item">
-                <div class="flex align-items-center gap-2">
-                  @if (!tag) {
-                    <div>{{item.name }}</div>
-                  }
-                  @if (tag) {
-                    <p-tag severity="info" value="{{item.name}}" class="mr-1"></p-tag>
-                  }
-                  <div class="text-400">({{item.count }})</div>
-                </div>
-              </ng-template>
-            </p-multiSelect>
-          </ng-template>
-        </p-columnFilter>
-      </div>
+  selector: 'naikan-project-filter-multiselect',
+  template: `
+    <div class="grid grid-cols-1 gap-12 mb-2">
+      <p-columnFilter field="{{field}}"
+                      class="w-full"
+                      tooltipPosition="top"
+                      pTooltip="{{label}}"
+                      matchMode="equals"
+                      [showClearButton]="true"
+                      [showMatchModes]="false"
+                      [showOperator]="false"
+                      [showMenu]="false">
+        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+          <p-multiSelect placeholder="{{label}}"
+                         appendTo="body"
+                         styleClass="w-full"
+                         [options]="filterNames"
+                         optionLabel="name"
+                         optionValue="name"
+                         [ngModel]="value"
+                         (onChange)="filter($event.value)">
+            <ng-template let-item pTemplate="item">
+              <div class="flex items-center gap-2">
+                @if (!tag) {
+                  <div>{{ item.name }}</div>
+                }
+                @if (tag) {
+                  <p-tag severity="info" value="{{item.name}}" class="mr-1"></p-tag>
+                }
+                <div class="text-surface-400">({{ item.count }})</div>
+              </div>
+            </ng-template>
+          </p-multiSelect>
+        </ng-template>
+      </p-columnFilter>
     </div>
-    `,
-    styleUrls: ['./project-filter.scss'],
-    encapsulation: ViewEncapsulation.None,
-    imports: [
-        TableModule,
-        TooltipModule,
-        MultiSelectModule,
-        FormsModule,
-        TagModule
-    ]
+  `,
+  styleUrls: ['./project-filter.scss'],
+  encapsulation: ViewEncapsulation.None,
+  imports: [
+    TableModule,
+    TooltipModule,
+    MultiSelectModule,
+    FormsModule,
+    TagModule
+  ]
 })
 export class ProjectFilterMultiSelect {
   @Input() label: string;
@@ -114,32 +115,35 @@ export class ProjectFilterMultiSelect {
 }
 
 @Component({
-    selector: 'naikan-project-filter-date',
-    template: `
-    <div class="field grid">
-      <div class="col-12">
-        <p-columnFilter type="date"
-                        field="{{field}}"
-                        tooltipPosition="top"
-                        pTooltip="{{label}}"
-                        matchMode="dateIs">
-          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-            <p-calendar placeholder="{{label}}"
-                        [ngModel]="value"
-                        (onSelect)="filter($event)"></p-calendar>
-          </ng-template>
-        </p-columnFilter>
-      </div>
+  selector: 'naikan-project-filter-date',
+  template: `
+    <div class="grid grid-cols-1 gap-12 mb-2">
+      <p-columnFilter type="date"
+                      class="w-full"
+                      field="{{field}}"
+                      tooltipPosition="top"
+                      pTooltip="{{label}}"
+                      matchMode="dateIs">
+        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+          <p-date-picker placeholder="{{label}}" 
+                         inputStyleClass="w-full"
+                         appendTo="body"
+                         styleClass="w-full"
+                         [ngModel]="value"
+                         (onSelect)="filter($event)"></p-date-picker>
+        </ng-template>
+
+      </p-columnFilter>
     </div>
   `,
-    styleUrls: ['./project-filter.scss'],
-    encapsulation: ViewEncapsulation.None,
-    imports: [
-        TableModule,
-        TooltipModule,
-        CalendarModule,
-        FormsModule,
-    ]
+  styleUrls: ['./project-filter.scss'],
+  encapsulation: ViewEncapsulation.None,
+  imports: [
+    TableModule,
+    TooltipModule,
+    DatePickerModule,
+    FormsModule,
+  ]
 })
 export class ProjectFilterDate {
   @Input() label: string;
@@ -148,11 +152,11 @@ export class ProjectFilterDate {
 
 
 @Component({
-    selector: 'naikan-project-filter-numeric',
-    template: `
-    <div class="field grid">
-      <div class="col-12">
+  selector: 'naikan-project-filter-numeric',
+  template: `
+    <div class="grid grid-cols-1 gap-12 mb-2">
         <p-columnFilter type="numeric"
+                        class="w-full"
                         field="{{field}}"
                         tooltipPosition="top"
                         pTooltip="{{label}}"
@@ -163,21 +167,21 @@ export class ProjectFilterDate {
                            [ngModel]="value"
                            [showButtons]="true"
                            [min]="0"
+                           styleClass="w-full"
                            (onInput)="filter($event.value)">
             </p-inputNumber>
           </ng-template>
         </p-columnFilter>
       </div>
-    </div>
   `,
-    styleUrls: ['./project-filter.scss'],
-    encapsulation: ViewEncapsulation.None,
-    imports: [
-        TableModule,
-        TooltipModule,
-        InputNumberModule,
-        FormsModule,
-    ]
+  styleUrls: ['./project-filter.scss'],
+  encapsulation: ViewEncapsulation.None,
+  imports: [
+    TableModule,
+    TooltipModule,
+    InputNumberModule,
+    FormsModule,
+  ]
 })
 export class ProjectFilterNumeric {
   @Input() label: string;
@@ -213,19 +217,19 @@ export class ProjectFilterNumeric {
 
 
 @Component({
-    selector: 'naikan-project-filter',
-    template: `
-    <p-sidebar [(visible)]="filterVisible"
-               position="right"
-               styleClass="w-8 md:w-6 lg:w-4"
-               class="sidebar-filter">
+  selector: 'naikan-project-filter',
+  template: `
+    <p-drawer [(visible)]="filterVisible"
+              position="right"
+              styleClass="w-full md:w-[50rem]"
+              class="sidebar-filter">
 
-      <ng-template pTemplate="header">
-        <div class="grid w-full mt-1">
-          <div class="col-5 text-xl text-900 font-medium uppercase mt-2">
+      <ng-template #header>
+        <div class="grid grid-cols-12 gap-12 w-full mt-1">
+          <div class="col-span-5 text-xl text-surface-900 font-medium uppercase mt-2">
             Filter
           </div>
-          <div class="col-6 text-900 text-right font-medium uppercase">
+          <div class="col-span-6 text-surface-900 text-right font-medium uppercase">
             <p-button (click)="restFilters()"
                       label="Clear all filters"
                       styleClass="p-button-link">
@@ -235,17 +239,17 @@ export class ProjectFilterNumeric {
         <br>
       </ng-template>
 
-      <ng-template pTemplate="content">
-        <p-accordion>
-          <p-accordionTab>
-            <ng-template pTemplate="header">
-              <naikan-project-filter-header 
-                  header="Project"
-                  [hasFilters]="ProjectFilters.hasFiltersForKeys(table.filters, ['timestamp', 'tags', 'project'])"
-              >
-              </naikan-project-filter-header>
-            </ng-template>
+      <p-accordion value="0">
+        <p-accordion-panel value="0">
+          <p-accordion-header>
+            <naikan-project-filter-header
+                header="Project"
+                [hasFilters]="ProjectFilters.hasFiltersForKeys(table.filters, ['timestamp', 'tags', 'project'])"
+            >
+            </naikan-project-filter-header>
+          </p-accordion-header>
 
+          <p-accordion-content>
             <naikan-project-filter-date field="timestamp"
                                         label="Last updated">
             </naikan-project-filter-date>
@@ -263,16 +267,19 @@ export class ProjectFilterNumeric {
                                                [tag]="true"
                                                [filterNames]="projectFilter?.tags">
             </naikan-project-filter-multiselect>
-          </p-accordionTab>
+          </p-accordion-content>
+        </p-accordion-panel>
 
-          <p-accordionTab>
-            <ng-template pTemplate="header">
-              <naikan-project-filter-header 
-                  header="Organization"
-                  [hasFilters]="ProjectFilters.hasFiltersForKeys(table.filters, ['organization'])">
-              ></naikan-project-filter-header>
-            </ng-template>
+        <p-accordion-panel value="1">
+          <p-accordion-header>
+            <naikan-project-filter-header
+                header="Organization"
+                [hasFilters]="ProjectFilters.hasFiltersForKeys(table.filters, ['organization'])">
+              >
+            </naikan-project-filter-header>
+          </p-accordion-header>
 
+          <p-accordion-content>
             <naikan-project-filter-multiselect field="organization.name"
                                                label="Name"
                                                [filterNames]="projectFilter?.organizations">
@@ -281,16 +288,19 @@ export class ProjectFilterNumeric {
                                                label="Department"
                                                [filterNames]="projectFilter?.organizationDepartments">
             </naikan-project-filter-multiselect>
-          </p-accordionTab>
+          </p-accordion-content>
+        </p-accordion-panel>
 
-          <p-accordionTab>
-            <ng-template pTemplate="header">
-              <naikan-project-filter-header 
-                  header="Environment"
-                  [hasFilters]="ProjectFilters.hasFiltersForKeys(table.filters, ['environments'])">
-              ></naikan-project-filter-header>
-            </ng-template>
+        <p-accordion-panel value="2">
+          <p-accordion-header>
+            <naikan-project-filter-header
+                header="Environment"
+                [hasFilters]="ProjectFilters.hasFiltersForKeys(table.filters, ['environments'])">
+              >
+            </naikan-project-filter-header>
+          </p-accordion-header>
 
+          <p-accordion-content>
             <naikan-project-filter-multiselect field="environments.name"
                                                label="Name"
                                                [filterNames]="projectFilter?.environments">
@@ -310,16 +320,19 @@ export class ProjectFilterNumeric {
             <naikan-project-filter-numeric field="environmentsCount"
                                            label="Environments">
             </naikan-project-filter-numeric>
-          </p-accordionTab>
+          </p-accordion-content>
+        </p-accordion-panel>
 
-          <p-accordionTab>
-            <ng-template pTemplate="header">
-              <naikan-project-filter-header 
-                  header="Team"
-                  [hasFilters]="ProjectFilters.hasFiltersForKeys(table.filters, ['teams'])">
-              ></naikan-project-filter-header>
-            </ng-template>
+        <p-accordion-panel value="3">
+          <p-accordion-header>
+            <naikan-project-filter-header
+                header="Team"
+                [hasFilters]="ProjectFilters.hasFiltersForKeys(table.filters, ['teams'])">
+              >
+            </naikan-project-filter-header>
+          </p-accordion-header>
 
+          <p-accordion-content>
             <naikan-project-filter-multiselect field="teams.name"
                                                label="Name"
                                                [filterNames]="projectFilter?.teams">
@@ -328,16 +341,19 @@ export class ProjectFilterNumeric {
             <naikan-project-filter-numeric field="teamsCount"
                                            label="Teams">
             </naikan-project-filter-numeric>
-          </p-accordionTab>
+          </p-accordion-content>
+        </p-accordion-panel>
 
-          <p-accordionTab>
-            <ng-template pTemplate="header">
-              <naikan-project-filter-header 
-                  header="Developer"
-                  [hasFilters]="ProjectFilters.hasFiltersForKeys(table.filters, ['developers'])">
-              ></naikan-project-filter-header>
-            </ng-template>
+        <p-accordion-panel value="4">
+          <p-accordion-header>
+            <naikan-project-filter-header
+                header="Developer"
+                [hasFilters]="ProjectFilters.hasFiltersForKeys(table.filters, ['developers'])">
+              >
+            </naikan-project-filter-header>
+          </p-accordion-header>
 
+          <p-accordion-content>
             <naikan-project-filter-multiselect field="developers.name"
                                                label="Name"
                                                [filterNames]="projectFilter?.developers">
@@ -362,16 +378,19 @@ export class ProjectFilterNumeric {
             <naikan-project-filter-numeric field="developersCount"
                                            label="Developers">
             </naikan-project-filter-numeric>
-          </p-accordionTab>
+          </p-accordion-content>
+        </p-accordion-panel>
 
-          <p-accordionTab>
-            <ng-template pTemplate="header">
-              <naikan-project-filter-header 
-                  header="Contact"
-                  [hasFilters]="ProjectFilters.hasFiltersForKeys(table.filters, ['contacts'])">
-              ></naikan-project-filter-header>
-            </ng-template>
+        <p-accordion-panel value="5">
+          <p-accordion-header>
+            <naikan-project-filter-header
+                header="Contact"
+                [hasFilters]="ProjectFilters.hasFiltersForKeys(table.filters, ['contacts'])">
+              >
+            </naikan-project-filter-header>
+          </p-accordion-header>
 
+          <p-accordion-content>
             <naikan-project-filter-multiselect field="contacts.name"
                                                label="Name"
                                                [filterNames]="projectFilter?.contacts">
@@ -386,16 +405,19 @@ export class ProjectFilterNumeric {
             <naikan-project-filter-numeric field="contactsCount"
                                            label="Contacts">
             </naikan-project-filter-numeric>
-          </p-accordionTab>
+          </p-accordion-content>
+        </p-accordion-panel>
 
-          <p-accordionTab>
-            <ng-template pTemplate="header">
-              <naikan-project-filter-header 
-                  header="Integration"
-                  [hasFilters]="ProjectFilters.hasFiltersForKeys(table.filters, ['integrations'])">
-              ></naikan-project-filter-header>
-            </ng-template>
+        <p-accordion-panel value="6">
+          <p-accordion-header>
+            <naikan-project-filter-header
+                header="Integration"
+                [hasFilters]="ProjectFilters.hasFiltersForKeys(table.filters, ['integrations'])">
+              >
+            </naikan-project-filter-header>
+          </p-accordion-header>
 
+          <p-accordion-content>
             <naikan-project-filter-multiselect field="integrations.name"
                                                label="Name"
                                                [filterNames]="projectFilter?.integrations">
@@ -410,16 +432,19 @@ export class ProjectFilterNumeric {
             <naikan-project-filter-numeric field="integrationsCount"
                                            label="Integrations">
             </naikan-project-filter-numeric>
-          </p-accordionTab>
+          </p-accordion-content>
+        </p-accordion-panel>
 
-          <p-accordionTab>
-            <ng-template pTemplate="header">
-              <naikan-project-filter-header 
-                  header="Technology"
-                  [hasFilters]="ProjectFilters.hasFiltersForKeys(table.filters, ['technologies'])">
-              ></naikan-project-filter-header>
-            </ng-template>
+        <p-accordion-panel value="7">
+          <p-accordion-header>
+            <naikan-project-filter-header
+                header="Technology"
+                [hasFilters]="ProjectFilters.hasFiltersForKeys(table.filters, ['technologies'])">
+              >
+            </naikan-project-filter-header>
+          </p-accordion-header>
 
+          <p-accordion-content>
             <naikan-project-filter-multiselect field="technologies.name"
                                                label="Name"
                                                [filterNames]="projectFilter?.technologies">
@@ -439,16 +464,19 @@ export class ProjectFilterNumeric {
             <naikan-project-filter-numeric field="technologiesCount"
                                            label="Technologies">
             </naikan-project-filter-numeric>
-          </p-accordionTab>
+          </p-accordion-content>
+        </p-accordion-panel>
 
-          <p-accordionTab>
-            <ng-template pTemplate="header">
-              <naikan-project-filter-header 
-                  header="Deployments"
-                  [hasFilters]="ProjectFilters.hasFiltersForKeys(table.filters, ['deployments'])">
-              ></naikan-project-filter-header>
-            </ng-template>
+        <p-accordion-panel value="8">
+          <p-accordion-header>
+            <naikan-project-filter-header
+                header="Deployments"
+                [hasFilters]="ProjectFilters.hasFiltersForKeys(table.filters, ['deployments'])">
+              >
+            </naikan-project-filter-header>
+          </p-accordion-header>
 
+          <p-accordion-content>
             <naikan-project-filter-multiselect field="deployments.location"
                                                label="Location"
                                                [filterNames]="projectFilter?.deployments">
@@ -457,16 +485,19 @@ export class ProjectFilterNumeric {
             <naikan-project-filter-numeric field="deploymentsCount"
                                            label="Deployments">
             </naikan-project-filter-numeric>
-          </p-accordionTab>
+          </p-accordion-content>
+        </p-accordion-panel>
 
-          <p-accordionTab>
-            <ng-template pTemplate="header">
-              <naikan-project-filter-header 
-                  header="License"
-                  [hasFilters]="ProjectFilters.hasFiltersForKeys(table.filters, ['licenses'])">
-              ></naikan-project-filter-header>
-            </ng-template>
+        <p-accordion-panel value="9">
+          <p-accordion-header>
+            <naikan-project-filter-header
+                header="License"
+                [hasFilters]="ProjectFilters.hasFiltersForKeys(table.filters, ['licenses'])">
+              >
+            </naikan-project-filter-header>
+          </p-accordion-header>
 
+          <p-accordion-content>
             <naikan-project-filter-multiselect field="licenses.name"
                                                label="Name"
                                                [filterNames]="projectFilter?.licenses">
@@ -475,23 +506,24 @@ export class ProjectFilterNumeric {
             <naikan-project-filter-numeric field="licensesCount"
                                            label="Licenses">
             </naikan-project-filter-numeric>
-          </p-accordionTab>
-        </p-accordion>
-      </ng-template>
-    </p-sidebar>
+          </p-accordion-content>
+        </p-accordion-panel>
+      </p-accordion>
+
+    </p-drawer>
   `,
-    styleUrls: ['./project-filter.scss'],
-    encapsulation: ViewEncapsulation.None,
-    imports: [
-        SidebarModule,
-        TableModule,
-        ButtonModule,
-        AccordionModule,
-        ProjectFilterHeader,
-        ProjectFilterDate,
-        ProjectFilterMultiSelect,
-        ProjectFilterNumeric
-    ]
+  styleUrls: ['./project-filter.scss'],
+  encapsulation: ViewEncapsulation.None,
+  imports: [
+    DrawerModule,
+    TableModule,
+    ButtonModule,
+    AccordionModule,
+    ProjectFilterHeader,
+    ProjectFilterDate,
+    ProjectFilterMultiSelect,
+    ProjectFilterNumeric
+  ]
 })
 export class ProjectFilter {
   @Input() table!: Table;

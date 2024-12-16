@@ -50,7 +50,7 @@ export class ProjectViewCondensedHeader {
     </td>
 
     <td>
-      <span class="text-900 font-medium text-lg"
+      <span class="text-surface-900 font-medium text-lg"
             tooltipPosition="top"
             pTooltip="{{ tooltipNames(bomOverview.environmentNames) }}">
         {{ bomOverview.environmentNames ? bomOverview.environmentNames.length : 0}}
@@ -58,7 +58,7 @@ export class ProjectViewCondensedHeader {
     </td>
 
     <td>
-      <span class="text-900 font-medium text-lg"
+      <span class="text-surface-900 font-medium text-lg"
             tooltipPosition="top"
             pTooltip="{{ tooltipNames(bomOverview.teamNames) }}">
         {{ bomOverview.teamNames ? bomOverview.teamNames.length : 0}}
@@ -66,7 +66,7 @@ export class ProjectViewCondensedHeader {
     </td>
 
     <td>
-      <span class="text-900 font-medium text-lg"
+      <span class="text-surface-900 font-medium text-lg"
             tooltipPosition="top"
             pTooltip="{{ tooltipNames(bomOverview.developerNames) }}">
         {{ bomOverview.developerNames ? bomOverview.developerNames.length : 0 }}
@@ -74,7 +74,7 @@ export class ProjectViewCondensedHeader {
     </td>
 
     <td>
-      <span class="text-900 font-medium text-lg"
+      <span class="text-surface-900 font-medium text-lg"
             tooltipPosition="top"
             pTooltip="{{ tooltipNames(bomOverview.contactNames) }}">
         {{ bomOverview.contactNames ? bomOverview.contactNames.length : 0 }}
@@ -82,7 +82,7 @@ export class ProjectViewCondensedHeader {
     </td>
 
     <td>
-      <span class="text-900 font-medium text-lg"
+      <span class="text-surface-900 font-medium text-lg"
             tooltipPosition="top"
             pTooltip="{{ tooltipNames(bomOverview.integrationNames) }}">
         {{ bomOverview.integrationNames ? bomOverview.integrationNames.length : 0 }}
@@ -90,7 +90,7 @@ export class ProjectViewCondensedHeader {
     </td>
 
     <td>
-      <span class="text-900 font-medium text-lg"
+      <span class="text-surface-900 font-medium text-lg"
             tooltipPosition="top"
             pTooltip="{{ tooltipNames(bomOverview.technologyNames) }}">
         {{ bomOverview.technologyNames ? bomOverview.technologyNames.length : 0 }}
@@ -98,13 +98,13 @@ export class ProjectViewCondensedHeader {
     </td>
 
     <td>
-      <span class="text-900 font-medium text-lg"> 
+      <span class="text-surface-900 font-medium text-lg"> 
         {{ bomOverview.deploymentsCount }} 
       </span>
     </td>
 
     <td>
-      <span class="text-900 font-medium text-lg"> 
+      <span class="text-surface-900 font-medium text-lg"> 
         {{ bomOverview.commitsCount }} 
       </span>
     </td>

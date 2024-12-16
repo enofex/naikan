@@ -27,30 +27,30 @@ import {TagModule} from "primeng/tag";
 @Component({
     selector: '.naikan-project-view-overview-body',
     template: `
-      <div class="card mb-2">
-          <div class="flex flex-column justify-content-between sm:flex-row sm:align-items-start p-4">
-              <div class="flex flex-column align-items-start">
-                  <div class="text-xl font-bold text-900">
+      <div class="card">
+          <div class="flex flex-col justify-between sm:flex-row sm:items-start p-6">
+              <div class="flex flex-col items-start">
+                  <div class="text-xl font-bold text-surface-900">
                       <i (click)="onFavoriteToggle(bomOverview.id)" [ngClass]="isFavorite(bomOverview.id)
           ? 'pi pi-star-fill mt-2 mr-2 text-primary-400'
         : 'pi pi-star mt-2 mr-2 text-primary-400'"></i>
                       <span tooltipPosition="top"
                             [escape]="false"
                             pTooltip="{{tooltipProject(bomOverview)}}">
-          <a routerLink="./{{bomOverview.id}}">{{ bomOverview.project?.name }}</a>
+          <a class="text-primary" routerLink="./{{bomOverview.id}}">{{ bomOverview.project?.name }}</a>
         </span>
                       <naikan-project-url-icon
                               [url]="bomOverview.project?.url"></naikan-project-url-icon>
                   </div>
                   @if (bomOverview.tags && bomOverview.tags.length > 0) {
-                      <span class="text-500">
+                      <span class="text-surface-500 mt-2">
           <i class="pi pi-tag mt-2 mr-2"></i>
           <naikan-tags [tags]="bomOverview.tags"></naikan-tags>
         </span>
                   }
               </div>
-              <div class="flex flex-column align-items-end sm:align-items-start">
-                  <div class="flex sm:align-self-end align-self-start align-items-center">
+              <div class="flex flex-col items-end sm:items-start">
+                  <div class="flex sm:self-end self-start items-center">
                       @if (bomOverview.repository) {
                           <p-tag tooltipPosition="top"
                                  pTooltip="{{ bomOverview.repository.url }}"
@@ -62,23 +62,23 @@ import {TagModule} from "primeng/tag";
                       </naikan-project-version>
                   </div>
                   @if (bomOverview.timestamp) {
-                      <div class="align-self-start sm:align-self-end mt-2">
-          <span class="font-normal text-500 text-sm"> last updated
-            <span class="text-700">{{ bomOverview.timestamp | naikanDateTime }}</span>
+                      <div class="self-start sm:self-end mt-2">
+          <span class="font-normal text-surface-500 text-sm"> last updated
+            <span class="text-surface-700">{{ bomOverview.timestamp | naikanDateTime }}</span>
           </span>
                       </div>
                   }
               </div>
           </div>
-          <div class="flex flex-column justify-content-between surface-50 sm:flex-row">
+          <div class="flex flex-col justify-between bg-surface-50 sm:flex-row">
               <div
-                      class="sm:flex-row flex-1 flex align-items-center justify-content-center m-1 px-3 py-3 sm:border-right-1 border-gray-300">
+                      class="sm:flex-row flex-1 flex items-center justify-center m-1 px-12 py-12 sm:border-r border-gray-300">
                   <div>
-        <span class="block text-900 font-medium mb-3">
+        <span class="block text-surface-900 font-medium mb-8">
           <i class="pi pi-box m-1"></i> Environments
         </span>
-                      <div class="flex justify-content-center">
-          <span class="text-900 font-medium text-lg"
+                      <div class="flex justify-center">
+          <span class="text-surface-900 font-medium text-lg"
                 tooltipPosition="top"
                 pTooltip="{{ tooltipNames(bomOverview.environmentNames) }}">
             {{ bomOverview.environmentNames ? bomOverview.environmentNames.length : 0 }}
@@ -87,13 +87,13 @@ import {TagModule} from "primeng/tag";
                   </div>
               </div>
               <div
-                      class="sm:flex-row flex-1 flex align-items-center justify-content-center m-1 px-3 py-3 sm:border-right-1 border-gray-300">
+                      class="sm:flex-row flex-1 flex items-center justify-center m-1 px-12 py-12 sm:border-r border-gray-300">
                   <div>
-        <span class="block text-900 font-medium mb-3">
+        <span class="block text-surface-900 font-medium mb-8">
           <i class="pi pi-users m-1"></i> Teams
         </span>
-                      <div class="flex justify-content-center">
-          <span class="text-900 font-medium text-lg"
+                      <div class="flex justify-center">
+          <span class="text-surface-900 font-medium text-lg"
                 tooltipPosition="top"
                 pTooltip="{{ tooltipNames(bomOverview.teamNames) }}">
             {{ bomOverview.teamNames ? bomOverview.teamNames.length : 0 }}
@@ -102,13 +102,13 @@ import {TagModule} from "primeng/tag";
                   </div>
               </div>
               <div
-                      class="sm:flex-row flex-1 flex align-items-center justify-content-center m-1 px-3 py-3 sm:border-right-1 border-gray-300">
+                      class="sm:flex-row flex-1 flex items-center justify-center m-1 px-12 py-12 sm:border-r border-gray-300">
                   <div>
-        <span class="block text-900 font-medium mb-3">
+        <span class="block text-surface-900 font-medium mb-8">
           <i class="pi pi-user m-1"></i> Developers
         </span>
-                      <div class="flex justify-content-center">
-          <span class="text-900 font-medium text-lg"
+                      <div class="flex justify-center">
+          <span class="text-surface-900 font-medium text-lg"
                 tooltipPosition="top"
                 pTooltip="{{ tooltipNames(bomOverview.developerNames) }}">
             {{ bomOverview.developerNames ? bomOverview.developerNames.length : 0 }}
@@ -117,13 +117,13 @@ import {TagModule} from "primeng/tag";
                   </div>
               </div>
               <div
-                      class="sm:flex-row flex-1 flex align-items-center justify-content-center m-1 px-3 py-3 sm:border-right-1 border-gray-300">
+                      class="sm:flex-row flex-1 flex items-center justify-center m-1 px-12 py-12 sm:border-r border-gray-300">
                   <div>
-        <span class="block text-900 font-medium mb-3">
+        <span class="block text-surface-900 font-medium mb-8">
           <i class="pi pi-envelope m-1"></i> Contacts
         </span>
-                      <div class="flex justify-content-center">
-          <span class="text-900 font-medium text-lg"
+                      <div class="flex justify-center">
+          <span class="text-surface-900 font-medium text-lg"
                 tooltipPosition="top"
                 pTooltip="{{ tooltipNames(bomOverview.contactNames) }}">
             {{ bomOverview.contactNames ? bomOverview.contactNames.length : 0 }}
@@ -132,13 +132,13 @@ import {TagModule} from "primeng/tag";
                   </div>
               </div>
               <div
-                      class="sm:flex-row flex-1 flex align-items-center justify-content-center m-1 px-3 py-3 sm:border-right-1 border-gray-300">
+                      class="sm:flex-row flex-1 flex items-center justify-center m-1 px-12 py-12 sm:border-r border-gray-300">
                   <div>
-        <span class="block text-900 font-medium mb-3">
+        <span class="block text-surface-900 font-medium mb-8">
           <i class="pi pi-link m-1"></i> Integrations
         </span>
-                      <div class="flex justify-content-center">
-          <span class="text-900 font-medium text-lg"
+                      <div class="flex justify-center">
+          <span class="text-surface-900 font-medium text-lg"
                 tooltipPosition="top"
                 pTooltip="{{ tooltipNames(bomOverview.integrationNames) }}">
             {{ bomOverview.integrationNames ? bomOverview.integrationNames.length : 0 }}
@@ -147,13 +147,13 @@ import {TagModule} from "primeng/tag";
                   </div>
               </div>
               <div
-                      class="sm:flex-row flex-1 flex align-items-center justify-content-center m-1 px-3 py-3 sm:border-right-1 border-gray-300">
+                      class="sm:flex-row flex-1 flex items-center justify-center m-1 px-12 py-12 sm:border-r border-gray-300">
                   <div>
-        <span class="block text-900 font-medium mb-3">
+        <span class="block text-surface-900 font-medium mb-8">
           <i class="pi pi-code m-1"></i> Technologies
         </span>
-                      <div class="flex justify-content-center">
-          <span class="text-900 font-medium text-lg"
+                      <div class="flex justify-center">
+          <span class="text-surface-900 font-medium text-lg"
                 tooltipPosition="top"
                 pTooltip="{{ tooltipNames(bomOverview.technologyNames) }}">
             {{ bomOverview.technologyNames ? bomOverview.technologyNames.length : 0 }}
@@ -162,26 +162,26 @@ import {TagModule} from "primeng/tag";
                   </div>
               </div>
               <div
-                      class="sm:flex-row flex-1 flex align-items-center justify-content-center m-1 px-3 py-3 sm:border-right-1 border-gray-300">
+                      class="sm:flex-row flex-1 flex items-center justify-center m-1 px-12 py-12 sm:border-r border-gray-300">
                   <div>
-        <span class="block text-900 font-medium mb-3">
+        <span class="block text-surface-900 font-medium mb-8">
           <i class="pi pi-cloud-upload m-1"></i>  Deployments
         </span>
-                      <div class="flex justify-content-center">
-          <span class="text-900 font-medium text-lg">
+                      <div class="flex justify-center">
+          <span class="text-surface-900 font-medium text-lg">
             {{ bomOverview.deploymentsCount }}
           </span>
                       </div>
                   </div>
               </div>
               <div
-                      class="sm:flex-row flex-1 flex align-items-center justify-content-center m-1 px-3 py-3">
+                      class="sm:flex-row flex-1 flex items-center justify-center m-1 px-12 py-12">
                   <div>
-        <span class="block text-900 font-medium mb-3">
+        <span class="block text-surface-900 font-medium mb-8">
           <i class="pi pi-clock m-1"></i>  Commits
         </span>
-                      <div class="flex justify-content-center">
-          <span class="text-900 font-medium text-lg"
+                      <div class="flex justify-center">
+          <span class="text-surface-900 font-medium text-lg"
                 tooltipPosition="top"
                 pTooltip="Contributions to default branch, excluding merge commits">
             {{ bomOverview.commitsCount }}
@@ -191,18 +191,18 @@ import {TagModule} from "primeng/tag";
               </div>
           </div>
           @if (this.bomOverview.deploymentsCount > 0) {
-              <div class="flex flex-column sm:flex-row sm:align-items-start pt-4"
+              <div class="flex flex-col sm:flex-row sm:items-start pt-12"
               >
                   <div
-                          class="flex flex-column sm:flex-row justify-content-between align-items-center sm:align-items-start flex-1">
-                      <div class="flex flex-column align-items-start">
+                          class="flex flex-col sm:flex-row justify-between items-center sm:items-start flex-1">
+                      <div class="flex flex-col items-start">
                           @if (bomOverview.repository) {
-                              <span class="flex text-500 pb-3">
-              <span class="text-500 text-sm text-overflow-ellipsis mt-2">
+                              <span class="flex text-surface-500 pb-12">
+              <span class="text-surface-500 text-sm text-ellipsis mt-2">
                 <p-tag severity="success">First commit</p-tag>
                 <naikan-commit-id commitId=" {{ bomOverview.repository?.firstCommit?.commitId }}"></naikan-commit-id>
                 on
-                <span class="text-700"
+                <span class="text-surface-700"
                       tooltipPosition="top"
                       pTooltip="{{ bomOverview.repository?.firstCommit?.author.name }}">
                   {{ bomOverview.repository?.firstCommit?.timestamp | naikanDateTime }}
@@ -211,29 +211,29 @@ import {TagModule} from "primeng/tag";
             </span>
                           }
                           @if (this.bomOverview.deploymentsCount > 0) {
-                              <span class="flex text-500">
-              <span class="text-500 text-sm text-overflow-ellipsis mt-2">
+                              <span class="flex text-surface-500">
+              <span class="text-surface-500 text-sm text-ellipsis mt-2">
                 Found deployments on
-                <span class="text-700">
+                <span class="text-surface-700">
                   {{ bomOverview.deploymentsEnvironmentsCount}}
                 </span> environments and
-                <span class="text-700">
+                <span class="text-surface-700">
                   {{ bomOverview.deploymentsVersionsCount}}
                 </span> versions.
               </span>
             </span>
                           }
                           @if (bomOverview.lastDeployment) {
-                              <span class="flex text-500">
-              <span class="text-500 text-sm text-overflow-ellipsis mt-2">
+                              <span class="flex text-surface-500">
+              <span class="text-surface-500 text-sm text-ellipsis mt-2">
                 Last deployment on
-                <span class="text-700">
+                <span class="text-surface-700">
                   {{ bomOverview.lastDeployment.environment }}
                 </span> with version
-                <span class="text-700">
+                <span class="text-surface-700">
                   {{ bomOverview.lastDeployment.version }}
                 </span> on
-                <span class="text-700">
+                <span class="text-surface-700">
                   {{ bomOverview.lastDeployment.timestamp | naikanDateTime }}
                 </span>
               </span>
@@ -242,7 +242,7 @@ import {TagModule} from "primeng/tag";
                       </div>
                       @if (this.bomOverview.deploymentsPerMonth.counts.length > 0
                       || this.bomOverview.commitsPerMonth.counts.length > 0) {
-          <div class="flex flex-column align-items-end"
+          <div class="flex flex-col items-end"
           >
             <p-chart type="line" height="80px" width="400px"
                      [data]="projectDeploymentsChart()"

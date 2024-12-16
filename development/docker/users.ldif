@@ -19,7 +19,7 @@ objectclass: top
 ou: users
 
 # Admin, username: admin, password: 123
-dn: uid=admin,ou=users,dc=naikan,dc=io
+dn: uid=admin,dc=naikan,dc=io
 cn: Admin
 gidnumber: 500
 givenname: Admin
@@ -42,6 +42,6 @@ objectclass: inetOrgPerson
 objectclass: posixAccount
 objectclass: top
 sn: Rambo
-uid: jnbamb
+uid: jnramb
 uidnumber: 1001
 userpassword: {MD5}ICy5YqxZB1uWSwcVLSNLcA==

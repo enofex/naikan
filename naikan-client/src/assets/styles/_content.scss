@@ -1,12 +1,10 @@
-@use "variables";
-
 .layout-main-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   justify-content: space-between;
   padding: 7rem 2rem 2rem 2rem;
-  transition: margin-left variables.$transitionDuration;
+  transition: margin-left .2s;
 }
 
 .layout-main {

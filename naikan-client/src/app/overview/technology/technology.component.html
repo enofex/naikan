@@ -32,11 +32,11 @@
       [rowsPerPageOptions]="[10, 25, 50, 100, 200]"
       [totalRecords]="page?.totalElements">
     <ng-template pTemplate="caption">
-      <div class="flex justify-content-between flex-wrap mb-2 mt-4">
-        <div class="flex align-items-center justify-content-center">
+      <div class="flex justify-between flex-wrap mb-2 mt-12">
+        <div class="flex items-center justify-center">
           <naikan-search #search [table]="tableOverviewGroups"></naikan-search>
         </div>
-        <div class="flex align-items-center justify-content-center">
+        <div class="flex items-center justify-center">
           <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
                   (click)="tableOverviewGroups.reset(); search.clear()"></button>
         </div>
@@ -44,7 +44,7 @@
     </ng-template>
     <ng-template pTemplate="header">
       <tr>
-        <th class="w-3rem">
+        <th class="w-16">
           @if (page?.totalElements > 0) {
             <p-button
                 styleClass="p-button-primary"
@@ -67,7 +67,7 @@
           </p-columnFilter>
           <p-sortIcon field="group.version"></p-sortIcon>
         </th>
-        <th pSortableColumn="count" class="w-10rem">Projects
+        <th pSortableColumn="count" class="w-40">Projects
           <p-sortIcon field="count"></p-sortIcon>
         </th>
       </tr>
@@ -85,7 +85,7 @@
         <td>
           <p-tag severity="success" value="{{ overviewGroup.group.version }}"></p-tag>
         </td>
-        <td class="text-center w-4rem">
+        <td class="text-center w-16">
           <p-tag value="{{ overviewGroup.count }}" [rounded]="true"></p-tag>
         </td>
       </tr>

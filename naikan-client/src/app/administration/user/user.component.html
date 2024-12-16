@@ -27,11 +27,11 @@
            [totalRecords]="page?.totalElements">
 
     <ng-template pTemplate="caption">
-      <div class="flex justify-content-between flex-wrap mb-2 mt-4">
-        <div class="flex align-items-center justify-content-center">
+      <div class="flex justify-between flex-wrap mb-2 mt-12">
+        <div class="flex items-center justify-center">
           <naikan-search #search [table]="tableAdministrationUsers"></naikan-search>
         </div>
-        <div class="flex align-items-center justify-content-center">
+        <div class="flex items-center justify-center">
           <button pButton label="Clear" class="p-button-outlined"
                   icon="pi pi-filter-slash"
                   (click)="tableAdministrationUsers.reset(); search.clear()">
@@ -48,7 +48,7 @@
         <th pSortableColumn="authorities">Authorities
           <p-sortIcon field="authorities"></p-sortIcon>
         </th>
-        <th class="w-4rem"></th>
+        <th class="w-16"></th>
       </tr>
     </ng-template>
 
@@ -64,7 +64,7 @@
                          appendTo="body"
                          optionLabel="label"
                          optionValue="value"
-                         styleClass="w-15rem"
+                         styleClass="w-60"
                          (onChange)="onAuthoritiesChange(item.id, $event)"></p-multiSelect>
         </td>
         <td>

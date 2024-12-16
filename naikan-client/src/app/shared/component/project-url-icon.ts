@@ -10,14 +10,14 @@ import {Urls} from "../util/urls";
           @switch (Urls.isValid(url) && 'isValid') {
               @case ('isValid') {
                   <a href="{{ url }}" target="_blank">
-                      <i class="pi pi-external-link text-gray-400 ml-3 text-sm"
+                      <i class="pi pi-external-link text-gray-400 ml-12 text-sm"
                          tooltipPosition="top"
                          pTooltip="{{ url }}">
                       </i>
                   </a>
               }
               @default {
-                  <i class="pi pi-external-link text-gray-400 ml-3 text-sm"
+                  <i class="pi pi-external-link text-gray-400 ml-12 text-sm"
                      tooltipPosition="top"
                      pTooltip="{{ url }}">
                   </i>

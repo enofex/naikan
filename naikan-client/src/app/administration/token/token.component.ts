@@ -12,12 +12,14 @@ import {MessagesModule} from "primeng/messages";
 import {TagModule} from "primeng/tag";
 import {DialogModule} from "primeng/dialog";
 import {FormsModule} from "@angular/forms";
-import {InputTextareaModule} from "primeng/inputtextarea";
 import {finalize} from "rxjs";
+import {Tooltip} from "primeng/tooltip";
+import {TextareaModule} from 'primeng/textarea';
+import {IftaLabelModule} from 'primeng/iftalabel';
 
 @Component({
     templateUrl: './token.component.html',
-    imports: [TableModule, MenuModule, Url, Breadcrumb, DateTimePipe, ButtonModule, Search, ConfirmDialogModule, MessagesModule, TagModule, DialogModule, FormsModule, InputTextareaModule],
+    imports: [TableModule, MenuModule, Url, Breadcrumb, DateTimePipe, ButtonModule, Search, ConfirmDialogModule, MessagesModule, TagModule, DialogModule, FormsModule, Tooltip, TextareaModule, IftaLabelModule],
     providers: [ConfirmationService, MessageService, AdministrationTokenService, DatePipe]
 })
 export class TokenComponent {

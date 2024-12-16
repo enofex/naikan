@@ -7,6 +7,10 @@ import {provideAnimations} from "@angular/platform-browser/animations";
 import {statusInterceptor} from "./app/shared/interceptor/status.interceptor";
 import {environmentInterceptor} from "./app/shared/interceptor/environment.interceptor";
 import {PreloadAllModules, provideRouter, withPreloading} from "@angular/router";
+import {provideAnimationsAsync} from "@angular/platform-browser/animations/async";
+import { providePrimeNG } from 'primeng/config';
+import {NaikanPreset} from "./naikan";
+
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -15,10 +19,23 @@ bootstrapApplication(AppComponent, {
         withInterceptors([statusInterceptor, environmentInterceptor])
     ),
     provideAnimations(),
+    provideAnimationsAsync(),
     provideRouter(
         APP_ROUTES,
         withPreloading(PreloadAllModules)
     ),
+    providePrimeNG({
+      ripple: false,
+      theme: {
+        preset: NaikanPreset,
+        options: {
+          cssLayer: {
+            name: 'primeng',
+            order: 'tailwind-base, primeng, tailwind-utilities, naikan'
+          }
+        }
+      }
+    })
   ]
 })
 .catch(err => console.error(err));

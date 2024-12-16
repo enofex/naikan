@@ -1,5 +1,3 @@
-@use "variables";
-
 @media (max-width: 991px) {
   .blocked-scroll {
     overflow: hidden;
@@ -28,7 +26,7 @@
       z-index: 998;
       width: 100%;
       height: 100%;
-      background-color: var(--maskbg);
+      background-color: var(--p-maskbg);
     }
 
     &.layout-mobile-active {
@@ -38,7 +36,7 @@
 
       .layout-mask {
         display: block;
-        animation: fadein variables.$transitionDuration;
+        animation: fadein .2s;
       }
     }
   }

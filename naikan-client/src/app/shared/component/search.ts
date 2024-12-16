@@ -14,13 +14,17 @@ import {Table} from "primeng/table";
 @Component({
     selector: 'naikan-search',
     template: `
-    <div class="p-inputgroup md:w-30rem">
-      <button type="button" pButton icon="pi pi-search" styleClass="p-button-success"></button>
+    <div class="flex flex-item-center p-inputgroup md:w-[30rem]">
+      <button type="button" pButton icon="pi pi-search" styleClass="p-button-success"
+              style="border-top-right-radius: 0; border-bottom-right-radius: 0px; border-right: 0px;">
+      </button>
 
       <input #searchInput pInputText (input)="onGlobalFilter($event)" maxlength="200"
-             type="text" placeholder="Search" class="w-full"/>
+             type="text" placeholder="Search" class="w-full" 
+             style="border-radius: 0px; border-left: 0px; border-right: 0px"/>
 
       <button type="button" pButton icon="pi pi-times" styleClass="p-button-success"
+              style="border-top-left-radius: 0; border-bottom-left-radius: 0px; border-left: 0px;"
               tooltipPosition="top" pTooltip="Clear"
               (click)="clear()"></button>
     </div>

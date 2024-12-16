@@ -51,7 +51,6 @@ export class LayoutService {
     const sessionConfig = JSON.parse(sessionStorage.getItem("naikan-config"));
 
     if (sessionConfig) {
-      this.changeTheme(sessionConfig.theme, sessionConfig.colorScheme);
       this.config = sessionConfig;
 
       document.documentElement.style.fontSize = this.config.scale + 'px';
@@ -100,33 +99,4 @@ export class LayoutService {
     sessionStorage.setItem("naikan-config", JSON.stringify(this.config));
     this.configUpdate.next(this.config);
   }
-
-  changeTheme(theme: string, colorScheme: string): void {
-    const themeLink = <HTMLLinkElement>document.getElementById('theme-css');
-    const newHref = themeLink.getAttribute('href')!.replace(this.config.theme + "-" + this.config.colorScheme, theme + "-" + colorScheme);
-
-    this.replaceThemeLink(newHref, () => {
-      this.config.theme = theme;
-      this.config.colorScheme = colorScheme;
-      this.onConfigUpdate();
-    });
-  }
-
-  private replaceThemeLink(href: string, onComplete: Function): void {
-    const id = 'theme-css';
-    const themeLink = <HTMLLinkElement>document.getElementById('theme-css');
-    const cloneLinkElement = <HTMLLinkElement>themeLink.cloneNode(true);
-
-    cloneLinkElement.setAttribute('href', href);
-    cloneLinkElement.setAttribute('id', id + '-clone');
-
-    themeLink.parentNode!.insertBefore(cloneLinkElement, themeLink.nextSibling);
-
-    cloneLinkElement.addEventListener('load', () => {
-      themeLink.remove();
-      cloneLinkElement.setAttribute('id', id);
-      onComplete();
-    });
-  }
-
 }

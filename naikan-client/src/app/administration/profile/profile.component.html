@@ -2,28 +2,28 @@
     [items]="[{label: 'Administration', routerLink: '/administration'}, {label: 'Profile', routerLink: '/administration/profile'}]">
 </naikan-breadcrumb>
 @if (user) {
-  <div class="grid">
-    <div class="col-12 mt-4 surface-50">
-      <div class="flex flex-column xl:flex-row align-items-start">
+  <div class="grid grid-cols-12 gap-12">
+    <div class="col-span-12 mt-12">
+      <div class="flex flex-col xl:flex-row items-start">
         <div
-          class="flex flex-column sm:flex-row justify-content-between align-items-start flex-1">
-          <div class="flex flex-column align-items-start">
-            <div class="text-xl font-bold text-900">
+          class="flex flex-col sm:flex-row justify-between items-start flex-1">
+          <div class="flex flex-col items-start">
+            <div class="text-xl font-bold text-surface-900 mb-2">
               <h5>Profile</h5>
             </div>
           </div>
         </div>
       </div>
-      <div class="field grid">
-        <label class="col-12 mb-2 md:col-2 md:mb-0">Name</label>
-        <div class="col-12 md:col-10">
+      <div class="field grid grid-cols-12 gap-12">
+        <label class="col-span-12 mb-2 md:col-span-2 ">Name</label>
+        <div class="col-span-12 md:col-span-10">
           {{ user.username }}
         </div>
       </div>
       @if (user.authorities && user.authorities.length > 0) {
-        <div class="field grid">
-          <label class="col-12 mb-2 md:col-2 md:mb-0">Authorities</label>
-          <div class="col-12 md:col-10">
+        <div class="field grid grid-cols-12 gap-12">
+          <label class="col-span-12 mb-2 md:col-span-2 ">Authorities</label>
+          <div class="col-span-12 md:col-span-10">
             @for (authority of user.authorities;track authority) {
               <p-tag severity="info" value="{{authority}}" class="mr-1"></p-tag>
             }
@@ -31,49 +31,49 @@
         </div>
       }
       @if (user.details?.title) {
-        <div class="field grid">
-          <label class="col-12 mb-2 md:col-2 md:mb-0">Title</label>
-          <div class="col-12 md:col-10">
+        <div class="field grid grid-cols-12 gap-12">
+          <label class="col-span-12 mb-2 md:col-span-2 ">Title</label>
+          <div class="col-span-12 md:col-span-10">
             {{ user.details?.title }}
           </div>
         </div>
       }
       @if (user.details?.givenName) {
-        <div class="field grid">
-          <label class="col-12 mb-2 md:col-2 md:mb-0">Given name</label>
-          <div class="col-12 md:col-10">
+        <div class="field grid grid-cols-12 gap-12">
+          <label class="col-span-12 mb-2 md:col-span-2 ">Given name</label>
+          <div class="col-span-12 md:col-span-10">
             {{ user.details?.givenName }}
           </div>
         </div>
       }
       @if (user.details?.displayName) {
-        <div class="field grid">
-          <label class="col-12 mb-2 md:col-2 md:mb-0">Display name</label>
-          <div class="col-12 md:col-10">
+        <div class="field grid grid-cols-12 gap-12">
+          <label class="col-span-12 mb-2 md:col-span-2 ">Display name</label>
+          <div class="col-span-12 md:col-span-10">
             {{ user.details?.displayName }}
           </div>
         </div>
       }
       @if (user.details?.mail) {
-        <div class="field grid">
-          <label class="col-12 mb-2 md:col-2 md:mb-0">Mail</label>
-          <div class="col-12 md:col-10">
+        <div class="field grid grid-cols-12 gap-12">
+          <label class="col-span-12 mb-2 md:col-span-2 ">Mail</label>
+          <div class="col-span-12 md:col-span-10">
             {{ user.details?.mail }}
           </div>
         </div>
       }
       @if (user.details?.telephoneNumber) {
-        <div class="field grid">
-          <label class="col-12 mb-2 md:col-2 md:mb-0">Telephone number</label>
-          <div class="col-12 md:col-10">
+        <div class="field grid grid-cols-12 gap-12">
+          <label class="col-span-12 mb-2 md:col-span-2 ">Telephone number</label>
+          <div class="col-span-12 md:col-span-10">
             {{ user.details?.telephoneNumber }}
           </div>
         </div>
       }
       @if (user.details?.mobile) {
-        <div class="field grid">
-          <label class="col-12 mb-2 md:col-2 md:mb-0">Mobile</label>
-          <div class="col-12 md:col-10">
+        <div class="field grid grid-cols-12 gap-12">
+          <label class="col-span-12 mb-2 md:col-span-2 ">Mobile</label>
+          <div class="col-span-12 md:col-span-10">
             {{ user.details?.mobile }}
           </div>
         </div>

@@ -4,12 +4,12 @@ import {FormsModule} from '@angular/forms';
 import {RadioButtonModule} from 'primeng/radiobutton';
 import {NgClass} from '@angular/common';
 import {ButtonModule} from 'primeng/button';
-import {SidebarModule} from 'primeng/sidebar';
+import {DrawerModule} from 'primeng/drawer';
 
 @Component({
     selector: 'app-config',
     templateUrl: './app.config.component.html',
-    imports: [SidebarModule, ButtonModule, NgClass, RadioButtonModule, FormsModule]
+    imports: [DrawerModule, ButtonModule, NgClass, RadioButtonModule, FormsModule]
 })
 export class AppConfigComponent {
 
@@ -46,18 +46,6 @@ export class AppConfigComponent {
         this.layoutService.config.menuMode = _val;
     }
 
-    get inputStyle(): string {
-        return this.layoutService.config.inputStyle;
-    }
-
-    set inputStyle(_val: string) {
-        this.layoutService.config.inputStyle = _val;
-    }
-
-    get colorScheme(): string {
-        return this.layoutService.config.colorScheme;
-    }
-
     onConfigButtonClick(): void {
         this.layoutService.showConfigSidebar();
     }
@@ -70,10 +58,6 @@ export class AppConfigComponent {
     incrementScale(): void {
         this.scale++;
         this.applyScale();
-    }
-
-    changeTheme(theme: string, colorScheme: string): void {
-        this.layoutService.changeTheme(theme, colorScheme);
     }
 
     private applyScale(): void {

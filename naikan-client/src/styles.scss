@@ -1,35 +1,51 @@
-/* You can add global styles to this file, and also import other style files */
+@layer tailwind-base, naikan, primeng, tailwind-utilities, naikan;
 
- //for primeflex grid system
-@use "sass:meta";
-@use "assets/layout/styles/layout/layout.scss";
-
-@import "../node_modules/primeng/resources/primeng.min.css";
-@include meta.load-css("../node_modules/primeflex/primeflex.scss", $with: ("gutter": 1rem));
-@import "../node_modules/primeicons/primeicons.css";
-
-#overview-chart-wrapper {
-  position: relative;
-  height: 250px;
-  overflow-y: auto;
+@layer tailwind-base {
+  @tailwind base;
 }
 
-.text-mono {
-  font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace !important;
+@layer tailwind-utilities {
+  @tailwind components;
+  @tailwind utilities;
 }
 
-.p-inputnumber-button-group {
-  .p-inputnumber-button-up {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-    padding: 0;
+@import url('assets/styles/layout.scss') layer(naikan);
+@import url('../node_modules/primeicons/primeicons.css') layer(naikan);
+
+@layer naikan {
+  #overview-chart-wrapper {
+    position: relative;
+    height: 250px;
+    overflow-y: auto;
   }
 
-  .p-inputnumber-button-down {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    border-bottom-left-radius: 0;
-    padding: 0;
+  .text-mono {
+    font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace !important;
+  }
+
+  .p-inputnumber-button-group {
+    .p-inputnumber-button-up {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      padding: 0;
+    }
+
+    .p-inputnumber-button-down {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      border-bottom-left-radius: 0;
+      padding: 0;
+    }
+  }
+
+  .p-datatable-paginator-bottom {
+    border: none;
+    margin-top: 4rem;
+  }
+
+  .p-datatable-header {
+    border: none;
   }
 }
+

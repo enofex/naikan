@@ -31,11 +31,11 @@
       [rowsPerPageOptions]="[10, 25, 50, 100, 200]"
       [totalRecords]="page?.totalElements">
     <ng-template pTemplate="caption">
-      <div class="flex justify-content-between flex-wrap mb-2 mt-4">
-        <div class="flex align-items-center justify-content-center">
+      <div class="flex justify-between flex-wrap mb-2 mt-12">
+        <div class="flex items-center justify-center">
           <naikan-search #search [table]="tableOverviewGroups"></naikan-search>
         </div>
-        <div class="flex align-items-center justify-content-center">
+        <div class="flex items-center justify-center">
           <button pButton label="Clear" class="p-button-outlined"
                   icon="pi pi-filter-slash"
                   (click)="tableOverviewGroups.reset(); search.clear()">
@@ -46,7 +46,7 @@
     <ng-template pTemplate="header">
       <tr>
         <th pSortableColumn="bom.project.name">
-          <div class="flex align-items-center">
+          <div class="flex items-center">
             <span class="mr-2">Name</span>
             <p-columnFilter field="bom.project.name" display="menu"
                             placeholder="Name">
@@ -55,7 +55,7 @@
           </div>
         </th>
         <th pSortableColumn="bom.timestamp">
-          <div class="flex align-items-center">
+          <div class="flex items-center">
             <span class="mr-2">Last updated</span>
             <p-columnFilter type="date" field="bom.timestamp" display="menu"
                             placeholder="Last updated">
@@ -64,7 +64,7 @@
           </div>
         </th>
         <th pSortableColumn="deployment.environment">
-          <div class="flex align-items-center">
+          <div class="flex items-center">
             <span class="mr-2">Environment</span>
             <p-columnFilter field="deployment.environment" display="menu"
                             placeholder="Environment">
@@ -73,7 +73,7 @@
           </div>
         </th>
         <th pSortableColumn="deployment.location">
-          <div class="flex align-items-center">
+          <div class="flex items-center">
             <span class="mr-2">Location</span>
             <p-columnFilter field="deployment.location" display="menu"
                             placeholder="Location">
@@ -82,7 +82,7 @@
           </div>
         </th>
         <th pSortableColumn="deployment.timestamp">
-          <div class="flex align-items-center">
+          <div class="flex items-center">
             <span class="mr-2">Timestamp</span>
             <p-columnFilter type="date" field="deployment.timestamp" display="menu"
                             placeholder="Timestamp">
@@ -90,8 +90,8 @@
             <p-sortIcon field="deployment.timestamp"></p-sortIcon>
           </div>
         </th>
-        <th class="w-12rem" pSortableColumn="deployment.version">
-          <div class="flex align-items-center">
+        <th class="w-48" pSortableColumn="deployment.version">
+          <div class="flex items-center">
             <span class="mr-2">Version</span>
             <p-columnFilter field="deployment.version" display="menu"
                             placeholder="Version">

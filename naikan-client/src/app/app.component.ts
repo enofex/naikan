@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {PrimeNGConfig} from 'primeng/api';
 import {RouterOutlet} from '@angular/router';
 import {BlockUIModule} from "primeng/blockui";
 import {BlockUIService, NaikanColorsPlugin} from "@naikan/shared";
@@ -15,9 +14,7 @@ import {Chart} from "chart.js";
 })
 export class AppComponent {
 
-  constructor(private primengConfig: PrimeNGConfig, public blockUIService: BlockUIService) {
-    primengConfig.ripple = false;
-
+  constructor(public blockUIService: BlockUIService) {
     Chart.defaults.animation = false;
     Chart.defaults.responsive = false;
     Chart.register(NaikanColorsPlugin)

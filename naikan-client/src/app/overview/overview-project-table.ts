@@ -21,7 +21,7 @@ import {OverviewBom} from "./overview";
           <th pSortableColumn="timestamp">Last updated
             <p-sortIcon field="timestamp"></p-sortIcon>
           </th>
-          <th class="w-10rem" pSortableColumn="project.version">Version
+          <th class="w-40" pSortableColumn="project.version">Version
             <p-sortIcon field="project.version"></p-sortIcon>
           </th>
         </tr>

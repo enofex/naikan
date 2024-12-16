@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {MenuItem, SelectItem, SharedModule} from 'primeng/api';
+import {SelectItem, SharedModule} from 'primeng/api';
 import {ProjectService} from './project.service';
 import {Page, Principal, Search, User} from "@naikan/shared";
 import {ProjectViewOverviewBody} from './project-view-overview.component';
@@ -8,21 +8,21 @@ import {
 } from './project-view-condensed.component';
 import {ProjectViewInsightsHeader} from "./project-view-insights.component";
 import {DatePipe, NgClass} from '@angular/common';
-import {DropdownChangeEvent, DropdownModule} from 'primeng/dropdown';
+import {SelectChangeEvent, SelectModule} from 'primeng/select';
 import {ButtonModule} from 'primeng/button';
 import {ProjectFilter} from './project-filter';
 import {Table, TableLazyLoadEvent, TableModule} from 'primeng/table';
-import {InputSwitchModule, InputSwitchChangeEvent} from "primeng/inputswitch";
+import {ToggleSwitchModule, ToggleSwitchChangeEvent} from "primeng/toggleswitch";
 import {FormsModule} from "@angular/forms";
 import {TooltipModule} from "primeng/tooltip";
 import {ProjectFilters} from "./project-filters";
 import {BlockUIModule} from "primeng/blockui";
-import {TabMenuModule} from "primeng/tabmenu";
+import {TabsModule} from "primeng/tabs";
 import {BomOverview} from "./bom-overview";
 
 @Component({
     templateUrl: './project.component.html',
-    imports: [TableModule, SharedModule, ProjectFilter, Search, ButtonModule, InputSwitchModule, DropdownModule, NgClass, ProjectViewOverviewBody, ProjectViewCondensedBody, InputSwitchModule, FormsModule, TooltipModule, BlockUIModule, TabMenuModule, ProjectViewInsightsHeader],
+  imports: [TableModule, SharedModule, ProjectFilter, Search, ButtonModule, ToggleSwitchModule, SelectModule, NgClass, ProjectViewOverviewBody, ProjectViewCondensedBody, ToggleSwitchModule, FormsModule, TooltipModule, BlockUIModule, TabsModule, ProjectViewInsightsHeader],
     providers: [ProjectService, DatePipe]
 })
 export class ProjectComponent implements OnInit {
@@ -37,8 +37,8 @@ export class ProjectComponent implements OnInit {
   sortField: string;
   sortOrder: number;
   favorites: boolean;
-  viewMenuItems: MenuItem[] | undefined;
-  viewMenuActiveItem: MenuItem | undefined;
+  viewTabs: { id: number; label: string; icon: string }[] = [];
+  viewTabActiveItem = 0;
   user: User;
 
   constructor(
@@ -60,7 +60,7 @@ export class ProjectComponent implements OnInit {
     });
   }
 
-  onSortChange(event: DropdownChangeEvent): void {
+  onSortChange(event: SelectChangeEvent): void {
     this.sortField = event.value;
   }
 
@@ -68,7 +68,7 @@ export class ProjectComponent implements OnInit {
     this.sortOrder = this.sortOrder === -1 ? 1 : -1;
   }
 
-  toggleFavorites(event: InputSwitchChangeEvent): void {
+  toggleFavorites(event: ToggleSwitchChangeEvent): void {
     localStorage.setItem(this.FAVORITES_KEY, String(event.checked));
     this.loadProjects(this.projectsTable.createLazyLoadMetadata());
   }
@@ -80,10 +80,6 @@ export class ProjectComponent implements OnInit {
 
   exportAll(): void {
     this.projectService.exportAll(this.projectsTable.createLazyLoadMetadata());
-  }
-
-  onViewMenuActiveItemChange(event: MenuItem): void {
-    this.viewMenuActiveItem = event;
   }
 
   private initTableSort(): void {
@@ -108,23 +104,22 @@ export class ProjectComponent implements OnInit {
   }
 
   private initViewMenuItems(): void {
-    this.viewMenuItems = [
+    this.viewTabs = [
       {
-        id: "0",
+        id: 0,
         label: 'Overview',
         icon: 'pi pi-eye'
       },
       {
-        id: "1",
+        id: 1,
         label: 'Condensed',
         icon: 'pi pi-bars'
       },
       {
-        id: "2",
+        id: 2,
         label: 'Insights',
         icon: 'pi pi-chart-bar'
       },
     ];
-    this.viewMenuActiveItem = this.viewMenuItems[0];
   }
 }

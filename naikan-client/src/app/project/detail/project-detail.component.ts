@@ -24,7 +24,7 @@ import {TagModule} from 'primeng/tag';
 import {TableLazyLoadEvent, TableModule} from 'primeng/table';
 import {TooltipModule} from 'primeng/tooltip';
 import {ButtonModule} from 'primeng/button';
-import {TabViewModule} from 'primeng/tabview';
+import {TabsModule} from 'primeng/tabs';
 import {DatePipe} from '@angular/common';
 import {SplitButtonModule} from "primeng/splitbutton";
 import {BomDetail} from "../bom-detail";
@@ -46,7 +46,7 @@ export interface LatestVersionPerEnvironment {
 
 @Component({
     templateUrl: './project-detail.component.html',
-    imports: [Breadcrumb, TabViewModule, Url, ProjectVersion, NaikanTags, ButtonModule, TooltipModule, TableModule, SharedModule, Search, TagModule, ChartModule, DateTimePipe, SplitButtonModule, CommitId, MessagesModule, ProgressSpinnerModule, ProgressBarModule],
+    imports: [Breadcrumb, TabsModule, Url, ProjectVersion, NaikanTags, ButtonModule, TooltipModule, TableModule, SharedModule, Search, TagModule, ChartModule, DateTimePipe, SplitButtonModule, CommitId, MessagesModule, ProgressSpinnerModule, ProgressBarModule],
     providers: [ProjectService, DatePipe],
     styleUrls: ['.//project-detail.component.scss']
 })
@@ -55,7 +55,7 @@ export class ProjectDetailComponent implements OnInit {
   protected readonly Object = Object;
 
   id: string;
-  activeView: number;
+  activeView = 0;
   bomDetail: BomDetail;
   deploymentsPage: Page<Deployment>;
   deploymentsPerMonth: CountsPerItems;

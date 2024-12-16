@@ -27,11 +27,11 @@
            [totalRecords]="page?.totalElements">
 
     <ng-template pTemplate="caption">
-      <div class="flex justify-content-between flex-wrap mb-2 mt-4">
-        <div class="flex align-items-center justify-content-center">
+      <div class="flex justify-between flex-wrap mb-2 mt-12">
+        <div class="flex items-center justify-center">
           <naikan-search #search [table]="tableAdministrationProjects"></naikan-search>
         </div>
-        <div class="flex align-items-center justify-content-center">
+        <div class="flex items-center justify-center">
           <button pButton label="Clear" class="p-button-outlined"
                   icon="pi pi-filter-slash"
                   (click)="tableAdministrationProjects.reset(); search.clear()">
@@ -51,7 +51,7 @@
         <th pSortableColumn="timestamp">Last updated
           <p-sortIcon field="timestamp"></p-sortIcon>
         </th>
-        <th class="w-4rem"></th>
+        <th class="w-16"></th>
       </tr>
     </ng-template>
 
