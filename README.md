@@ -1,6 +1,6 @@
 
 <p align="center">
-    <img src="https://github.com/enofex/naikan/blob/main/naikan-client/src/assets/layout/images/naikan-dark-large.png"
+    <img src="https://github.com/enofex/naikan/blob/main/naikan-client/src/assets/images/naikan-dark-large.png"
         height="150">
 </p>
 <p align="center">
