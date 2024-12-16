@@ -76,7 +76,7 @@ Naikan is built using open source software technologies, including:
 * Java Temurin
 * Spring Boot
 * Angular
-* PrimeNG, Sakai, ChartJS
+* PrimeNG, Sakai, ChartJS, TailwindCSS 
 * MongoDB
 * JUnit 5, ArchUnit, Taikai, Testcontainers
 * Docker
