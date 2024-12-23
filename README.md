@@ -97,4 +97,4 @@ If you want to contribute to this project, then follow please these [instruction
 
 ## Website
 
-Visit the [Naikan](https://naikan.io) Website for general information, demos and documentation.
+Visit the [Naikan](https://enofex.github.io/naikan/) Website for general information, demos and documentation.
