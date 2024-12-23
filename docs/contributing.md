@@ -87,8 +87,4 @@ plugin, which allows to enrich or update the *Naikan* model automatically.
 
 # Sponsor
 
-If your organization has sponsored or if you have any questions related to sponsorship or have
-chosen a tier that includes logo placement, please feel free to reach out to info@enofex.com. I will
-be happy to help you quickly.
-
 [Sponsor Naikan on GitHub :heart:](https://github.com/sponsors/mnhock){ .md-button }
