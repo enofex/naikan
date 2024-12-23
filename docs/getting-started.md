@@ -20,7 +20,7 @@ After downloading the docker-compose.yml file, review it and identify the servic
 === "Docker Compose"
 
     ``` sh
-    curl -LO https://naikan.io/docker-compose.yml
+    curl -LO https://enofex.github.io/naikan/docker-compose.yml
     docker-compose up -d
     ```
 

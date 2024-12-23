@@ -7,7 +7,7 @@ Content-Type: application/json
   "bomFormat": "Naikan",
   "project": {
     "name": "Naikan",
-    "url": "https://naikan.io",
+    "url": "https://enofex.github.io/naikan",
     "repository": "https://github.com/enofex/naikan",
     "groupId": "io.naikan",
     "artifactId": "naikan-core",
@@ -25,7 +25,7 @@ Content-Type: application/json
   "environments": [
     {
       "name": "Staging",
-      "location": "staging.naikan.io",
+      "location": "staging.enofex.github.io/naikan",
       "description": "Staging environment",
       "tags": [
         "Staging"
@@ -33,7 +33,7 @@ Content-Type: application/json
     },
     {
       "name": "Production",
-      "location": "naikan.io",
+      "location": "enofex.github.io/naikan",
       "description": "Production environment"
     }
   ],
@@ -130,7 +130,7 @@ Content-Type: application/json
   "documentations": [
     {
       "name": "Architecture overview",
-      "location": "naikan.io/arch24",
+      "location": "enofex.github.io/naikan/arch24",
       "description": "Update this documentation!",
       "tags": [
         "Architecture",
@@ -139,7 +139,7 @@ Content-Type: application/json
     },
     {
       "name": "Technical debt",
-      "location": "wiki.naikan.io/techdebt",
+      "location": "wiki.enofex.github.io/naikan/techdebt",
       "description": "Should be reduced!"
     }
   ],
@@ -187,37 +187,37 @@ Content-Type: application/json
   "deployments": [
     {
       "environment": "Staging",
-      "location": "staging.naikan.io",
+      "location": "staging.enofex.github.io/naikan",
       "version": "1.0.0",
       "timestamp": "2022-12-28T08:29:10.079226"
     },
     {
       "environment": "Production",
-      "location": "naikan.io",
+      "location": "enofex.github.io/naikan",
       "version": "1.0.1",
       "timestamp": "2022-11-28T18:29:10.079226"
     },
     {
       "environment": "Staging",
-      "location": "staging.naikan.io",
+      "location": "staging.enofex.github.io/naikan",
       "version": "1.0.0",
       "timestamp": "2022-11-28T09:29:10.079226"
     },
     {
       "environment": "Production",
-      "location": "naikan.io",
+      "location": "enofex.github.io/naikan",
       "version": "1.0.1",
       "timestamp": "2022-12-21T08:19:10.079226"
     },
     {
       "environment": "Staging",
-      "location": "staging.naikan.io",
+      "location": "staging.enofex.github.io/naikan",
       "version": "1.0.0",
       "timestamp": "2022-12-29T06:29:10.079226"
     },
     {
       "environment": "Production",
-      "location": "naikan.io",
+      "location": "enofex.github.io/naikan",
       "version": "1.0.1"
     }
   ]

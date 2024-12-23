@@ -108,7 +108,7 @@ class ProjectRepositoryIT {
     assertAll(
         () -> assertEquals(2, deployments.size()),
         () -> assertEquals("2.0.0", deployments.getFirst().version()),
-        () -> assertEquals("staging.naikan.io", deployments.getFirst().location()),
+        () -> assertEquals("staging.enofex.github.io/naikan", deployments.getFirst().location()),
         () -> assertEquals("Staging", deployments.getFirst().environment())
     );
   }
@@ -130,7 +130,8 @@ class ProjectRepositoryIT {
         () -> assertEquals(1, deployments.getFirst().count()),
         () -> assertEquals(1, deployments.getFirst().deployments().size()),
         () -> assertEquals("2.0.1", deployments.getFirst().deployments().getFirst().version()),
-        () -> assertEquals("naikan.io", deployments.getFirst().deployments().getFirst().location()),
+        () -> assertEquals("enofex.github.io/naikan",
+            deployments.getFirst().deployments().getFirst().location()),
         () -> assertEquals("Production",
             deployments.getFirst().deployments().getFirst().environment())
     );
@@ -148,7 +149,7 @@ class ProjectRepositoryIT {
         () -> assertEquals(2, versions.size()),
         () -> assertEquals("Production", versions.getFirst().environment()),
         () -> assertEquals("2.0.1", versions.getFirst().deployment().version()),
-        () -> assertEquals("naikan.io", versions.getFirst().deployment().location()),
+        () -> assertEquals("enofex.github.io/naikan", versions.getFirst().deployment().location()),
         () -> assertEquals("Production", versions.getFirst().deployment().environment())
     );
   }

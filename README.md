@@ -39,11 +39,11 @@ Tired of scattered spreadsheets and scattered information? Our user-friendly int
 ## Installation
 
 ```
-curl -LO https://naikan.io/docker-compose.yml
+curl -LO https://enofex.github.io/naikan/docker-compose.yml
 docker-compose up -d
 ```
 
-Visit the [Naikan](https://naikan.io) for configuration documentation and more information.
+Visit the [Naikan](https://enofex.github.io/naikan) for configuration documentation and more information.
 
 ## Modules
 The Naikan Project is a software that consists of four modules: naikan-test, naikan-model, naikan-maven-plugin and naikan. 

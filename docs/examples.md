@@ -26,7 +26,7 @@
   "project": {
     "name": "Naikan I",
     "inceptionYear" : "2003",
-    "url": "https://naikan.io",
+    "url": "https://enofex.github.io/naikan",
     "repository": "https://github.com/enofex/naikan",
     "packaging": "jar",
     "groupId": "com.enofex",
@@ -37,14 +37,14 @@
   },
   "organization": {
     "name": "Naikan",
-    "url": "https://naikan.io",
+    "url": "https://enofex.github.io/naikan",
     "department": "Software department",
     "description": "Company projects at a glance"
   },
   "environments": [
     {
       "name": "Staging",
-      "location": "staging.naikan.io",
+      "location": "staging.enofex.github.io/naikan",
       "description": "Staging description",
       "tags": [
         "Staging"
@@ -52,7 +52,7 @@
     },
     {
       "name": "Production",
-      "location": "naikan.io",
+      "location": "enofex.github.io/naikan",
       "description": "Production description"
     }
   ],
@@ -120,7 +120,7 @@
   "documentations": [
     {
       "name": "Architecture overview",
-      "location": "naikan.io/arch24",
+      "location": "enofex.github.io/naikan/arch24",
       "description": "ARC24",
       "tags": [
         "Architecture",
@@ -129,7 +129,7 @@
     },
     {
       "name": "Technical debt",
-      "location": "wiki.naikan.io/techdebt",
+      "location": "wiki.enofex.github.io/naikan/techdebt",
       "description": "Should be reduced!"
     }
   ],
@@ -176,13 +176,13 @@
   "deployments": [
     {
       "environment": "Staging",
-      "location": "staging.naikan.io",
+      "location": "staging.enofex.github.io/naikan",
       "version": "1.0.0",
       "timestamp": "2022-12-28T08:29:10.079226"
     },
     {
       "environment": "Production",
-      "location": "naikan.io",
+      "location": "enofex.github.io/naikan",
       "version": "1.0.1"
     }
   ]

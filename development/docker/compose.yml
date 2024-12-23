@@ -7,7 +7,7 @@ services:
     container_name: openldap
     environment:
       - LDAP_ORGANISATION="Naikan"
-      - LDAP_DOMAIN=naikan.io
+      - LDAP_DOMAIN=enofex.github.io/naikan
       - LDAP_ADMIN_PASSWORD=admin
       - LDAP_TLS=false
     ports:
