@@ -54,8 +54,6 @@ extra:
       link: https://github.com/enofex/naikan
     - icon: fontawesome/brands/docker
       link: https://hub.docker.com/u/enofex
-    - icon: fontawesome/brands/twitter
-      link: https://twitter.com/enofex
 
 # Extensions
 markdown_extensions:
