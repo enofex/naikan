@@ -20,7 +20,7 @@
     "@angular/forms": "19.1.4",
     "@angular/platform-browser": "19.1.4",
     "@angular/platform-browser-dynamic": "19.1.2",
-    "@angular/router": "19.1.2",
+    "@angular/router": "19.1.4",
     "@primeng/themes": "19.0.5",
     "@types/file-saver": "2.0.7",
     "angular-file-saver": "1.1.3",
