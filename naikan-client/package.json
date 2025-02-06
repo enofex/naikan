@@ -35,7 +35,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "19.1.5",
-    "@angular/cli": "19.1.5",
+    "@angular/cli": "19.1.6",
     "@angular/compiler-cli": "19.1.4",
     "autoprefixer": "10.4.20",
     "postcss": "8.5.1",
