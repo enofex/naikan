@@ -242,31 +242,25 @@ export class ProjectFilterNumeric {
       <p-accordion value="0">
         <p-accordion-panel value="0">
           <p-accordion-header>
-            <naikan-project-filter-header
-                header="Project"
+            <naikan-project-filter-header header="Project"
                 [hasFilters]="ProjectFilters.hasFiltersForKeys(table.filters, ['timestamp', 'tags', 'project'])"
-            >
-            </naikan-project-filter-header>
+             />
           </p-accordion-header>
 
           <p-accordion-content>
             <naikan-project-filter-date field="timestamp"
-                                        label="Last updated">
-            </naikan-project-filter-date>
+                                        label="Last updated" />
 
             <naikan-project-filter-multiselect field="project.packaging"
                                                label="Packaging"
-                                               [filterNames]="projectFilter?.packaging">
-            </naikan-project-filter-multiselect>
+                                               [filterNames]="projectFilter?.packaging" />
             <naikan-project-filter-multiselect field="project.groupId"
                                                label="Group"
-                                               [filterNames]="projectFilter?.groupIds">
-            </naikan-project-filter-multiselect>
+                                               [filterNames]="projectFilter?.groupIds" />
             <naikan-project-filter-multiselect field="tags"
                                                label="Tags"
                                                [tag]="true"
-                                               [filterNames]="projectFilter?.tags">
-            </naikan-project-filter-multiselect>
+                                               [filterNames]="projectFilter?.tags" />
           </p-accordion-content>
         </p-accordion-panel>
 
@@ -282,12 +276,10 @@ export class ProjectFilterNumeric {
           <p-accordion-content>
             <naikan-project-filter-multiselect field="organization.name"
                                                label="Name"
-                                               [filterNames]="projectFilter?.organizations">
-            </naikan-project-filter-multiselect>
+                                               [filterNames]="projectFilter?.organizations" />
             <naikan-project-filter-multiselect field="organization.department"
                                                label="Department"
-                                               [filterNames]="projectFilter?.organizationDepartments">
-            </naikan-project-filter-multiselect>
+                                               [filterNames]="projectFilter?.organizationDepartments" />
           </p-accordion-content>
         </p-accordion-panel>
 
@@ -303,23 +295,19 @@ export class ProjectFilterNumeric {
           <p-accordion-content>
             <naikan-project-filter-multiselect field="environments.name"
                                                label="Name"
-                                               [filterNames]="projectFilter?.environments">
-            </naikan-project-filter-multiselect>
+                                               [filterNames]="projectFilter?.environments" />
 
             <naikan-project-filter-multiselect field="environments.location"
                                                label="Location"
-                                               [filterNames]="projectFilter?.environmentLocations">
-            </naikan-project-filter-multiselect>
+                                               [filterNames]="projectFilter?.environmentLocations" />
 
             <naikan-project-filter-multiselect field="environments.tags"
                                                label="Tags"
                                                [tag]="true"
-                                               [filterNames]="projectFilter?.environmentTags">
-            </naikan-project-filter-multiselect>
+                                               [filterNames]="projectFilter?.environmentTags" />
 
             <naikan-project-filter-numeric field="environmentsCount"
-                                           label="Environments">
-            </naikan-project-filter-numeric>
+                                           label="Environments" />
           </p-accordion-content>
         </p-accordion-panel>
 
@@ -335,12 +323,10 @@ export class ProjectFilterNumeric {
           <p-accordion-content>
             <naikan-project-filter-multiselect field="teams.name"
                                                label="Name"
-                                               [filterNames]="projectFilter?.teams">
-            </naikan-project-filter-multiselect>
+                                               [filterNames]="projectFilter?.teams" />
 
             <naikan-project-filter-numeric field="teamsCount"
-                                           label="Teams">
-            </naikan-project-filter-numeric>
+                                           label="Teams" />
           </p-accordion-content>
         </p-accordion-panel>
 
@@ -356,28 +342,23 @@ export class ProjectFilterNumeric {
           <p-accordion-content>
             <naikan-project-filter-multiselect field="developers.name"
                                                label="Name"
-                                               [filterNames]="projectFilter?.developers">
-            </naikan-project-filter-multiselect>
+                                               [filterNames]="projectFilter?.developers" />
 
             <naikan-project-filter-multiselect field="developers.organization"
                                                label="Organization"
-                                               [filterNames]="projectFilter?.developerOrganizations">
-            </naikan-project-filter-multiselect>
+                                               [filterNames]="projectFilter?.developerOrganizations" />
 
             <naikan-project-filter-multiselect field="developers.department"
                                                label="Department"
-                                               [filterNames]="projectFilter?.developerDepartments">
-            </naikan-project-filter-multiselect>
+                                               [filterNames]="projectFilter?.developerDepartments" />
 
             <naikan-project-filter-multiselect field="developers.roles"
                                                label="Roles"
                                                [tag]="true"
-                                               [filterNames]="projectFilter?.developerRoles">
-            </naikan-project-filter-multiselect>
+                                               [filterNames]="projectFilter?.developerRoles" />
 
             <naikan-project-filter-numeric field="developersCount"
-                                           label="Developers">
-            </naikan-project-filter-numeric>
+                                           label="Developers" />
           </p-accordion-content>
         </p-accordion-panel>
 
@@ -393,18 +374,15 @@ export class ProjectFilterNumeric {
           <p-accordion-content>
             <naikan-project-filter-multiselect field="contacts.name"
                                                label="Name"
-                                               [filterNames]="projectFilter?.contacts">
-            </naikan-project-filter-multiselect>
+                                               [filterNames]="projectFilter?.contacts" />
 
             <naikan-project-filter-multiselect field="contacts.roles"
                                                label="Roles"
                                                [tag]="true"
-                                               [filterNames]="projectFilter?.contactRoles">
-            </naikan-project-filter-multiselect>
+                                               [filterNames]="projectFilter?.contactRoles" />
 
             <naikan-project-filter-numeric field="contactsCount"
-                                           label="Contacts">
-            </naikan-project-filter-numeric>
+                                           label="Contacts" />
           </p-accordion-content>
         </p-accordion-panel>
 
@@ -420,18 +398,15 @@ export class ProjectFilterNumeric {
           <p-accordion-content>
             <naikan-project-filter-multiselect field="integrations.name"
                                                label="Name"
-                                               [filterNames]="projectFilter?.integrations">
-            </naikan-project-filter-multiselect>
+                                               [filterNames]="projectFilter?.integrations" />
 
             <naikan-project-filter-multiselect field="integrations.tags"
                                                label="Tags"
                                                [tag]="true"
-                                               [filterNames]="projectFilter?.integrationTags">
-            </naikan-project-filter-multiselect>
+                                               [filterNames]="projectFilter?.integrationTags" />
 
             <naikan-project-filter-numeric field="integrationsCount"
-                                           label="Integrations">
-            </naikan-project-filter-numeric>
+                                           label="Integrations" />
           </p-accordion-content>
         </p-accordion-panel>
 
@@ -447,23 +422,19 @@ export class ProjectFilterNumeric {
           <p-accordion-content>
             <naikan-project-filter-multiselect field="technologies.name"
                                                label="Name"
-                                               [filterNames]="projectFilter?.technologies">
-            </naikan-project-filter-multiselect>
+                                               [filterNames]="projectFilter?.technologies" />
 
             <naikan-project-filter-multiselect field="technologies.version"
                                                label="Version"
-                                               [filterNames]="projectFilter?.technologyVersions">
-            </naikan-project-filter-multiselect>
+                                               [filterNames]="projectFilter?.technologyVersions" />
 
             <naikan-project-filter-multiselect field="technologies.tags"
                                                label="Tags"
                                                [tag]="true"
-                                               [filterNames]="projectFilter?.technologyTags">
-            </naikan-project-filter-multiselect>
+                                               [filterNames]="projectFilter?.technologyTags" />
 
             <naikan-project-filter-numeric field="technologiesCount"
-                                           label="Technologies">
-            </naikan-project-filter-numeric>
+                                           label="Technologies" />
           </p-accordion-content>
         </p-accordion-panel>
 
@@ -479,12 +450,10 @@ export class ProjectFilterNumeric {
           <p-accordion-content>
             <naikan-project-filter-multiselect field="deployments.location"
                                                label="Location"
-                                               [filterNames]="projectFilter?.deployments">
-            </naikan-project-filter-multiselect>
+                                               [filterNames]="projectFilter?.deployments" />
 
             <naikan-project-filter-numeric field="deploymentsCount"
-                                           label="Deployments">
-            </naikan-project-filter-numeric>
+                                           label="Deployments" />
           </p-accordion-content>
         </p-accordion-panel>
 
@@ -500,12 +469,10 @@ export class ProjectFilterNumeric {
           <p-accordion-content>
             <naikan-project-filter-multiselect field="licenses.name"
                                                label="Name"
-                                               [filterNames]="projectFilter?.licenses">
-            </naikan-project-filter-multiselect>
+                                               [filterNames]="projectFilter?.licenses" />
 
             <naikan-project-filter-numeric field="licensesCount"
-                                           label="Licenses">
-            </naikan-project-filter-numeric>
+                                           label="Licenses" />
           </p-accordion-content>
         </p-accordion-panel>
       </p-accordion>

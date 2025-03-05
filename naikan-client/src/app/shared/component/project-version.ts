@@ -8,14 +8,12 @@ import {TooltipModule} from 'primeng/tooltip';
     selector: 'naikan-project-version',
     template: `
     @if (project && project.version) {
-      <p-tag
-        severity="success"
+      <p-tag severity="success"
         class="{{ class }}"
         value="{{ project?.version }}"
         tooltipPosition="top"
         [escape]="false"
-        pTooltip="{{ tooltip() }}">
-      </p-tag>
+        pTooltip="{{ tooltip() }}" />
     }
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,

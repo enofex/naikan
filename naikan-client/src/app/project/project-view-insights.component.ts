@@ -64,8 +64,7 @@ export abstract class AbstractInsightChart implements OnDestroy {
              width="100%"
              #chartSummarizationRef
              [data]="chartSummarization.data"
-             [options]="chartSummarization.options">
-    </p-chart>
+             [options]="chartSummarization.options" />
   `,
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
@@ -147,8 +146,7 @@ export class SummarizationChart extends AbstractInsightChart {
              width="100%"
              #chartTechnologiesRef
              [data]="chartTechnologies.data"
-             [options]="chartTechnologies.options">
-    </p-chart>
+             [options]="chartTechnologies.options" />
   `,
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
@@ -218,8 +216,7 @@ export class TechnologiesChart extends AbstractInsightChart {
              height="100%"
              width="100%"
              [data]="chartDeployments.data"
-             [options]="chartDeployments.options">
-    </p-chart>
+             [options]="chartDeployments.options" />
   `,
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
@@ -306,8 +303,7 @@ export class DeploymentsChart extends AbstractInsightChart {
              width="100%"
              #chartDeploymentsSummarizationRef
              [data]="chartDeploymentsSummarization.data"
-             [options]="chartDeploymentsSummarization.options">
-    </p-chart>
+             [options]="chartDeploymentsSummarization.options" />
   `,
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
@@ -382,8 +378,7 @@ export class DeploymentsSummarizationChart extends AbstractInsightChart {
              height="100%"
              width="100%"
              [data]="chartCommits.data"
-             [options]="chartCommits.options">
-    </p-chart>
+             [options]="chartCommits.options" />
   `,
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
@@ -470,8 +465,7 @@ export class CommitsChart extends AbstractInsightChart {
              width="100%"
              #chartCommitsSummarizationRef
              [data]="chartCommitsSummarization.data"
-             [options]="chartCommitsSummarization.options">
-    </p-chart>
+             [options]="chartCommitsSummarization.options" />
   `,
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,

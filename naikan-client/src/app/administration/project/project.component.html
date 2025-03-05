@@ -1,10 +1,8 @@
-<naikan-breadcrumb
-    [items]="[{label: 'Administration', routerLink: '/administration'}, {label: 'Projects', routerLink: '/administration/projects'}]">
-</naikan-breadcrumb>
+<naikan-breadcrumb [items]="[{label: 'Administration', routerLink: '/administration'}, {label: 'Projects', routerLink: '/administration/projects'}]" />
 
-<p-confirmDialog [style]="{width: '40vw'}"></p-confirmDialog>
+<p-confirmDialog [style]="{width: '40vw'}" />
 
-<p-messages [enableService]="true" [closable]="true"></p-messages>
+<p-messages [enableService]="true" [closable]="true" />
 
 <div class="card card-border-none">
   <h5> {{page?.totalElements}} Projects</h5>

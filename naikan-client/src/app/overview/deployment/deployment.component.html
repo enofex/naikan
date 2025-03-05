@@ -1,6 +1,4 @@
-<naikan-breadcrumb
-    [items]="[{label: 'Overviews', routerLink: '/overview'}, {label: 'Deployments', routerLink: '/overview/deployments'}]">
-</naikan-breadcrumb>
+<naikan-breadcrumb [items]="[{label: 'Overviews', routerLink: '/overview'}, {label: 'Deployments', routerLink: '/overview/deployments'}]" />
 <div class="card card-border-none">
   <h5> {{page?.totalElements}} Deployments
     @if (chart.data?.datasets) {
