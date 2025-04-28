@@ -40,6 +40,6 @@
     "autoprefixer": "10.4.21",
     "postcss": "8.5.3",
     "sync-pom-version-to-package": "1.6.1",
-    "typescript": "5.8.2"
+    "typescript": "5.8.3"
   }
 }
