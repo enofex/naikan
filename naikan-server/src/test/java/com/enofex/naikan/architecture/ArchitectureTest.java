@@ -31,7 +31,7 @@ class ArchitectureTest {
                 .shouldNotDependOnServices()
                 .namesShouldEndWithRepository()))
         .test(test -> test
-            .junit5(junit5 -> junit5
+            .junit(junit -> junit
                 .methodsShouldContainAssertionsOrVerifications()
                 .classesShouldNotBeAnnotatedWithDisabled()
                 .classesShouldBePackagePrivate(".*Test")
