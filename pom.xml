@@ -23,7 +23,7 @@
     <java.version>23</java.version>
 
     <naikan-model.version>1.2.0</naikan-model.version>
-    <naikan-test.version>1.5.0</naikan-test.version>
+    <naikan-test.version>1.5.1</naikan-test.version>
     <apache.poi.version>5.4.1</apache.poi.version>
     <archunit.version>1.4.1</archunit.version>
     <taikai.version>1.40.0</taikai.version>
