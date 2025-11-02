@@ -1,13 +1,11 @@
-version: '3.8'
-
 services:
 
   openldap:
-    image: osixia/openldap
+    image: osixia/openldap:1.5.0
     container_name: openldap
     environment:
       - LDAP_ORGANISATION="Naikan"
-      - LDAP_DOMAIN=enofex.github.io/naikan
+      - LDAP_DOMAIN=naikan.io
       - LDAP_ADMIN_PASSWORD=admin
       - LDAP_TLS=false
     ports:

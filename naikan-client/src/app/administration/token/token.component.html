@@ -1,6 +1,10 @@
 <naikan-breadcrumb [items]="[{label: 'Administration', routerLink: '/administration'}, {label: 'Tokens', routerLink: '/administration/tokens'}]" />
 <p-confirmDialog [style]="{width: '40vw'}" />
-<p-messages [enableService]="true" [closable]="true" />
+
+@for (message of messages(); track message) {
+  <p-message [severity]="message.severity" closable="true">{{message.content}}</p-message>
+}
+
 <div class="card card-border-none">
   <h5> {{page?.totalElements}} Tokens</h5>
   <p-table class="w-full"

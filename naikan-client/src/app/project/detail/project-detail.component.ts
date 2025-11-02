@@ -29,7 +29,6 @@ import {DatePipe} from '@angular/common';
 import {SplitButtonModule} from "primeng/splitbutton";
 import {BomDetail} from "../bom-detail";
 import {CountsPerItems} from "../counts-per-items";
-import {MessagesModule} from "primeng/messages";
 import {ProgressSpinnerModule} from "primeng/progressspinner";
 import {ProgressBarModule} from "primeng/progressbar";
 
@@ -46,7 +45,7 @@ export interface LatestVersionPerEnvironment {
 
 @Component({
     templateUrl: './project-detail.component.html',
-    imports: [Breadcrumb, TabsModule, Url, ProjectVersion, NaikanTags, ButtonModule, TooltipModule, TableModule, SharedModule, Search, TagModule, ChartModule, DateTimePipe, SplitButtonModule, CommitId, MessagesModule, ProgressSpinnerModule, ProgressBarModule],
+    imports: [Breadcrumb, TabsModule, Url, ProjectVersion, NaikanTags, ButtonModule, TooltipModule, TableModule, SharedModule, Search, TagModule, ChartModule, DateTimePipe, SplitButtonModule, CommitId, ProgressSpinnerModule, ProgressBarModule],
     providers: [ProjectService, DatePipe],
     styleUrls: ['.//project-detail.component.scss']
 })

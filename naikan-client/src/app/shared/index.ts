@@ -14,7 +14,8 @@ export * from './util/urls';
 export * from './util/pageables';
 export * from './util/block-ui.service';
 export * from './util/charts';
-export * from './util/chart-colors.plugin'
+export * from './util/chart-colors.plugin';
+export * from './util/errors';
 export * from './pipe/date-time-pipe';
 export * from './model/page';
 export * from './model/bom';

@@ -1,16 +1,11 @@
-@layer tailwind-base, naikan, primeng, tailwind-utilities, naikan;
-
-@layer tailwind-base {
-  @tailwind base;
-}
-
-@layer tailwind-utilities {
-  @tailwind components;
-  @tailwind utilities;
-}
-
 @import url('assets/styles/layout.scss') layer(naikan);
 @import url('../node_modules/primeicons/primeicons.css') layer(naikan);
+
+@import "tailwindcss/preflight.css" layer(tailwind-base);
+@import "tailwindcss/theme.css" layer(tailwind-base);
+@import "tailwindcss/utilities.css" layer(tailwind-utilities);
+
+@layer tailwind-base, primeng, tailwind-utilities, naikan;
 
 @layer naikan {
   #overview-chart-wrapper {

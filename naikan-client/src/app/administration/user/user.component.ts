@@ -1,16 +1,16 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, signal, ViewChild, WritableSignal} from '@angular/core';
 import {Table, TableLazyLoadEvent, TableModule} from "primeng/table";
 import {MenuModule} from "primeng/menu";
 
-import {ConfirmationService, MessageService} from "primeng/api";
-import {Breadcrumb, Page, Search} from "@naikan/shared";
+import {ConfirmationService} from "primeng/api";
+import {Breadcrumb, Errors, Page, Search} from "@naikan/shared";
 import {ButtonModule} from "primeng/button";
-import {MessagesModule} from "primeng/messages";
 import {AdministrationUserService} from "./user.service";
 import {User} from "./user";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {MultiSelectChangeEvent, MultiSelectModule} from "primeng/multiselect";
 import {FormsModule} from "@angular/forms";
+import {Message} from "primeng/message";
 
 interface Authority {
   label: string;
@@ -19,8 +19,8 @@ interface Authority {
 
 @Component({
     templateUrl: './user.component.html',
-    imports: [TableModule, MenuModule, Breadcrumb, ButtonModule, Search, ConfirmDialogModule, MessagesModule, FormsModule, MultiSelectModule],
-    providers: [ConfirmationService, MessageService, AdministrationUserService]
+  imports: [TableModule, MenuModule, Breadcrumb, ButtonModule, Search, ConfirmDialogModule, FormsModule, MultiSelectModule, Message],
+    providers: [ConfirmationService, AdministrationUserService]
 })
 export class UserComponent {
 
@@ -30,10 +30,10 @@ export class UserComponent {
   authorities: Authority[] = [
     {label: 'Admin', value: 'ROLE_ADMIN'}
   ];
+  messages: WritableSignal<any[]> = signal([]);
 
   constructor(
       private readonly confirmationService: ConfirmationService,
-      private readonly messageService: MessageService,
       private readonly administrationUserService: AdministrationUserService) {
   }
 
@@ -50,24 +50,16 @@ export class UserComponent {
       icon: 'pi pi-info-circle',
       rejectButtonStyleClass: 'p-button-outlined',
       accept: () => {
-        this.messageService.clear();
-
         this.administrationUserService
         .deleteUserById(id)
         .subscribe({
           next: (): void => {
             this.loadUsers(this.tableAdministrationUsers.createLazyLoadMetadata());
 
-            this.messageService.add({
-              severity: 'success',
-              detail: 'User deleted'
-            })
+            Errors.toSuccessMessage(this.messages, 'User deleted');
           },
           error: (): void => {
-            this.messageService.add({
-              severity: 'error',
-              detail: 'An error occurred in deleting the user.'
-            })
+            Errors.toErrorMessage(this.messages, 'An error occurred in deleting the user.');
           }
         })
       }

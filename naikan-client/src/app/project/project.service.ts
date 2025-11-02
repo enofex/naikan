@@ -11,9 +11,8 @@ import {
   User
 } from "@naikan/shared";
 import {finalize, Observable, Subscription} from 'rxjs';
-import {FilterMatchMode} from 'primeng/api';
+import {FilterMatchMode, FilterMetadata} from 'primeng/api';
 import {ProjectFilter} from "./project-filter";
-import {FilterMetadata} from "primeng/api/filtermetadata";
 import {TableLazyLoadEvent} from "primeng/table";
 import {saveAs} from 'file-saver';
 import {

@@ -1,25 +1,25 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, signal, WritableSignal} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {LoginService} from './login.service';
 import {ButtonModule} from 'primeng/button';
 import {PasswordModule} from 'primeng/password';
 import {InputTextModule} from 'primeng/inputtext';
-import {MessagesModule} from "primeng/messages";
-import {MessageService} from "primeng/api";
+import {Errors} from "@naikan/shared";
+import {Message} from "primeng/message";
 
 @Component({
   selector: 'login-page',
   templateUrl: './login.component.html',
-  imports: [FormsModule, ReactiveFormsModule, InputTextModule, PasswordModule, ButtonModule, MessagesModule],
-  providers: [MessageService, LoginService]
+  imports: [FormsModule, ReactiveFormsModule, InputTextModule, PasswordModule, ButtonModule, Message],
+  providers: [LoginService]
 })
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
+  messages: WritableSignal<any[]> = signal([]);
 
   constructor(
       private readonly loginService: LoginService,
-      private readonly messageService: MessageService,
       private readonly fb: FormBuilder
   ) {
   }
@@ -39,13 +39,8 @@ export class LoginComponent implements OnInit {
     this.loginService.login(this.loginForm.value)
     .subscribe({
       error: (err) => {
-        this.messageService.clear();
-
         if (err.error?.detail) {
-          this.messageService.add({
-            severity: 'error',
-            detail: err.error.detail
-          });
+          Errors.toErrorMessage(this.messages, err.error.detail);
         }
       }
     });

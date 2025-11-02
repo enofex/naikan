@@ -32,7 +32,9 @@
 
           <button type="submit" pButton label="Sign In" icon="pi pi-user"
                   class="w-full p-2 mb-4"></button>
-          <p-messages [closable]="false"></p-messages>
+          @for (message of messages(); track message) {
+            <p-message [severity]="message.severity" closable="true">{{message.content}}</p-message>
+          }
         </form>
       </div>
     </div>
