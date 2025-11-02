@@ -13,7 +13,7 @@
                      [model]="this.exportItems"
                      (onClick)="exportXlsx()"
                      appendTo="body"
-                     styleClass="p-button-outlined" />
+                     class="p-button-outlined" />
     </ng-template>
   </naikan-breadcrumb>
 }
@@ -169,7 +169,7 @@
                             <p-button icon="pi pi-copy"
                                       tooltipPosition="top"
                                       pTooltip="Copy code"
-                                      styleClass="p-button-rounded p-button-secondary p-button-text"
+                                      class="p-button-rounded p-button-secondary p-button-text"
                                       (click)="copyToClipboard(maven)">
                             </p-button>
                           </div>
@@ -190,7 +190,7 @@
                             <p-button tooltipPosition="top"
                                       pTooltip="Copy code"
                                       icon="pi pi-copy"
-                                      styleClass="p-button-rounded p-button-secondary p-button-text"
+                                      class="p-button-rounded p-button-secondary p-button-text"
                                       (click)="copyToClipboard(gradle)">
                             </p-button>
                           </div>
@@ -235,7 +235,7 @@ implementation "{{ bomDetail.project?.groupId }}:{{ bomDetail.project?.artifactI
         <p-tabpanel [value]="1" class="leading-normal m-0">
           <p-table
               #tableEnvironments
-              styleClass="p-datatable-striped"
+              class="p-datatable-striped"
               [rowHover]="true"
               [defaultSortOrder]="1"
               [sortOrder]="1"
@@ -292,7 +292,7 @@ implementation "{{ bomDetail.project?.groupId }}:{{ bomDetail.project?.artifactI
               [value]="bomDetail.teams"
               [paginator]="true"
               [rows]="25"
-              styleClass="p-datatable-striped"
+              class="p-datatable-striped"
               [rowHover]="true"
               [defaultSortOrder]="1"
               [sortOrder]="1"
@@ -333,7 +333,7 @@ implementation "{{ bomDetail.project?.groupId }}:{{ bomDetail.project?.artifactI
         <p-tabpanel [value]="3" class="leading-normal m-0">
           <p-table
               #tableDevelopers
-              styleClass="p-datatable-striped"
+              class="p-datatable-striped"
               [rowHover]="true"
               [defaultSortOrder]="1"
               [sortOrder]="1"
@@ -417,7 +417,7 @@ implementation "{{ bomDetail.project?.groupId }}:{{ bomDetail.project?.artifactI
         <p-tabpanel [value]="4" class="leading-normal m-0">
           <p-table
               #tableContacts
-              styleClass="p-datatable-striped"
+              class="p-datatable-striped"
               [rowHover]="true"
               [defaultSortOrder]="1"
               [sortOrder]="1"
@@ -479,7 +479,7 @@ implementation "{{ bomDetail.project?.groupId }}:{{ bomDetail.project?.artifactI
         <p-tabpanel [value]="5" class="leading-normal m-0">
           <p-table
               #tableDocumentations
-              styleClass="p-datatable-striped"
+              class="p-datatable-striped"
               [rowHover]="true"
               [defaultSortOrder]="1"
               [sortOrder]="1"
@@ -534,7 +534,7 @@ implementation "{{ bomDetail.project?.groupId }}:{{ bomDetail.project?.artifactI
 
           <p-table
               #tableIntegrations
-              styleClass="p-datatable-striped"
+              class="p-datatable-striped"
               [rowHover]="true"
               [defaultSortOrder]="1"
               [sortOrder]="1"
@@ -588,7 +588,7 @@ implementation "{{ bomDetail.project?.groupId }}:{{ bomDetail.project?.artifactI
         <p-tabpanel [value]="7" class="leading-normal m-0">
           <p-table
               #tableTechnologies
-              styleClass="p-datatable-striped"
+              class="p-datatable-striped"
               [rowHover]="true"
               [defaultSortOrder]="1"
               [sortOrder]="1"
@@ -655,7 +655,7 @@ implementation "{{ bomDetail.project?.groupId }}:{{ bomDetail.project?.artifactI
           @defer (when (activeView === 8)) {
             <p-table
                 #tableDeployments
-                styleClass="p-datatable-striped"
+                class="p-datatable-striped"
                 [rowHover]="true"
                 sortMode="multiple"
                 sortField="timestamp"
@@ -776,7 +776,7 @@ implementation "{{ bomDetail.project?.groupId }}:{{ bomDetail.project?.artifactI
             <p-table
                 #tableVersions
                 dataKey="version"
-                styleClass="p-datatable-striped"
+                class="p-datatable-striped"
                 [rowHover]="true"
                 sortMode="multiple"
                 [lazy]="true"
@@ -798,7 +798,7 @@ implementation "{{ bomDetail.project?.groupId }}:{{ bomDetail.project?.artifactI
                   <th class="w-16">
                     @if (tableVersions.totalRecords > 0) {
                       <p-button
-                          styleClass="p-button-primary"
+                          class="p-button-primary"
                           icon="{{expandedVersionRows && Object.keys(expandedVersionRows).length ? 'pi pi-angle-down' : 'pi pi-angle-right'}}"
                           (click)="expandVersions()"
                           tooltipPosition="top"
@@ -952,7 +952,7 @@ implementation "{{ bomDetail.project?.groupId }}:{{ bomDetail.project?.artifactI
                       }
                       <p-table
                           #tableCommits
-                          styleClass="p-datatable-striped"
+                          class="p-datatable-striped"
                           [rowHover]="true"
                           sortMode="multiple"
                           sortField="timestamp"
@@ -1062,7 +1062,7 @@ implementation "{{ bomDetail.project?.groupId }}:{{ bomDetail.project?.artifactI
                     <p-tabpanel value="1">
                       <p-table
                           #tableBranches
-                          styleClass="p-datatable-striped"
+                          class="p-datatable-striped"
                           [rowHover]="true"
                           [lazy]="true"
                           (onLazyLoad)="loadRepositoryBranches($event)"
@@ -1110,7 +1110,7 @@ implementation "{{ bomDetail.project?.groupId }}:{{ bomDetail.project?.artifactI
                     <p-tabpanel value="2">
                       <p-table
                           #tableTags
-                          styleClass="p-datatable-striped"
+                          class="p-datatable-striped"
                           [rowHover]="true"
                           [lazy]="true"
                           (onLazyLoad)="loadRepositoryTags($event)"

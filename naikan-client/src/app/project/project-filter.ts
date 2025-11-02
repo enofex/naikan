@@ -126,9 +126,9 @@ export class ProjectFilterMultiSelect {
                       matchMode="dateIs">
         <ng-template pTemplate="filter" let-value let-filter="filterCallback">
           <p-date-picker placeholder="{{label}}" 
-                         inputStyleClass="w-full"
+                         inputclass="w-full"
                          appendTo="body"
-                         styleClass="w-full"
+                         class="w-full"
                          [ngModel]="value"
                          (onSelect)="filter($event)"></p-date-picker>
         </ng-template>
@@ -167,7 +167,7 @@ export class ProjectFilterDate {
                            [ngModel]="value"
                            [showButtons]="true"
                            [min]="0"
-                           styleClass="w-full"
+                           class="w-full"
                            (onInput)="filter($event.value)">
             </p-inputNumber>
           </ng-template>

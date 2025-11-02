@@ -17,7 +17,7 @@
 
     <div #topbarmenu class="layout-topbar-menu"
          [ngClass]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}">
-        <button styleClass="p-button-rounded p-button-text" pButton icon="pi pi-user"
+        <button class="p-button-rounded p-button-text" pButton icon="pi pi-user"
                 (click)="menu.toggle($event)" pTooltip="{{ user?.username }}" tooltipPosition="left">
         </button>
 

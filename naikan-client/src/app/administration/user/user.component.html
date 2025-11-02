@@ -9,10 +9,9 @@
 <div class="card card-border-none">
   <h5> {{page?.totalElements}} Users</h5>
 
-  <p-table class="w-full"
+  <p-table class="w-full p-datatable-striped"
            dataKey="id"
            #tableAdministrationUsers
-           styleClass="p-datatable-striped"
            [rowHover]="true"
            [value]="page?.content"
            [lazy]="true"
@@ -64,7 +63,7 @@
                          appendTo="body"
                          optionLabel="label"
                          optionValue="value"
-                         styleClass="w-60"
+                         class="w-60"
                          (onChange)="onAuthoritiesChange(item.id, $event)"></p-multiSelect>
         </td>
         <td>

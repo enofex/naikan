@@ -49,7 +49,7 @@
       [defaultSortOrder]="1"
       [rows]="25"
       [totalRecords]="page?.totalElements"
-      styleClass="p-datatable-striped">
+      class="p-datatable-striped">
     <ng-template pTemplate="caption">
       <naikan-project-filter
           [table]="projectsTable"
@@ -78,7 +78,7 @@
           <p-select [options]="sortOptions"
                       placeholder="Sort by name"
                       (onChange)="onSortChange($event)"
-                      styleClass="md:w-60 mb-2 ">
+                      class="md:w-60 mb-2 ">
           </p-select>
           <i class="pi pi-sort-alt ml-4 text-primary"
              [ngClass]="sortOrder === -1 ? 'pi-sort-amount-down-alt': 'pi-sort-amount-up-alt'"
