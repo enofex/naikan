@@ -41,7 +41,7 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.servlet.util.matcher.PathPatternRequestMatcher;
 import org.springframework.security.web.util.matcher.NegatedRequestMatcher;
 
 @Configuration
@@ -75,7 +75,7 @@ class SecurityConfiguration {
       http
           .securityMatchers(matchers ->
               matchers.requestMatchers(new NegatedRequestMatcher(
-                  new AntPathRequestMatcher(API_URLS)))
+                  PathPatternRequestMatcher.withDefaults().matcher(API_URLS)))
           )
           .csrf(csrf -> csrf
               .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
@@ -181,7 +181,7 @@ class SecurityConfiguration {
     SecurityFilterChain openApiSecurityFilterChain(HttpSecurity http) throws Exception {
       http
           .securityMatchers(matchers -> matchers.requestMatchers(
-              new AntPathRequestMatcher(OPENAPI_URL))
+              PathPatternRequestMatcher.withDefaults().matcher(OPENAPI_URL))
           )
           .csrf(AbstractHttpConfigurer::disable)
           .cors(AbstractHttpConfigurer::disable)
@@ -211,7 +211,7 @@ class SecurityConfiguration {
     SecurityFilterChain apiSecurityFilterChain(HttpSecurity http) throws Exception {
       http
           .securityMatchers(matchers -> matchers.requestMatchers(
-              new AntPathRequestMatcher(API_URLS))
+              PathPatternRequestMatcher.withDefaults().matcher(API_URLS))
           )
           .csrf(AbstractHttpConfigurer::disable)
           .cors(AbstractHttpConfigurer::disable)
